@@ -1,0 +1,237 @@
+import {
+    Request,
+    NextFunction,
+    Response,
+} from "express";
+
+import { 
+    User,
+    IUser,
+} from "../models";
+
+import { 
+    IConfig, 
+    Auth 
+} from "../services";
+
+import {
+    default as jwtDecode
+} from "jwt-decode";
+
+import { 
+    NotFound 
+} from "../utils";
+
+export default class UserController {
+    private auth: Auth;
+    private config: IConfig;
+
+    constructor(auth: Auth, config: IConfig) {
+        this.auth = auth;
+        this.config = config;
+    };
+
+    // Getting all users
+    public allUsers = async (req: Request, res: Response, next: NextFunction): Promise<Response<any>> => {
+        try {
+            // Only possible when you are a admin
+            if (!req.headers.authorization) {
+                return res.status(401).json({
+                    error: "Deze gebruiker bestaat niet.",
+                });
+            };
+
+            const token = req.headers.authorization.slice(7);
+            const payload = Object(jwtDecode(token));
+
+            const { id } = payload;
+
+            const user = await User.findOne({ _id: id });
+
+            // If user doesn't exist
+            if (!user) {
+                return res.status(404).json({
+                    error: "Deze gebruiker bestaat niet."
+                });
+            };
+
+            // if user isn't an admin
+            if (user.role !== 'admin') {
+                return res.status(401).json({
+                    error: "Je kan deze optie niet gebruiken."
+                });
+            };
+
+            // Pagination inserted
+            const { limit, skip } = req.query;
+
+            let users;
+
+            if (limit && skip) {
+                // Get user paginated
+                users = await User.paginate({}, {
+                    limit: 10,
+                    page: 1,
+                    sort: {
+                        _createdAt: -1,
+                    },
+                });
+            } else {
+                // Get all users
+                users = await User.find().sort({ _createdAt: -1 }).exec();
+            };
+
+            return res.status(200).json(users);
+        } catch (e) {
+            next(e);
+        };
+    };
+
+    // Getting current user
+    getMyself = async (req: Request, res: Response, next: NextFunction): Promise<Response<any>> => {
+        try {
+            // Only you as a user will be given
+            if (!req.headers.authorization) {
+                return res.status(401).json({
+                    error: "Deze gebruiker bestaat niet.",
+                });
+            };
+
+            const token = req.headers.authorization.slice(7);
+            const payload = Object(jwtDecode(token));
+
+            const { id } = payload;
+
+            const user = await User.findOne({ _id: id }); 
+            
+            // When user doesn't exist
+            if (!user) {
+                return res.status(404).json({
+                    error: "Deze gebruiker bestaat niet."
+                });
+            };
+
+            return res.status(200).json(user);
+        } catch (e) {
+            next(e);
+        };
+    };
+
+    // Update a user
+    updateMyself = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
+        try {
+            // Main values to be edited
+            const { email, firstName, lastName, schoolName, avatar } = req.body;
+
+            // First off all, check if you're the user
+            if (!req.headers.authorization) {
+                return res.status(401).json({
+                    error: "Deze gebruiker bestaat niet.",
+                });
+            };
+
+            const token = req.headers.authorization.slice(7);
+            const payload = Object(jwtDecode(token));
+
+            const { id } = payload;
+
+            const user = await User.findOne({ _id: id }); 
+
+            if (!user) {
+                return res.status(404).json({
+                    error: "Deze gebruiker bestaat niet."
+                });
+            };
+
+            // Updating the user
+            const updatedUser = await User.findOneAndUpdate({ _id: id }, {
+                $set: {
+                    email: email,
+                    'profile.firstName': firstName,
+                    'profile.lastName': lastName,
+                    'profile.schoolName': schoolName,
+                    'profile.avatar': avatar,
+                    _modifiedAt: Date.now(),
+                },
+            }, { new : true }).exec();
+
+            return res.status(200).json(updatedUser);
+        } catch (e) {
+            next(e);
+        };
+    };
+
+    // Delete a user
+    deleteMyself = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
+        try {
+            // Get your bearer token
+            if (!req.headers.authorization) {
+                return res.status(401).json({
+                    error: "Deze gebruiker bestaat niet.",
+                });
+            };
+            
+            const token = req.headers.authorization.slice(7);
+            const payload = Object(jwtDecode(token));
+    
+            const { id } = payload;
+
+            const user = await User.findOneAndRemove({ _id: id });
+
+            if (!user) {
+                return res.status(404).json({
+                    error: "Deze gebruiker kan niet verwijderd worden.",
+                });
+            };
+
+            return res.status(200).json(user);
+        } catch(e) {
+            next(e);
+        };
+    };
+
+    // Registering a user
+    newUser = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
+        const { email } = req.body;
+
+        // Check if user exists
+        let existing = await User.findOne({ email: email });
+
+        if (existing) {
+            return res.status(403).json({ error: 'Er is al een gebruiker gemaakt met dit e-mailadres' });
+        };
+
+        // Fill in user data
+        const newUser: IUser = new User(req.body);
+
+        const user: IUser = await newUser.save();
+
+        // Create a jwt token
+        const jwtToken = this.auth.createToken(user);
+
+        return res.status(200).json({
+            token: jwtToken,
+        });
+    };
+
+    // User logging in
+    loggingInUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        this.auth.passport.authenticate('local', {
+            session: this.config.auth.jwt.session,
+        }, (e, user) => {
+            if (e) {
+                return next(e);
+            };
+
+            // When user can't be found
+            if (!user) {
+                return next(new NotFound());
+            };
+
+            // Create a token
+            const token = this.auth.createToken(user);
+
+            return res.status(200).json({token: token, id: user._id});
+        })(req, res, next);
+    };
+};
