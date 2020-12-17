@@ -1,6 +1,6 @@
 {
     "version": 3,
-    "mappings": "AEAA,yDAAyD;ACAzD,OAAO,CAAC,+JAAI;AACZ,OAAO,CAAC,uSAAI",
+    "mappings": "AEAA,wDAAwD;ACAxD,OAAO,CAAC,+JAAI;AACZ,OAAO,CAAC,uSAAI",
     "sources": [
         "PageLayout.scss",
         "../_sass/abstracts/_index.scss",

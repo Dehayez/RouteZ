@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import { Landing, Login, Register, SendReset, SubmitReset } from './pages';
 
 // Main layouts
-import { PageLayout } from './layouts';
+import { PageLayout, AuthLayout } from './layouts';
 import { RouteWithLayout } from './utilities';
 
 // All routes
@@ -26,10 +26,10 @@ function App() {
               {/** Where the site lands */}
               <RouteWithLayout exact path={Routes.LANDING} component={Landing} layout={PageLayout} />
               {/** Main pages for authentication */}
-				      <RouteWithLayout exact path={Routes.AUTH_SIGN_IN} component={Login} layout={PageLayout} />
-              <RouteWithLayout exact path={Routes.AUTH_SIGN_UP} component={Register} layout={PageLayout} />
-              <RouteWithLayout exact path={Routes.AUTH_RESET} component={SendReset} layout={PageLayout} />
-              <RouteWithLayout exact path={Routes.AUTH_SUBMIT} component={SubmitReset} layout={PageLayout} />
+			  <RouteWithLayout exact path={Routes.AUTH_SIGN_IN} component={Login} layout={AuthLayout} />
+              <RouteWithLayout exact path={Routes.AUTH_SIGN_UP} component={Register} layout={AuthLayout} />
+              <RouteWithLayout exact path={Routes.AUTH_RESET} component={SendReset} layout={AuthLayout} />
+              <RouteWithLayout exact path={Routes.AUTH_SUBMIT} component={SubmitReset} layout={AuthLayout} />
             </Switch>
           </Router>
         </ApiProvider>

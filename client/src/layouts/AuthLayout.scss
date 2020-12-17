@@ -1,0 +1,30 @@
+@import '../_sass/abstracts/index';
+
+.auth {
+	&.container {
+		margin: 0;
+	}
+
+	&-left {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		background-color: $routez-secondary;
+		height: 100vh;
+		width: 100%;
+		border-radius: 30px;
+
+		&-frame {
+			background-color: white;
+			height: 20vw;
+			width: 20vw;
+			border-radius: 12px
+		}
+	}
+
+	&-right {
+		display: flex;
+		flex-direction: column;
+	}
+}

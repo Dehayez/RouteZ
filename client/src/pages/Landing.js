@@ -3,7 +3,7 @@ import React from 'react';
 const Landing = () => {
     return (
         <>
-            <h1>Aaaah, Yentel! Ge zijt dao!</h1>
+            <h1>Landingspagina</h1>
         </>
     )
 };
