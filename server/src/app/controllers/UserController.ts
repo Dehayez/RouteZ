@@ -193,6 +193,7 @@ export default class UserController {
     // Registering a user
     newUser = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
         const { email } = req.body;
+        console.log(email);
 
         // Check if user exists
         let existing = await User.findOne({ email: email });
@@ -225,7 +226,9 @@ export default class UserController {
 
             // When user can't be found
             if (!user) {
-                return next(new NotFound());
+                return res.status(404).json({
+                    error: 'Er is iets verkeerd gelopen bij het aanmelden.'
+                })
             };
 
             // Create a token

@@ -9,11 +9,16 @@ import {
 } from "crypto";
 
 import {
+    default as bcrypt
+} from "bcrypt";
+
+import {
     default as nodemailer,
 } from "nodemailer";
 
 import { 
     IReset,
+    IUser,
     Reset, 
     User,
 } from "../models";
@@ -93,17 +98,21 @@ export default class ResetController {
             });
         };
 
-        // Update user
-        await User.findByIdAndUpdate({
-            _id: reset._userId,
-        }, {
-            password: password,
-        });
+        bcrypt.genSalt(10, (err, salt) => {
+            bcrypt.hash(password, salt, async (err, hash) => {
+                // Update user
+                const user : IUser = await User.findByIdAndUpdate({
+                    _id: reset._userId,
+                }, {
+                    password: hash,
+                });
 
-        const deleteReset = await Reset.findOneAndRemove({
-            _id: reset._id,
-        });
+                const deleteReset = await Reset.findOneAndRemove({
+                    _id: reset._id,
+                });
 
-        return res.status(200).json(deleteReset);
+                return res.status(200).json(deleteReset);            
+            });
+        });
     };
 };

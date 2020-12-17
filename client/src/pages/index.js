@@ -1,7 +1,14 @@
-import { default as TestPage } from './TestPage';
+import Login from './Login';
+import Register from './Register';
+import SendReset from './SendReset';
+import SubmitReset from './SubmitReset';
 
-
+import Landing from './Landing';
 
 export {
-  TestPage,
-}
+  Login,
+  Register,
+  SendReset,
+  SubmitReset,
+  Landing,
+};
