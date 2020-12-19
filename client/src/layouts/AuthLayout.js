@@ -1,6 +1,7 @@
 import { default as React } from 'react';
 import {Container, Row, Col} from 'react-bootstrap'
 import illustration from '../assets/illustrations/welcome-illustation.svg';
+import logo from '../assets/logos/RouteZ-logo-color.png'
 
 import './AuthLayout.scss';
 
@@ -17,7 +18,7 @@ const AuthLayout = ({children}) => {
 					</div>
 				</Col>
 				<Col md={4} className="auth-right">
-						<img src="..." alt="..." className="img-thumbnail"></img>
+						<img src={logo} alt="RouteZ" className="auth-right-logo"></img>
 					{children}
 				</Col>
 			</Row>

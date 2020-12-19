@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { Link } from "react-router-dom";
+import FloatingLabelInput from 'react-floating-label-input';
+import { ButtonLarge }  from '../components/buttons';
 
 // Importing services
 import { useAuth } from '../services';
@@ -49,23 +52,33 @@ const SendReset = () => {
             ...formData,
             [e.target.name]: e.target.value,
         });
-    };
+	};
 
     return (
-        <>
-            <form onSubmit={(e) => sendRequest(e)}>
-                <h1>Zije je wachtwoord vergeten ti??</h1>
-                <label htmlFor="email">E-mail</label>
-                <input type="email" name="email" id="email" onChange={(e) => changeData(e)} required/>
-                <button type="submit">Kwil ne nieuweeeee</button>
+        <div className="auth-content">
+			<h1 className="title title--large">Wachtwoord vergeten?</h1>
+            <form className="form" onSubmit={(e) => sendRequest(e)}>
+                {/* <label htmlFor="email">E-mail</label>
+                <input type="email" name="email" id="email" onChange={(e) => changeData(e)} required/> */}
+				<div className="form-input" style={{ fontSize: 16  }}>
+					<FloatingLabelInput
+					id="email"
+					label="E-mail"
+					type="email"
+					onChange={(e) => changeData(e)} required
+					autofocus
+					/>
+				</div>			
+				<ButtonLarge content="Verzend aanvraag"></ButtonLarge>
             </form>
+			<Link className="form-link form-link--top" to="/signin">Annuleren</Link>
             {
                 message.visible && message.message
             }
             {
                 error.visible && error.message
             }
-        </>
+        </div>
     )
 };
 

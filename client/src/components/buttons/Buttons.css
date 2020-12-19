@@ -1,0 +1,32 @@
+/*********************** ROUTEZ ***********************/
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+.btn {
+  font-weight: 700 !important;
+  font-size: 18px !important;
+  border-radius: 10px !important;
+  cursor: pointer;
+  -webkit-transition: 0.2s !important;
+  transition: 0.2s !important;
+  padding: 10px 0 !important;
+}
+
+.btn--large {
+  width: 100%;
+}
+
+.btn--primary {
+  background-color: #4A84FC !important;
+  color: white !important;
+  /* -webkit-box-shadow: 0px 8px 20px 0px rgba(74,132,252,0.25); 
+		box-shadow: 0px 8px 20px 0px rgba(74,132,252,0.25); */
+}
+
+.btn--primary:hover {
+  background-color: #3B6ACA !important;
+}
+
+.btn--auth {
+  margin-top: 10vh;
+}
+/*# sourceMappingURL=Buttons.css.map */

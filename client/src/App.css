@@ -25,4 +25,14 @@ p {
   font-family: "Montserrat", sans-serif;
   color: #494949;
 }
+
+.title {
+  font-family: "Playfair Display", serif;
+  font-weight: 700;
+  text-align: center;
+}
+
+.title--large {
+  font-size: 32px;
+}
 /*# sourceMappingURL=App.css.map */

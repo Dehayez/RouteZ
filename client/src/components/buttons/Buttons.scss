@@ -1,0 +1,29 @@
+@import '../../_sass/abstracts/index';
+
+.btn {
+	font-weight: 700 !important;
+	font-size: 18px !important;
+	border-radius: 10px !important;
+	cursor: pointer;
+	transition: 0.2s !important;
+	padding: 10px 0 !important;
+
+	&--large {
+		width: 100%
+	}
+
+	&--primary {
+		background-color: $routez-primary !important;
+		color: white!important;
+		/* -webkit-box-shadow: 0px 8px 20px 0px rgba(74,132,252,0.25); 
+		box-shadow: 0px 8px 20px 0px rgba(74,132,252,0.25); */
+
+		&:hover {
+			background-color: $routez-primary-dark !important;
+		}
+	}
+
+	&--auth {
+		margin-top: 10vh;
+	}
+}

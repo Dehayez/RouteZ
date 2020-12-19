@@ -13,3 +13,13 @@ p {
 	font-family: $font-family-base;
 	color: $font-color-base;
 }
+
+.title {
+	font-family: $font-family-secondary;
+	font-weight: 700;
+	text-align: center;
+
+	&--large {
+		font-size: 32px
+	}
+}

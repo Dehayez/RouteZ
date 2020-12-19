@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
+import { ButtonLarge }  from '../components/buttons';
+import FloatingLabelInput from 'react-floating-label-input';
 
 // Importing services
 import { useAuth } from '../services';
@@ -60,13 +62,20 @@ const SubmitReset = () => {
     };
 
     return (
-        <>
-            <form onSubmit={(e) => submitRequest(e)}>
-                <h1>Iere, meugt een nieuwtjen en</h1>
-                <input type="password" name="password" id="password" onChange={(e) => changeData(e)} required />
-                <button type="submit">
-                    Tis goeeed
-                </button>
+        <div className="auth-content">
+            <form className="form" onSubmit={(e) => submitRequest(e)}>
+				<h1 className="title title--large">Wachtwoord veranderen</h1>
+                {/* <input type="password" name="password" id="password" onChange={(e) => changeData(e)} required /> */}
+				<div className="form-input sendreset-input" style={{ fontSize: 16 }}>
+					<FloatingLabelInput
+					id="email"
+					label="E-mail"
+					type="email"
+					onChange={(e) => changeData(e)} required
+					/>
+				</div>
+				<ButtonLarge content="Ga verder"></ButtonLarge>
+
             </form>
             {
                 message.visible && message.message
@@ -74,7 +83,7 @@ const SubmitReset = () => {
             {
                 error.visible && error.message
             }
-        </>
+        </div>
     )
 };
 

@@ -23,10 +23,6 @@
 }
 
 .auth-left-frame {
-  background-color: white;
-  height: 30vw;
-  width: 30vw;
-  border-radius: 12px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -36,6 +32,10 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  background-color: white;
+  height: 30vw;
+  width: 30vw;
+  border-radius: 12px;
 }
 
 .auth-left-frame__image {
@@ -51,5 +51,105 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+}
+
+.auth-right-logo {
+  width: 40%;
+  margin: 2rem 0 0 2rem;
+}
+
+/********************* FORM *********************/
+.auth-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-align: left;
+  height: 100%;
+}
+
+.form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-family: "Montserrat", sans-serif !important;
+  width: 100%;
+  padding: 2rem;
+}
+
+.form-input {
+  margin: 1rem;
+  width: 100%;
+}
+
+.form-link {
+  color: #AAAAAA;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.form-link--bottom {
+  margin-bottom: 10vh;
+}
+
+.form-link--top {
+  margin-top: 1rem;
+}
+
+.form-link b {
+  color: #494949;
+}
+
+.form-link:hover {
+  text-decoration: underline;
+  color: #494949;
+}
+
+.form-restrictions {
+  margin-top: 10vh;
+  margin-bottom: 1rem;
+}
+
+.form-restrictions-text {
+  font-size: 14px;
+  font-weight: 400;
+  color: #AAAAAA;
+  margin: 1rem;
+}
+
+.form-restrictions-text b {
+  color: #494949;
+}
+
+.form-input.sendreset-input {
+  margin: 2rem 0 6rem 0;
+}
+
+@media (max-width: 767.98px) {
+  .auth-left {
+    display: none;
+  }
+  .auth-right {
+    height: 100vh;
+  }
 }
 /*# sourceMappingURL=AuthLayout.css.map */
