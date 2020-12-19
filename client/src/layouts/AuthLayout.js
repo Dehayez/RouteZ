@@ -1,20 +1,22 @@
 import { default as React } from 'react';
 import {Container, Row, Col} from 'react-bootstrap'
+import illustration from '../assets/illustrations/welcome-illustation.svg';
 
 import './AuthLayout.scss';
 
+
 const AuthLayout = ({children}) => {
+	
   return (
 	<div className="page">
 		<Container className="page-main auth">
 			<Row>
-				<Col sm={7} className="auth-left">
+				<Col md={8} className="auth-left">
 					<div className="auth-left-frame">
-						<img className="auth-left-frame__image" src=""></img>
-						waar zitte
+						<img className="auth-left-frame__image" src={illustration} alt="illustration"></img>
 					</div>
 				</Col>
-				<Col sm={5} className="auth-right">
+				<Col md={4} className="auth-right">
 						<img src="..." alt="..." className="img-thumbnail"></img>
 					{children}
 				</Col>
