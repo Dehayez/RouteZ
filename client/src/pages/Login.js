@@ -43,8 +43,8 @@ const Login = ({ onChange, value }) => {
     const changeData = (e) => {
         setFormData({
             ...formData,
-            [e.target.name]: e.target.value,
-        });
+            [e.target.id]: e.target.value,
+		});
     };
   return (
 	<div className="auth-content">

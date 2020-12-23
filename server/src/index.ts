@@ -25,13 +25,11 @@ import { ILogger, Logger, IConfig, Config, Db, Files } from './app/services';
             app.stopServer();
             // Disconnect mongo
             await mongo.disconnect();
-
-            logger.info('stopped processes', {});
         };
     
         process.on('SIGINT', () =>  stop());
         process.on('SIGTERM', () => stop());
     } catch (e) {
-        logger.error('Error', {e});
+        console.log(e);
     };
 })();

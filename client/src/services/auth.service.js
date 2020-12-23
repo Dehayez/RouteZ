@@ -39,6 +39,26 @@ const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(verifyUserFromLocalStorage);
 
   /**
+   * @desc getting user who's logged in
+   * @param {string} token 
+   */
+  const getMyself = async (token) => {
+    const url = `${apiConfig.baseURL}users/me`;
+
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      redirect: 'follow'
+    });
+
+    return await response.json();
+  };
+
+  /**
    * @desc signing in as a existing user
    * @param {string} email 
    * @param {string} password 
@@ -153,13 +173,16 @@ const AuthProvider = ({ children }) => {
     return await response.json();
   };
 
+  /**
+   * @desc logging out the user
+   */
   const logout = async () => {
     localStorage.setItem('mern:authUser', null);
     return true;
   }
 
   return (
-    <AuthContext.Provider value={{ currentUser, signIn, signUp, logout, sendReset, submitReset }}>
+    <AuthContext.Provider value={{ currentUser, signIn, signUp, logout, sendReset, submitReset, getMyself }}>
       {children}
     </AuthContext.Provider>
   )

@@ -55,7 +55,7 @@ const Register = () => {
     const changeData = (e) => {
         setFormData({
             ...formData,
-            [e.target.name]: e.target.value,
+            [e.target.id]: e.target.value,
         });
     };
 
@@ -76,7 +76,7 @@ const Register = () => {
                 <input type="checkbox" name="restrictions" id="restrictions" required /> */}
 				<div className="form-input" style={{ fontSize: 16 }}>
 					<FloatingLabelInput
-					id="firstname"
+                    id="firstname"
 					label="Voornaam"
 					type="text"
 					onChange={(e) => changeData(e)} required
@@ -85,7 +85,7 @@ const Register = () => {
 				</div>
 				<div className="form-input" style={{ fontSize: 16 }}>
 					<FloatingLabelInput
-						id="lastname"
+                        id="lastname"
 						label="Achternaam"
 						type="text"
 						onChange={(e) => changeData(e)} required

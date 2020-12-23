@@ -6,3 +6,6 @@ export const AUTH_SUBMIT = '/reset/:token';
 
 // Main pages 
 export const LANDING = '/';
+export const DASHBOARD = '/dashboard';
+export const MY_PROFILE = '/my-profile';
+export const MY_PROFILE_SETTINGS = '/my-profile/settings';
