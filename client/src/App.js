@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
 
 // All pages
-import { Dashboard, Landing, Login, Register, SendReset, SubmitReset } from './pages';
+import { Dashboard, Landing, Login, Module, MyProfile, MyProfileSettings, Register, SendReset, Signpost, Signposts, SubmitReset } from './pages';
 
 // Main layouts
 import { PageLayout, AuthLayout } from './layouts';
@@ -32,7 +32,11 @@ function App() {
               <RouteWithLayout exact path={Routes.AUTH_SUBMIT} component={SubmitReset} layout={AuthLayout} />
               {/** Platform pages */}
               <AuthRouteWithLayout exact path={Routes.DASHBOARD} component={Dashboard} layout={PageLayout} />
-              <AuthRouteWithLayout exact path={Routes.MY_PROFILE} component={Routes.MY_PROFILE} layout={PageLayout} />
+              <AuthRouteWithLayout exact path={Routes.MY_PROFILE} component={MyProfile} layout={PageLayout} />
+              <AuthRouteWithLayout exact path={Routes.MY_PROFILE_SETTINGS} component={MyProfileSettings} layout={PageLayout} />
+              <AuthRouteWithLayout exact path={Routes.SIGNPOSTS} component={Signposts} layout={PageLayout} />
+              <AuthRouteWithLayout exact path={Routes.SIGNPOST} component={Signpost} layout={PageLayout} />
+              <AuthRouteWithLayout exact path={Routes.MODULE} component={Module} layout={PageLayout} />
             </Switch>
           </Router>
         </ApiProvider>

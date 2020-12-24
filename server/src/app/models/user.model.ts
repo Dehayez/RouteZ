@@ -26,6 +26,8 @@ interface IProfile {
     lastName: string;
     schoolName?: string;
     avatar?: string;
+    professionalFunction?: string;
+    phoneNumber?: string;
 };
 
 // Main interface
@@ -63,6 +65,14 @@ const userSchema: Schema = new Schema({
         lastName: {
             type: String,
             required: true,
+        },
+        phoneNumber: {
+            type: String,
+            required: false,
+        },
+        professionalFunction: {
+            type: String,
+            required: false,
         },
         schoolName: {
             type: String,

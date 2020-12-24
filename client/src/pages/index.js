@@ -7,6 +7,9 @@ import Landing from './Landing';
 import Dashboard from './Dashboard';
 import MyProfile from './MyProfile';
 import MyProfileSettings from './MyProfileSettings';
+import Signposts from './Signposts';
+import Signpost from './Signpost';
+import Module from './Module';
 
 export {
   Login,
@@ -17,4 +20,7 @@ export {
   Dashboard,
   MyProfile,
   MyProfileSettings,
+  Signpost,
+  Signposts,
+  Module,
 };

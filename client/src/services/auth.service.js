@@ -59,6 +59,48 @@ const AuthProvider = ({ children }) => {
   };
 
   /**
+   * @desc editing loggedin user
+   * @param {string} token 
+   * @param {json} data 
+   */
+  const editMyself = async (token, data) => {
+    const url = `${apiConfig.baseURL}users/me`;
+
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      redirect: 'follow',
+      body: JSON.stringify(data),
+    });
+
+    return await response.json();
+  };
+
+  /**
+   * @desc deleting myself
+   * @param {string} token 
+   */
+  const deleteMyself = async (token) => {
+    const url = `${apiConfig.baseURL}users/me`;
+
+    const response = await fetch(url, {
+      method: 'DELETE',
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      redirect: 'follow',
+    });
+
+    return await response.json();
+  };
+
+  /**
    * @desc signing in as a existing user
    * @param {string} email 
    * @param {string} password 
@@ -182,7 +224,7 @@ const AuthProvider = ({ children }) => {
   }
 
   return (
-    <AuthContext.Provider value={{ currentUser, signIn, signUp, logout, sendReset, submitReset, getMyself }}>
+    <AuthContext.Provider value={{ currentUser, signIn, signUp, logout, sendReset, submitReset, getMyself, editMyself, deleteMyself }}>
       {children}
     </AuthContext.Provider>
   )

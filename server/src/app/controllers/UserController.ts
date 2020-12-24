@@ -18,10 +18,6 @@ import {
     default as jwtDecode
 } from "jwt-decode";
 
-import { 
-    NotFound 
-} from "../utils";
-
 export default class UserController {
     private auth: Auth;
     private config: IConfig;
@@ -121,7 +117,7 @@ export default class UserController {
     updateMyself = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
         try {
             // Main values to be edited
-            const { email, firstName, lastName, schoolName, avatar } = req.body;
+            const { email, firstName, lastName, schoolName, avatar, professionalFunction, phoneNumber } = req.body;
 
             // First off all, check if you're the user
             if (!req.headers.authorization) {
@@ -151,6 +147,8 @@ export default class UserController {
                     'profile.lastName': lastName,
                     'profile.schoolName': schoolName,
                     'profile.avatar': avatar,
+                    'profile.professionalFunction': professionalFunction,
+                    'profile.phoneNumber': phoneNumber,
                     _modifiedAt: Date.now(),
                 },
             }, { new : true }).exec();

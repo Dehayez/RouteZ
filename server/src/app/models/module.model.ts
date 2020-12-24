@@ -14,7 +14,6 @@ interface IModule extends Document {
     title: string;
     shortInfo: string;
     mainInfo: string;
-    cardImg: string;
 
     _createdAt: number;
     _modifiedAt: number;
@@ -34,10 +33,6 @@ const moduleItem: Schema = new Schema({
         required: true,
     },
     mainInfo: {
-        type: String,
-        required: true,
-    },
-    cardImg: {
         type: String,
         required: true,
     },

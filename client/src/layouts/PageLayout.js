@@ -21,21 +21,23 @@ const PageLayout = ({children}) => {
     const getAllData = useCallback(() => {
         const easyFetch = async () => {
             // All user information
-            const userData = await getMyself(currentUser.token);
-            setUser(userData);
-
-            // Get users avatar, if he has one
-            if (userData.profile.avatar) {
-                setAvatar(userData.profile.avatar);
+            if (currentUser) {
+              const userData = await getMyself(currentUser.token);
+              setUser(userData);
+  
+              // Get users avatar, if he has one
+              if (userData.profile.avatar) {
+                  setAvatar(userData.profile.avatar);
+              };
+  
+              // All signposts
+              const signPostsData = await getSignPosts(currentUser.token);
+              setSignPosts(signPostsData);
             };
-
-            // All signposts
-            const signPostsData = await getSignPosts(currentUser.token);
-            setSignPosts(signPostsData);
         };
 
         easyFetch();
-    }, [getMyself, getSignPosts, currentUser.token]);
+    }, [getMyself, getSignPosts, currentUser]);
 
     useEffect(() => {
         getAllData();
