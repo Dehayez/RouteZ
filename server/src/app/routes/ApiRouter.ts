@@ -75,10 +75,13 @@ class ApiRouter {
         // Modules
         this.router.get('/modules', this.moduleController.allModules); // needs bearer
         this.router.get('/modules/:moduleId', this.moduleController.getModule); // needs bearer
+        this.router.post('/modules', this.moduleController.createModule);
 
         // Signposts
         this.router.get('/signposts', this.signpostController.allSignposts); // needs bearer
         this.router.get('/signposts/:signpostId', this.signpostController.getSignpost); // needs bearer
+        this.router.post('/signposts', this.signpostController.createSignpost); // needs bearer, only for admin
+        this.router.patch('/signposts/:signpostId/:moduleId', this.signpostController.addModuleToSignpost); // needs bearer, only for admin
     };
 };
 

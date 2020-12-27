@@ -1,11 +1,10 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { useParams, Redirect } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+
+import ReactHtmlParser from 'react-html-parser';
 
 // Import services
 import { useAuth, useApi } from '../services';
-
-// Import routes 
-import * as Routes from '../routes';
 
 const Module = () => {
     const { id } = useParams();
@@ -35,10 +34,12 @@ const Module = () => {
     return (
         <>
         {
-            module ? (
-                ''
-            ) : (
-                <Redirect to={Routes.NOT_FOUND} />
+            module && (
+                <>
+                {
+                    ReactHtmlParser(module.content)
+                }
+                </>
             )
         }
         </>

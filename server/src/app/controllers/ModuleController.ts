@@ -9,6 +9,7 @@ import {
 } from "jwt-decode";
 
 import {
+    IModule,
     ModuleItem, 
     User
 } from '../models';
@@ -55,6 +56,23 @@ export default class ModuleController {
             };
 
             return res.status(200).json(modules);
+        } catch (e) {
+            next(e);
+        };
+    };
+
+    createModule = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
+        try {
+            const { title, content } = req.body;
+
+            const newModule: IModule = new ModuleItem({
+                title: title,
+                content: content,
+            });
+
+            const savedModule = await newModule.save();
+
+            return res.status(200).json(savedModule);
         } catch (e) {
             next(e);
         };

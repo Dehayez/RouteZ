@@ -1,11 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Redirect, useHistory, useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 
 // Import services
 import { useAuth, useApi } from '../services';
-
-// Import routes
-import * as Routes from '../routes';
 
 const Signpost = () => {
     const { id } = useParams();
@@ -40,12 +37,10 @@ const Signpost = () => {
     return (
         <>
         {
-            signpost ? (
-                signpost._moduleIds && signpost._moduleIds.map((element, index) => {
+            signpost && (
+                signpost.modules && signpost.modules.map((element, index) => {
                     return ''
                 })
-            ) : (
-                <Redirect to={Routes.NOT_FOUND} />
             )
         }
         </>

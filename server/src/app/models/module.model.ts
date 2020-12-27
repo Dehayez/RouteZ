@@ -28,11 +28,7 @@ const moduleItem: Schema = new Schema({
         required: true,
         unique: true,
     },
-    shortInfo: {
-        type: String,
-        required: true,
-    },
-    mainInfo: {
+    content: {
         type: String,
         required: true,
     },

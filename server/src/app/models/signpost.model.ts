@@ -16,6 +16,7 @@ import {
 
 interface ISignpost extends Document {
     title: string;
+    shortedTitle: string;
     text: string;
     icon: string;
     illustration: string;
@@ -34,6 +35,11 @@ const signPost: Schema = new Schema({
         required: true,
         unique: true,
     },
+    shortedTitle: {
+        type: String,
+        required: true,
+        unique: true,    
+    },
     text: {
         type: String,
         required: true,
@@ -45,7 +51,7 @@ const signPost: Schema = new Schema({
     },
     illustration: {
         type: String,
-        unique: true,
+        unique: false,
         required: true,
     },
     _moduleIds: [
