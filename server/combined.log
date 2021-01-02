@@ -2761,3 +2761,21 @@
 2020-12-27 17:11:29 [[32minfo[39m: 	Server closed {
   "object": {}
 }]
+2021-01-02 17:38:04 [[32minfo[39m: 	Connected to the database {
+  "object": {}
+}]
+2021-01-02 17:38:04 [[32minfo[39m: 	Server on localhost:8000 {
+  "object": {}
+}]
+2021-01-02 17:43:07 [[32minfo[39m: 	Server closed {
+  "object": {}
+}]
+2021-01-02 17:43:10 [[32minfo[39m: 	Connected to the database {
+  "object": {}
+}]
+2021-01-02 17:43:10 [[32minfo[39m: 	Server on localhost:8000 {
+  "object": {}
+}]
+2021-01-02 17:43:47 [[32minfo[39m: 	Server closed {
+  "object": {}
+}]

@@ -14,6 +14,8 @@ import {
     FileController,
     ModuleController,
     SignpostController,
+    PathController,
+    ExerciseController,
 } from '../controllers';
 
 import { 
@@ -30,6 +32,8 @@ class ApiRouter {
     private fileController: FileController;
     private moduleController: ModuleController;
     private signpostController: SignpostController;
+    private pathController: PathController;
+    private exerciseController: ExerciseController;
 
     private config: IConfig;
     private auth: Auth;
@@ -51,6 +55,8 @@ class ApiRouter {
         this.fileController = new FileController();
         this.moduleController = new ModuleController();
         this.signpostController = new SignpostController();
+        this.exerciseController = new ExerciseController();
+        this.pathController = new PathController();
     };
 
     private registerRoutes(): void {
@@ -82,6 +88,18 @@ class ApiRouter {
         this.router.get('/signposts/:signpostId', this.signpostController.getSignpost); // needs bearer
         this.router.post('/signposts', this.signpostController.createSignpost); // needs bearer, only for admin
         this.router.patch('/signposts/:signpostId/:moduleId', this.signpostController.addModuleToSignpost); // needs bearer, only for admin
+
+        // Paths
+        this.router.get('/paths', this.pathController.allPaths); // needs bearer
+        this.router.get('/paths/:pathId', this.pathController.getPath); // needs bearer
+        this.router.post('/paths', this.pathController.createPath); // needs bearer, only for admin
+        this.router.patch('/paths/:moduleId/:pathId', this.pathController.addPathToModule); // needs bearer, only for admin
+
+        // Exercises
+        this.router.get('/exercises', this.exerciseController.allExercises); // needs bearer
+        this.router.get('/exercises/:exerciseId', this.exerciseController.getExercise); // needs bearer
+        this.router.post('/exercises', this.exerciseController.createExercise); // needs bearer, only for admin
+        this.router.patch('/exercises/:pathId/:exerciseId', this.exerciseController.addExerciseToPath); // needs bearer, only for admin
     };
 };
 

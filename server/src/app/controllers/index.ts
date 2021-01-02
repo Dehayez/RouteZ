@@ -3,6 +3,8 @@ import ResetController from './ResetController';
 import FileController from './FileController';
 import ModuleController from './ModuleController';
 import SignpostController from './SignpostController';
+import ExerciseController from './ExerciseController';
+import PathController from './PathController';
 
 export {
     UserController,
@@ -10,4 +12,6 @@ export {
     FileController,
     ModuleController,
     SignpostController,
+    ExerciseController,
+    PathController,
 };

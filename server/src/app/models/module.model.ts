@@ -10,10 +10,15 @@ import {
     default as mongoosePaginate,
 } from 'mongoose-paginate';
 
+import { 
+    IPath 
+} from './path.model';
+
 interface IModule extends Document {
     title: string;
     shortInfo: string;
     mainInfo: string;
+    _pathIds: Array<IPath['_id']>;
 
     _createdAt: number;
     _modifiedAt: number;
@@ -28,10 +33,19 @@ const moduleItem: Schema = new Schema({
         required: true,
         unique: true,
     },
+    mainInfo: {
+        type: String,
+        required: false,
+    },
     content: {
         type: String,
         required: true,
     },
+    _pathIds: [
+        {
+            type: Schema.Types.ObjectId, ref: 'Path', required: false,
+        },
+    ],
     _createdAt: {
         type: Number,
         required: true,
