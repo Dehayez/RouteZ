@@ -19,6 +19,7 @@ const Signpost = () => {
         const fetchData = async () => {
             if (currentUser) {
                 const signpostData = await getSignPost(currentUser.token, id);
+                console.log(signpostData);
                 setSignpost(signpostData);
             };
         };

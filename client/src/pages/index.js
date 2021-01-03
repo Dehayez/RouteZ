@@ -10,6 +10,7 @@ import MyProfileSettings from './MyProfileSettings';
 import Signposts from './Signposts';
 import Signpost from './Signpost';
 import Module from './Module';
+import Path from './Path';
 
 export {
   Login,
@@ -23,4 +24,5 @@ export {
   Signpost,
   Signposts,
   Module,
+  Path,
 };

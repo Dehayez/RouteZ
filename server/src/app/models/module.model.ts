@@ -61,9 +61,23 @@ const moduleItem: Schema = new Schema({
         required: false,
         default: null,       
     },
+}, {
+    toJSON: {
+        virtuals: true,
+    },
+    toObject: {
+        virtuals: true,
+    },
 });
 
 moduleItem.plugin(mongoosePaginate);
+
+moduleItem.virtual('paths', {
+    ref: 'Path',
+    localField: '_pathIds',
+    foreignField: '_id',
+    justOne: false,
+});
 
 const ModuleItem = mongoose.model<IModule, IModuleModel>(
     'Module',

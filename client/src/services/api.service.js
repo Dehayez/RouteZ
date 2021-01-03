@@ -68,6 +68,26 @@ const ApiProvider = ({children}) => {
   };
 
   /**
+   * @desc get one path
+   * @param {string} token 
+   * @param {string} id 
+   */
+  const getPath = async (token, id) => {
+    const url = `${BASE_URL}paths/${id}`;
+
+    const response = await fetch(url, {
+      'method': 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+    });
+
+    return await response.json();
+  };
+
+  /**
    * uploading a file to the server
    * @param {json} file 
    */
@@ -93,6 +113,7 @@ const ApiProvider = ({children}) => {
       getSignPosts,
       getSignPost,
       getModule,
+      getPath,
       uploadFile,
     }}>
       {children}
@@ -104,4 +125,4 @@ export {
   ApiContext,
   ApiProvider,
   useApi,
-}
+};

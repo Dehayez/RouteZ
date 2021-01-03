@@ -20,12 +20,13 @@ const Module = () => {
         const fetchData = async () => {
             if (currentUser) {
                 const moduleData = await getModule(currentUser.token, id);
+                console.log(moduleData);
                 setModule(moduleData);
             };
         };
 
         fetchData();
-    }, [getModule, currentUser]);
+    }, [getModule, currentUser, id]);
 
     useEffect(() => {
         getAllData();

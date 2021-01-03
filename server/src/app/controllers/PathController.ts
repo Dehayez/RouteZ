@@ -8,7 +8,7 @@ import {
   default as jwtDecode
 } from "jwt-decode";
 
-import { IModule, IPath, ModuleItem, Path, User } from '../models';
+import { IPath, ModuleItem, Path, User } from '../models';
 
 export default class PathController {
   public allPaths = async (req: Request, res: Response, next: NextFunction): Promise < Response > => {

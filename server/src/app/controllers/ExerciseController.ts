@@ -49,9 +49,10 @@ export default class PathController {
   addExerciseToPath = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
     try {
       const { exerciseId, pathId } = req.params;
+      console.log(exerciseId, pathId)
 
       // Update path
-      const foundPath = await Path.findOne({_id: exerciseId});
+      const foundPath = await Path.findOne({_id: pathId});
 
       // Pushing into array
       let array = foundPath._exerciseIds;

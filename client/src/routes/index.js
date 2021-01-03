@@ -12,5 +12,6 @@ export const MY_PROFILE_SETTINGS = '/my-profile/settings';
 export const SIGNPOSTS = '/signposts';
 export const SIGNPOST = '/signposts/:id';
 export const MODULE = '/module/:id';
+export const PATH = '/path/:id';
 
 export const NOT_FOUND = '/not-found';
