@@ -9,13 +9,18 @@ import {
 } from '../services';
 
 export default class FileController {
-    // Getting file
-    public show = (req: Request, res: Response, next: NextFunction): void => {
+    // Getting image
+    showImage = (req: Request, res: Response, next: NextFunction): void => {
         Files.pipeImage(req, res);
     };
 
+    // Getting file
+    showFile = (req: Request, res: Response, next: NextFunction): void => {
+        Files.pipeFile(req, res);
+    };
+
     // Uploading file
-    public upload = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
+    upload = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
         try {
             if (req.file) {
                 res.status(200).send({
@@ -38,4 +43,6 @@ export default class FileController {
         };
         return res.status(200).json();
     };
+
+
 };

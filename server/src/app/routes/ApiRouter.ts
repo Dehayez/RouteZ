@@ -16,6 +16,7 @@ import {
     SignpostController,
     PathController,
     ExerciseController,
+    TagController,
 } from '../controllers';
 
 import { 
@@ -34,6 +35,7 @@ class ApiRouter {
     private signpostController: SignpostController;
     private pathController: PathController;
     private exerciseController: ExerciseController;
+    private tagController : TagController;
 
     private config: IConfig;
     private auth: Auth;
@@ -57,6 +59,7 @@ class ApiRouter {
         this.signpostController = new SignpostController();
         this.exerciseController = new ExerciseController();
         this.pathController = new PathController();
+        this.tagController = new TagController();
     };
 
     private registerRoutes(): void {
@@ -75,8 +78,10 @@ class ApiRouter {
         this.router.post('/reset/submit', this.resetController.destroyToken); // needs body
 
         // Files
-        this.router.post('/file', multer({storage: memoryStorage()}).single('picture'), Files.uploadAvatar, this.fileController.upload); // uploading file, needs formdata
-        this.router.get('/file/:filename', this.fileController.show); // needs filename as params
+        this.router.post('/file', multer({storage: memoryStorage()}).single('picture'), Files.uploadAvatar, this.fileController.upload); // uploading avatar, needs formdata
+        this.router.post('/doc', multer({storage: memoryStorage()}).single('file'), Files.uploadFile, this.fileController.upload); // uploading avatar, needs formdata
+        this.router.get('/file/:filename', this.fileController.showImage); // needs filename as params
+        this.router.get('/doc/:filename', this.fileController.showFile); // needs filename as params
 
         // Modules
         this.router.get('/modules', this.moduleController.allModules); // needs bearer
@@ -100,6 +105,11 @@ class ApiRouter {
         this.router.get('/exercises/:exerciseId', this.exerciseController.getExercise); // needs bearer
         this.router.post('/exercises', this.exerciseController.createExercise); // needs bearer, only for admin
         this.router.patch('/exercises/:pathId/:exerciseId', this.exerciseController.addExerciseToPath); // needs bearer, only for admin
+
+        // Tags
+        this.router.get('/tags', this.tagController.allTags); // needs bearer
+        this.router.get('/tags/:id', this.tagController.getTag); // needs bearer
+        this.router.post('/tags', this.tagController.createTag); // needs bearer, only for admin
     };
 };
 
