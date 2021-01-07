@@ -26,7 +26,7 @@ import {
 
 interface IMulterRequest extends Request {
     file: any;
-}
+};
 
 class Files {
     private gfsBucket: any;
@@ -50,9 +50,9 @@ class Files {
 
         try {
             crypto.randomBytes(16, async (e, buf) => {
-                await sharp(uploadedImg.buffer).resize(300, 300, {
+                sharp(uploadedImg.buffer).resize(300, 300, {
                     fit: 'cover',
-                }).toFormat('jpeg').jpeg({quality: 90}).toBuffer((e: any, data: any, info: any) => {
+                }).toFormat('jpeg').jpeg({ quality: 90 }).toBuffer((e: any, data: any, info: any) => {
                     const name = buf.toString('hex') + path.extname(uploadedImg.originalname);
                     const bufferstream = new stream.PassThrough();
 

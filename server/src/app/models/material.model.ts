@@ -20,6 +20,7 @@ interface IMaterial extends Document {
   description: string;
   type: string;
   filename: string;
+  file: string;
   videoUrl: string;
   size: string;
   _authorId: IUser['_id'];
@@ -52,6 +53,11 @@ const materialSchema:Schema = new Schema({
     required: false,
     unique: false,
   },
+  file: {
+    type: String,
+    required: false,
+    unique: false,
+  },
   videoUrl: {
     type: String,
     unique: false,
@@ -67,7 +73,7 @@ const materialSchema:Schema = new Schema({
     ref: 'User',
     required: true,
   },
-  _arrayIds: {
+  _tagIds: {
     type: Schema.Types.ObjectId,
     ref: 'Tag',
     required: false,
