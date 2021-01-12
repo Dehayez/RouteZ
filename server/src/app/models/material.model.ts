@@ -13,6 +13,7 @@ import {
 import { 
   IUser, 
   ITag,
+  IModule,
 } from "../models";
 
 interface IMaterial extends Document {
@@ -25,6 +26,8 @@ interface IMaterial extends Document {
   size: string;
   _authorId: IUser['_id'];
   _tagIds: Array<ITag['_id']>;
+  _moduleId: IModule['_id'];
+  _likeIds: Array<IUser['_id']>;
   _createdAt: number;
   _modifiedAt: number;
   _deletedAt: number;
@@ -73,11 +76,21 @@ const materialSchema:Schema = new Schema({
     ref: 'User',
     required: true,
   },
-  _tagIds: {
+  _tagIds: [{
     type: Schema.Types.ObjectId,
     ref: 'Tag',
     required: false,
+  }],
+  _moduleId: {
+    type: Schema.Types.ObjectId,
+    ref: 'Module',
+    required: true,
   },
+  _likeIds: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Likes',
+    required: false,
+  }],
   _createdAt: {
     type: Number,
     required: true,
@@ -104,18 +117,32 @@ const materialSchema:Schema = new Schema({
 
 materialSchema.plugin(mongoosePaginate);
 
-materialSchema.virtual('user', {
+materialSchema.virtual('tags', {
   ref: 'Tag',
   localField: '_tagIds',
   foreignField: '_id',
   justOne: false,
 });
 
-materialSchema.virtual('tag', {
+materialSchema.virtual('author', {
   ref: 'User',
-  localField: '_userId',
+  localField: '_authorId',
   foreignField: '_id',
   justOne: true,
+});
+
+materialSchema.virtual('module', {
+  ref: 'Module',
+  localField: '_moduleId',
+  foreignField: '_id',
+  justOne: true,
+});
+
+materialSchema.virtual('likes', {
+  ref: 'Likes',
+  localField: '_likeIds',
+  foreignField: '_id',
+  justOne: false,
 });
 
 const Material = mongoose.model<IMaterial, IMaterialModel>(

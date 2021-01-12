@@ -159,6 +159,132 @@ export default class UserController {
         };
     };
 
+    updateProgress = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
+        try {
+            // Main values to be edited
+            const { moduleId, pathId, signpostId } = req.body;
+
+            // First off all, check if you're the user
+            if (!req.headers.authorization) {
+                return res.status(401).json({
+                    error: "Deze gebruiker bestaat niet.",
+                });
+            };
+
+            const token = req.headers.authorization.slice(7);
+            const payload = Object(jwtDecode(token));
+
+            const { id } = payload;
+
+            const user = await User.findOne({ _id: id }); 
+
+            if (!user) {
+                return res.status(404).json({
+                    error: "Deze gebruiker bestaat niet."
+                });
+            };
+
+            let updatedUser;
+
+            if (moduleId) {
+                let array = [];
+
+                if (user.progress._finishedModuleIds.includes(moduleId)) return res.status(200).json({
+                    message: "Deze module is al reeds toegevoegd",
+                });
+
+                if (!user.progress._finishedModuleIds || user.progress._finishedModuleIds.length === 0) {
+                    array.push(moduleId);
+
+                    // Updating the user
+                    updatedUser = await User.findOneAndUpdate({ _id: id }, {
+                        $set: {
+                            'progress._finishedModuleIds': array,
+                            _modifiedAt: Date.now(),
+                        },
+                    }, { new : true }).exec();
+                } else {
+                    // Updating the user
+                    array = user.progress._finishedModuleIds;
+                    array.push(moduleId);
+
+                    updatedUser = await User.findOneAndUpdate({ _id: id }, {
+                        $set: {
+                            'progress._finishedModuleIds': array,
+                            _modifiedAt: Date.now(),
+                        },
+                    }, { new : true }).exec();
+                };
+            };
+
+            if (pathId) {
+                let array = [];
+
+                if (user.progress._finishedPathIds.includes(pathId)) return res.status(200).json({
+                    message: "Dit pad is al reeds toegevoegd",
+                });
+
+                if (!user.progress._finishedPathIds || user.progress._finishedPathIds.length === 0) {
+                    array.push(pathId);
+
+                    // Updating the user
+                    updatedUser = await User.findOneAndUpdate({ _id: id }, {
+                        $set: {
+                            'progress._finishedPathIds': array,
+                            _modifiedAt: Date.now(),
+                        },
+                    }, { new : true }).exec();
+                } else {
+                    array = user.progress._finishedPathIds;
+                    array.push(pathId);
+
+                    // Updating the user
+                    updatedUser = await User.findOneAndUpdate({ _id: id }, {
+                        $set: {
+                            'progress._finishedPathIds': array,
+                            _modifiedAt: Date.now(),
+                        },
+                    }, { new : true }).exec();
+                };
+            };
+
+            if (signpostId) {
+                let array = [];
+
+                if (user.progress._finishedSignPostIds.includes(signpostId)) return res.status(200).json({
+                    message: "Deze wegwijzer is al reeds toegevoegd",
+                });
+
+                if (!user.progress._finishedSignPostIds || user.progress._finishedSignPostIds.length === 0) {
+                    array.push(signpostId);
+
+                    // Updating the user
+                    updatedUser = await User.findOneAndUpdate({ _id: id }, {
+                        $set: {
+                            'progress._finishedSignPostIds': array,
+                            _modifiedAt: Date.now(),
+                        },
+                    }, { new : true }).exec();
+                } else {
+                    array = user.progress._finishedSignPostIds;
+                    array.push(signpostId);
+
+                    // Updating the user
+                    updatedUser = await User.findOneAndUpdate({ _id: id }, {
+                        $set: {
+                            'progress._finishedSignPostIds': array,
+                            _modifiedAt: Date.now(),
+                        },
+                    }, { new : true }).exec();
+                };
+            };
+
+            return res.status(200).json(updatedUser);
+        } catch (e) {
+            next(e);
+        };
+    };
+
     // Delete a user
     deleteMyself = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
         try {

@@ -15,9 +15,22 @@ import {
 import {
     Material,
     IMaterial,
+    ModuleItem,
+    User,
 } from "../models";
 
 export default class FileController {
+    // Getting all materials
+    allMaterials = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
+        try {
+            const materials = await Material.find().exec();
+
+            return res.status(200).json(materials);
+        } catch (e) {
+            next(e);
+        };
+    };
+
     // Getting image
     showImage = (req: Request, res: Response, next: NextFunction): void => {
         Files.pipeImage(req, res);
@@ -146,10 +159,12 @@ export default class FileController {
 
     createMaterial = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
         try {
-            const { title, description, type, filename, file, videoUrl, size, author } = req.body;
+            const { title, description, type, filename, file, videoUrl, size, author, moduleId } = req.body;
+            
+            let newMaterial: IMaterial;
             
             if (type === 'Presentatie') {
-                let newMaterial: IMaterial = new Material({
+                newMaterial = new Material({
                     title: title,
                     description: description,
                     type: type,
@@ -157,21 +172,12 @@ export default class FileController {
                     file: file,
                     size: size,
                     _authorId: author,
+                    _moduleId: moduleId,
                 });
-
-                const material = await newMaterial.save();
-
-                if (!material) {
-                    return res.status(400).json({
-                        error: "De presentatie kon niet upgeload worden",
-                    });
-                };
-
-                return res.status(200).json(material);
             };
 
             if (type === 'Document') {
-                let newMaterial: IMaterial = new Material({
+                newMaterial = new Material({
                     title: title,
                     description: description,
                     type: type,
@@ -179,39 +185,115 @@ export default class FileController {
                     file: file,
                     size: size,
                     _authorId: author,
+                    _moduleId: moduleId,
                 });
-
-                const material = await newMaterial.save();
-
-                if (!material) {
-                    return res.status(400).json({
-                        error: "Het document kon niet upgeload worden",
-                    });
-                };
-
-                return res.status(200).json(material);
             };
 
             if (type === 'Video' && videoUrl) {
-                let newMaterial: IMaterial = new Material({
+                newMaterial = new Material({
                     title: title,
                     description: description,
                     type: type,
                     videoUrl: videoUrl,
                     _authorId: author,
+                    _moduleId: moduleId,
                 });
-
-                const material = await newMaterial.save();
-
-                if (!material) {
-                    return res.status(400).json({
-                        error: "De video kon niet upgeload worden",
-                    });
-                };
-
-                return res.status(200).json(material);
             };
+
+            const material = await newMaterial.save();
+
+            if (!material) {
+                return res.status(400).json({
+                    error: "Het bestand kon niet upgeload worden",
+                });
+            };
+
+            const updateModule = await ModuleItem.findOneAndUpdate({_id: moduleId}, {
+                $push: {
+                    _materialIds: material._id,
+                },
+            });
+
+            if (!updateModule) {
+                return res.status(400).json({
+                    error: "Het bestand kon niet upgeload worden",
+                });
+            };
+
+            return res.status(200).json(material);
         } catch(e) {
+            next(e);
+        };
+    };
+
+    likeMaterial = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
+        try {
+            const { userId, materialId } = req.body;
+
+            const user = await User.findById(userId);
+
+            if (!user) return res.status(404).json({
+                error: "Deze gebruiker bestaat niet",
+            });
+
+            const updateMaterial = await Material.findByIdAndUpdate(materialId, {
+                $push: {
+                    _likeIds: userId,
+                },
+            });
+
+            if (!updateMaterial) return res.status(400).json({
+                error: "Like kon niet worden toegevoegd",
+            });
+
+            return res.status(200).json(updateMaterial);
+        } catch (e) {
+            next(e);
+        };
+    };
+
+    dislikeMaterial = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
+        try {
+            const { userId, materialId } = req.body;
+
+            const user = await User.findById(userId);
+
+            if (!user) return res.status(404).json({
+                error: "Deze gebruiker bestaat niet",
+            });
+
+            const updateMaterial = await Material.findByIdAndUpdate(materialId, {
+                $pull: {
+                    _likeIds: userId,
+                },
+            });
+
+            if (!updateMaterial) return res.status(400).json({
+                error: "Like kon niet worden toegevoegd",
+            });
+
+            return res.status(200).json(updateMaterial);
+        } catch (e) {
+            next(e);
+        };
+    };
+
+    deleteMaterial = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
+        try {
+            const { id } = req.params;
+
+            const material = await Material.findOne({_id: id});
+
+            if (!material) {
+                return res.status(404).json({
+                    error: "Dit bestand bestaat niet",
+                });
+            };
+
+            const deleted = await Material.findOneAndDelete({_id: id});
+
+            return res.status(200).json(deleted);
+        } catch (e) {
             next(e);
         };
     };

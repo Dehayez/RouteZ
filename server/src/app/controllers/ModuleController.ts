@@ -105,7 +105,7 @@ export default class ModuleController {
             };
             
             // Find module
-            const moduleItem = await ModuleItem.findOne({_id: moduleId}).populate('paths').exec();
+            const moduleItem = await ModuleItem.findOne({_id: moduleId}).populate({path: 'materials', populate: {path: 'author'}}).populate('paths').exec();
 
             if (!moduleItem) {
                 return res.status(404).json({

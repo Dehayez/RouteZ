@@ -14,5 +14,7 @@ export const SIGNPOST = '/signposts/:id';
 export const MODULE = '/module/:id';
 export const PATH = '/path/:id';
 export const MATERIALS = '/materials';
+export const MATERIAL = '/material/:name';
+export const ADD_MATERIAL = '/material/add';
 
 export const NOT_FOUND = '/not-found';

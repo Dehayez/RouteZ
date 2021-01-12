@@ -14,10 +14,23 @@ import {
     default as bcrypt,
 } from 'bcrypt';
 
-// Progress made in modules
-// Shown in percentages
+import { 
+    IModule 
+} from './module.model';
+
+import { 
+    IPath 
+} from './path.model';
+
+import { 
+    ISignpost 
+} from './signpost.model';
+
+// Progress made in modules, paths and signposts
 interface IProgress {
-    
+    _finishedModuleIds: Array<IModule['_id']>;
+    _finishedPathIds: Array<IPath['_id']>;
+    _finishedSignPostIds: Array<ISignpost['_id']>;
 };
 
 // Main information of an user
@@ -83,6 +96,23 @@ const userSchema: Schema = new Schema({
             required: false,
         },
     },
+    progress: {
+        _finishedModuleIds: [
+            {
+                type: Schema.Types.ObjectId, ref: 'Module', required: false,
+            },
+        ],
+        _finishedPathIds: [
+            {
+                type: Schema.Types.ObjectId, ref: 'Path', required: false,
+            },
+        ],
+        _finishedSignPostsIds: [
+            {
+                type: Schema.Types.ObjectId, ref: 'Signpost', required: false,
+            },
+        ],
+    },
     role: {
         type: String,
         enum: ['user', 'admin'],
@@ -103,10 +133,34 @@ const userSchema: Schema = new Schema({
         type: Number,
         required: false,
         default: null,       
-    },
+    }
+}, {
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
 });
 
 userSchema.plugin(mongoosePaginate);
+
+userSchema.virtual('modules', {
+    ref: 'Module',
+    localField: '_finishedModuleIds',
+    foreignField: '_id',
+    justOne: false,
+});
+
+userSchema.virtual('paths', {
+    ref: 'Path',
+    localField: '_finishedPathIds',
+    foreignField: '_id',
+    justOne: false,
+});
+
+userSchema.virtual('signpost', {
+    ref: 'Signpost',
+    localField: '_finishedSignPostIds',
+    foreignField: '_id',
+    justOne: false,
+});
 
 // Hashing the password
 userSchema.pre('save', function (next) {

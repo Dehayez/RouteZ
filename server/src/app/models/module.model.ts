@@ -11,6 +11,10 @@ import {
 } from 'mongoose-paginate';
 
 import { 
+    IMaterial 
+} from './material.model';
+
+import { 
     IPath 
 } from './path.model';
 
@@ -19,6 +23,7 @@ interface IModule extends Document {
     shortInfo: string;
     mainInfo: string;
     _pathIds: Array<IPath['_id']>;
+    _materialIds: Array<IMaterial['_id']>
 
     _createdAt: number;
     _modifiedAt: number;
@@ -44,6 +49,11 @@ const moduleItem: Schema = new Schema({
     _pathIds: [
         {
             type: Schema.Types.ObjectId, ref: 'Path', required: false,
+        },
+    ],
+    _materialIds: [
+        {
+            type: Schema.Types.ObjectId, ref: 'Material', required: false,
         },
     ],
     _createdAt: {
@@ -75,6 +85,13 @@ moduleItem.plugin(mongoosePaginate);
 moduleItem.virtual('paths', {
     ref: 'Path',
     localField: '_pathIds',
+    foreignField: '_id',
+    justOne: false,
+});
+
+moduleItem.virtual('materials', {
+    ref: 'Material',
+    localField: '_materialIds',
     foreignField: '_id',
     justOne: false,
 });
