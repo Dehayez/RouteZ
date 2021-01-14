@@ -52,7 +52,7 @@ export default class SignpostController {
                     },
                 });
             } else {
-                signposts = await SignPost.find().sort({_createdAt: -1}).exec();
+                signposts = await SignPost.find().sort({_createdAt: -1}).populate('modules').exec();
             };
 
             return res.status(200).json(signposts);
@@ -85,6 +85,29 @@ export default class SignpostController {
         };
     };
 
+    removeModuleSignpost = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
+        try {
+            const { moduleId, signpostId } = req.params;
+
+            // Updating the signpost
+            const foundSignpost = await SignPost.findOne({ _id: signpostId });
+
+            // Pushing module into array
+            let array = foundSignpost._moduleIds;
+            array.push(moduleId);
+            
+            const updatedSignpost = await SignPost.findOneAndUpdate({ _id: signpostId }, {
+                $pull: {
+                    _moduleIds: array,
+                },
+            }, { new : true }).exec();
+
+            return res.status(200).json(updatedSignpost);
+        } catch (e) {
+            next(e);
+        };
+    };
+
     createSignpost = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
         try {
             // Get body
@@ -102,6 +125,22 @@ export default class SignpostController {
 
             return res.status(200).json(signpost);
         } catch(e) {
+            next(e);
+        };
+    };
+
+    deleteSignpost = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
+        try {
+            const { id } = req.params;
+
+            const deletedSignpost = await SignPost.findByIdAndDelete(id);
+
+            if (!deletedSignpost) return res.status(400).json({
+                error: "Deze module kon niet verwijderd worden",
+            });
+
+            return res.status(200).json(deletedSignpost);
+        } catch (e) {
             next(e);
         };
     };

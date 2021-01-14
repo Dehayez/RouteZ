@@ -100,6 +100,7 @@ class ApiRouter {
         this.router.get('/signposts/:signpostId', this.signpostController.getSignpost); // needs bearer
         this.router.post('/signposts', this.signpostController.createSignpost); // needs bearer, only for admin
         this.router.patch('/signposts/:signpostId/:moduleId', this.signpostController.addModuleToSignpost); // needs bearer, only for admin
+        this.router.delete('/signposts/:id', this.signpostController.deleteSignpost); // needs bearer, only for admin
 
         // Paths
         this.router.get('/paths', this.pathController.allPaths); // needs bearer

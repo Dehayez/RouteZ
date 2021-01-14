@@ -1,4 +1,5 @@
 import { default as React, useContext, createContext } from 'react';
+import { default as Downloader } from 'downloadjs';
 
 import { apiConfig } from '../config';
 
@@ -135,6 +136,15 @@ const ApiProvider = ({children}) => {
     return await response.json();
   };
 
+  /**
+   * get a document of the server
+   * @param {string} doc 
+   */
+  const getDoc = async (doc) => {
+    const url = `${BASE_URL}doc/${doc}`;
+    Downloader(url);
+  };
+
   // MATERIAL
 
   /**
@@ -197,6 +207,7 @@ const ApiProvider = ({children}) => {
       getModules,
       getPath,
       uploadFile,
+      getDoc,
       addLikeToMaterial,
       addDislikeToMaterial,
     }}>

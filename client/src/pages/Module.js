@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { NavLink, useParams } from 'react-router-dom';
+import { NavLink, useHistory, useParams } from 'react-router-dom';
 
 import ReactHtmlParser from 'react-html-parser';
 
@@ -12,34 +12,51 @@ import * as Routes from '../routes';
 // Import partials
 import { CardMaterials } from '../partials';
 
+// Import components
+import { BackLinks } from '../components';
+
 const Module = () => {
     const { id } = useParams();
+    const history = useHistory();
 
     // Services
-    const { getModule } = useApi();
+    const { getModule, getSignPosts } = useApi();
     const { currentUser, getMyself } = useAuth();
 
     // Some states
     const [ module, setModule ] = useState();
+    const [ signpost, setSignpost ] = useState();
     const [ checkedPaths, setCheckedPaths ] = useState();
     const [ checkedModule, setCheckedModule ] = useState(false);
 
     const getAllData = useCallback(() => {
         const fetchData = async () => {
-            if (currentUser) {
-                const moduleData = await getModule(currentUser.token, id);
-                const userData = await getMyself(currentUser.token);
-                setCheckedPaths(userData.progress._finishedPathIds);
-                setModule(moduleData);
-
-                if (userData.progress._finishedModuleIds.includes(moduleData._id)) {
-                    setCheckedModule(true);
+            try {
+                if (currentUser) {
+                    const moduleData = await getModule(currentUser.token, id);
+                    const userData = await getMyself(currentUser.token);
+                    const signpostData = await getSignPosts(currentUser.token);
+    
+                    setCheckedPaths(userData.progress._finishedPathIds);
+                    setModule(moduleData);
+    
+                    for (let i = 0; i < signpostData.length; i++) {
+                        if (signpostData[i]._moduleIds.includes(moduleData._id)) {
+                            setSignpost(signpostData[i]);
+                        };
+                    };
+    
+                    if (userData.progress._finishedModuleIds.includes(moduleData._id)) {
+                        setCheckedModule(true);
+                    };
                 };
+            } catch (e) {
+                history.push(Routes.NOT_FOUND);
             };
         };
 
         fetchData();
-    }, [getModule, currentUser, getMyself, id]);
+    }, [getModule, getSignPosts, currentUser, getMyself, id, history]);
 
     useEffect(() => {
         getAllData();
@@ -51,7 +68,24 @@ const Module = () => {
             module && (
                 <>
                 {/** Back buttons */}
-                
+                {
+                    signpost && <BackLinks 
+                        links={[
+                            {
+                                path: `${Routes.SIGNPOSTS}`,
+                                route: "wegwijzers"
+                            },
+                            {
+                                path: `${Routes.SIGNPOST.replace(':id', signpost._id)}`,
+                                route: `>${signpost.title}`
+                            },
+                            {
+                                path: `${Routes.MODULE.replace(':id', module._id)}`,
+                                route: `>${module.title}`
+                            }
+                        ]}
+                    />
+                }
                 {/** Main HTML */}
                 <h1 style={{padding: '30px 0px'}}>{module.title}</h1>
                 {

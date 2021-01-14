@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 
 // Import services
@@ -10,24 +10,29 @@ import * as Routes from '../../routes';
 const CardMaterial = ({material, user, token}) => {
   const history = useHistory();
 
-  const { addLikeToMaterial, addDislikeToMaterial } = useApi();
+  // Services
+  const { addLikeToMaterial, addDislikeToMaterial, getDoc } = useApi();
 
+  // States
   const [ liked, setLiked ] = useState(material && material._likeIds.includes(user));
 
+  // Like the material
   const likeMaterial = async () => {
     setLiked(!liked);
 
     await addLikeToMaterial(token, user, material._id);
   };
 
+  // Dislike the material
   const dislikeMaterial = async () => {
     setLiked(!liked);
 
     await addDislikeToMaterial(token, user, material._id);
   };
 
+  // Download material
   const readMaterial = () => {
-
+    getDoc(material.file);
   };
 
   return (
