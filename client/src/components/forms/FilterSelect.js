@@ -6,26 +6,29 @@ import Arrow from '../../assets/icons/arrow-blue.svg';
 // Components
 import { Checkbox } from '../forms';
 
-const FilterSelect = ({options, sections}) => {
+const FilterSelect = ({text, options, sections}) => {
+  // States
   const [ selected, setSelected ] = useState([]);
   const [ showSelect, setShowSelect ] = useState(false);
   const [ selectedString, setSelectedString ] = useState();
 
+  // Selection a group of options
   const selectSection = (index) => {
     const grouped =  document.getElementsByClassName('filter-select__select--section__options')[index].children;
 
     for (let i = 0; i < grouped.length; i++) {
-      grouped[i].children[1].checked = true;
+      grouped[i].children[1].children[0].children[0].checked = true;
 
-      if (!selected.filter(e => e.id === grouped[i].children[1].id).length > 0) {
+      if (!selected.filter(e => e.id === grouped[i].children[1].children[0].children[0].id).length > 0) {
         let array = selected;
-        array.push({id: grouped[i].children[1].id, name: grouped[i].children[1].name});
+        array.push({id: grouped[i].children[1].children[0].children[0].id, name: grouped[i].children[1].children[0].children[0].name});
         setSelected(array);
         createPlaceholder(array);
       };
     };
   };
 
+  // Change an item to checked or not
   const editSelected = (id, name) => {
     let array = selected;
 
@@ -43,6 +46,7 @@ const FilterSelect = ({options, sections}) => {
     createPlaceholder(array);
   };
 
+  // Create the string of checked items
   const createPlaceholder = (array) => {
     let string = '';
 
@@ -50,7 +54,7 @@ const FilterSelect = ({options, sections}) => {
       string = string + array[i].name + ', ';
     };
 
-    string = string.substring(0, 20);
+    string = string.substring(0, 20).toLowerCase();
     setSelectedString(string);
   };
 
@@ -58,7 +62,7 @@ const FilterSelect = ({options, sections}) => {
     <div className="filter-select">
       <div className="filter-select__field" onClick={() => setShowSelect(!showSelect)}>
         { 
-          selectedString ? `${selectedString}...` : 'Specifiek zoeken naar een type bestand' 
+          selectedString ? `${selectedString}...` : text 
         } 
         <img src={Arrow} alt="arrow" className={showSelect ? 'arrow-up' : 'arrow-down'} />
       </div>
@@ -70,7 +74,7 @@ const FilterSelect = ({options, sections}) => {
                 return (
                   <div key={index} className="filter-select__select--section__options--option">
                     <label htmlFor={option.id}>{option.title}</label>
-                    <input onChange={(e) => editSelected(e.target.id, e.target.name)} type="checkbox" id={option.id} name={option.title} />
+                    <Checkbox change={editSelected} name={option.title} id={option.id} />
                   </div>
                 )
               }) : options.map((option, index) => {
@@ -82,7 +86,7 @@ const FilterSelect = ({options, sections}) => {
                         option.modules.map((innerOption, innerIndex) => {
                           return <div key={innerIndex} className="filter-select__select--section__options--option">
                             <label htmlFor={innerOption.id}>{innerOption.title}</label>
-                            <input onChange={(e) => editSelected(e.target.id, e.target.name)} type="checkbox" id={innerOption.id} name={innerOption.title} />
+                            <Checkbox change={editSelected} name={innerOption.title} id={innerOption.id} />
                           </div>
                         })
                       }

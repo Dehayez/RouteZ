@@ -9,6 +9,7 @@ export const LANDING = '/';
 export const DASHBOARD = '/dashboard';
 export const MY_PROFILE = '/my-profile';
 export const MY_PROFILE_SETTINGS = '/my-profile/settings';
+export const PROFILE = '/profile/:id';
 export const SIGNPOSTS = '/signposts';
 export const SIGNPOST = '/signposts/:id';
 export const MODULE = '/module/:id';

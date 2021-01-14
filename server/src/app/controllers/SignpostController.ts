@@ -85,7 +85,7 @@ export default class SignpostController {
         };
     };
 
-    removeModuleSignpost = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
+    removeModuleFromSignpost = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
         try {
             const { moduleId, signpostId } = req.params;
 
@@ -94,11 +94,13 @@ export default class SignpostController {
 
             // Pushing module into array
             let array = foundSignpost._moduleIds;
-            array.push(moduleId);
+            const index = array.indexOf(moduleId);
+            array.splice(index, 1);
             
             const updatedSignpost = await SignPost.findOneAndUpdate({ _id: signpostId }, {
-                $pull: {
+                $set: {
                     _moduleIds: array,
+                    _modifiedAt: Date.now(),
                 },
             }, { new : true }).exec();
 

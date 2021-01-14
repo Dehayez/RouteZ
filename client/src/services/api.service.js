@@ -148,6 +148,23 @@ const ApiProvider = ({children}) => {
   // MATERIAL
 
   /**
+   * get all materials
+   */
+  const getMaterials = async () => {
+    const url = `${BASE_URL}material`;
+
+    const res = await fetch(url, {
+      method: "GET",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    });
+
+    return await res.json();
+  };
+
+  /**
    * adding a like to a material
    * @param {string} token 
    * @param {string} userId 
@@ -208,6 +225,7 @@ const ApiProvider = ({children}) => {
       getPath,
       uploadFile,
       getDoc,
+      getMaterials,
       addLikeToMaterial,
       addDislikeToMaterial,
     }}>

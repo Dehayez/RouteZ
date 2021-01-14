@@ -23,7 +23,15 @@ export default class FileController {
     // Getting all materials
     allMaterials = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
         try {
-            const materials = await Material.find().exec();
+            const { limit } = req.query;
+
+            let materials;
+            
+            if (limit) {
+                materials = await Material.find().sort({_likeIds: -1}).populate('author').limit(Number(limit)).exec();
+            } else {
+                materials = await Material.find().sort({_likeIds: -1}).populate('author').exec();
+            };
 
             return res.status(200).json(materials);
         } catch (e) {
