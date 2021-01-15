@@ -12,6 +12,7 @@ import Signpost from './Signpost';
 import Module from './Module';
 import Path from './Path';
 import Materials from './Materials';
+import Material from './Material';
 
 export {
   Login,
@@ -27,4 +28,5 @@ export {
   Module,
   Path,
   Materials,
+  Material,
 };

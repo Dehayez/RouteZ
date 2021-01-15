@@ -17,7 +17,7 @@ const Materials = () => {
   const history = useHistory();
 
   // Is it a redirect?
-  const { state } = useLocation();
+  const { props } = useLocation();
 
   // Services
   const { getSignPosts, getMaterials, queryMaterials } = useApi();
@@ -54,25 +54,45 @@ const Materials = () => {
       const signpostData = await getSignPosts(currentUser.token);
       setSignposts(signpostData);
 
-      const materialData = await getMaterials();
-
       let txt = [];
       let vid = [];
       let pres = [];
 
-      for (let i = 0; i < materialData.length; i++) {
-        switch (materialData[i].type) {
-          case "Document":
-            txt.push(materialData[i]);
-            break;
-          case "Video":
-            vid.push(materialData[i]);
-            break;
-          case "Presentatie":
-            pres.push(materialData[i]);
-            break;
-          default:
-            break;
+      // Check if it's coming from a redirect
+      if (props && props.module) {
+        const materialData = await queryMaterials(false, false, [props.module]);  
+        for (let i = 0; i < materialData.length; i++) {
+          switch (materialData[i].material.type) {
+            case "Document":
+              txt.push(materialData[i].material);
+              break;
+            case "Video":
+              vid.push(materialData[i].material);
+              break;
+            case "Presentatie":
+              pres.push(materialData[i].material);
+              break;
+            default:
+              break;
+          };
+        };
+      } else {
+        // Otherwise show everything
+        const materialData = await getMaterials();
+        for (let i = 0; i < materialData.length; i++) {
+          switch (materialData[i].type) {
+            case "Document":
+              txt.push(materialData[i]);
+              break;
+            case "Video":
+              vid.push(materialData[i]);
+              break;
+            case "Presentatie":
+              pres.push(materialData[i]);
+              break;
+            default:
+              break;
+          };
         };
       };
 
@@ -82,7 +102,7 @@ const Materials = () => {
     } catch (e) {
       history.push(Routes.NOT_FOUND);
     };
-  }, [getSignPosts, getMaterials, history, currentUser]);
+  }, [getSignPosts, queryMaterials, props, getMaterials, history, currentUser]);
 
   useEffect(() => {
     getData();
@@ -101,7 +121,6 @@ const Materials = () => {
         queryForm.type.length !== 0 ? queryForm.type : false,
         queryForm.modules.length !== 0 ? queryForm.modules : false,
       );
-
       for (let i = 0; i < materialData.length; i++) {
         switch (materialData[i].material.type) {
           case "Document":
@@ -119,7 +138,6 @@ const Materials = () => {
       };
     } else {
       const materialData = await getMaterials();
-
       for (let i = 0; i < materialData.length; i++) {
         switch (materialData[i].type) {
           case "Document":

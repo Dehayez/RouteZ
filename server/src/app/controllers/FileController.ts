@@ -73,6 +73,22 @@ export default class FileController {
         };
     };
 
+    getMaterial = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
+        try {
+            const { id } = req.params;
+
+            const material = await Material.findOne({_id: id}).populate('author').populate('like').exec();
+
+            if (!material) return res.status(404).json({
+                error: "Dit bestand kon niet worden terugvonden",
+            });
+
+            return res.status(200).json(material);
+        } catch (e) {
+            next(e);
+        };
+    };
+
     showMaterial = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
         try {
             const { keywords, startdate, enddate, type, modules } = req.body;

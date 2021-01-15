@@ -17,5 +17,6 @@ export const PATH = '/path/:id';
 export const MATERIALS = '/materials';
 export const MATERIAL = '/material/:name';
 export const ADD_MATERIAL = '/material/add';
+export const MY_MATERIALS = '/my-materials';
 
 export const NOT_FOUND = '/not-found';
