@@ -166,6 +166,24 @@ const ApiProvider = ({children}) => {
   };
 
   /**
+   * get my materials
+   * @param {string} id 
+   */
+  const getMyMaterials = async (id) => {
+    const url = `${BASE_URL}material/current/${id}`;
+
+    const res = await fetch(url, {
+      method: "GET",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    });
+
+    return await res.json();
+  };
+
+  /**
    * get all materials
    */
   const getMaterials = async () => {
@@ -173,6 +191,23 @@ const ApiProvider = ({children}) => {
 
     const res = await fetch(url, {
       method: "GET",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    });
+
+    return await res.json();
+  };
+
+  /**
+   * delete one material
+   */
+  const deleteMaterial = async (id) => {
+    const url = `${BASE_URL}material/${id}`;
+
+    const res = await fetch(url, {
+      method: "DELETE",
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
@@ -270,9 +305,11 @@ const ApiProvider = ({children}) => {
       getDoc,
       getMaterial,
       getMaterials,
+      getMyMaterials,
       queryMaterials,
       addLikeToMaterial,
       addDislikeToMaterial,
+      deleteMaterial,
     }}>
       {children}
     </ApiContext.Provider>

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 // Import components
 import { ListMaterialItem } from '.';
 
-const ListMaterials = ({title, materials}) => {
+const ListMaterials = ({title, materials, owner}) => {
   // Pagination
   const [ paginateIndex, setPaginateIndex ] = useState(2);
 
@@ -15,7 +15,7 @@ const ListMaterials = ({title, materials}) => {
         <>
           {
             materials && materials.map((material, index) => {
-              return index > paginateIndex ? '' : <ListMaterialItem key={index} material={material} />
+              return index > paginateIndex ? '' : owner ? <ListMaterialItem owner={owner} key={index} material={material}/> : <ListMaterialItem owner={owner} key={index} material={material} />
             })
           }
           {

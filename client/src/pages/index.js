@@ -13,6 +13,7 @@ import Module from './Module';
 import Path from './Path';
 import Materials from './Materials';
 import Material from './Material';
+import MyMaterials from './MyMaterials';
 
 export {
   Login,
@@ -29,4 +30,5 @@ export {
   Path,
   Materials,
   Material,
+  MyMaterials,
 };

@@ -84,6 +84,7 @@ class ApiRouter {
         this.router.get('/file/:filename', this.fileController.showImage); // needs filename as params
         this.router.get('/doc/:filename', this.fileController.showFile); // needs filename as params
         this.router.get('/material/:id', this.fileController.getMaterial); // needs bearer and params
+        this.router.get('/material/current/:userId', this.fileController.myMaterials); // needs userId as params and bearer
         this.router.get('/material', this.fileController.allMaterials); // needs bearer
         this.router.post('/material', this.fileController.createMaterial); // needs bearer and body
         this.router.post('/material/search', this.fileController.showMaterial); // needs bearer and body

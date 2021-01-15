@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
 
 // All pages
-import { Dashboard, Landing, Login, Material, Materials, Module, MyProfile, MyProfileSettings, Path, Register, SendReset, Signpost, Signposts, SubmitReset } from './pages';
+import { Dashboard, Landing, Login, Material, Materials, Module, MyMaterials, MyProfile, MyProfileSettings, Path, Register, SendReset, Signpost, Signposts, SubmitReset } from './pages';
 
 // Main layouts
 import { PageLayout, AuthLayout } from './layouts';
@@ -41,6 +41,7 @@ function App() {
                 <AuthRouteWithLayout exact path={Routes.PATH} component={Path} layout={PageLayout} />
                 <AuthRouteWithLayout exact path={Routes.MATERIALS} component={Materials} layout={PageLayout} />
                 <AuthRouteWithLayout exact path={Routes.MATERIAL} component={Material} layout={PageLayout} />
+                <AuthRouteWithLayout exact path={Routes.MY_MATERIALS} component={MyMaterials} layout={PageLayout} />
               </Switch>
             </Router>
           </ApiProvider>
@@ -48,6 +49,6 @@ function App() {
       </ToolboxProvider>
     </div>
   );
-}
+};
 
 export default App;

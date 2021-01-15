@@ -39,6 +39,23 @@ export default class FileController {
         };
     };
 
+    // Get users materials
+    myMaterials = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
+        try {
+            const { userId } = req.params;
+            
+            const materials = await Material.find({_authorId: userId}).populate('author').sort({_likeIds: -1}).exec();
+
+            if (!materials) return res.status(404).json({
+                error: "Nog geen bestanden upgeload",
+            });
+
+            return res.status(200).json(materials);
+        } catch (e) {
+            next(e);
+        };
+    };
+
     // Getting image
     showImage = (req: Request, res: Response, next: NextFunction): void => {
         Files.pipeImage(req, res);
