@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 
 // Import partials
 import { ListMaterials } from '../partials';
@@ -16,8 +16,11 @@ import { useApi, useAuth } from '../services';
 const Materials = () => {
   const history = useHistory();
 
+  // Is it a redirect?
+  const { state } = useLocation();
+
   // Services
-  const { getSignPosts, getMaterials } = useApi();
+  const { getSignPosts, getMaterials, queryMaterials } = useApi();
   const { currentUser } = useAuth();
 
   // States
@@ -27,15 +30,21 @@ const Materials = () => {
   const [ presentations, setPresentations ] = useState();
   const [ videos, setVideos ] = useState();
 
+  const [ queryForm, setQueryForm ] = useState({
+    "keywords": "",
+    "type": [],
+    "modules": [],
+  });
+
   // Context
   const typesContext = [{
-    id: "presentatie",
+    id: "Presentatie",
     title: "Presentatie",
   }, {
-    id: "document",
+    id: "Document",
     title: "Document",
   }, {
-    id: "video",
+    id: "Video",
     title: "Video",
   }];
 
@@ -79,24 +88,91 @@ const Materials = () => {
     getData();
   }, [getData]);
 
+  const searchMaterials = async (e) => {
+    e.preventDefault();
+
+    let txt = [];
+    let vid = [];
+    let pres = [];
+
+    if (queryForm.keywords.length !== 0 || queryForm.modules.length !== 0 || queryForm.type.length !== 0) {
+      const materialData = await queryMaterials(
+        queryForm.keywords.length !== 0 ? queryForm.keywords : false,
+        queryForm.type.length !== 0 ? queryForm.type : false,
+        queryForm.modules.length !== 0 ? queryForm.modules : false,
+      );
+
+      for (let i = 0; i < materialData.length; i++) {
+        switch (materialData[i].material.type) {
+          case "Document":
+            txt.push(materialData[i].material);
+            break;
+          case "Video":
+            vid.push(materialData[i].material);
+            break;
+          case "Presentatie":
+            pres.push(materialData[i].material);
+            break;
+          default:
+            break;
+        };
+      };
+    } else {
+      const materialData = await getMaterials();
+
+      for (let i = 0; i < materialData.length; i++) {
+        switch (materialData[i].type) {
+          case "Document":
+            txt.push(materialData[i]);
+            break;
+          case "Video":
+            vid.push(materialData[i]);
+            break;
+          case "Presentatie":
+            pres.push(materialData[i]);
+            break;
+          default:
+            break;
+        };
+      };
+    };
+
+    setPresentations(pres);
+    setTextFiles(txt);
+    setVideos(vid);
+  };
+
+  const changeKeywords = (value) => {
+    setQueryForm({
+      ...queryForm,
+      keywords: value,
+    });
+  };
+
   return (
     <>
     {
       signposts && (
         <>
-          <form>
+          <form onSubmit={(e) => searchMaterials(e)}>
             {/** Keywords */}
-            <input type="text" name="keywords" id="keywords" placeholder="Zoek op basis van kernwoorden" />
+            <input type="text" onChange={(e) => changeKeywords(e.target.value)} name="keywords" id="keywords" placeholder="Zoek op basis van kernwoorden" />
             {/** Select type of file */}
             <FilterSelect
               text="Welk type bestand"
               options={typesContext}
+              query={queryForm}
+              setQuery={setQueryForm}
+              type="type"
             />
             {/** Select module/signpost */}
             <FilterSelect
               text="Welke module"
               sections={true}
               options={signposts}
+              query={queryForm}
+              setQuery={setQueryForm}
+              type="modules"
             />
             <button type="submit">
               Zoeken maar

@@ -75,37 +75,48 @@ export default class FileController {
 
     showMaterial = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
         try {
-            const { keywords, startdate, enddate, type } = req.body;
+            const { keywords, startdate, enddate, type, modules } = req.body;
 
             // Filled in input
-            const allKeywords = keywords.toLowerCase().split(/,| /);
-
-            const allMaterials = await Material.find().exec();
+            const allMaterials = await Material.find().populate('author').populate('module').sort({_likeIds: -1}).exec();
             let eligibleMaterials: { material: IMaterial; relevance: number; }[] = [];
 
-            allMaterials.forEach(element => {
+            allMaterials.forEach(async element => {
                 let goOrNo = false;
                 let relevanceKeywords = 0;
 
-                // Check if keywords are in title
-                allKeywords.forEach((innerElement: string) => {
-                    element.title.toLowerCase().split(/,| /).forEach((word) => {
-                        if (word.includes(innerElement)) {
-                            goOrNo = true;
-                            relevanceKeywords += 1;
-                        };
-                    });  
-                });
+                if (keywords) {
+                    const allKeywords = keywords.toLowerCase().split(/,| /);
 
-                // Check if keywords are in description
-                allKeywords.forEach((innerElement: string) => {
-                    element.description.toLowerCase().split(/,| /).forEach((word) => {
-                        if (word.includes(innerElement)) {
+                    // Check if keywords are in title
+                    allKeywords.forEach((innerElement: string) => {
+                        element.title.toLowerCase().split(/,| /).forEach((word) => {
+                            if (word.includes(innerElement)) {
+                                goOrNo = true;
+                                relevanceKeywords += 1;
+                            };
+                        });  
+                    });
+
+                    // Check if keywords are in description
+                    allKeywords.forEach((innerElement: string) => {
+                        element.description.toLowerCase().split(/,| /).forEach((word) => {
+                            if (word.includes(innerElement)) {
+                                goOrNo = true;
+                                relevanceKeywords += 1;
+                            };
+                        });  
+                    });
+                };
+
+                // Check if its this module
+                if (modules) {
+                    for (let i = 0; i < modules.length; i++) {
+                        if (String(element._moduleId) === String(modules[i])) {
                             goOrNo = true;
-                            relevanceKeywords += 1;
                         };
-                    });  
-                });
+                    };
+                };
 
                 // Check if between dates
                 if (startdate && enddate) {
@@ -135,12 +146,12 @@ export default class FileController {
                 if (type) {
                     let checkIfType = false;
 
-                    for (let i = 0; i < type; i++) {
+                    for (let i = 0; i < type.length; i++) {
                         let check = element.type === type[i];
                         if (check) checkIfType = true;
                     };
 
-                    if (!checkIfType) goOrNo = false;
+                    if (checkIfType) goOrNo = true;
                 };
 
                 if (goOrNo) {

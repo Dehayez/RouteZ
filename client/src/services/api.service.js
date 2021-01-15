@@ -165,6 +165,31 @@ const ApiProvider = ({children}) => {
   };
 
   /**
+   * search all materials
+   * @param {string} keywords
+   * @param {array} type
+   * @param {array} modules
+   */
+  const queryMaterials = async (keywords, type, modules) => {
+    const url = `${BASE_URL}material/search`;
+
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        keywords: keywords,
+        type: type,
+        modules: modules,
+      }),
+    });
+
+    return await res.json();
+  };
+
+  /**
    * adding a like to a material
    * @param {string} token 
    * @param {string} userId 
@@ -226,6 +251,7 @@ const ApiProvider = ({children}) => {
       uploadFile,
       getDoc,
       getMaterials,
+      queryMaterials,
       addLikeToMaterial,
       addDislikeToMaterial,
     }}>

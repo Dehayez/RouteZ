@@ -6,7 +6,7 @@ import Arrow from '../../assets/icons/arrow-blue.svg';
 // Components
 import { Checkbox } from '../forms';
 
-const FilterSelect = ({text, options, sections}) => {
+const FilterSelect = ({text, options, sections, setQuery, query, type}) => {
   // States
   const [ selected, setSelected ] = useState([]);
   const [ showSelect, setShowSelect ] = useState(false);
@@ -22,8 +22,16 @@ const FilterSelect = ({text, options, sections}) => {
       if (!selected.filter(e => e.id === grouped[i].children[1].children[0].children[0].id).length > 0) {
         let array = selected;
         array.push({id: grouped[i].children[1].children[0].children[0].id, name: grouped[i].children[1].children[0].children[0].name});
+
+        let queryArray = query[type];
+        queryArray.push(grouped[i].children[1].children[0].children[0].id);
+        
         setSelected(array);
         createPlaceholder(array);
+        setQuery({
+          ...query,
+          [type]: queryArray,
+        });
       };
     };
   };
@@ -31,6 +39,14 @@ const FilterSelect = ({text, options, sections}) => {
   // Change an item to checked or not
   const editSelected = (id, name) => {
     let array = selected;
+    let queryArray = query[type];
+
+    if (!queryArray.includes(id)) {
+      queryArray.push(id);
+    } else {
+      const queryIndex = queryArray.indexOf(id);
+      queryArray.splice(queryIndex, 1);
+    };
 
     if (!selected.filter(e => e.id === id).length > 0) {
       array.push({id: id, name: name});
@@ -44,6 +60,10 @@ const FilterSelect = ({text, options, sections}) => {
 
     setSelected(array);
     createPlaceholder(array);
+    setQuery({
+      ...query,
+      [type]: queryArray,
+    });
   };
 
   // Create the string of checked items
