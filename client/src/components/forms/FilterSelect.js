@@ -93,8 +93,8 @@ const FilterSelect = ({text, options, sections, setQuery, query, type}) => {
               !sections ? options.map((option, index) => {
                 return (
                   <div key={index} className="filter-select__select--section__options--option">
-                    <label htmlFor={option.id}>{option.title}</label>
-                    <Checkbox change={editSelected} name={option.title} id={option.id} />
+                    <label htmlFor={option.id ? option.id : option._id}>{option.title ? option.title : option.name}</label>
+                    <Checkbox change={editSelected} name={option.title ? option.title : option.name} id={option.id ? option.id : option._id} />
                   </div>
                 )
               }) : options.map((option, index) => {

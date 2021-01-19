@@ -260,6 +260,25 @@ const ApiProvider = ({children}) => {
     return await res.json();
   };
 
+    /**
+   * create one material
+   * @param {json} context
+   */
+  const createMaterial = async (context) => {
+    const url = `${BASE_URL}material`;
+
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(context),
+    });
+
+    return await res.json();
+  };
+
   /**
    * delete one material
    * @param {string} id
@@ -368,6 +387,7 @@ const ApiProvider = ({children}) => {
       getDoc,
       getMaterial,
       getMaterials,
+      createMaterial,
       editMaterial,
       getMyMaterials,
       queryMaterials,

@@ -38,7 +38,7 @@ const RadioSelect = ({ grouped, text, data, defaultSelected, setSelected }) => {
                   <label htmlFor={element.title}>
                     {element.title}
                   </label>
-                  <input onChange={() => setSelected(element._id)} defaultChecked={defaultSelected === element._id ? true : false} type="radio" value={element._id} name="selectOne"/>
+                  <input onChange={() => setSelected(element._id)} defaultChecked={defaultSelected === element._id ? true : false} type="radio" value={element._id} name="selectTwo"/>
                   </div>
                 })
               )

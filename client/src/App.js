@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
 
 // All pages
-import { Dashboard, EditMaterial, Landing, Login, Material, Materials, Module, MyMaterials, MyProfile, MyProfileSettings, Path, Register, SendReset, Signpost, Signposts, SubmitReset } from './pages';
+import { CreateMaterial, Dashboard, EditMaterial, Landing, Login, Material, Materials, Module, MyMaterials, MyProfile, MyProfileSettings, Path, Register, SendReset, Signpost, Signposts, SubmitReset } from './pages';
 
 // Main layouts
 import { PageLayout, AuthLayout } from './layouts';
@@ -43,6 +43,7 @@ function App() {
                 <AuthRouteWithLayout exact path={Routes.MATERIAL} component={Material} layout={PageLayout} />
                 <AuthRouteWithLayout exact path={Routes.MY_MATERIALS} component={MyMaterials} layout={PageLayout} />
                 <AuthRouteWithLayout exact path={Routes.EDIT_MATERIAL} component={EditMaterial} layout={PageLayout} />
+                <AuthRouteWithLayout exact path={Routes.ADD_MATERIAL} component={CreateMaterial} layout={PageLayout} />
               </Switch>
             </Router>
           </ApiProvider>
