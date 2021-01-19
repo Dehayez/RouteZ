@@ -81,6 +81,28 @@ const AuthProvider = ({ children }) => {
   };
 
   /**
+   * @desc editing loggedin users progress
+   * @param {string} token 
+   * @param {json} data 
+   */
+  const editProgress = async (token, data) => {
+    const url = `${apiConfig.baseURL}users/me/progress`;
+
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      redirect: 'follow',
+      body: JSON.stringify(data),
+    });
+
+    return await response.json();
+  };
+
+  /**
    * @desc deleting myself
    * @param {string} token 
    */
@@ -224,7 +246,18 @@ const AuthProvider = ({ children }) => {
   }
 
   return (
-    <AuthContext.Provider value={{ currentUser, signIn, signUp, logout, sendReset, submitReset, getMyself, editMyself, deleteMyself }}>
+    <AuthContext.Provider value={{ 
+        currentUser, 
+        signIn, 
+        signUp, 
+        logout, 
+        sendReset, 
+        submitReset, 
+        getMyself, 
+        editMyself, 
+        editProgress,
+        deleteMyself 
+      }}>
       {children}
     </AuthContext.Provider>
   )
@@ -234,4 +267,4 @@ export {
   AuthContext,
   AuthProvider,
   useAuth,
-}
+};

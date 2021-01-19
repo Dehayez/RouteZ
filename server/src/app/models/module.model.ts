@@ -10,10 +10,20 @@ import {
     default as mongoosePaginate,
 } from 'mongoose-paginate';
 
+import { 
+    IMaterial 
+} from './material.model';
+
+import { 
+    IPath 
+} from './path.model';
+
 interface IModule extends Document {
     title: string;
     shortInfo: string;
     mainInfo: string;
+    _pathIds: Array<IPath['_id']>;
+    _materialIds: Array<IMaterial['_id']>
 
     _createdAt: number;
     _modifiedAt: number;
@@ -28,10 +38,24 @@ const moduleItem: Schema = new Schema({
         required: true,
         unique: true,
     },
+    mainInfo: {
+        type: String,
+        required: false,
+    },
     content: {
         type: String,
         required: true,
     },
+    _pathIds: [
+        {
+            type: Schema.Types.ObjectId, ref: 'Path', required: false,
+        },
+    ],
+    _materialIds: [
+        {
+            type: Schema.Types.ObjectId, ref: 'Material', required: false,
+        },
+    ],
     _createdAt: {
         type: Number,
         required: true,
@@ -47,9 +71,30 @@ const moduleItem: Schema = new Schema({
         required: false,
         default: null,       
     },
+}, {
+    toJSON: {
+        virtuals: true,
+    },
+    toObject: {
+        virtuals: true,
+    },
 });
 
 moduleItem.plugin(mongoosePaginate);
+
+moduleItem.virtual('paths', {
+    ref: 'Path',
+    localField: '_pathIds',
+    foreignField: '_id',
+    justOne: false,
+});
+
+moduleItem.virtual('materials', {
+    ref: 'Material',
+    localField: '_materialIds',
+    foreignField: '_id',
+    justOne: false,
+});
 
 const ModuleItem = mongoose.model<IModule, IModuleModel>(
     'Module',

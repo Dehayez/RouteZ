@@ -9,8 +9,15 @@ export const LANDING = '/';
 export const DASHBOARD = '/dashboard';
 export const MY_PROFILE = '/my-profile';
 export const MY_PROFILE_SETTINGS = '/my-profile/settings';
+export const PROFILE = '/profile/:id';
 export const SIGNPOSTS = '/signposts';
 export const SIGNPOST = '/signposts/:id';
 export const MODULE = '/module/:id';
+export const PATH = '/path/:id';
+export const MATERIALS = '/materials';
+export const MATERIAL = '/material/:name';
+export const ADD_MATERIAL = '/material/add';
+export const MY_MATERIALS = '/my-materials';
+export const EDIT_MATERIAL = '/material/edit';
 
 export const NOT_FOUND = '/not-found';
