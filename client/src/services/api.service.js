@@ -137,12 +137,52 @@ const ApiProvider = ({children}) => {
   };
 
   /**
+   * uploading a document to the server
+   * @param {json} file 
+   */
+  const uploadDoc = async (file) => {
+    const url = `${BASE_URL}doc`;
+
+    const formdata = new FormData();
+    formdata.append('file', file)
+
+    const response = await fetch(url, {
+      'method': 'POST',
+      headers: {
+        'Accept': 'application/json',
+      },
+      body: formdata,
+    });
+
+    return await response.json();
+  };
+
+  /**
    * get a document of the server
    * @param {string} doc 
    */
   const getDoc = async (doc) => {
     const url = `${BASE_URL}doc/${doc}`;
     Downloader(url);
+  };
+
+  // TAGS
+
+  /**
+   * get all tags
+   */
+  const getTags = async () => {
+    const url = `${BASE_URL}tags`;
+
+    const res = await fetch(url, {
+      method: "GET",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    });
+
+    return await res.json();
   };
 
   // MATERIAL
@@ -201,7 +241,28 @@ const ApiProvider = ({children}) => {
   };
 
   /**
+   * edit one material
+   * @param {string} id
+   * @param {json} context
+   */
+  const editMaterial = async (id, context) => {
+    const url = `${BASE_URL}edit-material/${id}`;
+
+    const res = await fetch(url, {
+      method: "PATCH",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(context),
+    });
+
+    return await res.json();
+  };
+
+  /**
    * delete one material
+   * @param {string} id
    */
   const deleteMaterial = async (id) => {
     const url = `${BASE_URL}material/${id}`;
@@ -301,10 +362,13 @@ const ApiProvider = ({children}) => {
       getModule,
       getModules,
       getPath,
+      getTags,
       uploadFile,
+      uploadDoc,
       getDoc,
       getMaterial,
       getMaterials,
+      editMaterial,
       getMyMaterials,
       queryMaterials,
       addLikeToMaterial,

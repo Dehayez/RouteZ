@@ -94,7 +94,7 @@ export default class FileController {
         try {
             const { id } = req.params;
 
-            const material = await Material.findOne({_id: id}).populate('author').populate('like').exec();
+            const material = await Material.findOne({_id: id}).populate('author').populate('tags').populate('like').exec();
 
             if (!material) return res.status(404).json({
                 error: "Dit bestand kon niet worden terugvonden",
@@ -325,6 +325,51 @@ export default class FileController {
             });
 
             return res.status(200).json(updateMaterial);
+        } catch (e) {
+            next(e);
+        };
+    };
+
+    editMaterial = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
+        try {
+            const { materialId } = req.params;
+            const { title, description, _moduleId, type, filename, file, size, videoUrl, _tagIds } = req.body; 
+
+            let material;
+
+            if (type === 'Video') {
+                material = await Material.findOneAndUpdate({_id: materialId}, {
+                    $set: {
+                        title: title,
+                        description: description,
+                        _moduleId: _moduleId,
+                        type: type,
+                        videoUrl: videoUrl,
+                        _tagIds: _tagIds,
+                        _modifiedAt: Date.now(),
+                    },
+                });
+            } else {
+                material = await Material.findOneAndUpdate({_id: materialId}, {
+                    $set: {
+                        title: title,
+                        description: description,
+                        _moduleId: _moduleId,
+                        filename: filename,
+                        type: type,
+                        file: file,
+                        size: size,
+                        _tagIds: _tagIds,
+                        _modifiedAt: Date.now(),
+                    },
+                });
+            };
+
+            if (!material) return res.status(404).json({
+                error: "Dit bestand bestaat niet",
+            });
+
+            return res.status(200).json(material);
         } catch (e) {
             next(e);
         };

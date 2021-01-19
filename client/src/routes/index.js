@@ -18,6 +18,6 @@ export const MATERIALS = '/materials';
 export const MATERIAL = '/material/:name';
 export const ADD_MATERIAL = '/material/add';
 export const MY_MATERIALS = '/my-materials';
-export const EDIT_MATERIAL = '/material/edit';
+export const EDIT_MATERIAL = '/edit-material';
 
 export const NOT_FOUND = '/not-found';

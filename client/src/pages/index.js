@@ -14,6 +14,7 @@ import Path from './Path';
 import Materials from './Materials';
 import Material from './Material';
 import MyMaterials from './MyMaterials';
+import EditMaterial from './EditMaterial';
 
 export {
   Login,
@@ -31,4 +32,5 @@ export {
   Materials,
   Material,
   MyMaterials,
+  EditMaterial,
 };
