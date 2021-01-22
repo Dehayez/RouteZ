@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { useHistory, Link } from 'react-router-dom';
-import { ButtonLarge }  from '../components/buttons';
-import FloatingLabelInput from 'react-floating-label-input';
 
 // Importing services
 import { useAuth } from '../services';
+
+// Importing components
+import { ButtonLarge }  from '../components/buttons';
+import FloatingLabelInput from 'react-floating-label-input';
 
 const Login = ({ onChange, value }) => {
 	
@@ -50,10 +52,6 @@ const Login = ({ onChange, value }) => {
 	<div className="auth-content">
 		<h1 className="title title--large">Welkom aan boord!</h1>
 		<form className="form"  onSubmit={(e) => loginUser(e)}>
-			{/* <label htmlFor="email">E-mail</label>
-			<input type="email" name="email" id="email" onChange={(e) => changeData(e)} required/>
-			<label htmlFor="email">Wachtwoord</label>
-			<input type="password" name="password" id="password" onChange={(e) => changeData(e)} required/> */}
 
 			<div className="form-input" style={{ fontSize: 16 }}>
 				<FloatingLabelInput
@@ -61,6 +59,7 @@ const Login = ({ onChange, value }) => {
 				label="E-mail"
 				type="email"
 				onChange={(e) => changeData(e)} required
+				autoFocus
 				/>
 			</div>
 			<div className="form-input" style={{ fontSize: 16 }}>

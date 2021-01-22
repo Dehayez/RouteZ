@@ -1,11 +1,13 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
+
+
 // Import services
 import { useAuth } from '../services';
 
 const MyProfile = () => {
     // Use services
-    const { getMyself, currentUser } = useAuth();
+   /*  const { getMyself, currentUser } = useAuth();
 
     // All accessable data
     const [ user, setUser ] = useState();
@@ -28,10 +30,12 @@ const MyProfile = () => {
 
     useEffect(() => {
         getAllData();
-    }, [getAllData]);
+    }, [getAllData]); */
 
     return (
-        <></>
+        <div>
+			profile
+		</div>
     )
 };
 
