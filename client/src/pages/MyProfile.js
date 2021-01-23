@@ -1,9 +1,10 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
-
-
 // Import services
 import { useAuth } from '../services';
+
+// Import component
+import { ButtonSmall } from '../components';
 
 const MyProfile = () => {
     // Use services
@@ -33,8 +34,10 @@ const MyProfile = () => {
     }, [getAllData]); */
 
     return (
-        <div>
-			profile
+        <div className="profile">
+			<div className="profile-buttons">
+				<ButtonSmall content="Mijn materiaal" color="primary"/>
+			</div>
 		</div>
     )
 };

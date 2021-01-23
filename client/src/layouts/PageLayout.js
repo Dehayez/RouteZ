@@ -9,7 +9,7 @@ import { useAuth, useApi } from '../services';
 import { apiConfig } from '../config';
 
 // Import components
-import { Navigation } from '../components/navigation'
+import { Navigation, Header } from '../components'
 
 const PageLayout = ({children}) => {
     // Use services
@@ -54,9 +54,10 @@ const PageLayout = ({children}) => {
                 <img src={`${apiConfig.baseURL}file/${avatar}`} alt="avatar"/>
             ) : ''
         }
-		<Navigation></Navigation>
+		<Navigation/>
         {/** Voor de wegwijzers best zoals de avatar het icoontje gaan ophalen vanuit de back-end */}
       <main className="page-main">
+		<Header/>
         {children}
       </main>
     </div>

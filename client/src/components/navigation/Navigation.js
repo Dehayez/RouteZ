@@ -1,48 +1,113 @@
-import { default as React } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 // Import components
 import { NavLink } from 'react-router-dom';
-import { LogoColor } from '../../assets/logos';
+import { LogoColor, LogoColorSingle } from '../../assets/logos';
 
 import './Navigation.scss' 
 
 const Navigation = () => {
 
-  return (
-	<div className="nav">
+	/*
+	* Store all posts with useState
+	*/
+	/* const [posts, getPosts] = useState([]);
 
-		<div className="nav-header">
-			<img className="nav-header__image" src={LogoColor}/>
+	const getAllPosts = () => {
+		axios.get('localhost:8000/api/file')
+		.then(res => {
+			// getPosts(res.data);
+
+			console.log(res.data)
+		})
+	};
+
+	useEffect(() => {
+		getAllPosts();
+	}, []); */
+
+	return (
+		<div className="nav">
+
+			<div className="nav-header">
+				<img className="nav-header__image" src={LogoColor}/>
+			</div>
+
+			<nav className="nav-list">
+				<NavLink to="/my-profile" className="nav-list-link" activeClassName="nav-list-link--active">
+					<div className="nav-list-link__icon-wrapper">
+						<img className="nav-list-link__icon" src={LogoColorSingle}/>
+					</div>
+					<div className="nav-list-link__text">
+						<span className="nav-list-link__text-span">Wegwijzer 1</span>
+						<p className="nav-list-link__text-title">Aanleren</p>
+					</div>
+				</NavLink>
+
+				<NavLink to="/module/2" className="nav-list-link" activeClassName="nav-link-list--active">
+					<div className="nav-list-link__icon-wrapper">
+						<img className="nav-list-link__icon" src={LogoColorSingle}/>
+					</div>				
+					<div className="nav-list-link__text">
+						<span className="nav-list-link__text-span">Wegwijzer 2</span>
+						<p className="nav-list-link__text-title">Groeproces</p>
+					</div>
+				</NavLink>
+
+				<NavLink to="/module/2" className="nav-list-link" activeClassName="nav-link-list--active">
+					<div className="nav-list-link__icon-wrapper">
+						<img className="nav-list-link__icon" src={LogoColorSingle}/>
+					</div>				
+					<div className="nav-list-link__text">
+						<span className="nav-list-link__text-span">Wegwijzer 2</span>
+						<p className="nav-list-link__text-title">Groeproces</p>
+					</div>
+				</NavLink>
+
+				<NavLink to="/module/2" className="nav-list-link" activeClassName="nav-link-list--active">
+					<div className="nav-list-link__icon-wrapper">
+						<img className="nav-list-link__icon" src={LogoColorSingle}/>
+					</div>				
+					<div className="nav-list-link__text">
+						<span className="nav-list-link__text-span">Wegwijzer 2</span>
+						<p className="nav-list-link__text-title">Groeproces</p>
+					</div>
+				</NavLink>
+
+				<NavLink to="/module/2" className="nav-list-link" activeClassName="nav-link-list--active">
+					<div className="nav-list-link__icon-wrapper">
+						<img className="nav-list-link__icon" src={LogoColorSingle}/>
+					</div>				
+					<div className="nav-list-link__text">
+						<span className="nav-list-link__text-span">Wegwijzer 2</span>
+						<p className="nav-list-link__text-title">Groeproces</p>
+					</div>
+				</NavLink>
+
+				<NavLink to="/module/2" className="nav-list-link" activeClassName="nav-link-list--active">
+					<div className="nav-list-link__icon-wrapper">
+						<img className="nav-list-link__icon" src={LogoColorSingle}/>
+					</div>				
+					<div className="nav-list-link__text">
+						<span className="nav-list-link__text-span">Wegwijzer 2</span>
+						<p className="nav-list-link__text-title">Groeproces</p>
+					</div>
+				</NavLink>
+
+				<NavLink to="/module/3" className="nav-list-link" activeClassName="nav-link-list--active">
+					<div className="nav-list-link__icon-wrapper">
+						<img className="nav-list-link__icon" src={LogoColorSingle}/>
+					</div>				
+					<div className="nav-list-link__text">
+						<span className="nav-list-link__text-span">Wegwijzer 7</span>
+						<p className="nav-list-link__text-title">Bruggen bouwen</p>
+					</div>
+				</NavLink>
+			</nav>
+
 		</div>
-
-		<nav className="nav-list">
-			<NavLink to="/my-profile" className="nav-list-link" activeClassName="nav-link-list--active">
-				<img className="nav-list-link-icon"/>
-				<div className="nav-list-link-text">
-					<span className="nav-list-link-text-span">Wegwijzer 1</span>
-					<p className="nav-list-link-text-title">Aanleren</p>
-				</div>
-			</NavLink>
-
-			<NavLink to="/module/2" className="nav-list-link" activeClassName="nav-link-list--active">
-				<img className="nav-list-link-icon"/>
-				<div className="nav-list-link-text">
-					<span className="nav-list-link-text-span">Wegwijzer 2</span>
-					<p className="nav-list-link-text-title">Aanleren</p>
-				</div>
-			</NavLink>
-
-			<NavLink to="/module/3" className="nav-listlink" activeClassName="nav-link-list--active">
-				<img className="nav-list-link-icon"/>
-				<div className="nav-list-link-text">
-					<span className="nav-list-link-text-span">Wegwijzer 3</span>
-					<p className="nav-list-link-text-title">Aanleren</p>
-				</div>
-			</NavLink>
-		</nav>
-
-	</div>
-  );
+	);
 
 };
 
