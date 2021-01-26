@@ -9,3 +9,95 @@
 		width: 100%;
 	}
 }
+
+/*
+ * Profile Page
+ */
+
+.profile {
+	padding: 1rem 2rem;
+
+	&-buttons {
+		width: 100%;
+	   display: flex;
+	   justify-content: flex-end;
+	}
+
+	&-info {
+		width: 100%;
+		display: flex;
+
+		&__image {
+			& img {
+				width: 100px;
+				height: 100px;
+				border-radius: 50%;
+			}
+		}
+
+		&__text {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			margin-left: 1rem;
+
+			& p {
+				margin: 0;
+			}
+
+			&-name {
+				font-size: 20px;
+				font-weight: 600;
+			}
+
+			&-mail {
+				font-weight: 300;
+			}
+
+			&-school {
+				color: $routez-primary;
+				font-weight: 300;
+			}
+		}
+	}
+
+	&-progression {
+		-webkit-box-shadow: 0px 0px 21px 1px rgba(77,77,77,0.1); 
+		box-shadow: 0px 0px 21px 1px rgba(77,77,77,0.1);
+
+		border-radius: 15px;
+		margin: 4rem 0;
+		padding: 2rem;
+
+		&-title {
+			font-size: 18px;
+			font-weight: 700;
+			margin: 1rem 0;
+		}
+
+		&-charts {
+			display: flex;
+			justify-content: space-between;
+			margin: 2rem 0;
+		}
+
+		&-chart {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			margin: 0 1rem;
+
+			&__title {
+				font-size: 16px;
+				font-weight: 600;
+			}
+		}
+	}
+}
+.profile-progression-chart__percentage {
+	height: 100px;
+}
+
+.CircularProgressbar {
+	height: 100%;
+}

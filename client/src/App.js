@@ -35,7 +35,7 @@ function App() {
 				{/** Alles terug naar AuthRoute vanaf het coderen af is */}
                 <AuthRouteWithLayout exact path={Routes.DASHBOARD} component={Dashboard} layout={PageLayout} />
                 <RouteWithLayout exact path={Routes.MY_PROFILE} component={MyProfile} layout={PageLayout} />
-                <AuthRouteWithLayout exact path={Routes.MY_PROFILE_SETTINGS} component={MyProfileSettings} layout={PageLayout} />
+                <RouteWithLayout exact path={Routes.MY_PROFILE_SETTINGS} component={MyProfileSettings} layout={PageLayout} />
                 <AuthRouteWithLayout exact path={Routes.SIGNPOSTS} component={Signposts} layout={PageLayout} />
                 <AuthRouteWithLayout exact path={Routes.SIGNPOST} component={Signpost} layout={PageLayout} />
                 <AuthRouteWithLayout exact path={Routes.MODULE} component={Module} layout={PageLayout} />
