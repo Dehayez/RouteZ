@@ -11,7 +11,9 @@
 }
 
 /*
- * Profile Page
+ *
+ * PROFILE PAGE
+ *
  */
 
 .profile {
@@ -91,13 +93,37 @@
 				font-size: 16px;
 				font-weight: 600;
 			}
+
+			&__percantage {
+				height: 100px;
+
+			}
 		}
 	}
-}
-.profile-progression-chart__percentage {
-	height: 100px;
 }
 
 .CircularProgressbar {
 	height: 100%;
 }
+
+/*
+ *
+ * PROFILE SETTINGS PAGE
+ *
+ */
+
+ .settings {
+
+ }
+
+ .form-label-left {
+	 &-label {
+		color: $routez-primary;
+		font-weight: 300;
+		
+		display: inline-block;
+		width: 140px;
+		text-align: right;
+	 }
+	
+ }

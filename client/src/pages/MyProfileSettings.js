@@ -7,6 +7,10 @@ import { useAuth, useApi } from '../services';
 // Import routes
 import * as Routes from '../routes';
 
+//Import components
+import { ButtonLarge }  from '../components/buttons';
+import FloatingLabelInput from 'react-floating-label-input';
+
 const MyProfileSettings = () => {
     const history = useHistory();
 
@@ -120,17 +124,42 @@ const MyProfileSettings = () => {
     }, [getAllData]);
 
     return (
-        <>
-            <form onSubmit={(e) => submitSettings(e)}>
+        <div className="settings">
+            <form className="form form-label-left" onSubmit={(e) => submitSettings(e)}>
                 <input type="file" accept="image/*" id="avatar" onChange={(e) => changeImage(e)} />
-                <input type="text" id="firstName" onChange={(e) => changeForms(e)} defaultValue={formData ? formData.firstName : ''} required/>
-                <input type="text" id="lastName" onChange={(e) => changeForms(e)} defaultValue={formData ? formData.lastName : ''} required/>
-                <input type="email" id="email" onChange={(e) => changeForms(e)} defaultValue={formData ? formData.email : ''} required/>
-                <input type="tel" id="phoneNumber" onChange={(e) => changeForms(e)} defaultValue={formData ? formData.phoneNumber : ''}/>
-                <input type="text" id="schoolName" onChange={(e) => changeForms(e)} defaultValue={formData ? formData.schoolName : ''}/>
-                <textarea id="professionalFunction" onChange={(e) => changeForms(e)} defaultValue={formData ? formData.professionalFunction : ''}/>
+				<div className="form-label-left-item">
+					<label className="form-label-left-label">Voornaam*</label>
+					<input className="form-label-left-input" type="text" id="firstName" onChange={(e) => changeForms(e)} defaultValue={formData ? formData.firstName : ''} required/>
+				</div>
+
+				<div className="form-label-left-item">
+					<label className="form-label-left-label">Achternaam*</label>
+					<input className="form-label-left-input" type="text" id="lastName" onChange={(e) => changeForms(e)} defaultValue={formData ? formData.lastName : ''} required/>
+				</div>
+
+				<div className="form-label-left-item">
+					<label className="form-label-left-label">E-mail*</label>
+					<input className="form-label-left-input" type="email" id="email" onChange={(e) => changeForms(e)} defaultValue={formData ? formData.email : ''} required/>
+				</div>
+
+				<div className="form-label-left-item">
+					<label className="form-label-left-label">Telefoonnummer</label>
+					<input className="form-label-left-input" type="tel" id="phoneNumber" onChange={(e) => changeForms(e)} defaultValue={formData ? formData.phoneNumber : ''}/>
+				</div>
+
+				<div className="form-label-left-item">
+					<label className="form-label-left-label">Schoolnaam</label>
+					<input className="form-label-left-input" type="text" id="schoolName" onChange={(e) => changeForms(e)} defaultValue={formData ? formData.schoolName : ''}/>
+				</div>
+
+				<div className="form-label-left-item">
+					<label className="form-label-left-label">Professionele functie</label>
+					<textarea className="form-label-left-input" id="professionalFunction" onChange={(e) => changeForms(e)} defaultValue={formData ? formData.professionalFunction : ''}/>
+				</div>
+
                 <button type="submit">Bevestig</button>
             </form>
+
             {
                 remove ? (
                     <>
@@ -153,7 +182,7 @@ const MyProfileSettings = () => {
             {
                 success && success
             }
-        </>
+        </div>
     )
 };
 
