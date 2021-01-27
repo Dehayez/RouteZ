@@ -7,11 +7,11 @@ import { DefaultImage } from '../../assets/images';
 
 import './Header.scss' 
 
-const Header = () => {
+const Header = ({pageTitle}) => {
   return (
     <header className="header">
 		<div className="header-left">
-			<h1 className="header-left-title">PageTitle</h1>
+			<h1 className="header-left-title">{pageTitle}</h1>
 		</div>
 
 		<div className="header-right">

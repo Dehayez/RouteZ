@@ -11,7 +11,8 @@ import { apiConfig } from '../config';
 // Import components
 import { Navigation, Header } from '../components'
 
-const PageLayout = ({children}) => {
+
+const PageLayout = ({ children }) => {
     // Use services
     const { getMyself, currentUser } = useAuth();
     const { getSignPosts } = useApi();
@@ -19,7 +20,9 @@ const PageLayout = ({children}) => {
     // All accessable data
     const [ signPosts, setSignPosts ] = useState();
     const [ user, setUser ] = useState();
-    const [ avatar, setAvatar ] = useState();
+	const [ avatar, setAvatar ] = useState();
+
+	const pageTitle = 'Dashboard';
 
     const getAllData = useCallback(() => {
         const easyFetch = async () => {
@@ -57,7 +60,7 @@ const PageLayout = ({children}) => {
 		<Navigation/>
         {/** Voor de wegwijzers best zoals de avatar het icoontje gaan ophalen vanuit de back-end */}
       <main className="page-main">
-		<Header/>
+		<Header pageTitle={pageTitle}/>
         {children}
       </main>
     </div>
