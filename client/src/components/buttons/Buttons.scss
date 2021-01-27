@@ -36,6 +36,35 @@
 		}
 	}
 
+	&--danger {
+		color: $routez-danger !important;
+		border: 1px solid $routez-danger !important;
+
+		&:hover {
+			color: white !important;
+			background-color: $routez-danger !important;
+		}
+	}
+	
+	&--danger-fill {
+		background-color: $routez-danger !important;
+		color: white !important;
+
+		&:hover {
+			color: white !important;
+			background-color: $routez-danger !important;
+		}
+	}
+
+	&--danger-secondary {
+		color: $routez-danger !important;
+
+		&:hover {
+			color: white !important;
+			background-color: $routez-danger !important;
+		}
+	}
+
 	&--auth {
 		margin-top: 10vh;
 	}

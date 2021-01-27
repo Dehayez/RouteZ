@@ -8,8 +8,7 @@ import { useAuth, useApi } from '../services';
 import * as Routes from '../routes';
 
 //Import components
-import { ButtonLarge }  from '../components/buttons';
-import FloatingLabelInput from 'react-floating-label-input';
+import { ButtonLarge, ButtonSmall }  from '../components/buttons';
 
 const MyProfileSettings = () => {
     const history = useHistory();
@@ -125,7 +124,7 @@ const MyProfileSettings = () => {
 
     return (
         <div className="settings">
-            <form className="form form-label-left" onSubmit={(e) => submitSettings(e)}>
+            <form className="form-label-left" onSubmit={(e) => submitSettings(e)}>
                 <input type="file" accept="image/*" id="avatar" onChange={(e) => changeImage(e)} />
 				<div className="form-label-left-item">
 					<label className="form-label-left-label">Voornaam*</label>
@@ -157,31 +156,29 @@ const MyProfileSettings = () => {
 					<textarea className="form-label-left-input" id="professionalFunction" onChange={(e) => changeForms(e)} defaultValue={formData ? formData.professionalFunction : ''}/>
 				</div>
 
-                <button type="submit">Bevestig</button>
+				<ButtonLarge type="submit" content="Bevestig" />
             </form>
 
-            {
+			<div className="settings-danger">
+				<h3 className="settings-danger-title">Gevarenzone</h3>
+				{
                 remove ? (
-                    <>
-                        <button onClick={() => removeUser()}>
-                            Ja, zeker!
-                        </button>
-                        <button onClick={() => setRemove(!remove)}>
-                            Neen!
-                        </button>
-                    </>
+                    <div>
+						<ButtonSmall onClick={() => removeUser()} color="danger-fill" content="Verwijder account"/>
+						<ButtonSmall onClick={() => setRemove(!remove)} color="danger-secondary" content="Annuleer"/>
+                    </div>
                 ) : (
-                    <button onClick={() => setRemove(true)}>
-                        Ik wil mijn account verwijderen
-                    </button>
+					<ButtonSmall onClick={() => setRemove(true)} color="danger" content="Verwijder account"/>
                 )
-            }
-            {
-                error && error
-            }
-            {
-                success && success
-            }
+				}
+				{
+					error && error
+				}
+				{
+					success && success
+				}
+			</div>
+
         </div>
     )
 };

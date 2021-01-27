@@ -112,18 +112,49 @@
  *
  */
 
- .settings {
+ .settings {    
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+	padding: 2rem;
 
+	&-danger {
+		width: 100%;
+		margin-top: 6rem;
+	}
  }
 
  .form-label-left {
-	 &-label {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 400px;
+
+	& div.form-label-left-item:last-of-type {
+		margin-bottom: 4rem;
+	}
+
+	&-item {
+		margin: 0.5rem;
+	}
+	&-label {
 		color: $routez-primary;
 		font-weight: 300;
+		font-size: 14px;
 		
 		display: inline-block;
 		width: 140px;
+		margin-right: 1rem;
 		text-align: right;
-	 }
+	}
+
+	&-input {
+		border-radius: 5px;
+		border: 2px solid $routez-grey-light;
+
+		&:focus {
+			outline: 3px solid $routez-secondary;
+		}
+	}
 	
  }
