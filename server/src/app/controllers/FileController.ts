@@ -94,7 +94,7 @@ export default class FileController {
         try {
             const { id } = req.params;
 
-            const material = await Material.findOne({_id: id}).populate('author').populate('like').exec();
+            const material = await Material.findOne({_id: id}).populate('author').populate('tags').populate('like').exec();
 
             if (!material) return res.status(404).json({
                 error: "Dit bestand kon niet worden terugvonden",
@@ -108,7 +108,7 @@ export default class FileController {
 
     showMaterial = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
         try {
-            const { keywords, startdate, enddate, type, modules } = req.body;
+            const { keywords, startdate, enddate, type, modules, tags } = req.body;
 
             // Filled in input
             const allMaterials = await Material.find().populate('author').populate('module').sort({_likeIds: -1}).exec();
@@ -146,6 +146,14 @@ export default class FileController {
                 if (modules) {
                     for (let i = 0; i < modules.length; i++) {
                         if (String(element._moduleId) === String(modules[i])) {
+                            goOrNo = true;
+                        };
+                    };
+                };
+
+                if (tags) {
+                    for (let i = 0; i < tags.length; i++) {
+                        if (String(element._tagIds) === String(tags[i])) {
                             goOrNo = true;
                         };
                     };
@@ -211,7 +219,7 @@ export default class FileController {
 
     createMaterial = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
         try {
-            const { title, description, type, filename, file, videoUrl, size, author, moduleId } = req.body;
+            const { title, description, type, filename, file, videoUrl, size, _authorId, _moduleId } = req.body;
             
             let newMaterial: IMaterial;
             
@@ -223,8 +231,8 @@ export default class FileController {
                     filename: filename,
                     file: file,
                     size: size,
-                    _authorId: author,
-                    _moduleId: moduleId,
+                    _authorId: _authorId,
+                    _moduleId: _moduleId,
                 });
             };
 
@@ -236,8 +244,8 @@ export default class FileController {
                     filename: filename,
                     file: file,
                     size: size,
-                    _authorId: author,
-                    _moduleId: moduleId,
+                    _authorId: _authorId,
+                    _moduleId: _moduleId,
                 });
             };
 
@@ -247,8 +255,8 @@ export default class FileController {
                     description: description,
                     type: type,
                     videoUrl: videoUrl,
-                    _authorId: author,
-                    _moduleId: moduleId,
+                    _authorId: _authorId,
+                    _moduleId: _moduleId,
                 });
             };
 
@@ -260,7 +268,7 @@ export default class FileController {
                 });
             };
 
-            const updateModule = await ModuleItem.findOneAndUpdate({_id: moduleId}, {
+            const updateModule = await ModuleItem.findOneAndUpdate({_id: _moduleId}, {
                 $push: {
                     _materialIds: material._id,
                 },
@@ -325,6 +333,51 @@ export default class FileController {
             });
 
             return res.status(200).json(updateMaterial);
+        } catch (e) {
+            next(e);
+        };
+    };
+
+    editMaterial = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
+        try {
+            const { materialId } = req.params;
+            const { title, description, _moduleId, type, filename, file, size, videoUrl, _tagIds } = req.body; 
+
+            let material;
+
+            if (type === 'Video') {
+                material = await Material.findOneAndUpdate({_id: materialId}, {
+                    $set: {
+                        title: title,
+                        description: description,
+                        _moduleId: _moduleId,
+                        type: type,
+                        videoUrl: videoUrl,
+                        _tagIds: _tagIds,
+                        _modifiedAt: Date.now(),
+                    },
+                });
+            } else {
+                material = await Material.findOneAndUpdate({_id: materialId}, {
+                    $set: {
+                        title: title,
+                        description: description,
+                        _moduleId: _moduleId,
+                        filename: filename,
+                        type: type,
+                        file: file,
+                        size: size,
+                        _tagIds: _tagIds,
+                        _modifiedAt: Date.now(),
+                    },
+                });
+            };
+
+            if (!material) return res.status(404).json({
+                error: "Dit bestand bestaat niet",
+            });
+
+            return res.status(200).json(material);
         } catch (e) {
             next(e);
         };

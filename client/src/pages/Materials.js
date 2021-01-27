@@ -20,11 +20,12 @@ const Materials = () => {
   const { props } = useLocation();
 
   // Services
-  const { getSignPosts, getMaterials, queryMaterials } = useApi();
+  const { getSignPosts, getMaterials, queryMaterials, getTags } = useApi();
   const { currentUser } = useAuth();
 
   // States
   const [ signposts, setSignposts ] = useState();
+  const [ tags, setTags ] = useState();
 
   const [ textFiles, setTextFiles ] = useState();
   const [ presentations, setPresentations ] = useState();
@@ -34,6 +35,7 @@ const Materials = () => {
     "keywords": "",
     "type": [],
     "modules": [],
+    "tags": [],
   });
 
   // Context
@@ -52,6 +54,8 @@ const Materials = () => {
   const getData = useCallback(async () => {
     try {
       const signpostData = await getSignPosts(currentUser.token);
+      const tagsData = await getTags();
+      setTags(tagsData);
       setSignposts(signpostData);
 
       let txt = [];
@@ -102,7 +106,7 @@ const Materials = () => {
     } catch (e) {
       history.push(Routes.NOT_FOUND);
     };
-  }, [getSignPosts, queryMaterials, props, getMaterials, history, currentUser]);
+  }, [getSignPosts, queryMaterials, props, getMaterials, history, getTags, currentUser]);
 
   useEffect(() => {
     getData();
@@ -120,7 +124,9 @@ const Materials = () => {
         queryForm.keywords.length !== 0 ? queryForm.keywords : false,
         queryForm.type.length !== 0 ? queryForm.type : false,
         queryForm.modules.length !== 0 ? queryForm.modules : false,
+        queryForm.tags.length !== 0 ? queryForm.tags : false,
       );
+
       for (let i = 0; i < materialData.length; i++) {
         switch (materialData[i].material.type) {
           case "Document":
@@ -191,6 +197,14 @@ const Materials = () => {
               query={queryForm}
               setQuery={setQueryForm}
               type="modules"
+            />
+            {/** Select tag */}
+            <FilterSelect
+              text="Welke tag"
+              options={tags}
+              query={queryForm}
+              setQuery={setQueryForm}
+              type="tags"
             />
             <button type="submit">
               Zoeken maar

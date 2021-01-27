@@ -90,6 +90,7 @@ class ApiRouter {
         this.router.post('/material/search', this.fileController.showMaterial); // needs bearer and body
         this.router.post('/material/like', this.fileController.likeMaterial); // needs bearer and body
         this.router.post('/material/dislike', this.fileController.dislikeMaterial); // needs bearer and body
+        this.router.patch('/edit-material/:materialId', this.fileController.editMaterial); // needs bearer and body and params
         this.router.delete('/material/:id', this.fileController.deleteMaterial); // needs bearer and params
 
         // Modules
