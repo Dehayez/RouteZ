@@ -9,6 +9,7 @@ import * as Routes from '../routes';
 
 //Import components
 import { ButtonLarge, ButtonSmall }  from '../components/buttons';
+import { DefaultImage } from '../assets/images';
 
 const MyProfileSettings = () => {
     const history = useHistory();
@@ -125,7 +126,10 @@ const MyProfileSettings = () => {
     return (
         <div className="settings">
             <form className="form-label-left" onSubmit={(e) => submitSettings(e)}>
-                <input type="file" accept="image/*" id="avatar" onChange={(e) => changeImage(e)} />
+
+				<img className="form-label-left-image" src={ DefaultImage } alt="profile"/>
+                <input type="file" accept="image/*" id="avatar" onChange={(e) => changeImage(e)} ></input>
+				
 				<div className="form-label-left-item">
 					<label className="form-label-left-label">Voornaam*</label>
 					<input className="form-label-left-input" type="text" id="firstName" onChange={(e) => changeForms(e)} defaultValue={formData ? formData.firstName : ''} required/>

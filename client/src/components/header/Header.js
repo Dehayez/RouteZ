@@ -11,7 +11,7 @@ const Header = () => {
   return (
     <header className="header">
 		<div className="header-left">
-			<h1 className="header-left-title">Mijn profiel</h1>
+			<h1 className="header-left-title">PageTitle</h1>
 		</div>
 
 		<div className="header-right">

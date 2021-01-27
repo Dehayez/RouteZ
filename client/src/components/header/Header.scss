@@ -9,8 +9,6 @@
 	width: 100%;
 	border-bottom: 2px solid $routez-grey-light;
 
-
-
 	&-left {
 		&-title {
 			margin: 0;
@@ -55,6 +53,7 @@
 
 			&:hover {
 				background-color: $routez-grey-light;
+				text-decoration: underline;
 			}
 		
 			&__text {
