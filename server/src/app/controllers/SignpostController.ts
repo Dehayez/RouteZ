@@ -131,6 +131,28 @@ export default class SignpostController {
         };
     };
 
+    editSignpost = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
+        try {
+            // Get body
+            const { title, shortedTitle, text, illustration, icon } = req.body;
+            const { signpostId } = req.params;
+
+            const signpost = await SignPost.findByIdAndUpdate(signpostId, {
+                $set: {
+                    text: text,
+                    title: title,
+                    shortedTitle: shortedTitle,
+                    icon: icon,
+                    illustration: illustration,
+                },
+            });
+
+            return res.status(200).json(signpost);
+        } catch(e) {
+            next(e);
+        };
+    };
+
     deleteSignpost = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
         try {
             const { id } = req.params;

@@ -66,14 +66,17 @@ class ApiRouter {
         // Authentication routes
         this.router.post('/users/register', this.userController.newUser); // gives bearer
         this.router.post('/users/login', this.userController.loggingInUser); // gives bearer
+        this.router.post('/users/admin', this.userController.loggingInAdmin); // gives bearer
 
         // Users
         this.router.get('/users', this.userController.allUsers); // needs bearer, only for admin
         this.router.get('/users/me', this.userController.getMyself); // needs bearer
+        this.router.get('/users/:id', this.userController.getUser); // needs bearer and id
+        this.router.patch('/users/:id', this.userController.editUser); // needs bearer and id, only for admin
         this.router.post('/users/me', this.userController.updateMyself); // needs bearer and body
         this.router.post('/users/me/progress', this.userController.updateProgress); // needs bearer and body
         this.router.delete('/users/me', this.userController.deleteMyself); // needs bearer
-
+        this.router.delete('/users/:id', this.userController.deleteUser); // needs id, only admin
         // Reset password
         this.router.post('/reset/send', this.resetController.sendToken); // needs body
         this.router.post('/reset/submit', this.resetController.destroyToken); // needs body
@@ -101,6 +104,7 @@ class ApiRouter {
         // Signposts
         this.router.get('/signposts', this.signpostController.allSignposts); // needs bearer
         this.router.get('/signposts/:signpostId', this.signpostController.getSignpost); // needs bearer
+        this.router.patch('/signposts/:signpostId', this.signpostController.editSignpost); // needs bearer
         this.router.post('/signposts', this.signpostController.createSignpost); // needs bearer, only for admin
         this.router.patch('/signposts/add/:signpostId/:moduleId', this.signpostController.addModuleToSignpost); // needs bearer, only for admin
         this.router.patch('/signposts/remove/:signpostId/:moduleId', this.signpostController.removeModuleFromSignpost); // needs bearer, only for admin
