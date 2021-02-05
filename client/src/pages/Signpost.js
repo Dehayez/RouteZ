@@ -7,6 +7,9 @@ import { useAuth, useApi } from '../services';
 // Import components
 import { BackLinks, ButtonSmall } from '../components';
 
+// Import config
+import { apiConfig } from '../config';
+
 // Import routes
 import * as Routes from '../routes';
 
@@ -41,6 +44,7 @@ const Signpost = () => {
         getAllData();
 	}, [getAllData]);
 
+	console.log(signpost)
 
     return (
 		<>
@@ -65,6 +69,8 @@ const Signpost = () => {
 					}
 					<h1 className="signpost-title">{ signpost.title }</h1>
 					<p className="signpost-text">{ signpost.text }</p>
+
+					<img className="signpost-illustration" src={`${apiConfig.baseURL}file/${signpost.illustration}`}/>
 
 					<div className="signpost-modules">
 						<h5 className="signpost-modules-title">Modules</h5>

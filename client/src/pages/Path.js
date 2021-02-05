@@ -110,19 +110,19 @@ const Path = () => {
                     links={[
                       {
                           path: `${Routes.SIGNPOSTS}`,
-                          route: "wegwijzers"
+                          route: "wegwijzers "
                       },
                       {
                           path: `${Routes.SIGNPOST.replace(':id', signpost._id)}`,
-                          route: `>${signpost.title}`
+                          route: ` > ${signpost.title}`
                       },
                       {
                         path: `${Routes.MODULE.replace(':id', moduleSet.id)}`,
-                        route: `>${moduleSet.title}`
+                        route: ` > ${moduleSet.title}`
                       },
                       {
                         path: `${Routes.PATH.replace(':id', path._id).replace(':order', 1).replace(':type', path.type.toLowerCase())}`,
-                        route: `>${path.title}`
+                        route: ` > ${path.title}`
                       },
                     ]}
                   />

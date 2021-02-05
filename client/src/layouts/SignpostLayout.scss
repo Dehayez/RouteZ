@@ -2,6 +2,7 @@
 
 .signpost {
 	padding: 1rem 3rem;
+	justify-content: space-between;
 
 	//backlinks
 	& > div > a {
@@ -28,6 +29,11 @@
 		margin: 2rem 0;
 	}
 
+	&-undertitle {
+		font-size: 18px;
+		font-weight: 500;
+	}
+
 	&-text {
 		font-size: 14px;
 		font-weight: 400;
@@ -36,6 +42,7 @@
 	&-modules {
 		margin: 4rem 0;
 		max-width: 600px;
+		position: relative;
 	
 		&-title {
 			font-size: 16px;
@@ -48,6 +55,56 @@
 			justify-content: space-between;
 			align-items: baseline;
 			border-bottom: 1px solid $routez-grey;
+			background-color: rgba($color: white, $alpha: 0.8);
+			-webkit-backdrop-filter: blur(20px);  
+			backdrop-filter: blur(20px);
+
+			&-title {
+				font-size: 16px;
+				font-weight: 400;
+			}
+		}
+	}
+
+	&-illustration{
+		position: absolute;
+		right: 0;
+		bottom: 0;
+		margin: 4rem;
+		width: 20%;
+	}
+
+	&-extra {
+		display: flex;
+		justify-content: space-between;
+		align-items: baseline;
+
+		margin: 2rem 0;
+
+		&-buttons {
+
+		}
+	}
+
+	&-paths {
+		margin: 4rem 0;
+		max-width: 600px;
+		position: relative;
+	
+		&-title {
+			font-size: 16px;
+			font-weight: 700;
+			margin-bottom: 1rem;
+		}
+
+		&-item {
+			display: flex;
+			justify-content: space-between;
+			align-items: baseline;
+			border-bottom: 1px solid $routez-grey;
+			background-color: rgba($color: white, $alpha: 0.8);
+			-webkit-backdrop-filter: blur(20px);  
+			backdrop-filter: blur(20px);
 
 			&-title {
 				font-size: 16px;

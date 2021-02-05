@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { NavLink, useHistory, useParams } from 'react-router-dom';
+import { NavLink, useHistory, useParams, Link } from 'react-router-dom';
 
 import ReactHtmlParser from 'react-html-parser';
 
@@ -13,8 +13,9 @@ import * as Routes from '../routes';
 import { CardMaterials } from '../partials';
 
 // Import components
-import { BackLinks } from '../components';
+import { BackLinks, ButtonSmall } from '../components';
 import { HiOutlinePrinter } from 'react-icons/hi';
+import { Container, Row, Col } from 'react-bootstrap';
 
 const Module = () => {
     const { id } = useParams();
@@ -67,89 +68,93 @@ const Module = () => {
         <>
         {
             module && (
-                <div className="signpost">
-                {
-                    signpost && (
-						<BackLinks 
-							links={[
-								{
-									path: `${Routes.SIGNPOSTS}`,
-									route: "wegwijzers "
-								},
-								{
-									path: `${Routes.SIGNPOST.replace(':id', signpost._id)}`,
-									route: ` > ${signpost.title}`
-								},
-								{
-									path: `${Routes.MODULE.replace(':id', module._id)}`,
-									route: ` > ${module.title}`
-								}
-							]}
-						/>
-					)
-                }
-
-
-                {/** Main HTML */}
-				<div className="signpost-header">
-					<h1 className="signpost-title">{module.title}</h1>
+                <Row className="signpost">
 					{
-						checkedModule && (
-							<HiOutlinePrinter className="icon__print" title="Print" />
+						signpost && (
+							<BackLinks 
+								links={[
+									{
+										path: `${Routes.SIGNPOSTS}`,
+										route: "wegwijzers "
+									},
+									{
+										path: `${Routes.SIGNPOST.replace(':id', signpost._id)}`,
+										route: ` > ${signpost.title}`
+									},
+									{
+										path: `${Routes.MODULE.replace(':id', module._id)}`,
+										route: ` > ${module.title}`
+									}
+								]}
+							/>
 						)
 					}
-				</div>
-
-                {
-                    ReactHtmlParser(module.content)
-                }
 
 
+					<div className="signpost-header">
+						<h1 className="signpost-title">{module.title}</h1>
+						{
+							checkedModule && (
+								<HiOutlinePrinter className="icon__print" title="Print" />
+							)
+						}
+					</div>
 
-                {/** All paths */}
-                <h1>Alle paden</h1>
-                {
-                    module.paths && module.paths.map((path, index) => {
-                        return <div key={index}>
-                            {
-                                console.log(path)
-                            }
-                            <NavLink to={`${Routes.PATH.replace(':type', path.type.toLowerCase()).replace(':id', path._id).replace(':order', 1)}`}>
-                                <span>{path.title}</span>
-                                <button>Open </button>
-                            </NavLink>
-                            {
-                                checkedPaths && checkedPaths.map((pathChecked, index) => {
-                                    return pathChecked === path._id && (
-                                        <span key={index}>Check</span>
-                                    )
-                                })
-                            }
-                        </div>
-                    })
-                }
-                {/** All material */}
-                <h1>Wat anderen hebben gedeeld:</h1>
-                {
-                    checkedModule && (
-                        <>
-                            <div>
-                                <NavLink to={{pathname: Routes.MATERIALS, props: {
-                                    module: module._id,
-                                }}}>Bekijk meer</NavLink>
-                                <NavLink to={{pathname: Routes.ADD_MATERIAL, props: {
-                                    module: module._id,
-                                }}}>Plaats materiaal</NavLink>
-                            </div>
-                            <CardMaterials
-                                materials={module.materials}
-                                user={currentUser.id}
-                                token={currentUser.token}
-                            />
-                        </>
-                    )
-                }
-                </div>
+					<Col lg={6}>
+						{ ReactHtmlParser(module.content) }
+					</Col>
+
+
+					{/** All paths */}
+					<Col lg={5} className="signpost-paths">
+					{
+						module.paths && module.paths.map((path, i) => {
+							return <div className="signpost-modules-item" key={i}>
+								
+									<p className="signpost-paths-item-title">{path.title}</p>
+									<div>
+										<Link to={`${Routes.PATH.replace(':type', path.type.toLowerCase()).replace(':id', path._id).replace(':order', 1)}`}>
+											<ButtonSmall content="Open" color="secondary"/>
+										</Link>
+									</div>
+								{
+									checkedPaths && checkedPaths.map((pathChecked, index) => {
+										return pathChecked === path._id && (
+											<span key={index}>Check</span>
+										)
+									})
+								}
+							</div>
+						})
+					}
+					</Col>
+
+
+
+					{/** All material */}
+					{
+						checkedModule && (
+							<>
+								<div className="signpost-extra">
+									<p className="signpost-undertitle">Wat anderen hebben gedeeld:</p>
+									<div className="signpost-extra-buttons">
+										<NavLink to={{pathname: Routes.MATERIALS, props: {module: module._id,}}}>
+											<ButtonSmall content="Bekijk meer" color="secondary"/>
+										</NavLink>
+										<NavLink to={{pathname: Routes.ADD_MATERIAL, props: {module: module._id,}}}>
+											<ButtonSmall content="Plaats materiaal" color="primary"/>
+										</NavLink>
+									</div>
+								</div>
+								<CardMaterials
+									materials={module.materials}
+									user={currentUser.id}
+									token={currentUser.token}
+								/>
+							</>
+						)
+					}
+                </Row>
             )
         }
         </>

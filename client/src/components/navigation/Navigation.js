@@ -7,7 +7,7 @@ import { useApi, useAuth } from '../../services';
 // Import components
 import { NavigationItem } from './'
 import { Link } from 'react-router-dom';
-import { LogoColor, LogoColorSingle } from '../../assets/logos';
+import { LogoColor } from '../../assets/logos';
 
 // Import config
 import { apiConfig } from '../../config';
