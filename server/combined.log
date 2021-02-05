@@ -4627,6 +4627,12 @@
 2021-01-15 14:36:13 [[32minfo[39m: 	Server closed {
   "object": {}
 }]
+<<<<<<< HEAD
+2021-01-23 13:16:43 [[31merror[39m: 	Can	 connect to the database {
+  "object": {
+    "e": {}
+  }
+=======
 2021-01-19 08:26:25 [[32minfo[39m: 	Connected to the database {
   "object": {}
 }]
@@ -4749,6 +4755,7 @@
 }]
 2021-01-19 18:58:01 [[32minfo[39m: 	Server on localhost:8000 {
   "object": {}
+>>>>>>> a3e919736715dd60daf9bc2904c37b68140f1975
 }]
 2021-01-23 13:00:40 [[32minfo[39m: 	Connected to the database {
   "object": {}
@@ -4922,5 +4929,11 @@
   "object": {}
 }]
 2021-02-04 12:13:59 [[32minfo[39m: 	Server on localhost:8000 {
+  "object": {}
+}]
+2021-02-05 08:22:59 [[32minfo[39m: 	Connected to the database {
+  "object": {}
+}]
+2021-02-05 08:22:59 [[32minfo[39m: 	Server on localhost:8000 {
   "object": {}
 }]

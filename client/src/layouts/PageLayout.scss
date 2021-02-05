@@ -1,2 +1,178 @@
 @import '../_sass/abstracts/index';
 
+.page {
+	width: 100%;
+	height: 100%;
+	display: flex;
+
+	&-main {
+		margin-left: 350px;
+		width: 100%;
+	}
+}
+
+
+
+
+
+/********************************* PROFILE PAGE *********************************/
+
+.profile {
+	padding: 1rem 2rem;
+
+	&-buttons {
+		width: 100%;
+	   display: flex;
+	   justify-content: flex-end;
+	}
+
+	&-info {
+		width: 100%;
+		display: flex;
+
+		&__image {
+			& img {
+				width: 100px;
+				height: 100px;
+				border-radius: 50%;
+			}
+		}
+
+		&__text {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			margin-left: 1rem;
+
+			& p {
+				margin: 0;
+			}
+
+			&-name {
+				font-size: 20px;
+				font-weight: 600;
+			}
+
+			&-mail {
+				font-weight: 300;
+			}
+
+			&-school {
+				color: $routez-primary;
+				font-weight: 300;
+			}
+		}
+	}
+}
+
+
+
+
+
+/********************************* PROFILE SETTINGS PAGE *********************************/
+
+ .settings {    
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+	padding: 2rem;
+
+	&-danger {
+		width: 100%;
+		margin-top: 6rem;
+	}
+ }
+
+ .form-label-left {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 400px;
+
+	& div.form-label-left-item:last-of-type {
+		margin-bottom: 4rem;
+	}
+
+	&-image {
+		width: 100px;
+		height: 100px;
+		border-radius: 50%;
+		margin: 1rem;
+
+	}
+
+	&-item {
+		margin: 0.5rem;
+	}
+	&-label {
+		color: $routez-primary;
+		font-weight: 300;
+		font-size: 14px;
+		
+		display: inline-block;
+		width: 140px;
+		margin-right: 1rem;
+		text-align: right;
+	}
+
+	&-input {
+		border-radius: 5px;
+		border: 2px solid $routez-grey-light;
+
+		&:focus {
+			outline: 3px solid $routez-secondary;
+		}
+	}
+	
+ }
+
+
+
+
+
+
+
+
+ /********************************* DASHBOARD PAGE *********************************/
+
+ .dashboard {    
+	display: flex;
+    flex-direction: column;
+	padding: 2rem;
+
+	&-card {
+		background-color: $routez-secondary;
+		border-radius: 10px;
+		padding: 2rem;
+		display: flex;
+		justify-content: space-between;
+
+		&-content {
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+
+			&-text {
+				&__title {
+					font-family: $font-family-secondary;
+					font-weight: 700;
+					font-size: 36px;
+					margin-bottom: 1rem;
+				}
+	
+				&__text {
+					opacity: 0.8;
+				}
+			}
+		}
+
+		&-image {
+			height: 200px;
+
+			&__image {
+				height: 100%;
+				width: auto;
+			}
+		}
+	}
+ }

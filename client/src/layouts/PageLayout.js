@@ -8,7 +8,11 @@ import { useAuth, useApi } from '../services';
 // Import config
 import { apiConfig } from '../config';
 
-const PageLayout = ({children}) => {
+// Import components
+import { Navigation, Header } from '../components'
+
+
+const PageLayout = ({ children }) => {
     // Use services
     const { getMyself, currentUser } = useAuth();
     const { getSignPosts } = useApi();
@@ -16,7 +20,9 @@ const PageLayout = ({children}) => {
     // All accessable data
     const [ signPosts, setSignPosts ] = useState();
     const [ user, setUser ] = useState();
-    const [ avatar, setAvatar ] = useState();
+	const [ avatar, setAvatar ] = useState();
+
+	const pageTitle = 'Dashboard';
 
     const getAllData = useCallback(() => {
         const easyFetch = async () => {
@@ -51,8 +57,10 @@ const PageLayout = ({children}) => {
                 <img src={`${apiConfig.baseURL}file/${avatar}`} alt="avatar"/>
             ) : ''
         }
+		<Navigation/>
         {/** Voor de wegwijzers best zoals de avatar het icoontje gaan ophalen vanuit de back-end */}
       <main className="page-main">
+		<Header pageTitle={pageTitle}/>
         {children}
       </main>
     </div>

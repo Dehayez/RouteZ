@@ -1,0 +1,104 @@
+@import '../../_sass/abstracts/index';
+
+
+.nav {
+	background-color: $routez-grey-light;
+	color: $routez-black;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	width: 350px;
+	position: fixed;
+
+	&-header {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		padding: 2rem;
+
+		&__image {
+			width: 80%;
+		}
+	}
+
+	&-list {
+		padding: 1rem;
+
+		&-link {
+			display: flex;
+			align-items: center;
+			text-decoration: none;
+			margin-bottom: 1rem;
+			border-radius: 10px;
+			background: $routez-grey-light;
+			width: 100%;
+
+			background: linear-gradient(to left, $routez-grey-light 50%, $routez-secondary 50%) right;
+			background-size: 210%;
+			transition: .5s ease-out;
+
+			&:hover {
+				background-position: left;
+			}
+
+			&--active {
+				background: $routez-primary;
+
+				&:hover {
+					background-color: $routez-primary;
+
+				}
+			
+				& .nav-list-link__icon{
+					background-color: $routez-secondary;
+					
+				}
+
+				& .nav-list-link__icon-wrapper{
+					background-color: $routez-primary;
+
+				}
+
+				& .nav-list-link__text-title, .nav-list-link__text-span {
+					color: $routez-grey-light;
+
+				}
+
+			}
+
+			&__icon {
+				color: $routez-primary;
+				width: 70%;
+
+				&-wrapper {
+					background-color: $routez-secondary;
+
+					border-radius: 10px;
+					width: 60px;
+					height: 60px;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+				}
+			}
+
+			&__text {
+				margin-left: 1rem;
+				margin-bottom: 6px;
+
+				&-span {
+					color: $routez-black;
+					font-size: 12px;
+					font-weight: 100;
+				}
+				&-title {
+					color: $routez-black;
+					font-size: 16px;
+					font-weight: 600;
+					margin: 0;
+					text-transform: capitalize;
+				}
+			}
+		}
+	}
+}

@@ -80,7 +80,7 @@ const Register = () => {
 					label="Voornaam"
 					type="text"
 					onChange={(e) => changeData(e)} required
-					autofocus
+					autoFocus
 					/>
 				</div>
 				<div className="form-input" style={{ fontSize: 16 }}>
@@ -115,9 +115,9 @@ const Register = () => {
 						onChange={(e) => changeData(e)} required
 					/>
 				</div>
-				<div class="form-restrictions">
+				<div className="form-restrictions">
 					<input type="checkbox" name="restrictions" id="restrictions" required />
-					<span class="form-restrictions-text">Ik accepteer de <b>algemene voorwaarden</b></span>
+					<span className="form-restrictions-text">Ik accepteer de <b>algemene voorwaarden</b></span>
 				</div>
 
                 <ButtonLarge content="Registreer"></ButtonLarge>

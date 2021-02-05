@@ -32,9 +32,10 @@ function App() {
                 <RouteWithLayout exact path={Routes.AUTH_RESET} component={SendReset} layout={AuthLayout} />
                 <RouteWithLayout exact path={Routes.AUTH_SUBMIT} component={SubmitReset} layout={AuthLayout} />
                 {/** Platform pages */}
-                <AuthRouteWithLayout exact path={Routes.DASHBOARD} component={Dashboard} layout={PageLayout} />
-                <AuthRouteWithLayout exact path={Routes.MY_PROFILE} component={MyProfile} layout={PageLayout} />
-                <AuthRouteWithLayout exact path={Routes.MY_PROFILE_SETTINGS} component={MyProfileSettings} layout={PageLayout} />
+				{/** Alles terug naar AuthRoute vanaf het coderen af is */}
+                <RouteWithLayout exact path={Routes.DASHBOARD} component={Dashboard} layout={PageLayout} />
+                <RouteWithLayout exact path={Routes.MY_PROFILE} component={MyProfile} layout={PageLayout} />
+                <RouteWithLayout exact path={Routes.MY_PROFILE_SETTINGS} component={MyProfileSettings} layout={PageLayout} />
                 <AuthRouteWithLayout exact path={Routes.SIGNPOSTS} component={Signposts} layout={PageLayout} />
                 <AuthRouteWithLayout exact path={Routes.SIGNPOST} component={Signpost} layout={PageLayout} />
                 <AuthRouteWithLayout exact path={Routes.MODULE} component={Module} layout={PageLayout} />

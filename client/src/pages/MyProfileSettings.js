@@ -7,6 +7,10 @@ import { useAuth, useApi } from '../services';
 // Import routes
 import * as Routes from '../routes';
 
+//Import components
+import { ButtonLarge, ButtonSmall }  from '../components/buttons';
+import { DefaultImage } from '../assets/images';
+
 const MyProfileSettings = () => {
     const history = useHistory();
 
@@ -120,40 +124,66 @@ const MyProfileSettings = () => {
     }, [getAllData]);
 
     return (
-        <>
-            <form onSubmit={(e) => submitSettings(e)}>
-                <input type="file" accept="image/*" id="avatar" onChange={(e) => changeImage(e)} />
-                <input type="text" id="firstName" onChange={(e) => changeForms(e)} defaultValue={formData ? formData.firstName : ''} required/>
-                <input type="text" id="lastName" onChange={(e) => changeForms(e)} defaultValue={formData ? formData.lastName : ''} required/>
-                <input type="email" id="email" onChange={(e) => changeForms(e)} defaultValue={formData ? formData.email : ''} required/>
-                <input type="tel" id="phoneNumber" onChange={(e) => changeForms(e)} defaultValue={formData ? formData.phoneNumber : ''}/>
-                <input type="text" id="schoolName" onChange={(e) => changeForms(e)} defaultValue={formData ? formData.schoolName : ''}/>
-                <textarea id="professionalFunction" onChange={(e) => changeForms(e)} defaultValue={formData ? formData.professionalFunction : ''}/>
-                <button type="submit">Bevestig</button>
+        <div className="settings">
+            <form className="form-label-left" onSubmit={(e) => submitSettings(e)}>
+
+				<img className="form-label-left-image" src={ DefaultImage } alt="profile"/>
+                <input type="file" accept="image/*" id="avatar" onChange={(e) => changeImage(e)} ></input>
+				
+				<div className="form-label-left-item">
+					<label className="form-label-left-label">Voornaam*</label>
+					<input className="form-label-left-input" type="text" id="firstName" onChange={(e) => changeForms(e)} defaultValue={formData ? formData.firstName : ''} required/>
+				</div>
+
+				<div className="form-label-left-item">
+					<label className="form-label-left-label">Achternaam*</label>
+					<input className="form-label-left-input" type="text" id="lastName" onChange={(e) => changeForms(e)} defaultValue={formData ? formData.lastName : ''} required/>
+				</div>
+
+				<div className="form-label-left-item">
+					<label className="form-label-left-label">E-mail*</label>
+					<input className="form-label-left-input" type="email" id="email" onChange={(e) => changeForms(e)} defaultValue={formData ? formData.email : ''} required/>
+				</div>
+
+				<div className="form-label-left-item">
+					<label className="form-label-left-label">Telefoonnummer</label>
+					<input className="form-label-left-input" type="tel" id="phoneNumber" onChange={(e) => changeForms(e)} defaultValue={formData ? formData.phoneNumber : ''}/>
+				</div>
+
+				<div className="form-label-left-item">
+					<label className="form-label-left-label">Schoolnaam</label>
+					<input className="form-label-left-input" type="text" id="schoolName" onChange={(e) => changeForms(e)} defaultValue={formData ? formData.schoolName : ''}/>
+				</div>
+
+				<div className="form-label-left-item">
+					<label className="form-label-left-label">Professionele functie</label>
+					<textarea className="form-label-left-input" id="professionalFunction" onChange={(e) => changeForms(e)} defaultValue={formData ? formData.professionalFunction : ''}/>
+				</div>
+
+				<ButtonLarge type="submit" content="Bevestig" />
             </form>
-            {
+
+			<div className="settings-danger">
+				<h3 className="settings-danger-title">Gevarenzone</h3>
+				{
                 remove ? (
-                    <>
-                        <button onClick={() => removeUser()}>
-                            Ja, zeker!
-                        </button>
-                        <button onClick={() => setRemove(!remove)}>
-                            Neen!
-                        </button>
-                    </>
+                    <div>
+						<ButtonSmall onClick={() => removeUser()} color="danger-fill" content="Verwijder account"/>
+						<ButtonSmall onClick={() => setRemove(!remove)} color="danger-secondary" content="Annuleer"/>
+                    </div>
                 ) : (
-                    <button onClick={() => setRemove(true)}>
-                        Ik wil mijn account verwijderen
-                    </button>
+					<ButtonSmall onClick={() => setRemove(true)} color="danger" content="Verwijder account"/>
                 )
-            }
-            {
-                error && error
-            }
-            {
-                success && success
-            }
-        </>
+				}
+				{
+					error && error
+				}
+				{
+					success && success
+				}
+			</div>
+
+        </div>
     )
 };
 
