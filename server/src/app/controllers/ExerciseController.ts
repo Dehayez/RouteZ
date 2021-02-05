@@ -8,7 +8,7 @@ import {
   default as jwtDecode
 } from "jwt-decode";
 
-import { IPath, ModuleItem, Path, User, Exercise, IExercise } from '../models';
+import { Path, User, Exercise, IExercise } from '../models';
 
 export default class PathController {
   public allExercises = async (req: Request, res: Response, next: NextFunction): Promise < Response > => {
@@ -49,7 +49,6 @@ export default class PathController {
   addExerciseToPath = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
     try {
       const { exerciseId, pathId } = req.params;
-      console.log(exerciseId, pathId)
 
       // Update path
       const foundPath = await Path.findOne({_id: pathId});

@@ -114,7 +114,8 @@ class ApiRouter {
         this.router.get('/paths', this.pathController.allPaths); // needs bearer
         this.router.get('/paths/:pathId', this.pathController.getPath); // needs bearer
         this.router.post('/paths', this.pathController.createPath); // needs bearer, only for admin
-        this.router.patch('/paths/:moduleId/:pathId', this.pathController.addPathToModule); // needs bearer, only for admin
+        this.router.patch('/paths/add/:moduleId/:pathId', this.pathController.addPathToModule); // needs bearer, only for admin
+        this.router.patch('/paths/remove/:moduleId/:pathId', this.pathController.removePathFromModule); // needs bearer, only for admin
 
         // Exercises
         this.router.get('/exercises', this.exerciseController.allExercises); // needs bearer

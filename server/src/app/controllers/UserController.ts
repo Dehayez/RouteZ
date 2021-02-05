@@ -215,7 +215,7 @@ export default class UserController {
     updateProgress = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
         try {
             // Main values to be edited
-            const { moduleId, pathId, signpostId } = req.body;
+            const { moduleId, pathId, signpostId, exercise } = req.body;
 
             // First off all, check if you're the user
             if (!req.headers.authorization) {
@@ -299,6 +299,24 @@ export default class UserController {
                         },
                     }, { new : true }).exec();
                 };
+            };
+
+            if (exercise) {
+                for (let i = 0; i < user.progress._finishedExercises.length; i++) {
+                    for (let j = 0; j < exercise.length; j++) {
+                        if (exercise[j].questionId === user.progress._finishedExercises[i].questionId) {
+                            return res.status(200).json({
+                                message: "Deze oefening is al reeds toegevoegd",
+                            });
+                        };
+                    };
+                };
+
+                updatedUser = await User.findByIdAndUpdate(id, {
+                    $push: {
+                        'progress._finishedExercises': exercise,
+                    }
+                }, {new: true}).exec();
             };
 
             if (signpostId) {

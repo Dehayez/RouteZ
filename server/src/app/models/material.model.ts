@@ -24,6 +24,7 @@ interface IMaterial extends Document {
   file: string;
   videoUrl: string;
   size: string;
+  target: string;
   _authorId: IUser['_id'];
   _tagIds: Array<ITag['_id']>;
   _moduleId: IModule['_id'];
@@ -57,6 +58,11 @@ const materialSchema:Schema = new Schema({
     unique: false,
   },
   file: {
+    type: String,
+    required: false,
+    unique: false,
+  },
+  target: {
     type: String,
     required: false,
     unique: false,

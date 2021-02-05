@@ -26,11 +26,26 @@ import {
     ISignpost 
 } from './signpost.model';
 
+// Answer interface
+interface IAnswer {
+    answerId: string;
+    text: string;
+    correct: boolean;
+    response: string;
+}
+
+// Exercise interface
+interface IExercise {
+    questionId: string;
+    answers: Array<IAnswer>;
+};
+
 // Progress made in modules, paths and signposts
 interface IProgress {
     _finishedModuleIds: Array<IModule['_id']>;
     _finishedPathIds: Array<IPath['_id']>;
     _finishedSignPostIds: Array<ISignpost['_id']>;
+    _finishedExercises: Array<IExercise>;
 };
 
 // Main information of an user
@@ -112,6 +127,26 @@ const userSchema: Schema = new Schema({
                 type: Schema.Types.ObjectId, ref: 'Signpost', required: false,
             },
         ],
+        _finishedExercises: [{
+            questionId: {
+                type: String,
+                required: true,
+            },
+            answers: [{
+                answerId: {
+                    type: String,
+                },
+                text: {
+                    type: String,
+                },
+                correct: {
+                    type: Boolean,
+                },
+                response: {
+                    type: String,
+                }
+            }],
+        }],
     },
     role: {
         type: String,

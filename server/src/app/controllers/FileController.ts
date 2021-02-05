@@ -108,7 +108,7 @@ export default class FileController {
 
     showMaterial = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
         try {
-            const { keywords, startdate, enddate, type, modules, tags } = req.body;
+            const { keywords, startdate, enddate, type, modules, tags, target } = req.body;
 
             // Filled in input
             const allMaterials = await Material.find().populate('author').populate('module').sort({_likeIds: -1}).exec();
@@ -146,6 +146,15 @@ export default class FileController {
                 if (modules) {
                     for (let i = 0; i < modules.length; i++) {
                         if (String(element._moduleId) === String(modules[i])) {
+                            goOrNo = true;
+                        };
+                    };
+                };
+
+                // Check if its this target audience
+                if (target) {
+                    for (let i = 0; i < target.length; i++) {
+                        if (String(element.target) === String(target[i])) {
                             goOrNo = true;
                         };
                     };
@@ -219,7 +228,7 @@ export default class FileController {
 
     createMaterial = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
         try {
-            const { title, description, type, filename, file, videoUrl, size, _authorId, _moduleId } = req.body;
+            const { title, description, type, filename, file, videoUrl, size, _authorId, _moduleId, target } = req.body;
             
             let newMaterial: IMaterial;
             
@@ -231,6 +240,7 @@ export default class FileController {
                     filename: filename,
                     file: file,
                     size: size,
+                    target: target,
                     _authorId: _authorId,
                     _moduleId: _moduleId,
                 });
@@ -244,6 +254,7 @@ export default class FileController {
                     filename: filename,
                     file: file,
                     size: size,
+                    target: target,
                     _authorId: _authorId,
                     _moduleId: _moduleId,
                 });
@@ -255,6 +266,7 @@ export default class FileController {
                     description: description,
                     type: type,
                     videoUrl: videoUrl,
+                    target: target,
                     _authorId: _authorId,
                     _moduleId: _moduleId,
                 });
@@ -341,7 +353,7 @@ export default class FileController {
     editMaterial = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
         try {
             const { materialId } = req.params;
-            const { title, description, _moduleId, type, filename, file, size, videoUrl, _tagIds } = req.body; 
+            const { title, description, _moduleId, type, filename, file, size, videoUrl, _tagIds, target } = req.body; 
 
             let material;
 
@@ -354,6 +366,7 @@ export default class FileController {
                         type: type,
                         videoUrl: videoUrl,
                         _tagIds: _tagIds,
+                        target: target,
                         _modifiedAt: Date.now(),
                     },
                 });

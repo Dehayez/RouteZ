@@ -101,7 +101,10 @@ const Module = () => {
                 {
                     module.paths && module.paths.map((path, index) => {
                         return <div key={index}>
-                            <NavLink to={`${Routes.PATH.replace(':id', path._id)}`}>
+                            {
+                                console.log(path)
+                            }
+                            <NavLink to={`${Routes.PATH.replace(':type', path.type.toLowerCase()).replace(':id', path._id).replace(':order', 1)}`}>
                                 <span>{path.title}</span>
                                 <button>
                                     Open
