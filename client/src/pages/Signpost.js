@@ -5,7 +5,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import { useAuth, useApi } from '../services';
 
 // Import components
-import { BackLinks } from '../components';
+import { BackLinks, ButtonSmall } from '../components';
 
 // Import routes
 import * as Routes from '../routes';
@@ -25,7 +25,6 @@ const Signpost = () => {
         const fetchData = async () => {
             if (currentUser) {
                 const signpostData = await getSignPost(currentUser.token, id);
-                console.log(signpostData);
                 setSignpost(signpostData);
             };
         };
@@ -39,34 +38,56 @@ const Signpost = () => {
 
     useEffect(() => {
         getAllData();
-    }, [getAllData]);
+	}, [getAllData]);
+	
+	console.log(signpost);
 
     return (
-        <>
-        {
-            signpost && (
-                <BackLinks 
-                    links={[
-                        {
-                            path: `${Routes.SIGNPOSTS}`,
-                            route: "wegwijzers"
-                        },
-                        {
-                            path: `${Routes.SIGNPOST.replace(':id', signpost._id)}`,
-                            route: `>${signpost.title}`
-                        },
-                    ]}
-                />
-            )
-        }
-        {
-            signpost && (
-                signpost.modules && signpost.modules.map((element, index) => {
-                    return ''
-                })
-            )
-        }
-        </>
+        <div className="signpost">
+			{
+				signpost && (
+					<BackLinks 
+						links={[
+							{
+								path: `${Routes.SIGNPOSTS}`,
+								route: "wegwijzers "
+							},
+							{
+								path: `${Routes.SIGNPOST.replace(':id', signpost._id)}`,
+								route: `>  ${signpost.shortedTitle}`
+							},
+						]}
+					/>
+				)
+			}
+			{
+				signpost && (
+					<h1 className="signpost-title">{ signpost.title }</h1>
+				)
+			}
+
+			{
+				signpost && (
+					<p className="signpost-text">{ signpost.text }</p>
+				)
+			}
+
+			<div className="signpost-modules">
+				<h5 className="signpost-modules-title">Modules</h5>
+				{
+					signpost && (
+						signpost.modules && signpost.modules.map((module, i) => {
+							return <div className="signpost-modules-item" key={i}>
+								<p lassName="signpost-modules-item-title">{module.title}</p>
+								<div>
+									<ButtonSmall content="Start" color="secondary"/>
+								</div>
+							</div>
+						})
+					)
+				}
+			</div>
+        </div>
     )
 };
 

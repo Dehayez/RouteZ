@@ -4757,3 +4757,90 @@
   "object": {}
 >>>>>>> a3e919736715dd60daf9bc2904c37b68140f1975
 }]
+2021-02-04 12:14:03 [[31merror[39m: 	Can	 connect to the database {
+  "object": {
+    "e": {
+      "message": "Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/",
+      "reason": {
+        "type": "ReplicaSetNoPrimary",
+        "setName": null,
+        "maxSetVersion": null,
+        "maxElectionId": null,
+        "servers": {},
+        "stale": false,
+        "compatible": true,
+        "compatibilityError": null,
+        "logicalSessionTimeoutMinutes": null,
+        "heartbeatFrequencyMS": 10000,
+        "localThresholdMS": 15,
+        "commonWireVersion": null
+      }
+    }
+  }
+}]
+2021-02-04 12:19:06 [[31merror[39m: 	Can	 connect to the database {
+  "object": {
+    "e": {
+      "message": "Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/",
+      "reason": {
+        "type": "ReplicaSetNoPrimary",
+        "setName": null,
+        "maxSetVersion": null,
+        "maxElectionId": null,
+        "servers": {},
+        "stale": false,
+        "compatible": true,
+        "compatibilityError": null,
+        "logicalSessionTimeoutMinutes": null,
+        "heartbeatFrequencyMS": 10000,
+        "localThresholdMS": 15,
+        "commonWireVersion": null
+      }
+    }
+  }
+}]
+2021-02-04 12:21:17 [[31merror[39m: 	Can	 connect to the database {
+  "object": {
+    "e": {
+      "message": "Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/",
+      "reason": {
+        "type": "ReplicaSetNoPrimary",
+        "setName": null,
+        "maxSetVersion": null,
+        "maxElectionId": null,
+        "servers": {},
+        "stale": false,
+        "compatible": true,
+        "compatibilityError": null,
+        "logicalSessionTimeoutMinutes": null,
+        "heartbeatFrequencyMS": 10000,
+        "localThresholdMS": 15,
+        "commonWireVersion": null
+      }
+    }
+  }
+}]
+2021-02-04 12:22:45 [[32minfo[39m: 	Connected to the database {
+  "object": {}
+}]
+2021-02-04 12:22:46 [[32minfo[39m: 	Server on localhost:8000 {
+  "object": {}
+}]
+2021-02-04 12:26:07 [[32minfo[39m: 	Server closed {
+  "object": {}
+}]
+2021-02-04 16:40:23 [[32minfo[39m: 	Connected to the database {
+  "object": {}
+}]
+2021-02-04 16:40:23 [[32minfo[39m: 	Server on localhost:8000 {
+  "object": {}
+}]
+2021-02-05 12:41:10 [[32minfo[39m: 	Server closed {
+  "object": {}
+}]
+2021-02-05 13:16:54 [[32minfo[39m: 	Connected to the database {
+  "object": {}
+}]
+2021-02-05 13:16:54 [[32minfo[39m: 	Server on localhost:8000 {
+  "object": {}
+}]

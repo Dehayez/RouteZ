@@ -9,7 +9,7 @@ import { DefaultImage } from '../assets/images';
 
 const MyProfile = () => {
     // Use services
-   /*  const { getMyself, currentUser } = useAuth();
+    const { getMyself, currentUser } = useAuth();
 
     // All accessable data
     const [ user, setUser ] = useState();
@@ -21,7 +21,7 @@ const MyProfile = () => {
             const userData = await getMyself(currentUser.token);
             setUser(userData);
 
-            // Get users avatar, if he has one
+            // Get users avatar, if has one
             if (userData.profile.avatar) {
                 setAvatar(userData.profile.avatar);
             };
@@ -32,8 +32,11 @@ const MyProfile = () => {
 
     useEffect(() => {
         getAllData();
-	}, [getAllData]); */
-	
+	}, [getAllData]);
+
+	console.log(user);
+	console.log(getMyself);
+	console.log(currentUser);
 
     return (
         <div className="profile">
@@ -47,9 +50,9 @@ const MyProfile = () => {
 					<img src={ DefaultImage } alt="annelies"/>
 				</div>
 				<div className="profile-info__text">
-					<p className="profile-info__text-name">Annelies Dedecker</p>
-					<p className="profile-info__text-mail">annelies.dedecker@hotmail.be</p>
-					<p className="profile-info__text-school">BSGO Herzele De trampoline</p>
+					{/* <p className="profile-info__text-name">{user.profile.firstName + ' ' +  user.profile.lastName}</p>
+					<p className="profile-info__text-mail">{user.email}</p> */}
+					<p className="profile-info__text-school">@TODO schoolfunctie</p>
 				</div>
 			</div>
 

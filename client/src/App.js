@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import { CreateMaterial, Dashboard, EditMaterial, Landing, Login, Material, Materials, Module, MyMaterials, MyProfile, MyProfileSettings, Path, Register, SendReset, Signpost, Signposts, SubmitReset } from './pages';
 
 // Main layouts
-import { PageLayout, AuthLayout } from './layouts';
+import { PageLayout, AuthLayout, SignpostLayout } from './layouts';
 import { AuthRouteWithLayout, RouteWithLayout } from './utilities';
 
 // All routes
@@ -33,18 +33,19 @@ function App() {
                 <RouteWithLayout exact path={Routes.AUTH_SUBMIT} component={SubmitReset} layout={AuthLayout} />
                 {/** Platform pages */}
 				{/** Alles terug naar AuthRoute vanaf het coderen af is */}
-                <RouteWithLayout exact path={Routes.DASHBOARD} component={Dashboard} layout={PageLayout} />
-                <RouteWithLayout exact path={Routes.MY_PROFILE} component={MyProfile} layout={PageLayout} />
-                <RouteWithLayout exact path={Routes.MY_PROFILE_SETTINGS} component={MyProfileSettings} layout={PageLayout} />
-                <AuthRouteWithLayout exact path={Routes.SIGNPOSTS} component={Signposts} layout={PageLayout} />
-                <AuthRouteWithLayout exact path={Routes.SIGNPOST} component={Signpost} layout={PageLayout} />
-                <AuthRouteWithLayout exact path={Routes.MODULE} component={Module} layout={PageLayout} />
-                <AuthRouteWithLayout exact path={Routes.PATH} component={Path} layout={PageLayout} />
-                <AuthRouteWithLayout exact path={Routes.MATERIALS} component={Materials} layout={PageLayout} />
-                <AuthRouteWithLayout exact path={Routes.MATERIAL} component={Material} layout={PageLayout} />
-                <AuthRouteWithLayout exact path={Routes.MY_MATERIALS} component={MyMaterials} layout={PageLayout} />
-                <AuthRouteWithLayout exact path={Routes.EDIT_MATERIAL} component={EditMaterial} layout={PageLayout} />
-                <AuthRouteWithLayout exact path={Routes.ADD_MATERIAL} component={CreateMaterial} layout={PageLayout} />
+                <AuthRouteWithLayout exact path={Routes.DASHBOARD} component={Dashboard} layout={PageLayout} />
+                <AuthRouteWithLayout exact path={Routes.MY_PROFILE} component={MyProfile} layout={PageLayout} />
+                <AuthRouteWithLayout exact path={Routes.MY_PROFILE_SETTINGS} component={MyProfileSettings} layout={PageLayout} />
+				
+                <AuthRouteWithLayout exact path={Routes.SIGNPOSTS} component={Signposts} layout={SignpostLayout} />
+                <AuthRouteWithLayout exact path={Routes.SIGNPOST} component={Signpost} layout={SignpostLayout} />
+                <AuthRouteWithLayout exact path={Routes.MODULE} component={Module} layout={SignpostLayout} />
+                <AuthRouteWithLayout exact path={Routes.PATH} component={Path} layout={SignpostLayout} />
+                <AuthRouteWithLayout exact path={Routes.MATERIALS} component={Materials} layout={SignpostLayout} />
+                <AuthRouteWithLayout exact path={Routes.MATERIAL} component={Material} layout={SignpostLayout} />
+                <AuthRouteWithLayout exact path={Routes.MY_MATERIALS} component={MyMaterials} layout={SignpostLayout} />
+                <AuthRouteWithLayout exact path={Routes.EDIT_MATERIAL} component={EditMaterial} layout={SignpostLayout} />
+                <AuthRouteWithLayout exact path={Routes.ADD_MATERIAL} component={CreateMaterial} layout={SignpostLayout} />
               </Switch>
             </Router>
           </ApiProvider>

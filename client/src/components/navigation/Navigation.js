@@ -1,32 +1,48 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useCallback, useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+
+// Importing services
+import { useApi, useAuth } from '../../services';
 
 // Import components
 import { NavigationItem } from './'
 import { Link } from 'react-router-dom';
 import { LogoColor, LogoColorSingle } from '../../assets/logos';
 
+// Import config
+import { apiConfig } from '../../config';
+
 import './Navigation.scss' 
 
 const Navigation = () => {
+	const history = useHistory();
 
-	/*
-	* Store all posts with useState
-	*/
-	/* const [posts, getPosts] = useState([]);
+    const { getSignPosts } = useApi();
+    const { currentUser } = useAuth();
 
-	const getAllPosts = () => {
-		axios.get('localhost:8000/api/file')
-		.then(res => {
-			// getPosts(res.data);
+    // Some important states
+    const [ signposts, setSignposts ] = useState();
 
-			console.log(res.data)
-		})
+    const getAllData = useCallback(() => {
+        const fetchData = async () => {
+            if (currentUser) {
+                const signpostsData = await getSignPosts(currentUser.token);
+                setSignposts(signpostsData);
+            };
+        };
+
+        fetchData();
+    }, [ getSignPosts, currentUser ]);
+
+    useEffect(() => {
+        getAllData();
+    }, [ getAllData ]);
+
+    // Going to specific signpost
+    const goToSign = async (id) => {
+        history.push(`/signposts/${id}`);
 	};
-
-	useEffect(() => {
-		getAllPosts();
-	}, []); */
+	
 
 	return (
 			<div className="nav">
@@ -35,13 +51,18 @@ const Navigation = () => {
 				</Link>
 
 				<nav className="nav-list">
-					<NavigationItem title="Aanleren" index="1" endpoint="/my-profile" logo={LogoColorSingle} />
-					<NavigationItem title="Samen leren" index="2" endpoint="/module/2" logo={LogoColorSingle} />
-					<NavigationItem title="Samen leren" index="3" endpoint="/module/2" logo={LogoColorSingle} />
-					<NavigationItem title="Samen leren" index="4" endpoint="/module/2" logo={LogoColorSingle} />
-					<NavigationItem title="Samen leren" index="5" endpoint="/module/2" logo={LogoColorSingle} />
-					<NavigationItem title="Samen leren" index="6" endpoint="/module/2" logo={LogoColorSingle} />
-					<NavigationItem title="Bruggen bouwen" index="7" endpoint="/module/2" logo={LogoColorSingle} />
+					{
+						signposts && signposts.map((signpost, i) => {
+							return <NavigationItem 
+								key={i} 
+								index={i+1}
+								title={signpost.shortedTitle} 
+								alt={signpost.shortedTitle} 
+								endpoint={`/signposts/${signpost.id}`} 
+								logo={`${apiConfig.baseURL}file/${signpost.icon}`}
+								/>
+						})
+        			}
 				</nav>
 
 			</div>

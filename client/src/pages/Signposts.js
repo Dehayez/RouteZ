@@ -31,16 +31,18 @@ const Signposts = () => {
     // Going to specific signpost
     const goToSign = async (id) => {
         history.push(`/signposts/${id}`);
-    };
+	};
+	
+	console.log(signposts);
 
     return (
-        <>
+        <div>
         {
             signposts && signposts.map((element, index) => {
                 return ''
             })
         }
-        </>
+        </div>
     )
 };
 

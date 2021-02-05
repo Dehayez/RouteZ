@@ -63,17 +63,6 @@ const Register = () => {
         <div className="auth-content">
             <form className="form" onSubmit={(e) => registerUser(e)}>
 				<h1 className="title title--large">Registreer</h1>
-               {/*  <label htmlFor="firstname">Voornaam</label>
-                <input type="text" name="firstname" id="firstname" onChange={(e) => changeData(e)} required/>
-                <label htmlFor="lastname">Achternaam</label>
-                <input type="text" name="lastname" id="lastname" onChange={(e) => changeData(e)} required/>
-                <label htmlFor="email">E-mail</label>
-                <input type="email" name="email" id="email" onChange={(e) => changeData(e)} required/>
-                <label htmlFor="password">Wachtwoord</label>
-                <input type="password" name="password" id="password" onChange={(e) => changeData(e)} required/>
-                <label htmlFor="passwordRepeat">Herhaal wachtwoord</label>
-                <input type="password" name="passwordRepeat" id="passwordRepeat" onChange={(e) => changeData(e)} required/>
-                <input type="checkbox" name="restrictions" id="restrictions" required /> */}
 				<div className="form-input" style={{ fontSize: 16 }}>
 					<FloatingLabelInput
                     id="firstname"
