@@ -47,7 +47,7 @@ const Header = ({pageTitle}) => {
 		<div className="header-right">
 			<input className="header-right-input" type="text" placeholder="Zoek"/>
 			<IoMdNotificationsOutline className="header-right-icon"/>
-			<Link className="header-right-profile" to="my-profile">
+			<Link className="header-right-profile" to="/my-profile">
 				<div className="header-right-profile__text">
 					<p className="header-right-profile__text-name">user.profile.name</p>
 					<p className="header-right-profile__text-settings">Instellingen</p>

@@ -14,6 +14,7 @@ import { CardMaterials } from '../partials';
 
 // Import components
 import { BackLinks } from '../components';
+import { HiOutlinePrinter } from 'react-icons/hi';
 
 const Module = () => {
     const { id } = useParams();
@@ -60,52 +61,59 @@ const Module = () => {
 
     useEffect(() => {
         getAllData();
-    }, [getAllData]);
+	}, [getAllData]);
 
     return (
         <>
         {
             module && (
-                <>
-                {/** Back buttons */}
+                <div className="signpost">
                 {
-                    signpost && <BackLinks 
-                        links={[
-                            {
-                                path: `${Routes.SIGNPOSTS}`,
-                                route: "wegwijzers"
-                            },
-                            {
-                                path: `${Routes.SIGNPOST.replace(':id', signpost._id)}`,
-                                route: `>${signpost.title}`
-                            },
-                            {
-                                path: `${Routes.MODULE.replace(':id', module._id)}`,
-                                route: `>${module.title}`
-                            }
-                        ]}
-                    />
+                    signpost && (
+						<BackLinks 
+							links={[
+								{
+									path: `${Routes.SIGNPOSTS}`,
+									route: "wegwijzers "
+								},
+								{
+									path: `${Routes.SIGNPOST.replace(':id', signpost._id)}`,
+									route: ` > ${signpost.title}`
+								},
+								{
+									path: `${Routes.MODULE.replace(':id', module._id)}`,
+									route: ` > ${module.title}`
+								}
+							]}
+						/>
+					)
                 }
+
+
                 {/** Main HTML */}
-                <h1 style={{padding: '30px 0px'}}>{module.title}</h1>
-                {
-                    checkedModule && (
-                        <button>Print</button>
-                    )
-                }
+				<div className="signpost-header">
+					<h1 className="signpost-title">{module.title}</h1>
+					{
+						checkedModule && (
+							<HiOutlinePrinter className="icon__print" title="Print" />
+						)
+					}
+				</div>
+
                 {
                     ReactHtmlParser(module.content)
                 }
+
+
+
                 {/** All paths */}
-                <h1 style={{padding: '30px 0px'}}>Alle paden</h1>
+                <h1>Alle paden</h1>
                 {
                     module.paths && module.paths.map((path, index) => {
                         return <div key={index}>
                             <NavLink to={`${Routes.PATH.replace(':id', path._id)}`}>
                                 <span>{path.title}</span>
-                                <button>
-                                    Open
-                                </button>
+                                <button>Open </button>
                             </NavLink>
                             {
                                 checkedPaths && checkedPaths.map((pathChecked, index) => {
@@ -118,7 +126,7 @@ const Module = () => {
                     })
                 }
                 {/** All material */}
-                <h1 style={{padding: '30px 0px'}}>Wat anderen hebben gedeeld:</h1>
+                <h1>Wat anderen hebben gedeeld:</h1>
                 {
                     checkedModule && (
                         <>
@@ -138,7 +146,7 @@ const Module = () => {
                         </>
                     )
                 }
-                </>
+                </div>
             )
         }
         </>
