@@ -52,7 +52,7 @@ export default class ModuleController {
                     },
                 });
             } else {
-                modules = await ModuleItem.find().sort({_createdAt: -1}).exec();
+                modules = await ModuleItem.find().populate({path: '_pathIds'}).sort({_createdAt: -1}).exec();
             };
 
             return res.status(200).json(modules);

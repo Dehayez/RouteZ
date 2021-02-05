@@ -12,7 +12,7 @@ import {
 interface IPath extends Document {
   title: string;
   type: string;
-  theoryText: string;
+  theoryText: Array<object>;
   videoUrl: string;
   _exerciseIds: Array<IExercise['_id']>;
 
@@ -30,13 +30,26 @@ const pathSchema : Schema = new Schema({
   type: {
     type: String,
     required: true,
-    enum: ['Theorie', 'Video', 'Tips and Tricks', 'Oefeningen'],
+    enum: ['Theorie', 'Oefeningen'],
   },
-  theoryText: {
-    type: String,
-    required: false,
-    unique: false,
-  },
+  theoryText: [{
+    title: {
+      type: String,
+      required: true,
+    },
+    content: {
+      type: String,
+      required: true,
+    },
+    images: [{
+      type: String,
+      required: false,
+    }],
+    order: {
+      type: Number,
+      required: true,
+    }
+  }],
   videoUrl: {
     type: String,
     required: false,

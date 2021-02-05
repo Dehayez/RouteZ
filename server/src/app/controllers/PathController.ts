@@ -70,6 +70,31 @@ export default class PathController {
     };
   };
 
+  removePathFromModule = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
+    try {
+      const { moduleId, pathId } = req.params;
+
+      // Update module
+      const foundModule = await ModuleItem.findOne({_id: moduleId});
+
+      // Pulling out array
+      let array = foundModule._pathIds;
+      let index = array.indexOf(pathId);
+      array.splice(index, 1);
+
+      const updatedModule = await ModuleItem.findOneAndUpdate({_id: moduleId}, {
+        $set: {
+          _pathIds: array,
+          _modifiedAt: Date.now(),
+        },
+      }, {new: true}).exec();
+
+      return res.status(200).json(updatedModule);
+    } catch (e) {
+      next(e);
+    };
+  };
+
   createPath = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
     try {
         // Get body

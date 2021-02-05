@@ -1,7 +1,8 @@
 import { default as React, useEffect } from 'react';
-import { Route as ReactRoute, useHistory } from 'react-router';
+import { Redirect, Route as ReactRoute } from 'react-router';
 
 import { useAuth } from '../services';
+import * as Routes from '../routes';
 
 const renderMergedProps = (component, layout, routeProps) => {
   return (layout) ? React.createElement(layout, routeProps, React.createElement(component, routeProps)) : React.createElement(component, routeProps);
@@ -9,11 +10,10 @@ const renderMergedProps = (component, layout, routeProps) => {
 
 const RouteWithLayout = ({ component, layout, ...rest }) => {
   const { currentUser } = useAuth();
-  const history = useHistory();
 
   useEffect(() => {
     if (currentUser) {
-      history.push('/dashboard');
+      return <Redirect to={Routes.LANDING} />
     };
   });
 

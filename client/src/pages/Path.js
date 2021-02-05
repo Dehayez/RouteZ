@@ -1,8 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 
-import ReactHtmlParser from 'react-html-parser';
-
 // Import services
 import { useAuth, useApi } from '../services';
 
@@ -10,18 +8,18 @@ import { useAuth, useApi } from '../services';
 import * as Routes from '../routes';
 
 // Import partials
-import { Exercises, Theory, TipsAndTricks, Video } from '../partials';
+import { Exercises, Theory } from '../partials';
 
 // Import components
 import { BackLinks } from '../components';
 
 const Path = () => {
     const history = useHistory();
-    const { id } = useParams();
+    const { id, type, order } = useParams();
 
     // Services
     const { getPath, getModules, getSignPosts } = useApi();
-    const { currentUser, editProgress } = useAuth();
+    const { currentUser, editProgress, getMyself } = useAuth();
 
     // Some states
     const [ path, setPath ] = useState();
@@ -34,33 +32,45 @@ const Path = () => {
     const [ exercises, setExercises ] = useState();
     const [ exerciseDone, setExerciseDone ] = useState(true);
 
+    const [ currentUserData, setCurrentUserData ] = useState();
+
     const getAllData = useCallback(() => {
         const fetchData = async () => {
           try {
             if (currentUser) {
+              let moduleId;
+
               const pathData = await getPath(currentUser.token, id);
               const moduleData = await getModules(currentUser.token);
               const signpostData = await getSignPosts(currentUser.token);
+              const userData = await getMyself(currentUser.token);
+
+              setCurrentUserData(userData);
 
               if (pathData.type === "Oefeningen") setExerciseDone(false);
 
               for (let i = 0; i < moduleData.length; i++) {
-                if (moduleData[i]._pathIds.includes(pathData._id)) {
-                  const importantIndex = moduleData[i]._pathIds.indexOf(pathData._id);
-                  setPaths(moduleData[i]._pathIds);
-                  setPathIndex(importantIndex);
-                  setModuleSet({id: moduleData[i]._id, title: moduleData[i].title});
-
-                  for (let j = 0; j < signpostData.length; j++) {
-                    if (signpostData[j]._moduleIds.includes(moduleData[i]._id)) {
-                        setSignpost(signpostData[j]);
-                    };
+                for (let j = 0; j < moduleData[i]._pathIds.length; j++) {
+                  if (moduleData[i]._pathIds[j]._id === pathData._id) {
+                    setPaths(moduleData[i]._pathIds);
+                    setPathIndex(j);
+                    setModuleSet({id: moduleData[i]._id, title: moduleData[i].title});
+                    moduleId = moduleData[i]._id;
                   };
                 };
               };
 
               if (pathData.type === "Oefeningen") setExercises(pathData.exercises);
               setPath(pathData);
+
+              for (let i = 0; i < signpostData.length; i++) {
+                for (let j = 0; j < signpostData[i].modules.length; j++) {
+                  if (signpostData[i].modules[j]._id === moduleId) {
+                    console.log(signpostData[i])
+                    setSignpost(signpostData[i]);
+                  }
+                }
+              };
             };
           } catch (e) {
             history.push(Routes.NOT_FOUND);
@@ -82,18 +92,18 @@ const Path = () => {
       if (pathIndex === paths.length-1) {
         history.push(`${Routes.MODULE.replace(':id', moduleSet.id)}`);
       } else {
-        history.push(`${Routes.PATH.replace(':id', paths[pathIndex+1])}`);
+        history.push(`${Routes.PATH.replace(':id', paths[pathIndex+1]._id).replace(':type', paths[pathIndex+1].type.toLowerCase()).replace(':order', 1)}`);
       };
     };
 
     const previousPath = async () => {
-      history.push(`${Routes.PATH.replace(':id', paths[pathIndex-1])}`);
+      history.push(`${Routes.PATH.replace(':id', paths[pathIndex-1]._id).replace(':type', paths[pathIndex-1].type.toLowerCase()).replace(':order', 1)}`);
     };
 
     return (
         <>
         {
-             path && (
+             path && currentUserData && (
                 <>
                 {
                   signpost && <BackLinks 
@@ -111,7 +121,7 @@ const Path = () => {
                         route: `>${moduleSet.title}`
                       },
                       {
-                        path: `${Routes.PATH.replace(':id', path._id)}`,
+                        path: `${Routes.PATH.replace(':id', path._id).replace(':order', 1).replace(':type', path.type.toLowerCase())}`,
                         route: `>${path.title}`
                       },
                     ]}
@@ -119,22 +129,12 @@ const Path = () => {
                 }
                 {
                   path.type === 'Theorie' && (
-                    <Theory html={ReactHtmlParser(path.theoryText)} />
-                  )
-                }
-                {
-                  path.type === 'Video' && (
-                    <Video url={path.videoUrl} />
-                  )
-                }
-                {
-                  path.type === 'Tips and Tricks' && (
-                    <TipsAndTricks html={ReactHtmlParser(path.theoryText)} />
+                    <Theory content={path} order={order} />
                   )
                 }
                 {
                   path.type === 'Oefeningen' && exercises && (
-                    <Exercises exercises={exercises} exerciseDone={exerciseDone} setExerciseDone={setExerciseDone} />
+                    <Exercises previousResults={currentUserData.progress._finishedExercises} exercises={exercises} exerciseDone={exerciseDone} setExerciseDone={setExerciseDone} />
                   )
                 }
                 {

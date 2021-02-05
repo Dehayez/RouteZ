@@ -8,6 +8,7 @@ import {
 interface IExercise extends Document {
   question: string;
   multiple: boolean;
+  open: boolean;
   answers: [{
     text: string;
     correct: boolean;
@@ -28,17 +29,22 @@ const exerciseSchema : Schema = new Schema({
     unique: false,
     required: true,
   },
+  open: {
+    type: Boolean,
+    unique: false,
+    required: false,
+  },
   answers: [
     {
       text: {
         type: String,
         unique: false,
-        required: true,
+        required: false,
       },
       correct: {
         type: Boolean,
         unique: false,
-        required: true,
+        required: false,
       },
     },
   ],

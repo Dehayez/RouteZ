@@ -1,6 +1,43 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-const Exercises = ({exercises, setExerciseDone, exerciseDone}) => {
+// Services
+import { useAuth } from '../../services';
+
+const Exercises = ({exercises, previousResults}) => {
+  // Services
+  const { editProgress, currentUser } = useAuth();
+  const [ showPrevious, setShowPrevious ] = useState(true);
+
+  useEffect(() => {
+    if(showPrevious) {
+      if (previousResults && previousResults.length !== 0) {
+        for (let i = 0; i < previousResults.length; i++) {
+          if (previousResults[i].answers[0].response) {
+            document.getElementById(previousResults[i].questionId).value = previousResults[i].answers[0].response;
+          };
+
+          for (let j = 0; j < exercises.length; j++) {
+            if (previousResults[i].questionId === exercises[j]._id) {
+              for (let k = 0; k < previousResults[i].answers.length; k++) {
+                for (let l = 0; l < exercises[j].answers.length; l++) {
+                  if(previousResults[i].answers[k].answerId === exercises[j].answers[l]._id) {
+                    if (previousResults[i].answers[k].correct === exercises[j].answers[l].correct) {
+                      document.getElementById(previousResults[i].answers[k].answerId).className = 'correct-answer';
+                      console.log(previousResults[i].answers[k].answerId)
+                    } else {
+                      document.getElementById(previousResults[i].answers[k].answerId).className = 'wrong-answer';
+                      console.log(previousResults[i].answers[k].answerId)
+                    };
+                  };
+                };
+              };
+            };
+          };
+        };
+      };
+    };
+  }, [previousResults, exercises]);
+
   const Question = ({element, index}) => {
     return element.multiple ? (
       <fieldset name={`question${index}`}>
@@ -9,7 +46,7 @@ const Exercises = ({exercises, setExerciseDone, exerciseDone}) => {
         </legend>
         {
           element.answers.map((innerElement, innerIndex) => {
-            return <span key={innerIndex}><input type="checkbox" id={innerElement._id} value={innerElement.text} name={`question${index}`} /><label>{innerElement.text}</label></span>
+            return <span key={innerIndex}><input type="checkbox" id={innerElement._id} className="" value={innerElement.text} name={`question${index}`} /><label>{innerElement.text}</label></span>
           })
         }
       </fieldset>
@@ -20,24 +57,43 @@ const Exercises = ({exercises, setExerciseDone, exerciseDone}) => {
         </legend>
         {
           element.answers.map((innerElement, innerIndex) => {
-            return <span key={innerIndex}><input type="radio" id={innerElement._id} value={innerElement.text} name={`question${index}`} /><label>{innerElement.text}</label></span>
+            return <span key={innerIndex}><input type="radio" id={innerElement._id} className="" value={innerElement.text} name={`question${index}`} /><label>{innerElement.text}</label></span>
           })
         }
       </fieldset>
     )
   };
 
-  const submitExercise = (e) => {
+  const OpenQuestion = ({element, index}) => {
+    return (
+      <>
+        <label htmlFor={element._id}>
+          {element.question}
+        </label>
+        <textarea name={element._id} id={element._id} />
+      </>
+    )
+  };
+
+  const submitExercise = async (e) => {
     e.preventDefault();
 
     let questionIndex = 0;
     let answerIndex = 0;
+    let arrayOfAnswers = [];
 
     for (let i = 0; i < e.target.length; i++) {
+      if (e.target[i].localName === 'textarea') {
+        let object = {questionId: e.target[i].id, answers: []};
+        object.answers.push({response: e.target[i].value});
+        arrayOfAnswers.push(object);
+      };
+
       if (e.target[i].localName === 'fieldset') {
         questionIndex = questionIndex + 1;
 
         // console.log('Vraag', questionIndex-1);
+        let object = {questionId: exercises[questionIndex-1]._id, answers: []};
         answerIndex = 0;
         for (let j = 0; j < e.target[i].children.length; j++) {
           if (j > 0) {
@@ -49,11 +105,11 @@ const Exercises = ({exercises, setExerciseDone, exerciseDone}) => {
             if (result === true) {
               // Check if it's also correct
               if (result === exercises[questionIndex-1].answers[answerIndex-1].correct) {
-                // console.log('Antwoord ', answerIndex-1 ,' op vraag ', questionIndex-1, ' is juist');
-                document.getElementById(id).classList.add('correct-answer');
+                object.answers.push({answerId: exercises[questionIndex-1].answers[answerIndex-1]._id, text: exercises[questionIndex-1].answers[answerIndex-1].text, correct: result});                // console.log('Antwoord ', answerIndex-1 ,' op vraag ', questionIndex-1, ' is juist');
+                document.getElementById(id).className = 'correct-answer';
               } else {
-                // console.log('Antwoord ', answerIndex-1 ,' op vraag ', questionIndex-1, ' is onjuist');
-                document.getElementById(id).classList.add('wrong-answer');
+                object.answers.push({answerId: exercises[questionIndex-1].answers[answerIndex-1]._id, text: exercises[questionIndex-1].answers[answerIndex-1].text, correct: result});                // console.log('Antwoord ', answerIndex-1 ,' op vraag ', questionIndex-1, ' is onjuist');
+                document.getElementById(id).className = 'wrong-answer';
               };
             };
 
@@ -61,22 +117,32 @@ const Exercises = ({exercises, setExerciseDone, exerciseDone}) => {
             if (result === false) {
               // Check if it's also incorrect
               if (result === exercises[questionIndex-1].answers[answerIndex-1].correct) {
+                object.answers.push({answerId: exercises[questionIndex-1].answers[answerIndex-1]._id, text: exercises[questionIndex-1].answers[answerIndex-1].text, correct: result});
+                document.getElementById(id).className = 'wrong-answer';
                 // console.log('Geen antwoord ', answerIndex-1 ,' op vraag ', questionIndex-1, ' is juist');
               } else {
-                // console.log('Geen antwoord ', answerIndex-1 ,' op vraag ', questionIndex-1, ' is onjuist');
-                document.getElementById(id).classList.add('correct-answer');
+                object.answers.push({answerId: exercises[questionIndex-1].answers[answerIndex-1]._id, text: exercises[questionIndex-1].answers[answerIndex-1].text, correct: result});                // console.log('Geen antwoord ', answerIndex-1 ,' op vraag ', questionIndex-1, ' is onjuist');
+                document.getElementById(id).className = 'correct-answer';
               };
             };
           };
         };
+
+        arrayOfAnswers.push(object);
       };
     };
 
-    setExerciseDone(true);
+    await editProgress(currentUser.token, {exercise: arrayOfAnswers});
   };
 
   const redoExercise = () => {
-    window.location.reload();
+    setShowPrevious(false);
+
+    for (let i = 0; i < exercises.length; i++) {
+      for (let j = 0; j < exercises[i].answers.length; j++) {
+        document.getElementById(exercises[i].answers[j]._id).className = '';
+      };
+    };
   };
 
 
@@ -84,11 +150,11 @@ const Exercises = ({exercises, setExerciseDone, exerciseDone}) => {
     <form onSubmit={(e) => submitExercise(e)}>
       {
         exercises.map((element, index) => {
-          return <Question key={index} index={index} element={element} />
+          return !element.open ? <Question key={index} index={index} element={element} /> : <OpenQuestion element={element} index={index} key={index} />
         })
       }
       {
-        !exerciseDone && (
+        !showPrevious && (
           <button type="submit">Klikkerdeklik</button>
         )
       }

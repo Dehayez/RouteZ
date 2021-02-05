@@ -113,6 +113,26 @@ export default class UserController {
         };
     };
 
+    // Get one user
+    getUser = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
+        try {
+            const { id } = req.params;
+
+            const user = await User.findOne({ _id: id }); 
+            
+            // When user doesn't exist
+            if (!user) {
+                return res.status(404).json({
+                    error: "Deze gebruiker bestaat niet."
+                });
+            };
+
+            return res.status(200).json(user);
+        } catch (e) {
+            next(e);
+        };
+    };
+
     // Update a user
     updateMyself = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
         try {
@@ -159,10 +179,43 @@ export default class UserController {
         };
     };
 
+    editUser = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
+           try {         
+            const { id } = req.params;
+            const { email, firstName, lastName, schoolName, avatar, professionalFunction, phoneNumber } = req.body;
+
+            const user = await User.findOne({ _id: id }); 
+
+            if (!user) {
+                return res.status(404).json({
+                    error: "Deze gebruiker bestaat niet."
+                });
+            };
+
+            // Updating the user
+            const updatedUser = await User.findOneAndUpdate({ _id: id }, {
+                $set: {
+                    email: email,
+                    'profile.firstName': firstName,
+                    'profile.lastName': lastName,
+                    'profile.schoolName': schoolName,
+                    'profile.avatar': avatar,
+                    'profile.professionalFunction': professionalFunction,
+                    'profile.phoneNumber': phoneNumber,
+                    _modifiedAt: Date.now(),
+                },
+            }, { new : true }).exec();
+
+            return res.status(200).json(updatedUser);
+        } catch (e) {
+            next(e);
+        };
+    }
+
     updateProgress = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
         try {
             // Main values to be edited
-            const { moduleId, pathId, signpostId } = req.body;
+            const { moduleId, pathId, signpostId, exercise } = req.body;
 
             // First off all, check if you're the user
             if (!req.headers.authorization) {
@@ -248,6 +301,24 @@ export default class UserController {
                 };
             };
 
+            if (exercise) {
+                for (let i = 0; i < user.progress._finishedExercises.length; i++) {
+                    for (let j = 0; j < exercise.length; j++) {
+                        if (exercise[j].questionId === user.progress._finishedExercises[i].questionId) {
+                            return res.status(200).json({
+                                message: "Deze oefening is al reeds toegevoegd",
+                            });
+                        };
+                    };
+                };
+
+                updatedUser = await User.findByIdAndUpdate(id, {
+                    $push: {
+                        'progress._finishedExercises': exercise,
+                    }
+                }, {new: true}).exec();
+            };
+
             if (signpostId) {
                 let array = [];
 
@@ -314,10 +385,28 @@ export default class UserController {
         };
     };
 
+    // Delete a user
+    deleteUser = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
+        try {
+            const { id } = req.params;
+
+            const user = await User.findOneAndRemove({ _id: id });
+
+            if (!user) {
+                return res.status(404).json({
+                    error: "Deze gebruiker kan niet verwijderd worden.",
+                });
+            };
+
+            return res.status(200).json(user);
+        } catch(e) {
+            next(e);
+        };
+    };
+
     // Registering a user
     newUser = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
         const { email } = req.body;
-        console.log(email);
 
         // Check if user exists
         let existing = await User.findOne({ email: email });
@@ -346,6 +435,35 @@ export default class UserController {
         }, (e, user) => {
             if (e) {
                 return next(e);
+            };
+
+            // When user can't be found
+            if (!user) {
+                return res.status(404).json({
+                    error: 'Er is iets verkeerd gelopen bij het aanmelden.'
+                })
+            };
+
+            // Create a token
+            const token = this.auth.createToken(user);
+
+            return res.status(200).json({token: token, id: user._id});
+        })(req, res, next);
+    };
+
+    // Admin logging in
+    loggingInAdmin = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        this.auth.passport.authenticate('local', {
+            session: this.config.auth.jwt.session,
+        }, (e, user) => {
+            if (e) {
+                return next(e);
+            };
+
+            if (user.role !== 'admin') {
+                return res.status(404).json({
+                    error: 'Er is iets verkeerd gelopen bij het aanmelden.'
+                });
             };
 
             // When user can't be found
