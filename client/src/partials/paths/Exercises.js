@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 // Services
 import { useAuth } from '../../services';
 
+import './Paths.scss';
+
 const Exercises = ({exercises, previousResults}) => {
   // Services
   const { editProgress, currentUser } = useAuth();

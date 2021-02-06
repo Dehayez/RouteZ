@@ -1,17 +1,51 @@
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
+
+// Import services
+import { useAuth } from '../services';
 
 // Import components
 import { ButtonLarge, Progress } from '../components'
 import { DefaultImage } from '../assets/images';
 const Dashboard = () => {
+    // Use services
+    const { getMyself, currentUser } = useAuth();
+
+    // All accessable data
+    const [ user, setUser ] = useState();
+    const [ avatar, setAvatar ] = useState();
+
+    const getAllData = useCallback(() => {
+        const easyFetch = async () => {
+            // All user information
+            const userData = await getMyself(currentUser.token);
+            setUser(userData);
+
+            // Get users avatar, if has one
+            if (userData.profile.avatar) {
+                setAvatar(userData.profile.avatar);
+            };
+        };
+
+        easyFetch();
+    }, [getMyself, currentUser.token]);
+
+    useEffect(() => {
+		getAllData();
+	}, [getAllData]);
 
     return (
         <div className="dashboard">
 			<div className="dashboard-card">
 				<div className="dashboard-card-content">
 					<div className="dashboard-card-content-text">
-						<h3 className="dashboard-card-content-text__title">Goeiemiddag, Annelies!</h3>
-						<p className="dashboard-card-content-text__text">Je was voor het laatst gebleven aan wegwijzer 4</p>
+					{ 
+						user && (
+							<>
+								<h3 className="dashboard-card-content-text__title">Goeiemiddag, {user.profile.firstName}!</h3>
+								<p className="dashboard-card-content-text__text">Je was voor het laatst gebleven aan wegwijzer 4</p>
+							</>
+						)
+					}
 					</div>
 					<div className="dashboard-card-content-button">
 						<ButtonLarge content="Ga verder"/>

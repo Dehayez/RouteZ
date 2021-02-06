@@ -44,8 +44,6 @@ const Signpost = () => {
         getAllData();
 	}, [getAllData]);
 
-	console.log(signpost)
-
     return (
 		<>
 		{
@@ -77,7 +75,6 @@ const Signpost = () => {
 						{
 							signpost && (
 								signpost.modules && signpost.modules.map((module, i) => {
-									console.log(module)
 									return <div className="signpost-modules-item" key={i}>
 										<p className="signpost-modules-item-title">{module.title}</p>
 										<div>

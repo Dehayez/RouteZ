@@ -14,8 +14,8 @@ import { CardMaterials } from '../partials';
 
 // Import components
 import { BackLinks, ButtonSmall } from '../components';
-import { HiOutlinePrinter } from 'react-icons/hi';
-import { Container, Row, Col } from 'react-bootstrap';
+import { HiOutlinePrinter, HiOutlineCheck } from 'react-icons/hi';
+import { Row, Col } from 'react-bootstrap';
 
 const Module = () => {
     const { id } = useParams();
@@ -113,17 +113,17 @@ const Module = () => {
 								
 									<p className="signpost-paths-item-title">{path.title}</p>
 									<div>
+										{
+											checkedPaths && checkedPaths.map((pathChecked, index) => {
+												return pathChecked === path._id && (
+													<HiOutlineCheck key={index} className="icon__check"/>
+												)
+											})
+										}
 										<Link to={`${Routes.PATH.replace(':type', path.type.toLowerCase()).replace(':id', path._id).replace(':order', 1)}`}>
 											<ButtonSmall content="Open" color="secondary"/>
 										</Link>
 									</div>
-								{
-									checkedPaths && checkedPaths.map((pathChecked, index) => {
-										return pathChecked === path._id && (
-											<span key={index}>Check</span>
-										)
-									})
-								}
 							</div>
 						})
 					}

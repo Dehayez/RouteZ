@@ -51,17 +51,21 @@
 		}
 
 		&-item {
-			display: flex;
-			justify-content: space-between;
-			align-items: baseline;
 			border-bottom: 1px solid $routez-grey;
 			background-color: rgba($color: white, $alpha: 0.8);
 			-webkit-backdrop-filter: blur(20px);  
 			backdrop-filter: blur(20px);
 
+			display: flex;
+			justify-content: space-between;
+			align-items: baseline;
+
+			padding: 0.6rem 0;
+
 			&-title {
 				font-size: 16px;
 				font-weight: 400;
+				margin: 0;
 			}
 		}
 	}
@@ -98,17 +102,22 @@
 		}
 
 		&-item {
-			display: flex;
-			justify-content: space-between;
-			align-items: baseline;
 			border-bottom: 1px solid $routez-grey;
 			background-color: rgba($color: white, $alpha: 0.8);
 			-webkit-backdrop-filter: blur(20px);  
 			backdrop-filter: blur(20px);
 
+			display: flex;
+			justify-content: space-between;
+			align-items: baseline;
+
+			margin: 0.6rem 0;
+
 			&-title {
 				font-size: 16px;
 				font-weight: 400;
+
+				margin: 0;
 			}
 		}
 	}
@@ -125,5 +134,19 @@
 			cursor: pointer;
 			color: $routez-primary-dark;
 		}
+	}
+
+	&__check {
+		color: $routez-succes;
+		font-size: 2rem;
+		margin-right: 0.6rem;
+	}
+}
+
+.order {
+	&-buttons {
+		display: flex;
+		justify-content: space-between;
+		margin-top: 2rem;
 	}
 }

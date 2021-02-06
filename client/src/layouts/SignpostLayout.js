@@ -51,18 +51,11 @@ const SignpostLayout = ({ children }) => {
 
   return (
     <div className="page">
-        {/** Deze route gebruiken voor een afbeelding, best een alternatieve foto tonen als gebruiker geen avatar heeft */}
-        {
-            avatar ? (
-                <img src={`${apiConfig.baseURL}file/${avatar}`} alt="avatar"/>
-            ) : ''
-        }
 		<Navigation/>
-        {/** Voor de wegwijzers best zoals de avatar het icoontje gaan ophalen vanuit de back-end */}
-      <main className="page-main">
-		<Header pageTitle={pageTitle}/>
-        {children}
-      </main>
+		<main className="page-main">
+			<Header pageTitle={pageTitle}/>
+			{children}
+		</main>
     </div>
   );
 };

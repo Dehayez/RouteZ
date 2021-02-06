@@ -1,0 +1,56 @@
+@import '../../_sass/abstracts/index';
+
+.path {
+	&-title {
+		font-size: 36px;
+		font-weight: 700;
+		font-family: $font-family-secondary;
+
+		margin-top: 2rem;
+	}
+
+	&-type {
+		font-size: 16px;
+		color: $routez-primary;
+		font-weight: 300;
+
+
+	}
+
+	&-content {
+		&__title {
+			font-size: 24px;
+			font-weight: 500;
+
+			margin-top: 2rem;
+		}
+
+		&__text {
+		}
+	}
+}
+
+.order {
+	display: flex;
+	justify-content: center;
+
+	& > span {
+		color: $routez-primary;
+
+		margin: 0 8px;
+
+		&:hover {
+			cursor: pointer;
+			text-decoration: underline;
+		}
+	}
+
+	& > .active {
+		color: $routez-black;
+
+		&:hover {
+			cursor: none;
+			text-decoration: none;
+		}
+	}
+}

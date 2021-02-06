@@ -22,8 +22,12 @@
 
 	&-buttons {
 		width: 100%;
-	   display: flex;
-	   justify-content: flex-end;
+		display: flex;
+		justify-content: flex-end;
+
+		& > .btn:first-child {
+			margin-right: 1rem;
+		}
 	}
 
 	&-info {

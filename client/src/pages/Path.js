@@ -11,7 +11,7 @@ import * as Routes from '../routes';
 import { Exercises, Theory } from '../partials';
 
 // Import components
-import { BackLinks } from '../components';
+import { BackLinks, ButtonSmall } from '../components';
 
 const Path = () => {
     const history = useHistory();
@@ -104,46 +104,48 @@ const Path = () => {
         <>
         {
              path && currentUserData && (
-                <>
-                {
-                  signpost && <BackLinks 
-                    links={[
-                      {
-                          path: `${Routes.SIGNPOSTS}`,
-                          route: "wegwijzers "
-                      },
-                      {
-                          path: `${Routes.SIGNPOST.replace(':id', signpost._id)}`,
-                          route: ` > ${signpost.title}`
-                      },
-                      {
-                        path: `${Routes.MODULE.replace(':id', moduleSet.id)}`,
-                        route: ` > ${moduleSet.title}`
-                      },
-                      {
-                        path: `${Routes.PATH.replace(':id', path._id).replace(':order', 1).replace(':type', path.type.toLowerCase())}`,
-                        route: ` > ${path.title}`
-                      },
-                    ]}
-                  />
-                }
-                {
-                  path.type === 'Theorie' && (
-                    <Theory content={path} order={order} />
-                  )
-                }
-                {
-                  path.type === 'Oefeningen' && exercises && (
-                    <Exercises previousResults={currentUserData.progress._finishedExercises} exercises={exercises} exerciseDone={exerciseDone} setExerciseDone={setExerciseDone} />
-                  )
-                }
-                {
-                  pathIndex !== 0 && (
-                    <button onClick={previousPath}>Vorige</button>
-                  )
-                }
-                  <button onClick={completePath}>Volgende</button>
-                </>
+                <div className="signpost">
+					{
+					signpost && <BackLinks 
+						links={[
+						{
+							path: `${Routes.SIGNPOSTS}`,
+							route: "wegwijzers "
+						},
+						{
+							path: `${Routes.SIGNPOST.replace(':id', signpost._id)}`,
+							route: ` > ${signpost.title}`
+						},
+						{
+							path: `${Routes.MODULE.replace(':id', moduleSet.id)}`,
+							route: ` > ${moduleSet.title}`
+						},
+						{
+							path: `${Routes.PATH.replace(':id', path._id).replace(':order', 1).replace(':type', path.type.toLowerCase())}`,
+							route: ` > ${path.title}`
+						},
+						]}
+					/>
+					}
+					{
+						path.type === 'Theorie' && (
+							<Theory content={path} order={order} />
+						)
+					}
+					{
+						path.type === 'Oefeningen' && exercises && (
+							<Exercises previousResults={currentUserData.progress._finishedExercises} exercises={exercises} exerciseDone={exerciseDone} setExerciseDone={setExerciseDone} />
+						)
+					}
+					<div className="order-buttons">
+						{
+						pathIndex !== 0 && (
+							<ButtonSmall onClick={previousPath} color="secondary" content="Vorige"/>
+						)
+						}
+						<ButtonSmall onClick={completePath} color="secondary" content="Volgende"/>
+					</div>
+                </div>
             )
         }
         </>

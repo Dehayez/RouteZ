@@ -23,7 +23,7 @@
 
 		&-input {
 			background-color: $routez-grey-light;
-			color: $routez-grey;
+			color: $routez-black;
 			font-weight: 400;
 			font-size: 14px;
 
@@ -31,6 +31,7 @@
 			border-radius: 5px;
 			padding: 1rem;
 			border: none;
+			
 
 			&:focus {
 				outline: 3px solid $routez-secondary;

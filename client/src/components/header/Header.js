@@ -4,6 +4,10 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useAuth } from '../../services';
 
 import { Link } from 'react-router-dom';
+
+// Import config
+import { apiConfig } from '../../config';
+
 // Import icons
 import { IoMdNotificationsOutline } from 'react-icons/io';
 
@@ -37,6 +41,7 @@ const Header = ({pageTitle}) => {
     useEffect(() => {
 		getAllData();
 	}, [getAllData]);
+
 	
   return (
     <header className="header">
@@ -49,10 +54,18 @@ const Header = ({pageTitle}) => {
 			<IoMdNotificationsOutline className="header-right-icon"/>
 			<Link className="header-right-profile" to="/my-profile">
 				<div className="header-right-profile__text">
-					<p className="header-right-profile__text-name">user.profile.name</p>
+					{ 
+						user && (
+							<p className="header-right-profile__text-name">{user.profile.firstName + ' ' + user.profile.lastName}</p>
+						)
+					}
 					<p className="header-right-profile__text-settings">Instellingen</p>
 				</div>
-				<img className="header-right-profile__image" src={ DefaultImage } alt="profile"/>
+				{
+					avatar ? (
+						<img className="header-right-profile__image" src={`${apiConfig.baseURL}file/${avatar}`} alt="profile"/>
+					) : <img className="header-right-profile__image" src={ DefaultImage } alt="profile"/>
+				}
 			</Link>
 		</div>
     </header>

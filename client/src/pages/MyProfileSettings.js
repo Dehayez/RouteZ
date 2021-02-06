@@ -7,6 +7,9 @@ import { useAuth, useApi } from '../services';
 // Import routes
 import * as Routes from '../routes';
 
+// Import config
+import { apiConfig } from '../config';
+
 //Import components
 import { ButtonLarge, ButtonSmall }  from '../components/buttons';
 import { DefaultImage } from '../assets/images';
@@ -127,7 +130,11 @@ const MyProfileSettings = () => {
         <div className="settings">
             <form className="form-label-left" onSubmit={(e) => submitSettings(e)}>
 
-				<img className="form-label-left-image" src={ DefaultImage } alt="profile"/>
+				{
+					formData.avatar ? (
+						<img className="form-label-left-image" src={`${apiConfig.baseURL}file/${formData.avatar}`} alt="profile"/>
+					) : <img className="form-label-left-image" src={ DefaultImage } alt="profile"/>
+				}
                 <input type="file" accept="image/*" id="avatar" onChange={(e) => changeImage(e)} ></input>
 				
 				<div className="form-label-left-item">

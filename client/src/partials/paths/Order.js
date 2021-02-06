@@ -4,6 +4,8 @@ import { useHistory, useParams } from 'react-router-dom';
 // Routes
 import * as Routes from '../../routes';
 
+import './Paths.scss';
+
 const Order = ({ paths, pathId }) => {
   const { order } = useParams();
   const history = useHistory();
@@ -15,7 +17,7 @@ const Order = ({ paths, pathId }) => {
 
   return (
     <>
-      <div className="d-flex">
+      <div className="order">
         {
           paths && paths.map((path, index) => {
             return <span onClick={() => goToOtherOrder(path.order)} key={index} className={`${order === path.order ? 'active' : 'non-active'}`}>{path.order}</span>
