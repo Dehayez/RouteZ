@@ -72,6 +72,7 @@ class ApiRouter {
         this.router.get('/users', this.userController.allUsers); // needs bearer, only for admin
         this.router.get('/users/me', this.userController.getMyself); // needs bearer
         this.router.get('/users/:id', this.userController.getUser); // needs bearer and id
+        this.router.get('/users-progress', this.userController.calculateUserProgress); // needs bearer
         this.router.patch('/users/:id', this.userController.editUser); // needs bearer and id, only for admin
         this.router.post('/users/me', this.userController.updateMyself); // needs bearer and body
         this.router.post('/users/me/progress', this.userController.updateProgress); // needs bearer and body
@@ -93,13 +94,13 @@ class ApiRouter {
         this.router.post('/material/search', this.fileController.showMaterial); // needs bearer and body
         this.router.post('/material/like', this.fileController.likeMaterial); // needs bearer and body
         this.router.post('/material/dislike', this.fileController.dislikeMaterial); // needs bearer and body
-        this.router.patch('/edit-material/:materialId', this.fileController.editMaterial); // needs bearer and body and params
+        this.router.post('/edit-material/:materialId', this.fileController.editMaterial); // needs bearer and body and params
         this.router.delete('/material/:id', this.fileController.deleteMaterial); // needs bearer and params
 
         // Modules
         this.router.get('/modules', this.moduleController.allModules); // needs bearer
         this.router.get('/modules/:moduleId', this.moduleController.getModule); // needs bearer
-        this.router.post('/modules', this.moduleController.createModule);
+        this.router.post('/modules', this.moduleController.createModule); // needs bearer and body
 
         // Signposts
         this.router.get('/signposts', this.signpostController.allSignposts); // needs bearer

@@ -7,6 +7,7 @@ import {
 import { 
     User,
     IUser,
+    SignPost,
 } from "../models";
 
 import { 
@@ -17,6 +18,10 @@ import {
 import {
     default as jwtDecode
 } from "jwt-decode";
+
+interface IUserRequest extends Request {
+    id: string;
+};
 
 export default class UserController {
     private auth: Auth;
@@ -428,6 +433,53 @@ export default class UserController {
         });
     };
 
+    calculateUserProgress = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
+        try {
+            if (!req.headers.authorization) {
+                return res.status(401).json({
+                    error: "Deze gebruiker bestaat niet.",
+                });
+            };
+                        
+            const token = req.headers.authorization.slice(7);
+            const payload = Object(jwtDecode(token));
+                
+            const { id } = payload;
+
+            // Find user
+            const user = await User.findById(id);
+
+            if (!user) {
+                return res.status(404).json({
+                    error: "Deze gebruiker kan niet gevonden worden.",
+                });
+            };
+
+            // Calculate every signposts progress
+            const signposts = await SignPost.find().populate("modules").exec();
+
+            let array = [];
+
+            for (let i = 0; i < signposts.length; i++) {
+                let done = 0;
+                let total = signposts[i]._moduleIds.length;
+
+                for (let j = 0; j < signposts[i]._moduleIds.length; j++) {
+                    if (user.progress._finishedModuleIds.includes(signposts[i].modules[j]._id)) {
+                        done += 1;
+                    };
+                };
+
+                let percentage = (done / total) * 100;
+                array.push({signpost: signposts[i], progress: {percentage: percentage, finishedModules: done, totalModules: total}});
+            };
+
+            return res.status(200).json(array);
+        } catch (e) {
+            next(e);
+        };
+    };
+
     // User logging in
     loggingInUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         this.auth.passport.authenticate('local', {
@@ -478,5 +530,23 @@ export default class UserController {
 
             return res.status(200).json({token: token, id: user._id});
         })(req, res, next);
+    };
+
+    // Check if token
+    checkToken = async (req: IUserRequest, res: Response, next: NextFunction) => {
+        // Get your bearer token
+        if (!req.headers.authorization) {
+            return res.status(401).json({
+                error: "Deze gebruiker bestaat niet.",
+            });
+        };
+                    
+        const token = req.headers.authorization.slice(7);
+        const payload = Object(jwtDecode(token));
+            
+        const { id } = payload;
+        req.body.id = id;
+
+        next();
     };
 };

@@ -38,6 +38,7 @@ const CreateMaterial = () => {
   const [ selectedTags, setSelectedTags ] = useState();
   const [ selectedModule, setSelectedModule ] = useState();
   const [ selectedType, setSelectedType ] = useState();
+  const [ selectedTarget, setSelectedTarget ] = useState();
 
   const [ form, setForm ] = useState({
     title: '',
@@ -96,6 +97,11 @@ const CreateMaterial = () => {
     forceUpdate();
   };
 
+  const updateTarget = (target) => {
+    setSelectedTarget(target);
+    forceUpdate();
+  };
+
   const uploadNewDocument = async (e) => {
     e.preventDefault();
     const upload = e.target.files[0];
@@ -150,6 +156,14 @@ const CreateMaterial = () => {
       return;
     };
 
+    if (!selectedTarget) {
+      setError({
+        visible: true,
+        text: "Dit bestand heeft nog een doelgroep nodig.",
+      });
+      return;
+    };
+
     if (selectedType !== 'Video' && !file) {
       setError({
         visible: true,
@@ -175,6 +189,7 @@ const CreateMaterial = () => {
         title: form.title,
         description: form.description,
         type: selectedType,
+        target: selectedTarget,
         videoUrl: form.videoUrl,
         _authorId: currentUser.id,
         _moduleId: selectedModule,
@@ -186,6 +201,7 @@ const CreateMaterial = () => {
         title: form.title,
         description: form.description,
         type: selectedType,
+        target: selectedTarget,
         filename: form.filename,
         file: uploaded.filename,
         size: form.size,
@@ -219,6 +235,16 @@ const CreateMaterial = () => {
               {_id: "Video", title: "Video"},
             ]}
             setSelected={updateType}
+          />
+          <RadioSelect 
+            text="Welke doelgroep"
+            grouped={false}
+            data={[
+              {_id: "De kiendjes", title: "De kiendjes"},
+              {_id: "De vintjes", title: "De vintjes"},
+              {_id: "De vrouwtjes", title: "De vrouwtjes"},
+            ]}
+            setSelected={updateTarget}
           />
           <RadioSelect 
             text="Aan welke module wil je deze toewijzen"

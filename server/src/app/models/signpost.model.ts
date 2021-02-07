@@ -15,6 +15,7 @@ import {
 } from './module.model';
 
 interface ISignpost extends Document {
+    modules: any;
     title: string;
     shortedTitle: string;
     text: string;

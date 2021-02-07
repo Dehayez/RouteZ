@@ -36,6 +36,7 @@ const Materials = () => {
     "type": [],
     "modules": [],
     "tags": [],
+    "target": [],
   });
 
   // Context
@@ -48,6 +49,17 @@ const Materials = () => {
   }, {
     id: "Video",
     title: "Video",
+  }];
+
+  const secondTypesContext = [{
+    id: "De kiendjes",
+    title: "De kiendjes",
+  }, {
+    id: "De vintjes",
+    title: "De vintjes",
+  }, {
+    id: "De vrouwtjes",
+    title: "De vrouwtjes",
   }];
 
   // Simple fetch of all data
@@ -119,12 +131,13 @@ const Materials = () => {
     let vid = [];
     let pres = [];
 
-    if (queryForm.keywords.length !== 0 || queryForm.modules.length !== 0 || queryForm.type.length !== 0) {
+    if (queryForm.keywords.length !== 0 || queryForm.modules.length !== 0 || queryForm.type.length !== 0 || queryForm.target.length !== 0) {
       const materialData = await queryMaterials(
         queryForm.keywords.length !== 0 ? queryForm.keywords : false,
         queryForm.type.length !== 0 ? queryForm.type : false,
         queryForm.modules.length !== 0 ? queryForm.modules : false,
         queryForm.tags.length !== 0 ? queryForm.tags : false,
+        queryForm.target.length !== 0 ? queryForm.target : false,
       );
 
       for (let i = 0; i < materialData.length; i++) {
@@ -188,6 +201,14 @@ const Materials = () => {
               query={queryForm}
               setQuery={setQueryForm}
               type="type"
+            />
+            {/** Select type of target audience */}
+            <FilterSelect
+              text="Welke doelgroep"
+              options={secondTypesContext}
+              query={queryForm}
+              setQuery={setQueryForm}
+              type="target"
             />
             {/** Select module/signpost */}
             <FilterSelect

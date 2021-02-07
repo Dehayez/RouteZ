@@ -5,3 +5,4 @@ export * from './links';
 export * from './forms';
 export * from './navigation';
 export * from './progress';
+export * from './documents';

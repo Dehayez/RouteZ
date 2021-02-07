@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { NavLink, useHistory, useParams, Link } from 'react-router-dom';
+import { PDFDownloadLink } from '@react-pdf/renderer';
 
 import ReactHtmlParser from 'react-html-parser';
 
@@ -13,7 +14,7 @@ import * as Routes from '../routes';
 import { CardMaterials } from '../partials';
 
 // Import components
-import { BackLinks, ButtonSmall } from '../components';
+import { BackLinks, ButtonSmall, CompletedDoc } from '../components';
 import { HiOutlinePrinter, HiOutlineCheck } from 'react-icons/hi';
 import { Row, Col } from 'react-bootstrap';
 
@@ -30,6 +31,7 @@ const Module = () => {
     const [ signpost, setSignpost ] = useState();
     const [ checkedPaths, setCheckedPaths ] = useState();
     const [ checkedModule, setCheckedModule ] = useState(false);
+		const [ myself, setMyself ] = useState();
 
     const getAllData = useCallback(() => {
         const fetchData = async () => {
@@ -41,6 +43,7 @@ const Module = () => {
     
                     setCheckedPaths(userData.progress._finishedPathIds);
                     setModule(moduleData);
+										setMyself(userData);
     
                     for (let i = 0; i < signpostData.length; i++) {
                         if (signpostData[i]._moduleIds.includes(moduleData._id)) {
@@ -60,6 +63,10 @@ const Module = () => {
         fetchData();
     }, [getModule, getSignPosts, currentUser, getMyself, id, history]);
 
+		const printModule = () => {
+
+		};
+
     useEffect(() => {
         getAllData();
 	}, [getAllData]);
@@ -67,7 +74,7 @@ const Module = () => {
     return (
         <>
         {
-            module && (
+            module && myself && (
                 <Row className="signpost">
 					{
 						signpost && (
@@ -95,7 +102,11 @@ const Module = () => {
 						<h1 className="signpost-title">{module.title}</h1>
 						{
 							checkedModule && (
-								<HiOutlinePrinter className="icon__print" title="Print" />
+								<PDFDownloadLink document={<CompletedDoc moduleName={module.title} userName={`${myself.profile.firstName} ${myself.profile.lastName}`} />} fileName="completedModule.pdf">
+									{({ blob, url, loading, error }) => (
+										loading ? '' : <HiOutlinePrinter className="icon__print" title="Print" />
+									)}
+								</PDFDownloadLink>
 							)
 						}
 					</div>

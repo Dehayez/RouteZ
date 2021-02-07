@@ -59,6 +59,26 @@ const AuthProvider = ({ children }) => {
   };
 
   /**
+   * @desc getting user who's logged in
+   * @param {string} token 
+   */
+  const getProgress = async (token) => {
+    const url = `${apiConfig.baseURL}users-progress`;
+
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      redirect: 'follow'
+    });
+
+    return await response.json();
+  };
+
+  /**
    * @desc editing loggedin user
    * @param {string} token 
    * @param {json} data 
@@ -254,6 +274,7 @@ const AuthProvider = ({ children }) => {
         sendReset, 
         submitReset, 
         getMyself, 
+        getProgress,
         editMyself, 
         editProgress,
         deleteMyself 

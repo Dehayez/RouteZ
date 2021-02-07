@@ -42,6 +42,7 @@ const EditMaterial = () => {
   const [ selectedTags, setSelectedTags ] = useState();
   const [ selectedModule, setSelectedModule ] = useState();
   const [ selectedType, setSelectedType ] = useState();
+  const [ selectedTarget, setSelectedTarget ] = useState();
 
   const [ form, setForm ] = useState({
     title: '',
@@ -52,6 +53,7 @@ const EditMaterial = () => {
     file: '',
     size: '',
     videoUrl: '',
+    target: '',
     _tagIds: [],
   });
 
@@ -80,9 +82,11 @@ const EditMaterial = () => {
         file: data.file,
         size: data.size,
         videoUrl: data.videoUrl,
+        target: data.target,
         _tagIds: data._tagIds,
       });
       setSelectedTags(data.tags ? data.tags : '');
+      setSelectedTarget(data.target);
       setSignposts(signpostsData);
     } catch (e) {
       history.push(Routes.NOT_FOUND);
@@ -124,8 +128,13 @@ const EditMaterial = () => {
     forceUpdate();
   };
 
+  const updateTarget = (target) => {
+    setSelectedTarget(target);
+    forceUpdate();
+  };
+
   const updateMaterial = async (e) => {
-    e.preventDefault();
+    // e.preventDefault();
 
     let result;
     let tags;
@@ -149,6 +158,7 @@ const EditMaterial = () => {
         _moduleId: selectedModule ? selectedModule : form._moduleId,
         type: selectedType ? selectedType : form.type,
         videoUrl: form.videoUrl,
+        target: selectedTarget,
         _tagIds: tags,
       });
     } else {
@@ -162,6 +172,7 @@ const EditMaterial = () => {
           filename: uploaded.filename,
           file: form.file,
           size: form.size,
+          target: selectedTarget,
           _tagIds: tags,
         });
       } else {
@@ -173,6 +184,7 @@ const EditMaterial = () => {
           filename: form.file,
           file: form.file,
           size: form.size,
+          target: selectedTarget,
           _tagIds: tags,
         });
       };
@@ -212,6 +224,17 @@ const EditMaterial = () => {
             ]}
             defaultSelected={material.type}
             setSelected={updateType}
+          />
+          <RadioSelect 
+            text="Welke doelgroep"
+            grouped={false}
+            data={[
+              {_id: "De kiendjes", title: "De kiendjes"},
+              {_id: "De vintjes", title: "De vintjes"},
+              {_id: "De vrouwtjes", title: "De vrouwtjes"},
+            ]}
+            defaultSelected={material.target}
+            setSelected={updateTarget}
           />
           <RadioSelect 
             text="Aan welke module wil je deze toewijzen"

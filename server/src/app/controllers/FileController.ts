@@ -380,6 +380,7 @@ export default class FileController {
                         type: type,
                         file: file,
                         size: size,
+                        target: target,
                         _tagIds: _tagIds,
                         _modifiedAt: Date.now(),
                     },

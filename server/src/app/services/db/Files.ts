@@ -52,7 +52,7 @@ class Files {
             crypto.randomBytes(16, async (e, buf) => {
                 sharp(uploadedImg.buffer).resize(300, 300, {
                     fit: 'cover',
-                }).toFormat('jpeg').jpeg({ quality: 90 }).toBuffer((e: any, data: any, info: any) => {
+                }).toFormat('png').png({ quality: 100 }).toBuffer((e: any, data: any, info: any) => {
                     const name = buf.toString('hex') + path.extname(uploadedImg.originalname);
                     const bufferstream = new stream.PassThrough();
 
@@ -69,7 +69,6 @@ class Files {
                 });
             });
         } catch (error) {
-            console.log('Upload not worked');
             return res.status(500).json({
                 'error': 'Upload niet gelukt',
             });    

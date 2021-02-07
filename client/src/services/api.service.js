@@ -249,7 +249,7 @@ const ApiProvider = ({children}) => {
     const url = `${BASE_URL}edit-material/${id}`;
 
     const res = await fetch(url, {
-      method: "PATCH",
+      method: "POST",
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
