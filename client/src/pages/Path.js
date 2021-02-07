@@ -66,7 +66,6 @@ const Path = () => {
               for (let i = 0; i < signpostData.length; i++) {
                 for (let j = 0; j < signpostData[i].modules.length; j++) {
                   if (signpostData[i].modules[j]._id === moduleId) {
-                    console.log(signpostData[i])
                     setSignpost(signpostData[i]);
                   }
                 }

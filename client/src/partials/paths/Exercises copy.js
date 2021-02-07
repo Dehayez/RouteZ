@@ -166,7 +166,7 @@ const Exercises = ({exercises, previousResults}) => {
 				<button type="submit">Klikkerdeklik</button>
 				)
 			}
-			<span className="exercise-restart" onClick={redoExercise}>Herbeginnen</span>
+			<span onClick={redoExercise}>Herbeginnen</span>
 		</form>
 	)
 };
