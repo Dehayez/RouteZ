@@ -1,12 +1,14 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 
 // Import services
 import { useAuth } from '../../services';
 
-import { Link } from 'react-router-dom';
-
 // Import config
 import { apiConfig } from '../../config';
+
+// Routes
+import * as Routes from '../../routes';
 
 // Import icons
 import { IoMdNotificationsOutline } from 'react-icons/io';
@@ -16,12 +18,16 @@ import { DefaultImage } from '../../assets/images';
 import './Header.scss' 
 
 const Header = ({pageTitle}) => {
+		// Routing
+		const history = useHistory();
+
     // Use services
     const { getMyself, currentUser } = useAuth();
 
     // All accessable data
     const [ user, setUser ] = useState();
     const [ avatar, setAvatar ] = useState();
+		const [ searchKeywords, setSearchKeywords ] = useState();
 
     const getAllData = useCallback(() => {
         const easyFetch = async () => {
@@ -42,6 +48,17 @@ const Header = ({pageTitle}) => {
 		getAllData();
 	}, [getAllData]);
 
+	// Change state for searches
+	const watchChanges = (e) => {
+		setSearchKeywords(e.target.value);
+	};
+
+	// Submit search
+	const submitSearch = (e) => {
+		e.preventDefault();
+
+		history.push(Routes.SEARCH_RESULTS, {keywords: searchKeywords});
+	};
 	
   return (
     <header className="header">
@@ -50,7 +67,9 @@ const Header = ({pageTitle}) => {
 		</div>
 
 		<div className="header-right">
-			<input className="header-right-input" type="text" placeholder="Zoek"/>
+			<form onSubmit={(e) => submitSearch(e)}>
+				<input onChange={(e) => watchChanges(e)} className="header-right-input" id="search-engine" type="text" placeholder="Zoek"/>
+			</form>
 			<IoMdNotificationsOutline className="header-right-icon"/>
 			<Link className="header-right-profile" to="/my-profile">
 				<div className="header-right-profile__text">

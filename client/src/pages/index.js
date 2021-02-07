@@ -16,6 +16,7 @@ import Material from './Material';
 import MyMaterials from './MyMaterials';
 import EditMaterial from './EditMaterial';
 import CreateMaterial from './CreateMaterial';
+import SearchResults from './SearchResults';
 
 export {
   Login,
@@ -35,4 +36,5 @@ export {
   MyMaterials,
   EditMaterial,
   CreateMaterial,
+  SearchResults,
 };

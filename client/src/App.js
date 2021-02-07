@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
 
 // All pages
-import { CreateMaterial, Dashboard, EditMaterial, Landing, Login, Material, Materials, Module, MyMaterials, MyProfile, MyProfileSettings, Path, Register, SendReset, Signpost, Signposts, SubmitReset } from './pages';
+import { CreateMaterial, Dashboard, EditMaterial, Landing, Login, Material, Materials, Module, MyMaterials, MyProfile, MyProfileSettings, Path, Register, SearchResults, SendReset, Signpost, Signposts, SubmitReset } from './pages';
 
 // Main layouts
 import { PageLayout, AuthLayout, SignpostLayout } from './layouts';
@@ -32,7 +32,7 @@ function App() {
                 <RouteWithLayout exact path={Routes.AUTH_RESET} component={SendReset} layout={AuthLayout} />
                 <RouteWithLayout exact path={Routes.AUTH_SUBMIT} component={SubmitReset} layout={AuthLayout} />
                 {/** Platform pages */}
-				{/** Alles terug naar AuthRoute vanaf het coderen af is */}
+				        {/** Alles terug naar AuthRoute vanaf het coderen af is */}
                 <AuthRouteWithLayout exact path={Routes.DASHBOARD} component={Dashboard} layout={PageLayout} />
                 <AuthRouteWithLayout exact path={Routes.MY_PROFILE} component={MyProfile} layout={PageLayout} />
                 <AuthRouteWithLayout exact path={Routes.MY_PROFILE_SETTINGS} component={MyProfileSettings} layout={PageLayout} />
@@ -46,6 +46,7 @@ function App() {
                 <AuthRouteWithLayout exact path={Routes.MY_MATERIALS} component={MyMaterials} layout={SignpostLayout} />
                 <AuthRouteWithLayout exact path={Routes.EDIT_MATERIAL} component={EditMaterial} layout={SignpostLayout} />
                 <AuthRouteWithLayout exact path={Routes.ADD_MATERIAL} component={CreateMaterial} layout={SignpostLayout} />
+                <AuthRouteWithLayout exact path={Routes.SEARCH_RESULTS} component={SearchResults} layout={SignpostLayout} />
               </Switch>
             </Router>
           </ApiProvider>

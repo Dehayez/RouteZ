@@ -374,6 +374,29 @@ const ApiProvider = ({children}) => {
     });
   };
 
+  /**
+   * main search engine
+   * @param {string} token
+   * @param {string} keywords 
+   */
+  const searchEverything = async (token, keywords) => {
+    const url = `${BASE_URL}search-engine`;
+
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        keywords: keywords,
+      }),
+    });
+
+    return await res.json();
+  };
+
   return (
     <ApiContext.Provider value={{
       getSignPosts,
@@ -394,6 +417,7 @@ const ApiProvider = ({children}) => {
       addLikeToMaterial,
       addDislikeToMaterial,
       deleteMaterial,
+      searchEverything,
     }}>
       {children}
     </ApiContext.Provider>

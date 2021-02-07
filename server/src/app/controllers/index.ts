@@ -6,6 +6,7 @@ import SignpostController from './SignpostController';
 import ExerciseController from './ExerciseController';
 import PathController from './PathController';
 import TagController from './TagController';
+import SearchController from './SearchController';
 
 export {
     UserController,
@@ -16,4 +17,5 @@ export {
     ExerciseController,
     PathController,
     TagController,
+    SearchController,
 };

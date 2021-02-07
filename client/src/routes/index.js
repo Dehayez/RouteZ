@@ -19,5 +19,6 @@ export const MATERIAL = '/material/:name';
 export const ADD_MATERIAL = '/create-material';
 export const MY_MATERIALS = '/my-materials';
 export const EDIT_MATERIAL = '/edit-material';
+export const SEARCH_RESULTS = '/search-results';
 
 export const NOT_FOUND = '/not-found';

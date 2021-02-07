@@ -17,6 +17,7 @@ import {
     PathController,
     ExerciseController,
     TagController,
+    SearchController,
 } from '../controllers';
 
 import { 
@@ -36,6 +37,7 @@ class ApiRouter {
     private pathController: PathController;
     private exerciseController: ExerciseController;
     private tagController : TagController;
+    private searchController: SearchController;
 
     private config: IConfig;
     private auth: Auth;
@@ -60,6 +62,7 @@ class ApiRouter {
         this.exerciseController = new ExerciseController();
         this.pathController = new PathController();
         this.tagController = new TagController();
+        this.searchController = new SearchController();
     };
 
     private registerRoutes(): void {
@@ -128,6 +131,9 @@ class ApiRouter {
         this.router.get('/tags', this.tagController.allTags); // needs bearer
         this.router.get('/tags/:id', this.tagController.getTag); // needs bearer
         this.router.post('/tags', this.tagController.createTag); // needs bearer, only for admin
+
+        // Searches
+        this.router.post('/search-engine', this.searchController.searchItems); // needs bearer and body
     };
 };
 
