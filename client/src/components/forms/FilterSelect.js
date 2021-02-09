@@ -2,9 +2,12 @@ import React, { useState } from 'react';
 
 // Icons
 import Arrow from '../../assets/icons/arrow-blue.svg';
+import { IoIosArrowUp } from 'react-icons/io'
 
 // Components
 import { Checkbox } from '../forms';
+
+import './FilterSelect.scss';
 
 const FilterSelect = ({text, options, sections, setQuery, query, type}) => {
   // States
@@ -84,7 +87,8 @@ const FilterSelect = ({text, options, sections, setQuery, query, type}) => {
         { 
           selectedString ? `${selectedString}...` : text 
         } 
-        <img src={Arrow} alt="arrow" className={showSelect ? 'arrow-up' : 'arrow-down'} />
+        {/* <img src={Arrow} alt="arrow" className={showSelect ? 'arrow-up' : 'arrow-down'} /> */}
+		<IoIosArrowUp className={showSelect ? 'arrow-up' : 'arrow-down'}/>
       </div>
       {
         showSelect && (

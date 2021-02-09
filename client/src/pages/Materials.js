@@ -5,13 +5,17 @@ import { useHistory, useLocation } from 'react-router-dom';
 import { ListMaterials } from '../partials';
 
 // Import components
-import { FilterSelect } from '../components';
+import { FilterSelect, ButtonSmall } from '../components';
+
+// Icon
+import { FiSearch } from 'react-icons/fi'
 
 // Import routes
 import * as Routes from '../routes';
 
 // Import services
 import { useApi, useAuth } from '../services';
+
 
 const Materials = () => {
   const history = useHistory();
@@ -187,59 +191,68 @@ const Materials = () => {
   };
 
   return (
-    <>
+    <div className="material">
     {
       signposts && (
         <>
-          <form onSubmit={(e) => searchMaterials(e)}>
-            {/** Keywords */}
-            <input type="text" onChange={(e) => changeKeywords(e.target.value)} name="keywords" id="keywords" placeholder="Zoek op basis van kernwoorden" />
-            {/** Select type of file */}
-            <FilterSelect
-              text="Welk type bestand"
-              options={typesContext}
-              query={queryForm}
-              setQuery={setQueryForm}
-              type="type"
-            />
-            {/** Select type of target audience */}
-            <FilterSelect
-              text="Welke doelgroep"
-              options={secondTypesContext}
-              query={queryForm}
-              setQuery={setQueryForm}
-              type="target"
-            />
-            {/** Select module/signpost */}
-            <FilterSelect
-              text="Welke module"
-              sections={true}
-              options={signposts}
-              query={queryForm}
-              setQuery={setQueryForm}
-              type="modules"
-            />
-            {/** Select tag */}
-            <FilterSelect
-              text="Welke tag"
-              options={tags}
-              query={queryForm}
-              setQuery={setQueryForm}
-              type="tags"
-            />
-            <button type="submit">
-              Zoeken maar
-            </button>
-          </form>
-          <>
+			<form className="material-form" onSubmit={(e) => searchMaterials(e)}>
+				{/** Keywords */}
+				<div className="material-form-search">
+					<div className="material-form-search__icon">
+						<FiSearch/> 
+					</div>
+					<input className="material-form-search__input" type="text" onChange={(e) => changeKeywords(e.target.value)} name="keywords" id="keywords" placeholder="Zoek kernwoorden" />
+				</div>
+				{/** Select type of file */}
+				<div className="material-form-filters">
+					<FilterSelect
+						text="Type"
+						options={typesContext}
+						query={queryForm}
+						setQuery={setQueryForm}
+						type="type"
+					/>
+					{/** Select type of target audience */}
+					<FilterSelect
+						text="Doelgroep"
+						options={secondTypesContext}
+						query={queryForm}
+						setQuery={setQueryForm}
+						type="target"
+					/>
+					{/** Select module/signpost */}
+					<FilterSelect
+						text="Module"
+						sections={true}
+						options={signposts}
+						query={queryForm}
+						setQuery={setQueryForm}
+						type="modules"
+					/>
+					{/** Select tag */}
+					<FilterSelect
+						text="Tag"
+						options={tags}
+						query={queryForm}
+						setQuery={setQueryForm}
+						type="tags"
+					/>
+				</div>
+				<div className="material-form-button">
+					<ButtonSmall type="submit" content="Toepassen" color="primary"/>
+				</div>
+			</form>
+
+          <div className="material-content">
             <ListMaterials title="Alle tekstbestanden" materials={textFiles && textFiles} />
             <ListMaterials title="Alle presentaties" materials={presentations && presentations} />
             <ListMaterials title="Alle video's" materials={videos && videos} />
-          </>
+          </div>
+
         </>
       )
     }
-    </>
+    </div>
   );
 };
 
