@@ -50,9 +50,7 @@ class Files {
 
         try {
             crypto.randomBytes(16, async (e, buf) => {
-                sharp(uploadedImg.buffer).resize(300, 300, {
-                    fit: 'cover',
-                }).toFormat('png').png({ quality: 100 }).toBuffer((e: any, data: any, info: any) => {
+                sharp(uploadedImg.buffer).toFormat('png').png({ quality: 100 }).toBuffer((e: any, data: any, info: any) => {
                     const name = buf.toString('hex') + path.extname(uploadedImg.originalname);
                     const bufferstream = new stream.PassThrough();
 
