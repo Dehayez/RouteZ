@@ -1,0 +1,18 @@
+.auth {
+  min-height: 100vh;
+  padding: 50px 0;
+
+  &__upper {
+    display: flex;
+    justify-content: center;
+
+    img {
+      height: 55px;
+    }
+  }
+
+  &__section {
+    margin-top: 80px;
+    width: 100%;
+  }
+}

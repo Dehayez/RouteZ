@@ -1,0 +1,30 @@
+@import '../../_sass/index';
+
+.input-field {
+  &__label {
+    display: block;
+    font-family: $font-family-primary;
+    font-size: $font-size-s;
+    margin-left: 20px;
+  }
+
+  &__field {
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 10px;
+    background-color: white;
+    border: 1px solid $routez-grey;
+    outline: none;
+    font-family: $font-family-primary;
+    font-size: $font-size-s;
+    color: $routez-black;
+    padding: 10px 20px;
+    transition: ease-in-out 0.5s;
+  }
+
+  &__field:focus {
+    border: 1px solid $routez-black;
+  }
+}

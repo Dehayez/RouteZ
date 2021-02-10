@@ -1,0 +1,13 @@
+@import '../../_sass/index';
+
+.large-submit-button {
+  width: 100%;
+  background-color: $routez-primary;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  color: white;
+  font-family: $font-family-primary;
+  font-weight: bold;
+  font-size: $font-size-s;
+}

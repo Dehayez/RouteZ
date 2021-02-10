@@ -5757,6 +5757,21 @@
 2021-02-07 10:02:50 [[32minfo[39m: 	Server on localhost:8000 {
   "object": {}
 }]
+<<<<<<< HEAD
+2021-02-07 16:36:01 [[32minfo[39m: 	Connected to the database {
+  "object": {}
+}]
+2021-02-07 16:36:01 [[32minfo[39m: 	Server on localhost:8000 {
+  "object": {}
+}]
+2021-02-07 16:36:49 [[32minfo[39m: 	Server closed {
+  "object": {}
+}]
+2021-02-07 16:36:51 [[32minfo[39m: 	Connected to the database {
+  "object": {}
+}]
+2021-02-07 16:36:51 [[32minfo[39m: 	Server on localhost:8000 {
+=======
 2021-02-07 12:37:01 [[32minfo[39m: 	Connected to the database {
   "object": {}
 }]
@@ -5767,6 +5782,16 @@
   "object": {}
 }]
 2021-02-09 14:02:51 [[32minfo[39m: 	Server on localhost:8000 {
+>>>>>>> 0e4190dcaaa6bc2700905f2dcc35b9614745a617
+  "object": {}
+}]
+2021-02-10 11:59:58 [[32minfo[39m: 	Connected to the database {
+  "object": {}
+}]
+2021-02-10 11:59:58 [[32minfo[39m: 	Server on localhost:8000 {
+  "object": {}
+}]
+2021-02-10 13:43:15 [[32minfo[39m: 	Server closed {
   "object": {}
 }]
 2021-02-10 12:22:03 [[32minfo[39m: 	Connected to the database {
@@ -5779,5 +5804,11 @@
   "object": {}
 }]
 2021-02-10 17:33:27 [[32minfo[39m: 	Server on localhost:8000 {
+  "object": {}
+}]
+2021-02-10 18:10:10 [[32minfo[39m: 	Connected to the database {
+  "object": {}
+}]
+2021-02-10 18:10:10 [[32minfo[39m: 	Server on localhost:8000 {
   "object": {}
 }]
