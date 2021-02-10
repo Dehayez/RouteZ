@@ -83,8 +83,18 @@ const ListMaterialItem = ({material, owner}) => {
 					)
 				}
 				{
-					liked ? <div className="material-icon-heart-wrapper"> <IoHeartSharp className="material-icon-heart material-icon-heart--fill" onClick={dislikeMaterial} title="Dislike"/> {likedDigit && likedDigit} </div> 
-					: <div className="material-icon-heart-wrapper"> <IoHeartOutline className="material-icon-heart" onClick={likeMaterial} title="Like"/> {likedDigit && likedDigit} </div>
+					liked ? <div className="material-icon-heart-wrapper--number"> 
+								<div className="material-icon-heart-wrapper"> 
+									<IoHeartSharp className="material-icon-heart material-icon-heart--number material-icon-heart--fill" onClick={dislikeMaterial} title="Dislike"/>
+								</div> 
+								<p>{likedDigit && likedDigit}</p> 
+							</div>
+					: <div className="material-icon-heart-wrapper--number">
+						<div className="material-icon-heart-wrapper">
+							 <IoHeartOutline className="material-icon-heart material-icon-heart--number" onClick={likeMaterial} title="Like"/>
+						</div> 
+						<p>{likedDigit && likedDigit} </p>
+					</div>
 				}
 			</div>
 	  </div>

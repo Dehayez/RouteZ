@@ -18,6 +18,9 @@ import { apiConfig } from '../config';
 import * as Routes from '../routes';
 import { CardMaterials } from '../partials';
 
+// Components
+import { ButtonSmall } from '../components'
+
 // Icons 
 import { IoHeartSharp, IoHeartOutline } from 'react-icons/io5'
 import { HiOutlineDownload } from 'react-icons/hi';
@@ -136,13 +139,14 @@ const Material = () => {
 								</div>
 							</div>
 
-							<div className="material-detail-right-download">
+							<div className="material-detail-right-download" title="Download PDF" onClick={() => getDoc(material.file)}>
 								<div className="material-detail-right-download-text">
-									<p className="material-detail-right-download-text__title"><strong>{material.filename}</strong></p>
+									<p className="material-detail-right-download-text__title">Download</p>
+									<p className="material-detail-right-download-text__name">{material.filename}</p>
 									<p className="material-detail-right-download-text__data">{date.format('L')} | {material.size} | TODO pagina's</p>
 								</div>
 								{/** Later on adding pages */}
-								<HiOutlineDownload className="material-icon__download" title="Download PDF" onClick={() => getDoc(material.file)}/> 
+								<HiOutlineDownload className="material-icon__download" /> 
 							</div>
 							<div className="material-detail-right-likes">
 								{
@@ -162,10 +166,11 @@ const Material = () => {
 					{
 						extraMaterials && (
 						<>
-							<div>
-								<NavLink to={{pathname: Routes.MATERIALS, props: {
-									module: material._moduleId,
-								}}}>Bekijk meer</NavLink>
+							<div className="material-recommended-header">
+								<p>Dit lijkt interessant voor jou</p>
+								<NavLink to={{pathname: Routes.MATERIALS, props: { module: material._moduleId,}}}>
+									<ButtonSmall content="Bekijk meer" color="secondary"/>
+								</NavLink>
 							</div>
 							<CardMaterials
 								materials={extraMaterials}
