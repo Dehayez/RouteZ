@@ -11,9 +11,22 @@ import 'moment/locale/nl-be';
 // Import services
 import { useApi, useAuth } from '../services';
 
+// Import config
+import { apiConfig } from '../config';
+
 // Import routes
 import * as Routes from '../routes';
 import { CardMaterials } from '../partials';
+
+// Icons 
+import { IoHeartSharp, IoHeartOutline } from 'react-icons/io5'
+import { HiOutlineDownload } from 'react-icons/hi';
+
+// Bootstrap
+import { Row, Col } from 'react-bootstrap'
+
+// Images
+import { DefaultImage } from '../assets/images';
 
 const Material = () => {
   const history = useHistory();
@@ -31,6 +44,8 @@ const Material = () => {
 
   const [ liked, setLiked ] = useState();
   const [ likedDigit, setLikedDigit ] = useState();
+
+  const [ avatar, setAvatar ] = useState();
 
   // Init date
   let date = moment(material && material._createdAt);
@@ -83,73 +98,88 @@ const Material = () => {
   };
 
   return (
-    <>
-    {
-      material && (
-        <>
-        {/** Material */}
-          <h1>{material.title}</h1>
-          <>
-            {
-              liked ? (
-                <button onClick={dislikeMaterial}>Dislike {likedDigit}</button>
-              ) : (
-                <button onClick={likeMaterial}>Like {likedDigit}</button>
-              )
-            }
-          </>
-          {
-            HTMLParser(material.description)
-          }
-          <>
-          {/** Author */}
-            <h2>Auteur</h2>
-            {console.log(material.author)}
-            <div>
-              <p><strong>{material.filename}</strong></p>
-              <p>{date.format('L')} | {material.size}</p>
-              {/** Later on adding pages */}
-              <button onClick={() => getDoc(material.file)}>Download</button>
-              <div>
-                {
-                  liked ? (
-                    <button onClick={dislikeMaterial}>Dislike {likedDigit}</button>
-                  ) : (
-                    <button onClick={likeMaterial}>Like {likedDigit}</button>
-                  )
-                }
-                <p>
-                  <strong>{likedDigit} gedeelde hartjes</strong><br/>
-                  {
-                    likedDigit === 0 ? 'Er zijn nog geen hartjes uitgedeeld' : 'Dit materiaal wordt geappreciëerd'
-                  }
-                </p>
-              </div>
-            </div>
-          </>
-          <>
-            {/** Extra materials */}
-            {
-              extraMaterials && (
-                <>
-                  <div>
-                      <NavLink to={{pathname: Routes.MATERIALS, props: {
-                          module: material._moduleId,
-                      }}}>Bekijk meer</NavLink>
-                  </div>
-                  <CardMaterials
-                      materials={extraMaterials}
-                      user={currentUser.id}
-                      token={currentUser.token}
-                  />
-              </>
-              )
-            }
-          </>
-        </>
-      )
-    }
-    </>
+    <div className="material">
+		{
+		material && (
+			<>
+				<Row className="material-detail">
+					{/** Material */}
+						<Col lg={7} className="material-detail-left">
+							<div className="material-detail-title-wrapper">
+								<h1 className="material-detail-title">{material.title}</h1>
+								<>
+									{
+										liked ? <div className="material-icon-heart-wrapper"> <IoHeartSharp className="material-icon-heart material-icon-heart--big material-icon-heart--fill" onClick={dislikeMaterial} title="Dislike"/></div> 
+										: <div className="material-icon-heart-wrapper"> <IoHeartOutline className="material-icon-heart material-icon-heart--big" onClick={likeMaterial} title="Like"/></div>
+									}
+								</>
+							</div>
+							<p className="material-detail-text">
+								{
+									HTMLParser(material.description)
+								}
+							</p>
+						</Col>
+
+						<Col lg={5} className="material-detail-right">
+							{/** Author */}
+							<h5 className="material-detail-right-title">Auteur van het materiaal</h5>
+							<div className="material-detail-right-profile" >
+								{
+									material.author.profile.avatar ? (
+										<img className="material-detail-right-profile__image" src={`${apiConfig.baseURL}file/${ material.author.profile.avatar}`} alt="profile"/>
+									) : <img className="header-right-profile__image" src={ DefaultImage } alt="profile"/>
+								}
+								<div className="material-detail-right-profile__text">
+									<p className="material-detail-right-profile__text-name">{material.author.profile.firstName + ' ' + material.author.profile.lastName}</p>
+									<p className="material-detail-right-profile__text-settings">{material.author.profile.schoolName}</p>
+								</div>
+							</div>
+
+							<div className="material-detail-right-download">
+								<div className="material-detail-right-download-text">
+									<p className="material-detail-right-download-text__title"><strong>{material.filename}</strong></p>
+									<p className="material-detail-right-download-text__data">{date.format('L')} | {material.size} | TODO pagina's</p>
+								</div>
+								{/** Later on adding pages */}
+								<HiOutlineDownload className="material-icon__download" title="Download PDF" onClick={() => getDoc(material.file)}/> 
+							</div>
+							<div className="material-detail-right-likes">
+								{
+									liked ? <div className="material-icon-heart-wrapper"> <IoHeartSharp className="material-icon-heart material-icon-heart--fill" onClick={dislikeMaterial} title="Dislike"/></div> 
+									: <div className="material-icon-heart-wrapper"> <IoHeartOutline className="material-icon-heart" onClick={likeMaterial} title="Like"/></div>
+								}
+								<p className="material-detail-right-likes__text">
+									<strong>{likedDigit} { likedDigit === 1 ? ' gedeeld hartje' : ' gedeelde hartjes' }</strong><br/>
+									{ likedDigit === 0 ? 'Er zijn nog geen hartjes uitgedeeld' : 'Dit materiaal wordt geappreciëerd' }
+								</p>
+							</div>
+						</Col>
+				</Row>
+					
+				<div className="material-recommended">
+					{/** Extra materials */}
+					{
+						extraMaterials && (
+						<>
+							<div>
+								<NavLink to={{pathname: Routes.MATERIALS, props: {
+									module: material._moduleId,
+								}}}>Bekijk meer</NavLink>
+							</div>
+							<CardMaterials
+								materials={extraMaterials}
+								user={currentUser.id}
+								token={currentUser.token}
+							/>
+						</>
+						)
+					}
+				</div>
+			</>
+		)
+		}
+    </div>
   );
 };
 

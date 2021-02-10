@@ -27,7 +27,7 @@ const Header = ({pageTitle}) => {
     // All accessable data
     const [ user, setUser ] = useState();
     const [ avatar, setAvatar ] = useState();
-		const [ searchKeywords, setSearchKeywords ] = useState();
+	const [ searchKeywords, setSearchKeywords ] = useState();
 
     const getAllData = useCallback(() => {
         const easyFetch = async () => {

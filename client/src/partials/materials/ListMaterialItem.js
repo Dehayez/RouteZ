@@ -8,8 +8,14 @@ import 'moment/locale/nl-be';
 // Routes
 import * as Routes from '../../routes';
 
+// Icons
+import { HiOutlineDownload } from 'react-icons/hi';
+import { IoHeartSharp, IoHeartOutline } from 'react-icons/io5'
+
 // Services
 import { useApi, useAuth } from '../../services';
+
+import './Materials.scss';
 
 const ListMaterialItem = ({material, owner}) => {
   const history = useHistory();
@@ -65,18 +71,23 @@ const ListMaterialItem = ({material, owner}) => {
   };
 
   return (
-    <>
-      <h3><NavLink to={Routes.MATERIAL.replace(':name', material._id)}>{material.title}</NavLink></h3>
-      {
-        owner ? (
-          <p>Geplaatst op {date.format('L')}</p>
-        ) : (
-          <p>Geplaatst door <NavLink to={Routes.PROFILE.replace(':id', material.author._id)}>{material.author.profile.firstName + ' ' + material.author.profile.lastName}</NavLink> op {date.format('L')}</p>
-        )
-      }
-      {
-        liked ? <button onClick={dislikeMaterial}>Dislike {likedDigit && likedDigit}</button> : <button onClick={likeMaterial}>Like {likedDigit && likedDigit}</button>
-      }
+    <div className="material-list-item">
+		<div className="material-list-item-left">
+			<h3 className="material-list-item-title"><NavLink to={Routes.MATERIAL.replace(':name', material._id)}>{material.title}</NavLink></h3>
+			<div className="material-list-item-left-bottom">
+				{
+					owner ? (
+					<p className="material-list-item-date">Geplaatst op {date.format('L')}</p>
+					) : (
+					<p className="material-list-item-date">Geplaatst door <NavLink to={Routes.PROFILE.replace(':id', material.author._id)}>{material.author.profile.firstName + ' ' + material.author.profile.lastName}</NavLink> op {date.format('L')}</p>
+					)
+				}
+				{
+					liked ? <div className="material-icon-heart-wrapper"> <IoHeartSharp className="material-icon-heart material-icon-heart--fill" onClick={dislikeMaterial} title="Dislike"/> {likedDigit && likedDigit} </div> 
+					: <div className="material-icon-heart-wrapper"> <IoHeartOutline className="material-icon-heart" onClick={likeMaterial} title="Like"/> {likedDigit && likedDigit} </div>
+				}
+			</div>
+	  </div>
       {
         owner ? (
           <>
@@ -89,9 +100,10 @@ const ListMaterialItem = ({material, owner}) => {
               )
             }
           </>
-        ) : material.type === "Video" ? <NavLink to={Routes.MATERIAL.replace(':name', material._id)}>Afspelen</NavLink> : <button onClick={() => getDoc(material.file)}>Download</button>
+        ) : material.type === "Video" ? <NavLink to={Routes.MATERIAL.replace(':name', material._id)}>Afspelen</NavLink> 
+		  : <HiOutlineDownload className="material-icon__download" title="Download PDF" onClick={() => getDoc(material.file)}/> 
       }
-    </>
+    </div>
   )
 };
 

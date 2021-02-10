@@ -174,9 +174,9 @@ const MyProfileSettings = () => {
 				<h3 className="settings-danger-title">Gevarenzone</h3>
 				{
                 remove ? (
-                    <div>
-						<ButtonSmall onClick={() => removeUser()} color="danger-fill" content="Verwijder account"/>
+                    <div className="settings-danger-buttons">
 						<ButtonSmall onClick={() => setRemove(!remove)} color="danger-secondary" content="Annuleer"/>
+						<ButtonSmall onClick={() => removeUser()} color="danger-fill" content="Verwijder account"/>
                     </div>
                 ) : (
 					<ButtonSmall onClick={() => setRemove(true)} color="danger" content="Verwijder account"/>

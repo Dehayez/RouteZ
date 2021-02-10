@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 // Import components
 import { CardMaterial } from '../../components';
 
+import './Materials.scss';
+
 const CardMaterials = ({materials, user, token}) => {
   const [ pagination, setPagination ] = useState(2);
 

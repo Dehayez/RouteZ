@@ -199,7 +199,7 @@ const Materials = () => {
 				{/** Keywords */}
 				<div className="material-form-search">
 					<div className="material-form-search__icon">
-						<FiSearch/> 
+						<FiSearch type="submit"/> 
 					</div>
 					<input className="material-form-search__input" type="text" onChange={(e) => changeKeywords(e.target.value)} name="keywords" id="keywords" placeholder="Zoek kernwoorden" />
 				</div>

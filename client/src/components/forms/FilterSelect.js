@@ -82,8 +82,8 @@ const FilterSelect = ({text, options, sections, setQuery, query, type}) => {
   };
 
   return (
-    <div className="filter-select">
-      <div className="filter-select__field" onClick={() => setShowSelect(!showSelect)}>
+    <div className="filter-select" className={showSelect ? 'filter-select filter-select--active' : 'filter-select' } >
+      <div className="filter-select__field" onClick={() => setShowSelect(!showSelect)} >
         { 
           selectedString ? `${selectedString}...` : text 
         } 

@@ -26,13 +26,14 @@ function App() {
               <Switch>
                 {/** Where the site lands */}
                 <RouteWithLayout exact path={Routes.LANDING} component={Landing} layout={PageLayout} />
+	
                 {/** Main pages for authentication */}
                 <RouteWithLayout exact path={Routes.AUTH_SIGN_IN} component={Login} layout={AuthLayout} />
                 <RouteWithLayout exact path={Routes.AUTH_SIGN_UP} component={Register} layout={AuthLayout} />
                 <RouteWithLayout exact path={Routes.AUTH_RESET} component={SendReset} layout={AuthLayout} />
                 <RouteWithLayout exact path={Routes.AUTH_SUBMIT} component={SubmitReset} layout={AuthLayout} />
+
                 {/** Platform pages */}
-				        {/** Alles terug naar AuthRoute vanaf het coderen af is */}
                 <AuthRouteWithLayout exact path={Routes.DASHBOARD} component={Dashboard} layout={PageLayout} />
                 <AuthRouteWithLayout exact path={Routes.MY_PROFILE} component={MyProfile} layout={PageLayout} />
                 <AuthRouteWithLayout exact path={Routes.MY_PROFILE_SETTINGS} component={MyProfileSettings} layout={PageLayout} />
