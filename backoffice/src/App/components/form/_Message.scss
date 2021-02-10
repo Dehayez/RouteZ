@@ -1,0 +1,14 @@
+@import '../../_sass/index';
+
+.message {
+  width: 100%;
+  background-color: $routez-grey-light;
+  padding: 10px 20px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+
+  span {
+    font-family: $font-family-primary;
+    font-size: $font-size-s;
+  }
+}

@@ -5785,3 +5785,12 @@
 >>>>>>> 0e4190dcaaa6bc2700905f2dcc35b9614745a617
   "object": {}
 }]
+2021-02-10 11:59:58 [[32minfo[39m: 	Connected to the database {
+  "object": {}
+}]
+2021-02-10 11:59:58 [[32minfo[39m: 	Server on localhost:8000 {
+  "object": {}
+}]
+2021-02-10 13:43:15 [[32minfo[39m: 	Server closed {
+  "object": {}
+}]
