@@ -6,6 +6,7 @@ import { useAuth } from '../../services';
 import './Paths.scss';
 
 const Exercises = ({exercises, previousResults}) => {
+
   // Services
   const { editProgress, currentUser } = useAuth();
   const [ showPrevious, setShowPrevious ] = useState(true);
@@ -42,24 +43,30 @@ const Exercises = ({exercises, previousResults}) => {
 
   const Question = ({element, index}) => {
     return element.multiple ? (
-      <fieldset name={`question${index}`}>
-        <legend>
+      <fieldset name={`question${index}`} className="exercise-fieldset">
+        <legend className="exercise__question">
           {element.question}
         </legend>
         {
           element.answers.map((innerElement, innerIndex) => {
-            return <span key={innerIndex}><input type="checkbox" id={innerElement._id} className="" value={innerElement.text} name={`question${index}`} /><label>{innerElement.text}</label></span>
+            return <label className="exercise-fieldset-label" key={innerIndex}> {innerElement.text}
+						<input className="checkbox" type="checkbox" id={innerElement._id} value={innerElement.text} name={`question${index}`} />
+						<span className="checkmark"></span>
+					</label>
           })
         }
       </fieldset>
     ) : (
-      <fieldset name={`question${index}`}>
-        <legend>
+      <fieldset name={`question${index}`} className="exercise-fieldset">
+        <legend className="exercise__question">
           {element.question}
         </legend>
         {
           element.answers.map((innerElement, innerIndex) => {
-            return <span key={innerIndex}><input type="radio" id={innerElement._id} className="" value={innerElement.text} name={`question${index}`} /><label>{innerElement.text}</label></span>
+            return <label className="exercise-fieldset-label" key={innerIndex}> {innerElement.text}
+						<input className="checkbox" type="radio" id={innerElement._id} className="exercise__radio" value={innerElement.text} name={`question${index}`} />
+						<span className="checkmark checkmark-radio"></span>
+					</label>
           })
         }
       </fieldset>
@@ -68,12 +75,12 @@ const Exercises = ({exercises, previousResults}) => {
 
   const OpenQuestion = ({element, index}) => {
     return (
-      <>
-        <label htmlFor={element._id}>
+      <div className="exercise-fieldset">
+        <label htmlFor={element._id} className="exercise__question">
           {element.question}
         </label>
-        <textarea name={element._id} id={element._id} />
-      </>
+        <textarea name={element._id} id={element._id} className="exercise__textarea" />
+      </div>
     )
   };
 
@@ -147,22 +154,21 @@ const Exercises = ({exercises, previousResults}) => {
     };
   };
 
-
-  return (
-    <form onSubmit={(e) => submitExercise(e)}>
-      {
-        exercises.map((element, index) => {
-          return !element.open ? <Question key={index} index={index} element={element} /> : <OpenQuestion element={element} index={index} key={index} />
-        })
-      }
-      {
-        !showPrevious && (
-          <button type="submit">Klikkerdeklik</button>
-        )
-      }
-      <span onClick={redoExercise}>Herbeginnen</span>
-    </form>
-  )
+	return (
+		<form className="exercise" onSubmit={(e) => submitExercise(e)}>
+			{
+				exercises.map((element, index) => {
+				return !element.open ? <Question key={index} index={index} element={element} /> : <OpenQuestion element={element} index={index} key={index} />
+				})
+			}
+			{
+				!showPrevious && (
+				<button type="submit">Klikkerdeklik</button>
+				)
+			}
+			<span className="exercise-restart" onClick={redoExercise}>Herbeginnen</span>
+		</form>
+	)
 };
 
 export default Exercises;

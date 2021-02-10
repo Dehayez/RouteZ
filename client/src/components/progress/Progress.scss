@@ -31,13 +31,10 @@
 			font-weight: 600;
 		}
 
-		&__percantage {
-			height: 100px;
-
-		}
 	}
 }
 
 .CircularProgressbar {
 	height: 100%;
+	max-height: 100px;
 }
