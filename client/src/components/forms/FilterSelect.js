@@ -104,13 +104,15 @@ const FilterSelect = ({text, options, sections, setQuery, query, type}) => {
               }) : options.map((option, index) => {
                 return (
                   <div key={index} className="filter-select__select--section">
-                    <span onClick={() => selectSection(index)}>{option.title}</span>
+                    <span className="filter-select__select--section__title" onClick={() => selectSection(index)}>{option.shortedTitle}</span>
                     <div className="filter-select__select--section__options">
                       {
                         option.modules.map((innerOption, innerIndex) => {
                           return <div key={innerIndex} className="filter-select__select--section__options--option">
                             <label htmlFor={innerOption.id}>{innerOption.title}</label>
-                            <Checkbox change={editSelected} name={innerOption.title} id={innerOption.id} />
+							<div className="filter-select__select--section__options--option-checkbox">
+                           		<Checkbox change={editSelected} name={innerOption.title} id={innerOption.id} />
+							</div>
                           </div>
                         })
                       }

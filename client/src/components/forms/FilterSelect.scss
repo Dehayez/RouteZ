@@ -33,14 +33,25 @@
 	&__select {
 		margin-top: 1rem;
 
-		&--section__options--option {
-			font-size: 14px;
+		&--section {
+			&__title {
+				font-size: 14px;
+				text-transform: capitalize;
+				font-weight: 700;
+			}
+			&__options--option {
+				font-size: 14px;
+	
+				width: 100%;
+				margin: 0.5rem 0;
+	
+				display: flex;
+				justify-content: space-between;
 
-			width: 100%;
-			margin: 0.5rem 0;
-
-			display: flex;
-			justify-content: space-between;
+				&-checkbox {
+					background-color: red;
+				}
+			}
 		}
 
 	}
