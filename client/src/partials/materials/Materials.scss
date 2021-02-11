@@ -27,9 +27,6 @@
 				}
 			}
 
-			&-right {
-
-			}
 			&-title a {
 				color: $routez-black;
 				font-size: 16px;
@@ -77,5 +74,10 @@
 				text-decoration: underline;
 			}
 		}
+	}
+
+	&-cards {
+		display: flex;
+		justify-content: space-between;
 	}
 }

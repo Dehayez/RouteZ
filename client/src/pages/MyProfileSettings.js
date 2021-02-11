@@ -163,14 +163,14 @@ const MyProfileSettings = () => {
 				</div>
 
 				<div className="form-label-left-item">
-					<label className="form-label-left-label">Professionele functie</label>
+					<label className="form-label-left-label">Functie</label>
 					<textarea className="form-label-left-input" id="professionalFunction" onChange={(e) => changeForms(e)} defaultValue={formData ? formData.professionalFunction : ''}/>
 				</div>
 
 				<ButtonLarge type="submit" content="Bevestig" />
             </form>
 
-			<div className="settings-danger">
+			{/* <div className="settings-danger">
 				<h3 className="settings-danger-title">Gevarenzone</h3>
 				{
                 remove ? (
@@ -188,7 +188,7 @@ const MyProfileSettings = () => {
 				{
 					success && success
 				}
-			</div>
+			</div> */}
 
         </div>
     )

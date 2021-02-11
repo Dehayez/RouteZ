@@ -131,7 +131,7 @@ const Material = () => {
 								{
 									material.author.profile.avatar ? (
 										<img className="material-detail-right-profile__image" src={`${apiConfig.baseURL}file/${ material.author.profile.avatar}`} alt="profile"/>
-									) : <img className="header-right-profile__image" src={ DefaultImage } alt="profile"/>
+									) : <img className="material-detail-right-profile__image" src={ DefaultImage } alt="profile"/>
 								}
 								<div className="material-detail-right-profile__text">
 									<p className="material-detail-right-profile__text-name">{material.author.profile.firstName + ' ' + material.author.profile.lastName}</p>
@@ -139,9 +139,9 @@ const Material = () => {
 								</div>
 							</div>
 
+							{/* <p className="material-detail-right-download-title">Download</p> */}
 							<div className="material-detail-right-download" title="Download PDF" onClick={() => getDoc(material.file)}>
 								<div className="material-detail-right-download-text">
-									<p className="material-detail-right-download-text__title">Download</p>
 									<p className="material-detail-right-download-text__name">{material.filename}</p>
 									<p className="material-detail-right-download-text__data">{date.format('L')} | {material.size} | TODO pagina's</p>
 								</div>

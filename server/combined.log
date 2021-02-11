@@ -5812,3 +5812,18 @@
 2021-02-10 18:10:10 [[32minfo[39m: 	Server on localhost:8000 {
   "object": {}
 }]
+2021-02-10 22:31:22 [[32minfo[39m: 	Server closed {
+  "object": {}
+}]
+2021-02-11 10:04:38 [[32minfo[39m: 	Connected to the database {
+  "object": {}
+}]
+2021-02-11 10:04:38 [[32minfo[39m: 	Server on localhost:8000 {
+  "object": {}
+}]
+2021-02-11 14:53:51 [[32minfo[39m: 	Connected to the database {
+  "object": {}
+}]
+2021-02-11 14:53:51 [[32minfo[39m: 	Server on localhost:8000 {
+  "object": {}
+}]

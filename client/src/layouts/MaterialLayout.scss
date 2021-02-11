@@ -25,7 +25,7 @@
 				font-size: 14px;
 		
 				height: 30px;
-				width: 12vw;
+				width: 100%;
 				max-width: 200px;
 				padding: 1.5rem;
 
@@ -129,7 +129,6 @@
 				background-color: $routez-grey-light;
 				border-radius: 10px;
 				padding: 1rem;
-				margin: 1rem 0;
 
 				display: flex;
 				justify-content: space-between;
@@ -137,16 +136,17 @@
 
 				transition: 0.3s;
 
+				&-title {
+					font-weight: 600;
+					font-size: 14px;
+					margin-bottom: 0.4rem;
+				}
+
 				&-text {
 					font-size: 12px;
 
-					&__name, &__title, &__data {
+					&__name, &__data {
 						margin: 0;
-					}
-
-					&__title {
-						font-weight: 700;
-						color: $routez-primary;
 					}
 
 					&__name {
@@ -269,6 +269,7 @@
 
 			& p {
 				font-weight: 500;
+				margin: 0;
 			}
 		}
 	}

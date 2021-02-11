@@ -70,7 +70,7 @@ const Header = ({pageTitle}) => {
 			<form onSubmit={(e) => submitSearch(e)}>
 				<input onChange={(e) => watchChanges(e)} className="header-right-input" id="search-engine" type="text" placeholder="Zoek"/>
 			</form>
-			<IoMdNotificationsOutline className="header-right-icon"/>
+			{/* <IoMdNotificationsOutline className="header-right-icon"/> */}
 			<Link className="header-right-profile" to="/my-profile">
 				<div className="header-right-profile__text">
 					{ 
