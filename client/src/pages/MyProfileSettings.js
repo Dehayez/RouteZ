@@ -163,20 +163,20 @@ const MyProfileSettings = () => {
 				</div>
 
 				<div className="form-label-left-item">
-					<label className="form-label-left-label">Professionele functie</label>
+					<label className="form-label-left-label">Functie</label>
 					<textarea className="form-label-left-input" id="professionalFunction" onChange={(e) => changeForms(e)} defaultValue={formData ? formData.professionalFunction : ''}/>
 				</div>
 
 				<ButtonLarge type="submit" content="Bevestig" />
             </form>
 
-			<div className="settings-danger">
+			{/* <div className="settings-danger">
 				<h3 className="settings-danger-title">Gevarenzone</h3>
 				{
                 remove ? (
-                    <div>
-						<ButtonSmall onClick={() => removeUser()} color="danger-fill" content="Verwijder account"/>
+                    <div className="settings-danger-buttons">
 						<ButtonSmall onClick={() => setRemove(!remove)} color="danger-secondary" content="Annuleer"/>
+						<ButtonSmall onClick={() => removeUser()} color="danger-fill" content="Verwijder account"/>
                     </div>
                 ) : (
 					<ButtonSmall onClick={() => setRemove(true)} color="danger" content="Verwijder account"/>
@@ -188,7 +188,7 @@ const MyProfileSettings = () => {
 				{
 					success && success
 				}
-			</div>
+			</div> */}
 
         </div>
     )

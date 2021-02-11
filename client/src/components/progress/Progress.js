@@ -46,7 +46,6 @@ const Progress = () => {
 			<div className="progression-charts">
 				{
 					progress && progress.map((item, index) => {
-						console.log(item)
 						return <ProgressItem key={index} percentage={item.progress.percentage} title={capitalizeTitle(item.signpost.shortedTitle)} />
 					})
 				}

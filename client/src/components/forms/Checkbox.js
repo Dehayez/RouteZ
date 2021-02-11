@@ -13,12 +13,10 @@ const Checkbox = ({name, id, change}) => {
 
   return (
     <div className="checkbox">
-      <span>
         {
           checked && <img src={Check} alt="check" />
         }
         <input onChange={(e) => changeThis(e)} type="checkbox" name={name} id={id} />
-      </span>
     </div>
   )
 };

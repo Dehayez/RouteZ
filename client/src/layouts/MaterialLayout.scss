@@ -7,7 +7,9 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: flex-start;
-		margin-bottom: 4rem;
+		flex-wrap: wrap;
+	
+		position: absolute;
 
 		&-search{
 			display: flex;
@@ -23,7 +25,7 @@
 				font-size: 14px;
 		
 				height: 30px;
-				width: 12vw;
+				width: 100%;
 				max-width: 200px;
 				padding: 1.5rem;
 
@@ -52,11 +54,223 @@
 
 		&-filters {
 			display: flex;
+			flex-wrap: wrap;
 			margin-top: 8px;
 		}
 
 		&-button {
 			margin-top: 8px;
+		}
+	}
+
+	&-content {
+		margin-top: 8rem;
+	}
+
+	&-detail {
+		display: flex;
+		justify-content: space-between;
+
+		&-left {
+		}
+
+		&-right {
+			border-left: 1px solid rgba($routez-grey, 0.3);
+			padding: 2rem;
+
+			&-title {
+				font-size: 18px;
+				font-weight: 500;
+			}
+			
+			&-profile {
+				display: flex;
+	
+				border-radius: 10px;
+				padding: 0.5rem 0;
+				margin: 1rem 0;
+				transition: all 0.3s;
+				cursor: pointer;
+				text-decoration: none;
+	
+				&:hover {
+					text-decoration: underline;
+					text-decoration-color: $routez-black;
+				}
+			
+				&__text {
+					font-size: 12px;
+			
+					display: flex;
+					flex-direction: column;
+					justify-content: center;
+					text-align: left;
+			
+					&-name {
+						font-weight: 600;
+						margin: 0;
+					}
+	
+					&-settings {
+						font-weight: 300;
+						margin: 0;
+					}
+				}
+	
+				&__image {
+					width: 50px;
+					height: 50px;
+					border-radius: 50%;
+					margin-right: 1rem;
+				}
+			}
+
+			&-download {
+				background-color: $routez-grey-light;
+				border-radius: 10px;
+				padding: 1rem;
+
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+
+				transition: 0.3s;
+
+				&-title {
+					font-weight: 600;
+					font-size: 14px;
+					margin-bottom: 0.4rem;
+				}
+
+				&-text {
+					font-size: 12px;
+
+					&__name, &__data {
+						margin: 0;
+					}
+
+					&__name {
+						font-weight: 600;
+					}
+				}
+
+				&:hover {
+					cursor: pointer;
+					background-color: $routez-grey-light-dark;
+				}
+			}
+
+			&-likes {
+				display: flex;
+				align-items: center;
+				margin: 1rem 0;
+				margin-bottom: 2rem;
+
+				& .material-icon-heart-wrapper {
+					margin-left: 0;
+				}
+
+				&__text {
+					font-size: 12px;
+					margin: 0;
+				}
+			}
+		}
+
+		&-title {
+			font-size: 36px;
+			font-weight: 600;
+			font-family: $font-family-secondary;
+
+			&-wrapper {
+				display: flex;
+				align-items: center;
+				margin-bottom: 2rem;
+			}
+		}
+
+		&-text {
+			font-size: 14px;
+			font-weight: 400;
+		}
+	}
+
+	&-icon {
+		&__download {
+			color: $routez-primary;
+			font-size: 1.6rem;
+
+			&:hover {
+				color: $routez-primary-dark;
+				cursor: pointer;
+			}
+		}
+
+		&-heart {
+			font-size: 1.4rem;
+			color: $routez-grey;
+			transition: 0.3s;
+
+			&--number {
+
+			}
+	
+			&-wrapper {
+				background-color: $routez-grey-light;
+				height: 36px;
+				width: 36px;
+				border-radius: 50%;
+
+				margin: 0 1rem;
+				
+				display: flex;
+				justify-content: center;
+				align-items: center;
+
+				transition: 0.3s;
+
+				&--number {
+					display: flex;
+					align-items: center;
+
+					& p {
+						margin: 0;
+						font-size: 14px;
+						font-weight: 600;
+					}
+				}
+
+				&:hover {
+					cursor: pointer;
+				}
+
+				&:hover > .material-icon-heart {
+					color: $routez-primary;
+				}
+
+				&:hover > .material-icon-heart--fill {
+					color: $routez-primary-dark;
+				}
+			}
+			
+			&--fill {
+				color: $routez-primary;
+			}
+		}
+	}
+
+	&-recommended {
+		&-header {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+
+			margin: 2rem 0;
+
+			& p {
+				font-weight: 500;
+				margin: 0;
+			}
 		}
 	}
 }

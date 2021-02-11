@@ -12,7 +12,6 @@
 }
 
 /********************************* PROFILE PAGE *********************************/
-
 .profile {
 	padding: 1rem 2rem;
 
@@ -70,7 +69,6 @@
 
 
 /********************************* PROFILE SETTINGS PAGE *********************************/
-
  .settings {    
 	display: flex;
     flex-direction: column;
@@ -80,6 +78,12 @@
 	&-danger {
 		width: 100%;
 		margin-top: 6rem;
+
+		&-buttons {
+			& > button {
+				margin-right: 1rem;
+			}
+		}
 	}
  }
 
@@ -103,13 +107,18 @@
 
 	&-item {
 		margin: 0.5rem;
+		display: flex;
+		// margin-right: 10.5rem;
 	}
+
 	&-label {
 		color: $routez-primary;
 		font-weight: 300;
 		font-size: 14px;
 		
-		display: inline-block;
+		display: flex;
+		justify-content: flex-end;
+		align-items: center;
 		width: 140px;
 		margin-right: 1rem;
 		text-align: right;
@@ -118,6 +127,9 @@
 	&-input {
 		border-radius: 5px;
 		border: 2px solid $routez-grey-light;
+		font-weight: 300;
+		font-size: 14px;
+		padding: 0.2rem 0.8rem;
 
 		&:focus {
 			outline: 3px solid $routez-secondary;
@@ -134,7 +146,6 @@
 
 
  /********************************* DASHBOARD PAGE *********************************/
-
  .dashboard {    
 	display: flex;
     flex-direction: column;

@@ -3,13 +3,15 @@ import React, { useState } from 'react';
 // Import components
 import { ListMaterialItem } from '.';
 
+import './Materials.scss';
+
 const ListMaterials = ({title, materials, owner}) => {
   // Pagination
   const [ paginateIndex, setPaginateIndex ] = useState(2);
 
   return (
-    <>
-    <h1>{title}</h1>
+    <div className="material-list">
+    <h1 className="material-list-title">{title}</h1>
     {
       materials && materials.length !== 0 ? (
         <>
@@ -19,12 +21,12 @@ const ListMaterials = ({title, materials, owner}) => {
             })
           }
           {
-            paginateIndex === materials.length ? '' : paginateIndex > materials.length ? '' : <span onClick={() => setPaginateIndex(paginateIndex+3)}>Bekijk meer</span>
+            paginateIndex === materials.length ? '' : paginateIndex > materials.length ? '' : <p className="material-list-more" onClick={() => setPaginateIndex(paginateIndex+3)}>Bekijk meer</p>
           }
         </>
-      ) : <span>Er zijn geen bestanden gevonden.</span>
+      ) : <span className="material-list-warning">Er zijn geen bestanden gevonden.</span>
     }
-    </>
+    </div>
   )
 };
 

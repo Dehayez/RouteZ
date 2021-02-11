@@ -1,0 +1,83 @@
+@import '../../_sass/abstracts/index';
+
+.material {
+	&-list {
+		margin: 4rem 0;
+
+		&-title {
+			font-size: 18px;
+			font-weight: 600;
+		}
+
+		&-item {
+			border-bottom: 1px solid rgba($routez-grey, .3);
+			padding: 1rem 0;
+
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+	
+			&-left {
+				display: flex;
+				flex-direction: column;
+
+				&-bottom {
+					display: flex;
+					align-items: center;
+				}
+			}
+
+			&-title a {
+				color: $routez-black;
+				font-size: 16px;
+				font-weight: 500;
+				text-decoration: none;
+
+				&:hover {
+					color: $routez-black;
+					text-decoration: underline;
+				}
+			}
+	
+			&-date {
+				color: $routez-black;
+				font-size: 13px;
+				font-weight: 300;
+				margin: 0;
+	
+				& a {
+					font-weight: 500;
+					color: $routez-black;
+					text-decoration: none;
+
+					&:hover {
+						color: $routez-black;
+						text-decoration: underline;
+					}
+				}
+			}
+		}
+
+		&-warning {
+			font-size: 14px;
+			font-weight: 300;
+			opacity: 0.8;
+		}
+
+		&-more {
+			color: $routez-primary;
+			font-size: 14px;
+			padding-top: 1rem;
+
+			&:hover {
+				cursor: pointer;
+				text-decoration: underline;
+			}
+		}
+	}
+
+	&-cards {
+		display: flex;
+		justify-content: space-between;
+	}
+}

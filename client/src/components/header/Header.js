@@ -10,16 +10,18 @@ import { apiConfig } from '../../config';
 // Routes
 import * as Routes from '../../routes';
 
-// Import icons
-import { IoMdNotificationsOutline } from 'react-icons/io';
+// Icons
+// import { IoMdNotificationsOutline } from 'react-icons/io';
 
 import { DefaultImage } from '../../assets/images';
 
 import './Header.scss' 
 
-const Header = ({pageTitle}) => {
-		// Routing
-		const history = useHistory();
+const Header = () => {
+	// Routing
+	const history = useHistory();
+
+	const url = window.location.pathname.split('/');
 
     // Use services
     const { getMyself, currentUser } = useAuth();
@@ -27,7 +29,7 @@ const Header = ({pageTitle}) => {
     // All accessable data
     const [ user, setUser ] = useState();
     const [ avatar, setAvatar ] = useState();
-		const [ searchKeywords, setSearchKeywords ] = useState();
+	const [ searchKeywords, setSearchKeywords ] = useState();
 
     const getAllData = useCallback(() => {
         const easyFetch = async () => {
@@ -63,14 +65,24 @@ const Header = ({pageTitle}) => {
   return (
     <header className="header">
 		<div className="header-left">
-			<h1 className="header-left-title">{pageTitle}</h1>
+			<h1 className="header-left-title">
+				{
+					url.includes('dashboard') ? 'Dashboard' : 
+					url.includes('settings') ? 'Instellingen' : 
+					url.includes('my-profile') ? 'Mijn profiel' : 
+					url.includes('profile') ? 'Profiel' : 
+					url.includes('my-materials') ? 'Mijn materiaal' : 
+					url.includes('search-results') ? 'Zoekresultaten' : 
+					'Wegwijzers'
+				}
+			</h1>
 		</div>
 
 		<div className="header-right">
 			<form onSubmit={(e) => submitSearch(e)}>
 				<input onChange={(e) => watchChanges(e)} className="header-right-input" id="search-engine" type="text" placeholder="Zoek"/>
 			</form>
-			<IoMdNotificationsOutline className="header-right-icon"/>
+			{/* <IoMdNotificationsOutline className="header-right-icon"/> */}
 			<Link className="header-right-profile" to="/my-profile">
 				<div className="header-right-profile__text">
 					{ 

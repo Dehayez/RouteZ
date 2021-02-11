@@ -198,9 +198,9 @@ const Materials = () => {
 			<form className="material-form" onSubmit={(e) => searchMaterials(e)}>
 				{/** Keywords */}
 				<div className="material-form-search">
-					<div className="material-form-search__icon">
-						<FiSearch/> 
-					</div>
+					{/* <div className="material-form-search__icon">
+						<FiSearch type="submit"/> 
+					</div> */}
 					<input className="material-form-search__input" type="text" onChange={(e) => changeKeywords(e.target.value)} name="keywords" id="keywords" placeholder="Zoek kernwoorden" />
 				</div>
 				{/** Select type of file */}
