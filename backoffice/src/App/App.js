@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Switch } from 'react-router-dom';
 
 // Services
-import { AuthProvider } from './services';
+import { ApiProvider, AuthProvider } from './services';
 
 // Utils
 import { RouteCheck } from './utils';
@@ -11,7 +11,7 @@ import { RouteCheck } from './utils';
 import * as Routes from './routes';
 
 // Pages
-import { Signin } from './pages';
+import { Dashboard, Signin, Signposts } from './pages';
 
 // CSS
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -20,11 +20,15 @@ import './_sass/_index.scss';
 const App = () => {
   return (
     <AuthProvider>
-      <BrowserRouter>
-        <Switch>
-          <RouteCheck tokenNeeded={false} path={Routes.SIGNIN} component={Signin} />
-        </Switch>
-      </BrowserRouter>
+      <ApiProvider>
+        <BrowserRouter>
+          <Switch>
+            <RouteCheck tokenNeeded={false} path={Routes.SIGNPOSTS} component={Signposts} />
+            <RouteCheck tokenNeeded={true} path={Routes.DASHBOARD} component={Dashboard} />
+            <RouteCheck tokenNeeded={false} path={Routes.SIGNIN} component={Signin} />
+          </Switch>
+        </BrowserRouter>
+      </ApiProvider>
     </AuthProvider>
   );
 };

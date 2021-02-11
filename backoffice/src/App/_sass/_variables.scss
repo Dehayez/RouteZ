@@ -23,3 +23,46 @@ $font-size-m: 1rem;
 $font-size-l: 1.125rem;
 $font-size-xl: 1.5rem;
 $font-size-xxl: 1.875rem; 
+
+
+// Quick styles
+.overview {
+  &__title {
+    font-size: $font-size-xxl;
+    font-family: $font-family-secondary;
+    font-weight: 700;
+  }
+
+  &__items {
+    margin-top: 20px;
+
+    &--item {
+      padding: 20px 0;
+      border-bottom: 1px solid $routez-grey;
+
+      &--text {
+        h5, h6 {
+          margin: 0;
+        }
+
+        h5 {
+          font-family: $font-family-primary;
+          font-size: $font-size-m;
+          font-weight: 700;
+          cursor: pointer;
+        }
+
+        h5:hover {
+          text-decoration: underline;
+        }
+
+        h6 {
+          margin-top: 10px;
+          font-family: $font-family-primary;
+          font-size: $font-size-s;
+          font-weight: 300;
+        }
+      }
+    }
+  }
+}

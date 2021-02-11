@@ -70,6 +70,28 @@ const AuthProvider = ({ children }) => {
     return user;
   };
 
+    /**
+   * @desc get current user
+   * @param {string} token 
+   */
+  const getMyself = async (token) => {
+    const url = `${apiConfig.baseURL}users/me`;
+
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      redirect: 'follow'
+    });
+
+    const user = await response.json();
+
+    return user;
+  };
+
   /**
    * @desc logging out the user
    */
@@ -82,6 +104,7 @@ const AuthProvider = ({ children }) => {
     <AuthContext.Provider value={{ 
         currentUser, 
         signInAdmin, 
+        getMyself,
         logoutAdmin, 
       }}>
       {children}

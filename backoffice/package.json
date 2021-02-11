@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^12.1.10",
     "bootstrap": "^4.6.0",
     "dotenv": "^8.2.0",
+    "downloadjs": "^1.4.7",
     "jsonwebtoken": "^8.5.1",
     "node-sass": "^4.14.1",
     "react": "^17.0.1",

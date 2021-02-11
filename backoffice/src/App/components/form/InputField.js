@@ -9,9 +9,9 @@ const InputField = ({ defaultValue, placeholder, id, name, type, label, whenChan
       <label className="input-field__label" htmlFor={name}>{label}</label>
       {
         required ? (
-          <input className="input-field__field" type={type} id={id} placeholder={placeholder} defaultValue={defaultValue} onChange={whenChanging} required />
+          <input className="input-field__field" type={type} name={name} id={id} placeholder={placeholder} defaultValue={defaultValue} onChange={whenChanging} required />
         ) : (
-          <input className="input-field__field" type={type} id={id} placeholder={placeholder} defaultValue={defaultValue} onChange={whenChanging} />
+          <input className="input-field__field" type={type} name={name} id={id} placeholder={placeholder} defaultValue={defaultValue} onChange={whenChanging} />
         )
       }
     </>

@@ -1,0 +1,17 @@
+@import '../_sass/index';
+
+.dashboard {
+  &__title {
+    font-family: $font-family-secondary;
+    font-weight: bold;
+    font-size: $font-size-xxl;
+    margin-top: 30px;
+    margin-bottom: 50px;
+
+    span {
+      font-family: $font-family-primary;
+      font-size: $font-size-xl;
+      font-weight: 400;
+    }
+  }
+}

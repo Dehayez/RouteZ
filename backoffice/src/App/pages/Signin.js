@@ -49,7 +49,7 @@ const Signin = () => {
         return;
       };
 
-      // history.push(Routes.DASHBOARD);
+      history.push(Routes.DASHBOARD);
     } catch (e) {
       setError(true);
     };
@@ -69,7 +69,7 @@ const Signin = () => {
                 defaultValue=""
                 required={true}
                 type="email"
-                whenChanging={(e) => setForm(e)}
+                whenChanging={(e) => changeForm(e)}
               />
               <InputField 
                 name="password"
@@ -79,7 +79,7 @@ const Signin = () => {
                 defaultValue=""
                 required={true}
                 type="password"
-                whenChanging={(e) => setForm(e)}
+                whenChanging={(e) => changeForm(e)}
               />
               {
                 error && <Message text="Aanmelden mislukt" />
