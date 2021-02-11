@@ -11,7 +11,6 @@ import { apiConfig } from '../config';
 // Import components
 import { Navigation, Header } from '../components'
 
-
 const MaterialLayout = ({ children }) => {
     // Use services
     const { getMyself, currentUser } = useAuth();

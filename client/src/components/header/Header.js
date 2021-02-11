@@ -10,16 +10,18 @@ import { apiConfig } from '../../config';
 // Routes
 import * as Routes from '../../routes';
 
-// Import icons
-import { IoMdNotificationsOutline } from 'react-icons/io';
+// Icons
+// import { IoMdNotificationsOutline } from 'react-icons/io';
 
 import { DefaultImage } from '../../assets/images';
 
 import './Header.scss' 
 
-const Header = ({pageTitle}) => {
-		// Routing
-		const history = useHistory();
+const Header = () => {
+	// Routing
+	const history = useHistory();
+
+	const url = window.location.pathname.split('/');
 
     // Use services
     const { getMyself, currentUser } = useAuth();
@@ -63,7 +65,17 @@ const Header = ({pageTitle}) => {
   return (
     <header className="header">
 		<div className="header-left">
-			<h1 className="header-left-title">{pageTitle}</h1>
+			<h1 className="header-left-title">
+				{
+					url.includes('dashboard') ? 'Dashboard' : 
+					url.includes('settings') ? 'Instellingen' : 
+					url.includes('my-profile') ? 'Mijn profiel' : 
+					url.includes('profile') ? 'Profiel' : 
+					url.includes('my-materials') ? 'Mijn materiaal' : 
+					url.includes('search-results') ? 'Zoekresultaten' : 
+					'Wegwijzers'
+				}
+			</h1>
 		</div>
 
 		<div className="header-right">
