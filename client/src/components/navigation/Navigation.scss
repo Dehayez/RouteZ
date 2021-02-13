@@ -89,7 +89,7 @@
 				&-span {
 					color: $routez-black;
 					font-size: 12px;
-					font-weight: 100;
+					font-weight: 300;
 				}
 				&-title {
 					color: $routez-black;
@@ -99,6 +99,14 @@
 					text-transform: capitalize;
 				}
 			}
+		}
+	}
+
+	&-link {
+		font-size: 14px;
+		
+		&:hover {
+			text-decoration: underline;
 		}
 	}
 }

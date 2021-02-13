@@ -70,10 +70,7 @@
 	&-detail {
 		display: flex;
 		justify-content: space-between;
-
-		&-left {
-		}
-
+	
 		&-right {
 			border-left: 1px solid rgba($routez-grey, 0.3);
 			padding: 2rem;
@@ -270,6 +267,66 @@
 			& p {
 				font-weight: 500;
 				margin: 0;
+			}
+		}
+	}
+}
+
+
+
+
+
+
+
+/********************************* SEARCH RESULTS PAGE *********************************/
+.search {
+	padding: 3rem;
+
+	&-left {
+		display: flex;
+		justify-content: center;
+
+		&-form {
+			&-input {
+				background-color: $routez-grey-light;
+				color: $routez-black;
+				font-weight: 500;
+				font-size: 14px;
+	
+				height: 30px;
+				border-radius: 10px;
+				padding: 1.5rem;
+				border: none;
+				
+				&:focus {
+					outline: 3px solid $routez-secondary;
+				}
+			}
+		}
+	}
+
+	&-right {
+		&-indicator {
+			padding: 0.6rem 1rem 1rem;
+			border-bottom: 1px solid rgba($routez-grey, 0.3);
+		}
+
+		&-results {
+			&-item {
+				padding: 1rem;
+				border-bottom: 1px solid rgba($routez-grey, 0.3);
+
+				& > button {
+					margin: 0.4rem 0;
+				}
+				&__title {
+					font-size: 16px;
+					font-weight: 600;
+
+					&::first-letter {
+						text-transform: capitalize;
+					}
+				}
 			}
 		}
 	}

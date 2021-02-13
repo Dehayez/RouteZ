@@ -9,6 +9,8 @@ import { NavigationItem } from './'
 import { Link } from 'react-router-dom';
 import { LogoColor } from '../../assets/logos';
 
+import * as Routes from '../../routes';
+
 // Import config
 import { apiConfig } from '../../config';
 
@@ -64,6 +66,8 @@ const Navigation = () => {
 						})
         			}
 				</nav>
+				
+				<Link className="nav-link" to={Routes.SIGNPOSTS}>Alle wegwijzers</Link>
 
 			</div>
 	);
