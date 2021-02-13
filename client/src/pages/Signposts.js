@@ -1,49 +1,77 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
+// Components
+import { CardSignpost } from '../components';
+import { BackLinks } from '../components';
+
 // Importing services
-import { useApi, useAuth } from '../services';
+import { useAuth } from '../services';
+
+// Import config
+import { apiConfig } from '../config';
+
+// Routes
+import * as Routes from '../routes';
 
 const Signposts = () => {
-    const history = useHistory();
+	// Routing
+	const history = useHistory();
 
-    const { getSignPosts } = useApi();
-    const { currentUser } = useAuth();
+	// Services
+	const { currentUser, getProgress } = useAuth();
 
-    // Some important states
-    const [ signposts, setSignposts ] = useState();
+	// States
+	const [ progress, setProgress ] = useState();
 
-    const getAllData = useCallback(() => {
-        const fetchData = async () => {
-            if (currentUser) {
-                const signpostsData = await getSignPosts(currentUser.token);
-                setSignposts(signpostsData);
-            };
-        };
+	const fetchProgress = useCallback(async () => {
+		try {
+			const data = await getProgress(currentUser.token);
+			setProgress(data);
+		} catch (e) {
+			history.push(Routes.NOT_FOUND);
+		};
+	}, [history, getProgress, currentUser]);
 
-        fetchData();
-    }, [ getSignPosts, currentUser ]);
+	useEffect(() => {
+		fetchProgress();
+	}, [fetchProgress]);
 
-    useEffect(() => {
-        getAllData();
-    }, [ getAllData ]);
-
-    // Going to specific signpost
-    const goToSign = async (id) => {
-        history.push(`/signposts/${id}`);
-	};
-	
-	console.log(signposts);
+	console.log(progress)
 
     return (
-        <div>
-        {
-            signposts && signposts.map((element, index) => {
-                return ''
-            })
-        }
+        <div className="signposts">
+		{
+			progress && (
+				<BackLinks 
+					links={[
+						{
+							path: `${Routes.SIGNPOSTS}`,
+							route: "wegwijzers "
+						},
+					]}
+				/>
+			)
+		}
+			<h1 className="signposts-title">Wegwijzers</h1>
+			<div className="signposts-items">
+				{
+					progress && progress.map((signpost, i) => {
+						return <CardSignpost 
+									key={i}
+									index={i+1}
+									title={signpost.signpost.shortedTitle} 
+									text={signpost.signpost.title} 
+									alt={signpost.signpost.shortedTitle} 
+									endpoint={`/signposts/${signpost.signpost.id}`} 
+									logo={`${apiConfig.baseURL}file/${signpost.signpost.icon}`}
+									percentage={signpost.progress.percentage}
+								/>
+					})
+				}
+			</div>
         </div>
     )
-};
+}
 
 export default Signposts;

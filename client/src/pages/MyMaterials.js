@@ -58,17 +58,17 @@ const MyMaterials = () => {
   }, [getData]);
 
   return (
-    <>
+    <div className="material">
     {
       videos && presentations && textFiles && (
-        <>
+        <div className="material-content">
           <ListMaterials owner={true} title="Alle tekstbestanden" materials={textFiles && textFiles} />
           <ListMaterials owner={true} title="Alle presentaties" materials={presentations && presentations} />
           <ListMaterials owner={true} title="Alle video's" materials={videos && videos} />
-        </>
+        </div>
       )
     }
-    </>
+    </div>
   );
 };
 

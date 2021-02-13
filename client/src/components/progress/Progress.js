@@ -40,13 +40,19 @@ const Progress = () => {
 		return s.charAt(0).toUpperCase() + s.slice(1);
 	};
 
+	console.log(progress)
+
 	return (
 		<div className="progression">
 			<h4 className="progression-title">Progressie</h4>
 			<div className="progression-charts">
 				{
 					progress && progress.map((item, index) => {
-						return <ProgressItem key={index} percentage={item.progress.percentage} title={capitalizeTitle(item.signpost.shortedTitle)} />
+						return <ProgressItem 
+									key={index} 
+									percentage={item.progress.percentage} 
+									title={capitalizeTitle(item.signpost.shortedTitle)} 
+								/>
 					})
 				}
 			</div>

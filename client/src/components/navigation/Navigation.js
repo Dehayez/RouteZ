@@ -56,13 +56,13 @@ const Navigation = () => {
 					{
 						signposts && signposts.map((signpost, i) => {
 							return <NavigationItem 
-								key={i} 
-								index={i+1}
-								title={signpost.shortedTitle} 
-								alt={signpost.shortedTitle} 
-								endpoint={`/signposts/${signpost.id}`} 
-								logo={`${apiConfig.baseURL}file/${signpost.icon}`}
-								/>
+										key={i} 
+										index={i+1}
+										title={signpost.shortedTitle} 
+										alt={signpost.shortedTitle} 
+										endpoint={`/signposts/${signpost.id}`} 
+										logo={`${apiConfig.baseURL}file/${signpost.icon}`}
+									/>
 						})
         			}
 				</nav>
