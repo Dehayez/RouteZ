@@ -14,26 +14,26 @@ import { UsualButton, DeleteButton } from '../components';
 // Routes
 import * as Routes from '../routes';
 
-const Signposts = () => {
+const Modules = () => {
   // Routing
   const history = useHistory();
 
   // Services
-  const { getSignPosts, deleteSignpost } = useApi();
+  const { getModules, deleteModule } = useApi();
   const { currentUser } = useAuth();
 
   // States
-  const [ signposts, setSignposts ] = useState();
+  const [ modules, setModules ] = useState();
 
   // Fetch
   const getData = useCallback(async () => {
     try {
-      const data = await getSignPosts(currentUser.token);
-      setSignposts(data);
+      const data = await getModules(currentUser.token);
+      setModules(data);
     } catch (e) {
       console.log(e);
     };
-  }, [getSignPosts, currentUser]);
+  }, [getModules, currentUser]);
 
   useEffect(() => {
     getData();
@@ -41,34 +41,33 @@ const Signposts = () => {
 
   // Delete
   const deleteItem = async (id) => {
-    await deleteSignpost(currentUser.token, id);
+    await deleteModule(currentUser.token, id);
     window.location.reload();
   };
 
   return (
     <UsualLayout>
       <Row>
-        <Col xs={12} className="d-flex align-items-center justify-content-between">
+        <Col xs={12}>
           <h1 className="overview__title">
-            Alle wegwijzers
+            Alle modules
           </h1>
-          <UsualButton text="Wegwijzer maken" action={() => history.push(Routes.CREATE_SIGNPOST)} />
         </Col>
       </Row>
       <Row>
         <Col xs={12}>
           <div className="overview__items">
             {
-              signposts && signposts.map((signpost, index) => {
+              modules && modules.map((moduleItem, index) => {
                 return (
-                  <div className="overview__items--item d-flex justify-content-between align-items-center" key={index}>
+                  <div className="overview__items--item" key={index}>
                     <div className="overview__items--item--text">
-                      <h5 onClick={() => history.push(Routes.SIGNPOST.replace(':id', signpost._id))}>{signpost.title}</h5>
-                      <h6>Bevat {signpost.modules.length} modules</h6>
+                      <h5 onClick={() => history.push(Routes.MODULE.replace(':id', moduleItem._id))}>{moduleItem.title}</h5>
+                      <h6>Bevat {moduleItem.paths.length} paden</h6>
                     </div>
-                    <div className="overview__items--item--buttons d-flex align-items-center">
-                      <UsualButton text="Bewerk" action={() => history.push(Routes.EDIT_SIGNPOST.replace(':id', signpost._id))} />
-                      <DeleteButton text="Verwijder" action={() => deleteItem(signpost._id)} />
+                    <div className="overview__items--item--buttons d-flex align-items-center justify-content-end">
+                      <UsualButton text="Bewerk" action={() => history.push(Routes.EDIT_MODULE.replace(':id', moduleItem._id))} />
+                      <DeleteButton text="Verwijder" action={() => deleteItem(moduleItem._id)} />
                     </div>
                   </div>
                 )
@@ -81,4 +80,4 @@ const Signposts = () => {
   );
 };
 
-export default Signposts;
+export default Modules;

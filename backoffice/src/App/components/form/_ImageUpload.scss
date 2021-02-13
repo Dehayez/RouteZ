@@ -1,0 +1,53 @@
+@import '../../_sass/index';
+
+.image-upload {
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+
+  &__preview {
+    background-size: cover;
+    background-position: center center;
+    border-radius: 5px;
+    width: 400px;
+    height: 400px;
+    margin-left: 20px;
+  }
+
+  &__field {
+    &--title {
+      font-family: $font-family-primary;
+      font-size: $font-size-s;
+      margin-left: 20px;
+    }
+
+    &--wrapper {
+      margin-top: 10px;
+      background-color: $routez-primary;
+      padding: 10px 20px;
+      border-radius: 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      cursor: pointer;
+
+      span {
+        cursor: pointer;
+        font-size: $font-size-s;
+        color: white;
+        font-family: $font-family-primary;
+        font-weight: bold;
+      }
+
+      input {
+        opacity: 0;
+        position: absolute;
+        cursor: pointer;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}

@@ -1,0 +1,71 @@
+@import '../_sass/index';
+
+.create {
+  &__title {
+    font-size: $font-size-xxl;
+    font-family: $font-family-secondary;
+    font-weight: 700;
+  }
+
+  &__form {
+    margin-top: 50px;
+
+    &--file {
+      margin-bottom: 20px;
+
+      &--wrapper {
+        padding: 10px 20px;
+        background-color: $routez-primary;
+        border-radius: 5px;
+        cursor: pointer;      
+        border: none;
+        display: inline-block;
+        position: relative;
+
+        span {
+          cursor: pointer;
+          font-size: $font-size-s;
+          color: white;
+          font-family: $font-family-primary;
+          font-weight: bold;
+          text-align: center;
+        }
+
+        input {
+          position: absolute;
+          width: 100%;
+          left: 0;
+          top: 0;
+          height: 100%;
+          opacity: 0;
+          cursor: pointer;
+        }
+      }
+
+      &--info {
+        background-color: $routez-grey-light;
+        margin-top: 10px;
+        font-size: $font-size-s;
+        font-family: $font-family-primary;
+        padding: 10px 20px;
+        border-radius: 5px;
+      }
+    }
+
+    &--submit {
+      button {
+        padding: 10px 20px;
+        background-color: $routez-primary;
+        font-size: $font-size-s;
+        color: white;
+        font-family: $font-family-primary;
+        font-weight: bold;
+        text-align: center;
+        border-radius: 5px;
+        margin-left: 5px;
+        cursor: pointer;      
+        border: none;
+      }
+    }
+  }
+}

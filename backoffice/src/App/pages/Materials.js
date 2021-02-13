@@ -9,31 +9,31 @@ import { UsualLayout } from '../layouts';
 import { useApi, useAuth } from '../services';
 
 // Components
-import { UsualButton, DeleteButton } from '../components';
+import { DeleteButton, UsualButton } from '../components';
 
 // Routes
 import * as Routes from '../routes';
 
-const Signposts = () => {
+const Materials = () => {
   // Routing
   const history = useHistory();
 
   // Services
-  const { getSignPosts, deleteSignpost } = useApi();
+  const { getMaterials, deleteMaterial } = useApi();
   const { currentUser } = useAuth();
 
   // States
-  const [ signposts, setSignposts ] = useState();
+  const [ materials, setMaterials ] = useState();
 
   // Fetch
   const getData = useCallback(async () => {
     try {
-      const data = await getSignPosts(currentUser.token);
-      setSignposts(data);
+      const data = await getMaterials(currentUser.token);
+      setMaterials(data);
     } catch (e) {
       console.log(e);
     };
-  }, [getSignPosts, currentUser]);
+  }, [getMaterials, currentUser]);
 
   useEffect(() => {
     getData();
@@ -41,34 +41,34 @@ const Signposts = () => {
 
   // Delete
   const deleteItem = async (id) => {
-    await deleteSignpost(currentUser.token, id);
+    await deleteMaterial(currentUser.token, id);
     window.location.reload();
   };
 
   return (
     <UsualLayout>
       <Row>
-        <Col xs={12} className="d-flex align-items-center justify-content-between">
+        <Col xs={12} className="d-flex justify-content-between align-items-center">
           <h1 className="overview__title">
-            Alle wegwijzers
+            Alle materialen
           </h1>
-          <UsualButton text="Wegwijzer maken" action={() => history.push(Routes.CREATE_SIGNPOST)} />
+          <UsualButton text="Materiaal maken" action={() => history.push(Routes.CREATE_MATERIAL)} />
         </Col>
       </Row>
       <Row>
         <Col xs={12}>
           <div className="overview__items">
             {
-              signposts && signposts.map((signpost, index) => {
+              materials && materials.map((material, index) => {
                 return (
                   <div className="overview__items--item d-flex justify-content-between align-items-center" key={index}>
                     <div className="overview__items--item--text">
-                      <h5 onClick={() => history.push(Routes.SIGNPOST.replace(':id', signpost._id))}>{signpost.title}</h5>
-                      <h6>Bevat {signpost.modules.length} modules</h6>
+                      <h5 onClick={() => history.push(Routes.MATERIAL.replace(':id', material._id))}>{material.title}</h5>
+                      <h6>{material.type}</h6>
                     </div>
-                    <div className="overview__items--item--buttons d-flex align-items-center">
-                      <UsualButton text="Bewerk" action={() => history.push(Routes.EDIT_SIGNPOST.replace(':id', signpost._id))} />
-                      <DeleteButton text="Verwijder" action={() => deleteItem(signpost._id)} />
+                    <div className="overview__items--item--buttons align-items-center justify-content-end">
+                      <UsualButton text="Bewerk" action={() => history.push(Routes.EDIT_MATERIAL.replace(':id', material._id))} />
+                      <DeleteButton text="Verwijder" action={() => deleteItem(material._id)} />
                     </div>
                   </div>
                 )
@@ -81,4 +81,4 @@ const Signposts = () => {
   );
 };
 
-export default Signposts;
+export default Materials;
