@@ -3,6 +3,8 @@ import LargeSubmitButton from './LargeSubmitButton';
 import Message from './Message';
 import Textarea from './Textarea';
 import ImageUpload from './ImageUpload';
+import Tags from './Tags';
+import RadioSelect from './RadioSelect';
 
 export {
   InputField,
@@ -10,4 +12,6 @@ export {
   Message,
   Textarea,
   ImageUpload,
+  Tags,
+  RadioSelect,
 };

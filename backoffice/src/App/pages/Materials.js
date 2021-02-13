@@ -52,7 +52,7 @@ const Materials = () => {
           <h1 className="overview__title">
             Alle materialen
           </h1>
-          <UsualButton text="Materiaal maken" />
+          <UsualButton text="Materiaal maken" action={() => history.push(Routes.CREATE_MATERIAL)} />
         </Col>
       </Row>
       <Row>

@@ -25,6 +25,7 @@ export const EDIT_MODULE = '/edit-module/:id';
 export const MATERIALS = '/materials';
 export const MATERIAL = '/material/:id';
 export const EDIT_MATERIAL = '/edit-material/:id';
+export const CREATE_MATERIAL = '/create-material';
 
 // WHOOPS?
 export const WHOOPSIE = '/somethings-wrong';

@@ -184,8 +184,9 @@ const ApiProvider = ({children}) => {
   /**
    * uploading a document to the server
    * @param {json} file 
+   * @param {string} token
    */
-  const uploadDoc = async (file) => {
+  const uploadDoc = async (token, file) => {
     const url = `${BASE_URL}doc`;
 
     const formdata = new FormData();
@@ -195,6 +196,7 @@ const ApiProvider = ({children}) => {
       'method': 'POST',
       headers: {
         'Accept': 'application/json',
+        'Authorization': `Bearer ${token}`,
       },
       body: formdata,
     });
@@ -235,14 +237,16 @@ const ApiProvider = ({children}) => {
   /**
    * get one material
    * @param {string} id 
+   * @param {string} token
    */
-  const getMaterial = async (id) => {
+  const getMaterial = async (id, token) => {
     const url = `${BASE_URL}material/${id}`;
 
     const res = await fetch(url, {
       method: "GET",
       headers: {
         'Accept': 'application/json',
+        'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json'
       }
     });
@@ -289,14 +293,16 @@ const ApiProvider = ({children}) => {
    * edit one material
    * @param {string} id
    * @param {json} context
+   * @param {string} token
    */
-  const editMaterial = async (id, context) => {
+  const editMaterial = async (token, id, context) => {
     const url = `${BASE_URL}edit-material/${id}`;
 
     const res = await fetch(url, {
       method: "POST",
       headers: {
         'Accept': 'application/json',
+        'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(context),
@@ -308,14 +314,16 @@ const ApiProvider = ({children}) => {
     /**
    * create one material
    * @param {json} context
+   * @param {string} token
    */
-  const createMaterial = async (context) => {
+  const createMaterial = async (token, context) => {
     const url = `${BASE_URL}material`;
 
     const res = await fetch(url, {
       method: "POST",
       headers: {
         'Accept': 'application/json',
+        'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(context),
