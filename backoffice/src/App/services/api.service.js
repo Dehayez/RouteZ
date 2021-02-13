@@ -50,6 +50,49 @@ const ApiProvider = ({children}) => {
     return await response.json();
   };
 
+  /**
+   * @desc create one signpost
+   * @param {string} token 
+   * @param {json} content
+   */
+  const createSignPost = async (token, content) => {
+    const url = `${BASE_URL}signposts`;
+
+    const response = await fetch(url, {
+      'method': 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(content),
+    });
+
+    return await response.json();
+  };
+
+  /**
+   * @desc edit one signpost
+   * @param {string} token 
+   * @param {json} content
+   * @param {string} id
+   */
+  const editSignPost = async (token, content, id) => {
+    const url = `${BASE_URL}signposts/${id}`;
+
+    const response = await fetch(url, {
+      'method': 'PATCH',
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(content),
+    });
+
+    return await response.json();
+  };
+
   // MODULES
 
   /**
@@ -118,8 +161,9 @@ const ApiProvider = ({children}) => {
   /**
    * uploading a file to the server
    * @param {json} file 
+   * @param {string} token
    */
-  const uploadFile = async (file) => {
+  const uploadFile = async (file, token) => {
     const url = `${BASE_URL}file`;
 
     const formdata = new FormData();
@@ -129,6 +173,7 @@ const ApiProvider = ({children}) => {
       'method': 'POST',
       headers: {
         'Accept': 'application/json',
+        'Authorization': `Bearer ${token}`,
       },
       body: formdata,
     });
@@ -282,14 +327,16 @@ const ApiProvider = ({children}) => {
   /**
    * delete one material
    * @param {string} id
+   * @param {token} string
    */
-  const deleteMaterial = async (id) => {
+  const deleteMaterial = async (token, id) => {
     const url = `${BASE_URL}material/${id}`;
 
     const res = await fetch(url, {
       method: "DELETE",
       headers: {
         'Accept': 'application/json',
+        'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json'
       }
     });
@@ -397,10 +444,33 @@ const ApiProvider = ({children}) => {
     return await res.json();
   };
 
+  // USERS
+
+  /**
+   * fetch all users
+   * @param {string} token 
+   */
+  const getUsers = async (token) => {
+    const url = `${BASE_URL}users`;
+
+    const res = await fetch(url, {
+      method: "GET",
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+    });
+
+    return await res.json();
+  };
+
   return (
     <ApiContext.Provider value={{
       getSignPosts,
       getSignPost,
+      createSignPost,
+      editSignPost,
       getModule,
       getModules,
       getPath,
@@ -418,6 +488,7 @@ const ApiProvider = ({children}) => {
       addDislikeToMaterial,
       deleteMaterial,
       searchEverything,
+      getUsers,
     }}>
       {children}
     </ApiContext.Provider>

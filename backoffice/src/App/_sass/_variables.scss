@@ -40,7 +40,12 @@ $font-size-xxl: 1.875rem;
       padding: 20px 0;
       border-bottom: 1px solid $routez-grey;
 
+      &--buttons {
+        display: inline-flex;
+      }
+
       &--text {
+        display: inline-block;
         h5, h6 {
           margin: 0;
         }

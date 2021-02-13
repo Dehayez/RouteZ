@@ -1,0 +1,17 @@
+@import '../../_sass/index';
+
+.delete-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: $routez-danger;
+  font-size: $font-size-s;
+  color: white;
+  font-family: $font-family-primary;
+  font-weight: bold;
+  text-align: center;
+  margin-left: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+}
