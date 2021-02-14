@@ -12,23 +12,21 @@ const CardSignpost = ({endpoint, index, title, text, logo, alt, percentage }) =>
 
 
   return (
-	  <Link to={endpoint}>
-		<div className="signpost-card">
-			<h1 className="signpost-card__title">{index}. {title}</h1>
-			<p className="signpost-card__text">{text}</p>
+	  <Link className="signpost-card" to={endpoint}>
+		<h1 className="signpost-card__title">{index}. {title}</h1>
+		<p className="signpost-card__text">{text}</p>
 
-			<div className="signpost-card-bottom">
-				<div className="signpost-card-bottom__icon-wrapper">
-					<img className="signpost-card-bottom__icon" src={logo} alt={alt}/>
-				</div>
-				<div className="signpost-card-bottom-percentage">
-					<CircularProgressbar value={ percentage } strokeWidth={8} styles={buildStyles({
-						rotation: 0,
-						pathTransitionDuration: 2,
-						pathColor: '#4A84FC',
-						trailColor: '#DDECFE',
-					})} />
-				</div>
+		<div className="signpost-card-bottom">
+			<div className="signpost-card-bottom__icon-wrapper">
+				<img className="signpost-card-bottom__icon" src={logo} alt={alt}/>
+			</div>
+			<div className="signpost-card-bottom__percentage">
+				<CircularProgressbar value={ percentage } strokeWidth={8} styles={buildStyles({
+					rotation: 0,
+					pathTransitionDuration: 2,
+					pathColor: '#4A84FC',
+					trailColor: '#DDECFE',
+				})} />
 			</div>
 		</div>
 	</Link>
