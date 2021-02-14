@@ -1,0 +1,46 @@
+@import '../_sass/abstracts/index';
+
+.error {
+	padding: 0 3rem;
+
+	&-left {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+
+		&__404 {
+			color: $routez-primary;
+			font-size: 96px;
+			font-family: $font-family-secondary;
+			font-weight: 500;
+		}
+
+		&__title {
+			font-size: 48px;
+			font-family: $font-family-secondary;
+			font-weight: 500;
+			margin: 1rem 0 2rem 0;
+		}
+
+		&__text {
+			font-size: 20px;
+			font-weight: 300;
+		}
+	}
+
+	&-right {
+		display: flex;
+		align-items: flex-end;
+		justify-content: center;
+
+		&__image {
+			height: 50vh;
+			transition: 0.3s;
+			
+			&:hover {
+				-webkit-filter: drop-shadow(5px 5px 5px gba($routez-black, 0.4));
+				filter: drop-shadow(5px 5px 5px rgba($routez-black, 0.4));
+			}
+		}
+	}
+}

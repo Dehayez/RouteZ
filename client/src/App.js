@@ -2,10 +2,10 @@ import React from 'react';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
 
 // All pages
-import { CreateMaterial, Dashboard, EditMaterial, Landing, Login, Material, Materials, Module, MyMaterials, MyProfile, MyProfileSettings, Path, Register, SearchResults, SendReset, Signpost, Signposts, SubmitReset } from './pages';
+import { CreateMaterial, Dashboard, EditMaterial, Landing, Login, Material, Materials, Module, MyMaterials, MyProfile, MyProfileSettings, Path, Register, SearchResults, SendReset, Signpost, Signposts, SubmitReset, NotFound } from './pages';
 
 // Main layouts
-import { PageLayout, AuthLayout, SignpostLayout, MaterialLayout } from './layouts';
+import { PageLayout, AuthLayout, SignpostLayout, MaterialLayout, ErrorLayout } from './layouts';
 import { AuthRouteWithLayout, RouteWithLayout } from './utilities';
 
 // All routes
@@ -49,6 +49,9 @@ function App() {
                 <AuthRouteWithLayout exact path={Routes.EDIT_MATERIAL} component={EditMaterial} layout={MaterialLayout} />
                 <AuthRouteWithLayout exact path={Routes.ADD_MATERIAL} component={CreateMaterial} layout={MaterialLayout} />
                 <AuthRouteWithLayout exact path={Routes.SEARCH_RESULTS} component={SearchResults} layout={MaterialLayout} />
+				
+				{/** Not found page  */}
+				<RouteWithLayout component={NotFound} layout={ErrorLayout} />
               </Switch>
             </Router>
           </ApiProvider>

@@ -18,6 +18,8 @@ import EditMaterial from './EditMaterial';
 import CreateMaterial from './CreateMaterial';
 import SearchResults from './SearchResults';
 
+import NotFound from './NotFound';
+
 export {
   Login,
   Register,
@@ -37,4 +39,5 @@ export {
   EditMaterial,
   CreateMaterial,
   SearchResults,
+  NotFound,
 };
