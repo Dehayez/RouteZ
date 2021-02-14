@@ -1,20 +1,20 @@
 @import '../../_sass/abstracts/index';
 
 .filter-select {
-	border: 0.5px solid $routez-grey;
+	border: 1px solid rgba($routez-grey, 0.3);
 	background-color: white;
 	font-size: 16px;
 	font-weight: 400;
 
 	border-radius: 10px;
 	width: 10vw;
-	height: 42px;
+	height: max-content;
 
 	margin: 0 0.5rem;
 	padding: 0.5rem 0.8rem ;
 
 	&--active {
-		height: auto;
+		height: max-content;
 	}
 
 	&:hover {
@@ -47,10 +47,6 @@
 	
 				display: flex;
 				justify-content: space-between;
-
-				&-checkbox {
-					background-color: red;
-				}
 			}
 		}
 

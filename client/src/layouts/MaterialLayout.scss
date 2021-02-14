@@ -14,20 +14,20 @@
 		&-search{
 			display: flex;
 			flex-direction: row-reverse;
-			margin-top: 6px;
 
 			&__input {
 				background-color: $routez-grey-light;
 				color: $routez-black;
-				border-radius: 10px;
-				border: none;
 				font-weight: 400;
 				font-size: 14px;
-		
-				height: 30px;
+				border-radius: 10px;
+				border: none;
+
+				height: 42px;
+				margin: 0 0.5rem;
+				padding: 0.5rem 0.8rem;
 				width: 100%;
 				max-width: 200px;
-				padding: 1.5rem;
 
 				&:focus {
 					outline: 3px solid $routez-secondary;
@@ -55,11 +55,10 @@
 		&-filters {
 			display: flex;
 			flex-wrap: wrap;
-			margin-top: 8px;
 		}
 
 		&-button {
-			margin-top: 8px;
+			//margin-top: 8px;
 		}
 	}
 
