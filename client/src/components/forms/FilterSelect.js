@@ -82,13 +82,14 @@ const FilterSelect = ({text, options, sections, setQuery, query, type}) => {
   };
 
   return (
-    <div className="filter-select" className={showSelect ? 'filter-select filter-select--active' : 'filter-select' } >
+    <div className="filter-select" className={showSelect ? 'filter-select filter-select--active' : 'filter-select' }>
       <div className="filter-select__field" onClick={() => setShowSelect(!showSelect)} >
-        { 
+        {/* { 
           selectedString ? `${selectedString}...` : text 
-        } 
+        }  */}
+		{ text }
         {/* <img src={Arrow} alt="arrow" className={showSelect ? 'arrow-up' : 'arrow-down'} /> */}
-		<IoIosArrowUp className={showSelect ? 'arrow-up' : 'arrow-down'}/>
+		<IoIosArrowUp className={showSelect ? 'arrow-down' : 'arrow-up' }/>
       </div>
       {
         showSelect && (

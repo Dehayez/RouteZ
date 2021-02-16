@@ -196,49 +196,45 @@ const Materials = () => {
       signposts && (
         <>
 			<form className="material-form" onSubmit={(e) => searchMaterials(e)}>
-				{/** Keywords */}
 				<div className="material-form-search">
-					{/* <div className="material-form-search__icon">
-						<FiSearch type="submit"/> 
-					</div> */}
 					<input className="material-form-search__input" type="text" onChange={(e) => changeKeywords(e.target.value)} name="keywords" id="keywords" placeholder="Zoek kernwoorden" />
 				</div>
-				{/** Select type of file */}
-				<div className="material-form-filters">
-					<FilterSelect
-						text="Type"
-						options={typesContext}
-						query={queryForm}
-						setQuery={setQueryForm}
-						type="type"
-					/>
-					{/** Select type of target audience */}
-					<FilterSelect
-						text="Doelgroep"
-						options={secondTypesContext}
-						query={queryForm}
-						setQuery={setQueryForm}
-						type="target"
-					/>
-					{/** Select module/signpost */}
-					<FilterSelect
-						text="Module"
-						sections={true}
-						options={signposts}
-						query={queryForm}
-						setQuery={setQueryForm}
-						type="modules"
-					/>
-					{/** Select tag */}
-					<FilterSelect
-						text="Tag"
-						options={tags}
-						query={queryForm}
-						setQuery={setQueryForm}
-						type="tags"
-					/>
-				</div>
-				<div className="material-form-button">
+				<div className="material-form-filters-wrapper">
+						{/** Select type of file */}
+					<div className="material-form-filters">
+						<FilterSelect
+							text="Type"
+							options={typesContext}
+							query={queryForm}
+							setQuery={setQueryForm}
+							type="type"
+						/>
+						{/** Select type of target audience */}
+						<FilterSelect
+							text="Doelgroep"
+							options={secondTypesContext}
+							query={queryForm}
+							setQuery={setQueryForm}
+							type="target"
+						/>
+						{/** Select module/signpost */}
+						<FilterSelect
+							text="Module"
+							sections={true}
+							options={signposts}
+							query={queryForm}
+							setQuery={setQueryForm}
+							type="modules"
+						/>
+						{/** Select tag */}
+						<FilterSelect
+							text="Tag"
+							options={tags}
+							query={queryForm}
+							setQuery={setQueryForm}
+							type="tags"
+						/>
+					</div>
 					<ButtonSmall type="submit" content="Toepassen" color="primary"/>
 				</div>
 			</form>

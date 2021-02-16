@@ -3,6 +3,9 @@ import React, { useEffect, useState } from 'react';
 // Services
 import { useAuth } from '../../services';
 
+// Componentes
+import { ButtonSmall } from '../../components';
+
 import './Paths.scss';
 
 const Exercises = ({exercises, previousResults}) => {
@@ -26,10 +29,8 @@ const Exercises = ({exercises, previousResults}) => {
                   if(previousResults[i].answers[k].answerId === exercises[j].answers[l]._id) {
                     if (previousResults[i].answers[k].correct === exercises[j].answers[l].correct) {
                       document.getElementById(previousResults[i].answers[k].answerId).className = 'correct-answer';
-                      console.log(previousResults[i].answers[k].answerId)
                     } else {
                       document.getElementById(previousResults[i].answers[k].answerId).className = 'wrong-answer';
-                      console.log(previousResults[i].answers[k].answerId)
                     };
                   };
                 };
@@ -163,7 +164,9 @@ const Exercises = ({exercises, previousResults}) => {
 			}
 			{
 				!showPrevious && (
-				<button type="submit">Klikkerdeklik</button>
+					<div className="exercise-submit">
+						<ButtonSmall type="submit" content="Klaar" color="primary"/>
+					</div>
 				)
 			}
 			<span className="exercise-restart" onClick={redoExercise}>Herbeginnen</span>

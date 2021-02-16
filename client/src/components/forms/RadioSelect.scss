@@ -1,21 +1,15 @@
 @import '../../_sass/abstracts/index';
 
-.filter-select {
+.radio-select {
 	border: 1px solid rgba($routez-grey, 0.3);
 	background-color: white;
 	font-size: 16px;
 	font-weight: 400;
 
-	border-radius: 10px;
-	width: 12vw;
-	height: max-content;
-
-	margin: 0 0.5rem;
+	border-radius: 5px;
 	padding: 0.5rem 0.8rem ;
-
-	&:first-of-type{
-		margin-left: 0;
-	}
+	margin-bottom: 2rem;
+	max-width: 500px;
 
 	&--active {
 		height: max-content;
@@ -27,7 +21,7 @@
 
 	&__field {
 		color: $routez-primary;
-		text-transform: capitalize;
+		font-size: 14px;
 	
 		display: flex;
 		align-items: center;
