@@ -2,17 +2,23 @@ import React, { useState } from 'react';
 
 // Icons
 import Arrow from '../../assets/icons/arrow-blue.svg';
+import { IoIosArrowUp } from 'react-icons/io'
+
+import './RadioSelect.scss';
 
 const RadioSelect = ({ grouped, text, data, defaultSelected, setSelected }) => {
   // States
   const [ showFully, setShowFully ] = useState(false);
 
   return (
-    <div>
-      <div onClick={() => setShowFully(!showFully)}>{text} <img src={Arrow} alt="arrow" /></div>
+    <div className="radio-select" className={showFully ? 'radio-select radio-select--active' : 'radio-select' }>
+      <div className="radio-select__field" onClick={() => setShowFully(!showFully)}>
+		  {text} 
+	 	 <IoIosArrowUp className={showFully ? 'arrow-down' : 'arrow-up' }/>
+	  </div>
       {
         showFully && (
-          <div>
+          <div className="radio-select__select">
             {
               grouped ? (
                 data && data.map((signpost, index) => {
@@ -21,7 +27,7 @@ const RadioSelect = ({ grouped, text, data, defaultSelected, setSelected }) => {
                     {
                       signpost.modules.map((module, innerIndex) => {
                         return (
-                          <div key={innerIndex}>
+                          <div className="radio-select__select--section__options--option" key={innerIndex}>
                             <label htmlFor={module.title}>
                               {module.title}
                             </label>
@@ -35,11 +41,11 @@ const RadioSelect = ({ grouped, text, data, defaultSelected, setSelected }) => {
               ) : (
                 data && data.map((element, index) => {
                   return <div key={index}>
-                  <label htmlFor={element.title}>
-                    {element.title}
-                  </label>
-                  <input onChange={() => setSelected(element._id)} defaultChecked={defaultSelected === element._id ? true : false} type="radio" value={element._id} name="selectTwo"/>
-                  </div>
+							<label htmlFor={element.title}>
+								{element.title}
+							</label>
+							<input onChange={() => setSelected(element._id)} defaultChecked={defaultSelected === element._id ? true : false} type="radio" value={element._id} name="selectTwo"/>
+						</div>
                 })
               )
             }

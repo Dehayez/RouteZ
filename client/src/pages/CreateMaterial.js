@@ -12,7 +12,7 @@ import { default as moment } from 'moment';
 import 'moment/locale/nl-be';
 
 // Components
-import { Tags, RadioSelect } from '../components';
+import { Tags, RadioSelect, ButtonSmall } from '../components';
 
 // Small function to force a re-render
 const useForceUpdate = () => {
@@ -223,12 +223,13 @@ const CreateMaterial = () => {
 			  <label className="create-material-form__label">Titel</label>
               <input className="create-material-form__input" onChange={(e) => changeInput(e)} placeholder="titel" type="text" name="title" id="title" required />
 
-			  <labe className="create-material-form__label"l>Beschrijving</labe>
+			  <label className="create-material-form__label"l>Beschrijving</label>
               <textarea className="create-material-form__input" onChange={(e) => changeInput(e)} placeholder="beschrijving" name="description" id="description" required />
           </form>
-          <Tags 
-            setForm={updateTags}
-          />
+
+          <Tags  setForm={updateTags}/>
+
+		  <label className="create-material__label">Bestand</label>
           <RadioSelect 
             text="Welk soort bestand wil je uploaden"
             grouped={false}
@@ -239,6 +240,8 @@ const CreateMaterial = () => {
             ]}
             setSelected={updateType}
           />
+
+		  <label className="create-material__label">Doelgroep</label>
           <RadioSelect 
             text="Welke doelgroep"
             grouped={false}
@@ -249,12 +252,15 @@ const CreateMaterial = () => {
             ]}
             setSelected={updateTarget}
           />
+
+ 		  <label className="create-material__label">Toewijzing module</label>
           <RadioSelect 
             text="Aan welke module wil je deze toewijzen"
             grouped={true}
             data={signposts}
             setSelected={updateModule}
           />
+
           {
               form && form.type === 'Video' ? (
                 <input onChange={(e) => changeInput(e)} type="text" placeholder="video-url" name="videoUrl" id="videoUrl" />
@@ -277,10 +283,10 @@ const CreateMaterial = () => {
               error.text
             )
           }
-          <span onClick={() => history.push(Routes.MY_MATERIALS)}>Annuleren</span>
-          <button onClick={(e) => updateMaterial(e)} type="submit">
-            Opslaan
-          </button>
+		  <div className="create-material-buttons">
+			<ButtonSmall content="Annuleren" color="secondary" onClick={() => history.push(Routes.MY_MATERIALS)}/>
+			<ButtonSmall content="Opslaan" color="primary" onClick={(e) => updateMaterial(e)} type="submit"/>
+		  </div>
         </>
       )
     }

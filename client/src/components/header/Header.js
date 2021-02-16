@@ -83,21 +83,27 @@ const Header = () => {
 				<input onChange={(e) => watchChanges(e)} className="header-right-input" id="search-engine" type="text" placeholder="Zoek"/>
 			</form>
 			{/* <IoMdNotificationsOutline className="header-right-icon"/> */}
-			<Link className="header-right-profile" to="/my-profile">
+			<div className="header-right-profile">
 				<div className="header-right-profile__text">
 					{ 
 						user && (
-							<p className="header-right-profile__text-name">{user.profile.firstName + ' ' + user.profile.lastName}</p>
+							<Link className="header-right-profile__text-name-link" to={Routes.MY_PROFILE}>
+								<p className="header-right-profile__text-name">{user.profile.firstName + ' ' + user.profile.lastName}</p>
+							</Link>
 						)
 					}
-					<p className="header-right-profile__text-settings">Instellingen</p>
+					<Link className="header-right-profile__text-settings-link" to={Routes.MY_PROFILE_SETTINGS}>
+						<p className="header-right-profile__text-settings">Instellingen</p>
+					</Link>
 				</div>
-				{
-					avatar ? (
-						<img className="header-right-profile__image" src={`${apiConfig.baseURL}file/${avatar}`} alt="profile"/>
-					) : <img className="header-right-profile__image" src={ DefaultImage } alt="profile"/>
-				}
-			</Link>
+				<Link className="header-right-profile__image-link" to={Routes.MY_PROFILE}>
+					{
+						avatar ? (
+							<img className="header-right-profile__image" src={`${apiConfig.baseURL}file/${avatar}`} alt="profile"/>
+						) : <img className="header-right-profile__image" src={ DefaultImage } alt="profile"/>
+					}
+				</Link>
+			</div>
 		</div>
     </header>
   );
