@@ -79,8 +79,10 @@ class ApiRouter {
         this.router.patch('/users/:id', this.userController.editUser); // needs bearer and id, only for admin
         this.router.post('/users/me', this.userController.updateMyself); // needs bearer and body
         this.router.post('/users/me/progress', this.userController.updateProgress); // needs bearer and body
+        this.router.post('/users/create', this.userController.createUser); // needs body, only admin
         this.router.delete('/users/me', this.userController.deleteMyself); // needs bearer
         this.router.delete('/users/:id', this.userController.deleteUser); // needs id, only admin
+
         // Reset password
         this.router.post('/reset/send', this.resetController.sendToken); // needs body
         this.router.post('/reset/submit', this.resetController.destroyToken); // needs body
