@@ -473,6 +473,89 @@ const ApiProvider = ({children}) => {
     return await res.json();
   };
 
+  /**
+   * get a user
+   * @param {string} token 
+   * @param {string} id
+   */
+  const getUser = async (token, id) => {
+    const url = `${BASE_URL}users/${id}`;
+
+    const res = await fetch(url, {
+      method: "GET",
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+    });
+
+    return await res.json();
+  };
+
+  /**
+   * delete a user
+   * @param {string} token 
+   * @param {string} id
+   */
+  const deleteUser = async (token, id) => {
+    const url = `${BASE_URL}users/${id}`;
+
+    const res = await fetch(url, {
+      method: "DELETE",
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+    });
+
+    return await res.json();
+  };
+
+  /**
+   * edit a user
+   * @param {string} token 
+   * @param {string} id
+   * @param {json} body
+   */
+  const editUser = async (token, id, body) => {
+    const url = `${BASE_URL}users/${id}`;
+
+    const res = await fetch(url, {
+      method: "PATCH",
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body),
+    });
+
+    return await res.json();
+  };
+
+  /**
+   * create a user
+   * @param {string} token 
+   * @param {json} body
+   */
+  const createUser = async (token, body) => {
+    const url = `${BASE_URL}users/create`;
+
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body),
+    });
+
+    return await res.json();
+  };
+
   return (
     <ApiContext.Provider value={{
       getSignPosts,
@@ -497,6 +580,10 @@ const ApiProvider = ({children}) => {
       deleteMaterial,
       searchEverything,
       getUsers,
+      getUser,
+      deleteUser,
+      createUser,
+      editUser,
     }}>
       {children}
     </ApiContext.Provider>

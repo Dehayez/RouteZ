@@ -10,6 +10,16 @@
   &__form {
     margin-top: 50px;
 
+    &--check {
+      margin: 20px 0;
+      
+      h5 {
+        font-family: $font-family-primary;
+        font-size: $font-size-m;
+        margin-bottom: 20px;
+      }
+    }
+
     &--file {
       margin-bottom: 20px;
 

@@ -4,6 +4,8 @@ import Signposts from './Signposts';
 import CreateSignpost from './CreateSignpost';
 import EditSignpost from './EditSignpost';
 import Users from './Users';
+import CreateUser from './CreateUser';
+import EditUser from './EditUser';
 import Materials from './Materials';
 import CreateMaterial from './CreateMaterial';
 import EditMaterial from './EditMaterial';
@@ -14,10 +16,12 @@ export {
   Dashboard,
   Signposts,
   Users,
+  CreateUser,
   Materials,
   CreateMaterial,
   EditMaterial,
   Modules,
   CreateSignpost,
   EditSignpost,
+  EditUser,
 };

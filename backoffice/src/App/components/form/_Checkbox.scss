@@ -1,0 +1,27 @@
+@import '../../_sass/index';
+
+.checkbox {
+  margin-bottom: 10px;
+  &__button {
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    border: 1px solid $routez-grey;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+
+    &--inner {
+      background-color: $routez-primary;
+      padding: 5px;
+      border-radius: 100%;
+    }
+  }
+
+  span {
+    font-family: $font-family-primary;
+    font-size: $font-size-s;
+  }
+}

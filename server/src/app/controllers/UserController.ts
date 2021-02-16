@@ -19,6 +19,10 @@ import {
     default as jwtDecode
 } from "jwt-decode";
 
+import {
+    default as bcrypt
+} from "bcrypt";
+
 interface IUserRequest extends Request {
     id: string;
 };
@@ -187,7 +191,7 @@ export default class UserController {
     editUser = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
            try {         
             const { id } = req.params;
-            const { email, firstName, lastName, schoolName, avatar, professionalFunction, phoneNumber } = req.body;
+            const { role, firstName, lastName } = req.body;
 
             const user = await User.findOne({ _id: id }); 
 
@@ -200,13 +204,9 @@ export default class UserController {
             // Updating the user
             const updatedUser = await User.findOneAndUpdate({ _id: id }, {
                 $set: {
-                    email: email,
                     'profile.firstName': firstName,
                     'profile.lastName': lastName,
-                    'profile.schoolName': schoolName,
-                    'profile.avatar': avatar,
-                    'profile.professionalFunction': professionalFunction,
-                    'profile.phoneNumber': phoneNumber,
+                    'role': role,
                     _modifiedAt: Date.now(),
                 },
             }, { new : true }).exec();
@@ -431,6 +431,49 @@ export default class UserController {
         return res.status(200).json({
             token: jwtToken,
         });
+    };
+
+    // Create user from backoffice
+    createUser = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
+        try {
+            const { email, password, role, firstName, lastName } = req.body;
+
+            // Checking if user exists
+            const checkIfExist = await User.findOne({email: email});
+
+            if (checkIfExist) return res.status(403).json({
+                error: "Er bestaat al reeds een gebruiker",
+            });
+
+            // New user
+            let user;
+
+            bcrypt.genSalt(10, (err, salt) => {
+                if (err) {
+                    throw err;
+                };
+    
+                bcrypt.hash(password, salt, async (errHash, hash) => {
+                    if (errHash) {
+                        throw errHash;
+                    };
+                    
+                    const newUser : IUser = new User({
+                        email: email,
+                        password: hash,
+                        'profile.firstName': firstName,
+                        'profile.lastName': lastName,
+                        role: role,
+                    });
+
+                    user = await newUser.save();
+                });
+            });
+
+            return res.status(200).json(user);
+        } catch (e) {
+            next(e);
+        };
     };
 
     calculateUserProgress = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
