@@ -75,9 +75,11 @@ const Login = ({ onChange, value }) => {
 			<ButtonLarge content="Log in"></ButtonLarge>
 			<Link className="form-link form-link--top" to="/signup">Nog geen account? <b>Registreer hier</b></Link>
 		</form>
-		{
-            error.visible && error.message
-        }
+		<p className="auth-content__error">
+			{
+				error.visible && error.message
+			}
+		</p>
 	</div>
   )
 };

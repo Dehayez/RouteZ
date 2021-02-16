@@ -54,6 +54,12 @@
 	height: 100%
 }
 
+.auth-content__error {
+	color: $routez-danger;
+	font-size: 16px;
+	text-align: center;
+}
+
 .form {
 	display: flex;
 	flex-direction: column;
@@ -81,6 +87,7 @@
 
 		&--top {
 			margin-top: 1rem;
+			text-align: center;
 		}
 
 		& b {

@@ -8,7 +8,7 @@ import './Navigation.scss'
 const NavigationItem = ({ index, title, alt, endpoint, logo }) => {
 
 	return (
-		<NavLink to={endpoint} className="nav-list-link" activeClassName="nav-list-link--active">
+		<NavLink className="nav-list-link" activeClassName="nav-list-link--active" to={endpoint}>
 			<div className="nav-list-link__icon-wrapper">
 				<img className="nav-list-link__icon" src={logo} alt={alt}/>
 			</div>

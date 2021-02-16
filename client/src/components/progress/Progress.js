@@ -47,11 +47,12 @@ const Progress = () => {
 			<h4 className="progression-title">Progressie</h4>
 			<div className="progression-charts">
 				{
-					progress && progress.map((item, index) => {
+					progress && progress.map((progress, index) => {
 						return <ProgressItem 
 									key={index} 
-									percentage={item.progress.percentage} 
-									title={capitalizeTitle(item.signpost.shortedTitle)} 
+									endpoint={`/signposts/${progress.signpost.id}`}
+									percentage={progress.progress.percentage} 
+									title={capitalizeTitle(progress.signpost.shortedTitle)} 
 								/>
 					})
 				}

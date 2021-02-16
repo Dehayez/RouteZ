@@ -214,14 +214,17 @@ const CreateMaterial = () => {
   };
 
   return (
-    <>
+    <div className="create-material">
     {
       signposts && (
         <>
-          <h1>Bestand uploaden</h1>
-          <form id="check-form">
-            <input onChange={(e) => changeInput(e)} placeholder="titel" type="text" name="title" id="title" required />
-            <textarea onChange={(e) => changeInput(e)} placeholder="beschrijving" name="description" id="description" required />
+          <h1 className="create-material__title">Bestand uploaden</h1>
+          <form  className="create-material-form" id="check-form">
+			  <label className="create-material-form__label">Titel</label>
+              <input className="create-material-form__input" onChange={(e) => changeInput(e)} placeholder="titel" type="text" name="title" id="title" required />
+
+			  <labe className="create-material-form__label"l>Beschrijving</labe>
+              <textarea className="create-material-form__input" onChange={(e) => changeInput(e)} placeholder="beschrijving" name="description" id="description" required />
           </form>
           <Tags 
             setForm={updateTags}
@@ -281,7 +284,7 @@ const CreateMaterial = () => {
         </>
       )
     }
-    </>
+    </div>
   );
 };
 

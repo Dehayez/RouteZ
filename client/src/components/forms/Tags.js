@@ -3,6 +3,11 @@ import React, { useCallback, useEffect, useState } from 'react';
 // Services
 import { useApi } from '../../services';
 
+// Icons 
+import { IoRemoveCircle } from 'react-icons/io5';
+
+import './Tags.scss';
+
 // Small function to force a re-render
 const useForceUpdate = () => {
   const [value, setValue] = useState(0);
@@ -73,30 +78,34 @@ const Tags = ({ defaultTags, setForm }) => {
   };
 
   return (
-    <div>
-      <div>
-        <strong>Selecteer een aantal tags</strong>
-        {
-          selectedTags && selectedTags.map((tag, index) => {
-            return (
-              <div onClick={() => removeTag(tag._id)} key={index}>{tag.name}</div>
-            )
-          })
-        }
-        <input onChange={(e) => checkTag(e)} type="text" name="tag" id="tag" />
-        {
-          typedTag.list && (
-            <form>
-              <div>
-                {tags && tags.map((tag, index) => {
-                  return tag.name.includes(typedTag.text.toLowerCase()) && <button key={index} onClick={(e) => addTag(e, tag)}>{tag.name}</button>
-                })}
-              </div>
-            </form>
-          )
-        }
+      <div className="tag">
+        <label className="tag__label">Tags</label>
+		<div className="tag-selected">
+			{
+			selectedTags && selectedTags.map((tag, index) => {
+				return (
+				<div className="tag-selected-item" onClick={() => removeTag(tag._id)} key={index}>
+					<IoRemoveCircle className="tag-selected-item__icon"/>
+					{tag.name}
+				</div>
+				)
+			})
+			}
+		</div>
+        <input className="tag__input" onChange={(e) => checkTag(e)} placeholder="Zoek" type="text" name="tag" id="tag" />
+        <div className="tag-found">
+			<label className="tag-found__label">Selecteer tags</label>
+			{
+			typedTag.list && (
+				<div className="tag-found-container ">
+					{tags && tags.map((tag, index) => {
+					return tag.name.includes(typedTag.text.toLowerCase()) && <div className="tag-found-item" key={index} onClick={(e) => addTag(e, tag)}>{tag.name}</div>
+					})}
+				</div>
+			)
+			}
+		</div>
       </div>
-    </div>
   );
 };
 

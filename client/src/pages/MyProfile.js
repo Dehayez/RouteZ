@@ -46,7 +46,9 @@ const MyProfile = () => {
     return (
         <div className="profile">
 			<div className="profile-buttons">
-				<ButtonSmall content="Mijn materiaal" color="primary"/>
+				<Link to={Routes.MY_MATERIALS}>
+					<ButtonSmall content="Mijn materiaal" color="primary"/>
+				</Link>
 				<Link to={Routes.MY_PROFILE_SETTINGS}>
 					<ButtonSmall content="Instellingen" color="secondary"/>
 				</Link>
