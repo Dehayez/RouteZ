@@ -20,6 +20,7 @@ export const CREATE_SIGNPOST = '/create-signpost';
 export const MODULES = '/modules';
 export const MODULE = '/modules/:id';
 export const EDIT_MODULE = '/edit-module/:id';
+export const CREATE_MODULE = '/create-module';
 
 // MATERIALS
 export const MATERIALS = '/materials';
