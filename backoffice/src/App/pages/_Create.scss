@@ -9,6 +9,7 @@
 
   &__form {
     margin-top: 50px;
+    width: 100%;
 
     &--check {
       margin: 20px 0;
@@ -17,6 +18,62 @@
         font-family: $font-family-primary;
         font-size: $font-size-m;
         margin-bottom: 20px;
+      }
+    }
+
+    &--paths {
+      margin-top: 30px;
+
+      &--create {
+        margin-top: 20px;
+
+        &--theory {
+          &--item {
+            margin-top: 30px;
+
+            h2 {
+              font-family: $font-family-primary;
+              font-size: $font-size-s;
+              margin-bottom: 20px;
+            }
+          }
+        }
+
+        h6 {
+          font-family: $font-family-primary;
+          font-size: $font-size-s;
+          font-weight: bold;
+          color: $routez-primary;
+        }
+
+        &--check {
+          margin-top: 20px;
+        }
+      }
+
+      h5 {
+        font-family: $font-family-primary;
+        font-size: $font-size-s;
+        font-weight: bold;
+      }
+
+      &__overview {
+        &--none {
+          font-family: $font-family-primary;
+          font-size: $font-size-s;
+        }
+      }
+    }
+
+    &--wysiwyg {
+      .wysiwyg-label {
+        font-family: $font-family-primary;
+        font-size: $font-size-s;
+        margin-left: 20px;
+      }
+
+      .wysiwyg-field {
+        margin-top: 10px;
       }
     }
 
@@ -63,6 +120,8 @@
     }
 
     &--submit {
+      margin-top: 20px;
+
       button {
         padding: 10px 20px;
         background-color: $routez-primary;

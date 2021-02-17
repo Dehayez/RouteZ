@@ -48,10 +48,11 @@ const Modules = () => {
   return (
     <UsualLayout>
       <Row>
-        <Col xs={12}>
+        <Col xs={12} className="d-flex justify-content-between align-items-center">
           <h1 className="overview__title">
             Alle modules
           </h1>
+          <UsualButton text="Module maken" action={() => history.push(Routes.CREATE_MODULE)} />
         </Col>
       </Row>
       <Row>
@@ -60,10 +61,10 @@ const Modules = () => {
             {
               modules && modules.map((moduleItem, index) => {
                 return (
-                  <div className="overview__items--item" key={index}>
+                  <div className="overview__items--item d-flex justify-content-between align-items-center" key={index}>
                     <div className="overview__items--item--text">
                       <h5 onClick={() => history.push(Routes.MODULE.replace(':id', moduleItem._id))}>{moduleItem.title}</h5>
-                      <h6>Bevat {moduleItem.paths.length} paden</h6>
+                      <h6>Bevat {moduleItem.paths ? moduleItem.paths.length : 0} paden</h6>
                     </div>
                     <div className="overview__items--item--buttons d-flex align-items-center justify-content-end">
                       <UsualButton text="Bewerk" action={() => history.push(Routes.EDIT_MODULE.replace(':id', moduleItem._id))} />
