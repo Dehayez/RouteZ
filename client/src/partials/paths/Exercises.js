@@ -65,7 +65,7 @@ const Exercises = ({exercises, previousResults}) => {
         {
           element.answers.map((innerElement, innerIndex) => {
             return <label className="exercise-fieldset-label" key={innerIndex}> {innerElement.text}
-						<input className="checkbox" type="radio" id={innerElement._id} className="exercise__radio" value={innerElement.text} name={`question${index}`} />
+						<input className="checkbox" type="radio" id={innerElement._id} /* className="exercise__radio" */ value={innerElement.text} name={`question${index}`} />
 						<span className="checkmark checkmark-radio"></span>
 					</label>
           })

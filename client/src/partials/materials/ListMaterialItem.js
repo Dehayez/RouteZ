@@ -10,7 +10,8 @@ import * as Routes from '../../routes';
 
 // Icons
 import { HiOutlineDownload } from 'react-icons/hi';
-import { IoHeartSharp, IoHeartOutline } from 'react-icons/io5'
+import { IoHeartSharp, IoHeartOutline, IoTrash } from 'react-icons/io5'
+import { MdEdit, MdDelete } from 'react-icons/md';
 
 // Services
 import { useApi, useAuth } from '../../services';
@@ -100,16 +101,19 @@ const ListMaterialItem = ({material, owner}) => {
 	  </div>
       {
         owner ? (
-          <>
-            <button onClick={() => history.push(Routes.EDIT_MATERIAL, {id: material._id})}>Edit</button>
+          <div className="material-list-item-right">
+			<MdEdit className="material-icon__edit" title="Bewerk" onClick={() => history.push(Routes.EDIT_MATERIAL, {id: material._id})}/>
             {
               deleteState ? (
-                <button onClick={removeMaterial}>Ben je zeker?</button>
+				  <div className="material-list-item-right-delete" onClick={() => setDeleteState(!deleteState)}>
+				 	 <p className="material-list-item-right-delete__text" title="Nee">Ben je zeker dat je dit wilt verwijderen?</p>
+					<IoTrash className="material-icon__delete material-icon__delete--fill" title="Verwijder" onClick={removeMaterial}/>
+				</div>
               ) : (
-                <button onClick={() => setDeleteState(!deleteState)}>Delete</button>
+				<IoTrash className="material-icon__delete" title="Verwijder" onClick={() => setDeleteState(!deleteState)}/>
               )
             }
-          </>
+          </div>
         ) : material.type === "Video" ? <NavLink to={Routes.MATERIAL.replace(':name', material._id)}>Afspelen</NavLink> 
 		  : <HiOutlineDownload className="material-icon__download" title="Download PDF" onClick={() => getDoc(material.file)}/> 
       }

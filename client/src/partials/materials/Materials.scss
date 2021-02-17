@@ -27,6 +27,28 @@
 				}
 			}
 
+			&-right {
+				display: flex;
+				align-items: center;
+
+				&-delete {
+					display: flex;
+					align-items: center;
+					background-color: $routez-grey-light;
+					padding: 0.5rem 0.5rem 0.5rem 1rem;
+					border-radius: 50px;
+					cursor: pointer;
+
+					transition: 1s;
+
+					&__text {
+						font-size: 12px;
+						font-weight: 300;
+						margin: 0;
+					}
+				}
+			}
+
 			&-title a {
 				color: $routez-black;
 				font-size: 16px;
@@ -78,6 +100,55 @@
 
 	&-cards {
 		display: flex;
-		justify-content: space-between;
+
+		& > .material-card:first-child {
+			margin-left: 0;
+		}
+
+		& > .material-card:last-child {
+			margin-right: 0;
+		}
+	}
+
+	&-icon {
+		&__edit {
+			color: $routez-primary;
+			font-size: 1.4rem;
+			margin: 0 1rem;
+
+			transition: 0.3s;
+
+			&:hover {
+				cursor: pointer;
+				color: $routez-primary-dark;
+			}
+		}
+
+		&__delete {
+			color: $routez-danger;
+			font-size: 1.4rem;
+			margin: 0 1rem;
+
+			transition: 0.3s;
+
+			&--fill {
+				color: white !important;
+				background-color: $routez-danger;
+				border-radius: 50%;
+				padding: 4px;
+				margin-right: 0;
+
+				&:hover {
+					color: white;
+					cursor: pointer;
+					background-color: $routez-danger-dark;
+				}
+			}
+
+			&:hover {
+				cursor: pointer;
+				color: $routez-danger-dark;
+			}
+		}
 	}
 }

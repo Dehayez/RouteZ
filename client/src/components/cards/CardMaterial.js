@@ -50,7 +50,7 @@ const CardMaterial = ({material, user, token}) => {
   console.log(material);
 
   return (
-	  <div className="material-card" >
+	  <div className="material-card">
 
 		<Link className="material-card-link" to={`${Routes.MATERIAL.replace(':name', material.id)}`}>
 

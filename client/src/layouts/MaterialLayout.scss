@@ -8,16 +8,17 @@
 		flex-direction: column;
 	
 		position: absolute;
+		z-index: 1;
 
 		&-search {
 
 			&__input {
 				background-color: $routez-grey-light;
+				border: 1px solid $routez-grey-light;
 				color: $routez-black;
 				font-weight: 400;
 				font-size: 14px;
 				border-radius: 10px;
-				border: none;
 
 				height: 42px;
 				padding: 0.5rem 0.8rem;
@@ -25,7 +26,8 @@
 				max-width: 300px;
 
 				&:focus {
-					outline: 3px solid $routez-secondary;
+					outline: none;
+					border: 1px solid $routez-primary;
 				}
 			}
 
@@ -63,7 +65,7 @@
 	}
 
 	&-content {
-		margin-top: 8rem;
+		margin-top: 2rem;
 	}
 
 	&-detail {
@@ -259,6 +261,13 @@
 
 			margin: 2rem 0;
 
+			&-buttons {
+				display: flex;
+				& > a:first-child {
+					margin-right: 1rem;
+				}
+			}
+
 			& p {
 				font-weight: 500;
 				margin: 0;
@@ -276,29 +285,6 @@
 /********************************* SEARCH RESULTS PAGE *********************************/
 .search {
 	padding: 3rem;
-
-	&-left {
-		display: flex;
-		justify-content: center;
-
-		&-form {
-			&-input {
-				background-color: $routez-grey-light;
-				color: $routez-black;
-				font-weight: 500;
-				font-size: 14px;
-	
-				height: 30px;
-				border-radius: 10px;
-				padding: 1.5rem;
-				border: none;
-				
-				&:focus {
-					outline: 3px solid $routez-secondary;
-				}
-			}
-		}
-	}
 
 	&-right {
 		&-indicator {
@@ -325,8 +311,31 @@
 			}
 		}
 	}
-}
 
+	&-left {
+		display: flex;
+		justify-content: center;
+
+		&-form {
+			&-input {
+				border: 1px solid $routez-grey-light;
+				background-color: $routez-grey-light;
+				color: $routez-black;
+				font-weight: 400;
+				font-size: 14px;
+				border-radius: 10px;
+
+				height: 42px;
+				padding: 0.5rem 0.8rem;
+				
+				&:focus {
+					border: 1px solid $routez-primary;
+					outline: none;
+				}
+			}
+		}
+	}
+}
 
 
 
@@ -344,6 +353,7 @@
 
 	&__label {
 		font-size: 14px;
+		font-weight: 500;
 		margin-bottom: 0.5rem;
 	}
 
@@ -353,6 +363,7 @@
 
 		&__label {
 			font-size: 14px;
+			font-weight: 500;
 			margin-bottom: 0.5rem;
 		}
 
@@ -361,11 +372,104 @@
 			border-radius: 5px;
 			font-weight: 300;
 			font-size: 14px;
-			text-transform: capitalize;
 
 			padding: 0.2rem 0.8rem;
 			margin-bottom: 2rem;
 			max-width: 500px;
+
+			&:focus {
+				outline: none;
+			}
+		}
+	}
+
+	&-buttons {
+		margin-top: 3rem;
+
+		& > .btn:first-child {
+			margin-right: 1rem;
+		}		
+	}
+}
+
+
+
+
+
+
+/********************************* EDIT MATERIAL PAGE *********************************/
+.edit-material {
+	padding: 1rem 3rem;
+
+	&__title {
+		font-size: 36px;
+		font-weight: 600;
+		font-family: $font-family-secondary;
+		margin-bottom: 3rem;
+	}
+
+	&__label {
+		font-size: 14px;
+		font-weight: 500;
+		margin-bottom: 0.5rem;
+	}
+
+	&-form {
+		display: flex;
+		flex-direction: column;
+
+		&__label {
+			font-size: 14px;
+			font-weight: 500;
+			margin-bottom: 0.5rem;
+		}
+
+		&__input {
+			border: 1px solid rgba($routez-grey, 0.3);
+			border-radius: 5px;
+			font-weight: 300;
+			font-size: 14px;
+
+			padding: 0.2rem 0.8rem;
+			margin-bottom: 2rem;
+			max-width: 500px;
+
+			&:focus {
+				outline: none;
+			}
+		}
+
+		&-file {
+			background-color: $routez-grey-light;
+			border-radius: 10px;
+
+			max-width: 500px;
+			padding: 1rem;
+			margin: 1rem 0;
+
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+
+			transition: 0.3s;
+
+			&-title {
+				font-weight: 600;
+				font-size: 14px;
+				margin-bottom: 0.4rem;
+			}
+
+			&-text {
+				font-size: 12px;
+
+				&__name, &__data {
+					margin: 0;
+				}
+
+				&__name {
+					font-weight: 600;
+				}
+			}
 		}
 	}
 

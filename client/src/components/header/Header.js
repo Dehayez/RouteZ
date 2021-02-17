@@ -72,7 +72,11 @@ const Header = () => {
 					url.includes('my-profile') ? 'Mijn profiel' : 
 					url.includes('profile') ? 'Profiel' : 
 					url.includes('my-materials') ? 'Mijn materiaal' : 
-					url.includes('search-results') ? 'Zoekresultaten' : 
+					url.includes('materials') ? 'Materiaal' : 
+					url.includes('material') ? 'Materiaal' : 
+					url.includes('create-material') ? 'Materiaal' : 
+					url.includes('search-results') ? 'Zoeken' : 
+
 					'Wegwijzers'
 				}
 			</h1>

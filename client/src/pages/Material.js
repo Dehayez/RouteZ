@@ -168,9 +168,14 @@ const Material = () => {
 						<>
 							<div className="material-recommended-header">
 								<p>Dit lijkt interessant voor jou</p>
-								<NavLink to={{pathname: Routes.MATERIALS, props: { module: material._moduleId,}}}>
-									<ButtonSmall content="Bekijk meer" color="secondary"/>
-								</NavLink>
+								<div className="material-recommended-header-buttons">
+									<NavLink to={{pathname: Routes.MATERIALS, props: { module: material._moduleId,}}}>
+										<ButtonSmall content="Bekijk meer" color="secondary"/>
+									</NavLink>
+									<NavLink to={{pathname: Routes.ADD_MATERIAL}}>
+										<ButtonSmall content="Materiaal plaatsen" color="primary"/>
+									</NavLink>
+								</div>
 							</div>
 							<CardMaterials
 								materials={extraMaterials}

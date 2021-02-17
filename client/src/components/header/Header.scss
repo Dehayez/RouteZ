@@ -22,18 +22,19 @@
 		justify-content: flex-end;
 
 		&-input {
+			border: 1px solid $routez-grey-light;
 			background-color: $routez-grey-light;
 			color: $routez-black;
-			font-weight: 500;
+			font-weight: 400;
 			font-size: 14px;
-
-			height: 30px;
 			border-radius: 10px;
-			padding: 1.5rem;
-			border: none;
+
+			height: 42px;
+			padding: 0.5rem 0.8rem;
 			
+
 			&:focus {
-				//outline: 3px solid $routez-secondary;
+				border: 1px solid $routez-primary;
 				outline: none;
 			}
 		}

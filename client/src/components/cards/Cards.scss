@@ -7,7 +7,9 @@
 	transition: 0.3s;
 
 	padding: 2rem;
-	width: 30%;
+	
+	flex-basis: calc(33.333% - 2rem);
+	margin: 1rem;
 
 	&:hover {
 		cursor: pointer;
@@ -25,7 +27,6 @@
 		display: flex;
 
 		border-radius: 10px;
-		padding: 0.5rem 0;
 		margin-bottom: 1rem;
 		transition: all 0.3s;
 		cursor: pointer;
@@ -182,8 +183,8 @@
 		}
 
 		&__percentage {
-			height: 50px;
-			width: auto;
+			max-height: 50px;
+			max-width: 50px;
 		}
 	}
 }

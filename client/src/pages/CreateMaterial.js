@@ -221,17 +221,17 @@ const CreateMaterial = () => {
           <h1 className="create-material__title">Bestand uploaden</h1>
           <form  className="create-material-form" id="check-form">
 			  <label className="create-material-form__label">Titel</label>
-              <input className="create-material-form__input" onChange={(e) => changeInput(e)} placeholder="titel" type="text" name="title" id="title" required />
+              <input className="create-material-form__input" onChange={(e) => changeInput(e)} placeholder="Titel" type="text" name="title" id="title" required />
 
-			  <label className="create-material-form__label"l>Beschrijving</label>
-              <textarea className="create-material-form__input" onChange={(e) => changeInput(e)} placeholder="beschrijving" name="description" id="description" required />
+			  <label className="create-material-form__label">Beschrijving</label>
+              <textarea className="create-material-form__input" onChange={(e) => changeInput(e)} placeholder="Beschrijving" name="description" id="description" required />
           </form>
 
           <Tags  setForm={updateTags}/>
 
 		  <label className="create-material__label">Bestand</label>
           <RadioSelect 
-            text="Welk soort bestand wil je uploaden"
+            text="Welk soort bestand wil je uploaden?"
             grouped={false}
             data={[
               {_id: "Document", title: "Document"},
@@ -243,7 +243,7 @@ const CreateMaterial = () => {
 
 		  <label className="create-material__label">Doelgroep</label>
           <RadioSelect 
-            text="Welke doelgroep"
+            text="Wat is jouw doelgroep?"
             grouped={false}
             data={[
               {_id: "De kiendjes", title: "De kiendjes"},
@@ -255,7 +255,7 @@ const CreateMaterial = () => {
 
  		  <label className="create-material__label">Toewijzing module</label>
           <RadioSelect 
-            text="Aan welke module wil je deze toewijzen"
+            text="Aan welke module wil je deze toewijzen?"
             grouped={true}
             data={signposts}
             setSelected={updateModule}

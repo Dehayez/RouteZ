@@ -12,7 +12,7 @@ import { default as moment } from 'moment';
 import 'moment/locale/nl-be';
 
 // Components
-import { Tags, RadioSelect } from '../components';
+import { Tags, RadioSelect, ButtonSmall } from '../components';
 
 // Small function to force a re-render
 const useForceUpdate = () => {
@@ -201,21 +201,27 @@ const EditMaterial = () => {
   };
 
   return (
-    <>
+    <div className="edit-material">
     {
       material && signposts && (
         <>
-          <h1>Bestand bewerken</h1>
-          <form>
-            <input onChange={(e) => changeInput(e)} type="text" defaultValue={form.title} name="title" id="title" />
-            <textarea onChange={(e) => changeInput(e)} defaultValue={form.description} name="description" id="description" />
+          <h1 className="edit-material__title">Bestand bewerken</h1>
+          <form className="edit-material-form">
+		  	<label className="edit-material-form__label">Titel</label>
+            <input className="edit-material-form__input" onChange={(e) => changeInput(e)} type="text" defaultValue={form.title} name="title" id="title" />
+
+			<label className="edit-material-form__label">Beschrijving</label>
+            <textarea className="edit-material-form__input" onChange={(e) => changeInput(e)} defaultValue={form.description} name="description" id="description" />
           </form>
+
           <Tags 
             defaultTags={material.tags} 
             setForm={updateTags}
           />
+
+		  <label className="edit-material-form__label">Bestand</label>
           <RadioSelect 
-            text="Welk soort bestand wil je uploaden"
+            text="Welk soort bestand wil je uploaden?"
             grouped={false}
             data={[
               {_id: "Document", title: "Document"},
@@ -225,8 +231,10 @@ const EditMaterial = () => {
             defaultSelected={material.type}
             setSelected={updateType}
           />
+
+		  <label className="edit-material-form__label">Doelgroep</label>
           <RadioSelect 
-            text="Welke doelgroep"
+            text="Wat is jouw doelgroep?"
             grouped={false}
             data={[
               {_id: "De kiendjes", title: "De kiendjes"},
@@ -236,8 +244,10 @@ const EditMaterial = () => {
             defaultSelected={material.target}
             setSelected={updateTarget}
           />
+
+		<label className="edit-material-form__label">Toewijzing module</label>
           <RadioSelect 
-            text="Aan welke module wil je deze toewijzen"
+            text="Aan welke module wil je deze toewijzen?"
             grouped={true}
             data={signposts}
             defaultSelected={material._moduleId}
@@ -249,21 +259,26 @@ const EditMaterial = () => {
               ) : (
                 <>
                 <input type="file" accept="application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint, text/plain, application/pdf, image/*" onChange={(e) => uploadNewDocument(e)} name="file" id="file"/>
-                <span>
-                  <strong>{form.filename}</strong>
-                  <span>{form.file ? created.format('L') : newCreated.format('L')} | {form.size}</span>
-                </span>
+                
+				<div className="edit-material-form-file">
+					<div className="edit-material-form-file-text">
+						<p className="edit-material-form-file-text__name">{form.filename}</p>
+						<p className="edit-material-form-file-text__data">{form.file ? created.format('L') : newCreated.format('L')} | {form.size} | TODO pagina's</p>
+					</div>
+				</div>
                 </>
             )
           }
-          <span onClick={() => history.push(Routes.MY_MATERIALS)}>Annuleren</span>
-          <button onClick={(e) => updateMaterial(e)} type="submit">
-            Opslaan
-          </button>
+		
+
+		  <div className="create-material-buttons">
+			<ButtonSmall content="Annuleren" color="secondary" onClick={() => history.push(Routes.MY_MATERIALS)}/>
+			<ButtonSmall content="Opslaan" color="primary" onClick={(e) => updateMaterial(e)} type="submit"/>
+		  </div>
         </>
       )
     }
-    </>
+    </div>
   );
 };
 

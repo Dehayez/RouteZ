@@ -27,25 +27,34 @@ const RadioSelect = ({ grouped, text, data, defaultSelected, setSelected }) => {
                     {
                       signpost.modules.map((module, innerIndex) => {
                         return (
-                          <div className="radio-select__select--section__options--option" key={innerIndex}>
-                            <label htmlFor={module.title}>
-                              {module.title}
-                            </label>
-                            <input onChange={() => setSelected(module._id)} defaultChecked={defaultSelected === module._id ? true : false} type="radio" value={module._id} name="selectOne"/>
-                          </div>
+							<label className="radio" key={innerIndex}>
+								<span className="radio__input" htmlFor={module.title}> 
+									<input onChange={() => setSelected(module._id)} defaultChecked={defaultSelected === module._id ? true : false} type="radio" value={module._id} name="selectOne"/>
+									<span className="radio__control"></span>
+								</span>
+								<span className="radio__label">{module.title}</span>
+							</label>
                         )
+
+							{/* <div key={innerIndex}>
+								<label htmlFor={module.title}>
+								{module.title}
+								</label>
+								<input onChange={() => setSelected(module._id)} defaultChecked={defaultSelected === module._id ? true : false} type="radio" value={module._id} name="selectOne"/>
+							</div> */}
                       })
                     }
                   </div>
                 })
               ) : (
                 data && data.map((element, index) => {
-                  return <div key={index}>
-							<label htmlFor={element.title}>
-								{element.title}
-							</label>
-							<input onChange={() => setSelected(element._id)} defaultChecked={defaultSelected === element._id ? true : false} type="radio" value={element._id} name="selectTwo"/>
-						</div>
+                  return <label className="radio" key={index}>
+							<span className="radio__input" htmlFor={element.title}> 
+								<input onChange={() => setSelected(element._id)} defaultChecked={defaultSelected === element._id ? true : false} type="radio" value={element._id} name="selectTwo"/>
+								<span className="radio__control"></span>
+							</span>
+							<span className="radio__label">{ element.title }</span>
+						</label>
                 })
               )
             }
