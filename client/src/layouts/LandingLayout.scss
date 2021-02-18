@@ -1,0 +1,265 @@
+@import '../_sass/abstracts/index';
+
+.navbar {
+	background-color: $routez-secondary-light;
+	padding: 1rem;
+
+	&-brand {
+		&__image {
+			height: 60px;
+		}
+	}
+
+	&-collapse {
+		justify-content: flex-end;
+	}
+}
+
+.landing {
+	padding: 0 8rem;
+	width: 100%;
+
+	& .row {
+		width: 100%;
+		justify-content: space-between;
+	}
+
+	&-top {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		&-background {
+			position: absolute;
+			width: 70vw;
+			height: 100vh;
+			background-image: url(../assets/images/background.png);
+		}
+
+		&-circle {
+			height: 130vh;
+			width: 200vw;
+			background-color: $routez-secondary-light;
+			border-radius: 50%;
+			/* z-index: -2;
+			position: absolute;
+			top: -70vh; */
+			// top: -150vh;
+			position: absolute;
+
+			&-wrapper {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				position: relative;
+				width: 100vw;
+				height: 100vh;
+				padding-bottom: 80vh;
+				overflow: hidden;
+
+				&-wrapper {
+					position: absolute;
+				}
+			}
+			
+		}
+
+		&-chevron {
+			color: rgba($routez-primary, .5);
+			font-size: 4rem;
+
+			position: absolute;
+			bottom: 0;
+			margin-bottom: 3rem;
+			transition: 0.5s;
+
+			&:hover {
+				animation-play-state: paused;
+				color: rgba($routez-primary, 1);
+			}
+		}
+	
+		&-left {
+			&__title {
+				font-size: 36px;
+				font-weight: 600;
+
+				margin-top: 2rem;
+				margin-bottom: 1rem;
+
+				& span {
+					color: $routez-primary;
+				}
+			}
+			&__text {
+				text-transform: uppercase;
+				font-size: 16px;
+				font-weight: 400;
+
+				& span {
+					font-weight: 300;
+					font-size: 14px;
+					color: $routez-primary;
+				}
+			}
+		}
+
+		&-right {
+
+			&-login {
+				-webkit-box-shadow: 0px 0px 21px -1px rgba(54,57,65,0.19);
+				-moz-box-shadow: 0px 0px 21px -1px rgba(54,57,65,0.19);
+				box-shadow: 0px 0px 21px -1px rgba(54,57,65,0.19);
+				background-color: white;
+				border-radius: 10px;
+				padding: 3rem 2rem 1rem;
+			}
+
+			&-title {
+				margin-bottom: 2rem;
+			}
+
+			&-form {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+			
+				font-family: $font-family-base !important;
+				width: 100%;
+			
+				&-input {
+					margin: 1rem;
+					width: 100%;
+				}
+			
+				&-link {
+					color: $routez-black;
+					text-decoration: none;
+					font-size: 14px;
+					opacity: 0.8;
+					transition: 0.2s;
+			
+					&--bottom {
+						margin-bottom: 3rem;
+					}
+			
+					&--top {
+						margin-top: 1rem;
+						text-align: center;
+					}
+			
+					& b {
+						color: $routez-black;
+					}
+			
+					&:hover {
+						opacity: 1;
+						color: $routez-black;
+					}
+				}
+			}
+
+			&-error {
+				font-size: 14px;
+				color: $routez-danger;
+				text-align: center;
+				margin: 0;
+				margin-top: 0.5rem;
+				height: 30px;
+			}
+		}
+	}
+
+	&-section {
+		width: 100%;
+		height: 100vh;
+
+		&--one {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+		}
+	}
+}
+
+
+
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) { 
+	
+ }
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) { 
+	
+ }
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) { 
+	.navbar {
+		padding: 2rem 10rem;
+	}
+
+	.landing {
+		&-top {
+			height: calc(100vh - 76px);
+		}
+	}
+ }
+
+// X-Large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) { 
+
+ }
+
+// XX-Large devices (larger desktops, 1400px and up)
+@media (min-width: 1400px) { 
+
+ }
+
+ // Extra small devices (portrait phones, less than 576px)
+@media (max-width: 575.98px) { 
+	
+ }
+
+// Small devices (landscape phones, less than 768px)
+@media (max-width: 767.98px) { 
+	
+ }
+
+// Medium devices (tablets, less than 992px)
+@media (max-width: 991.98px) { 
+
+	.landing {
+		padding: 1rem;
+
+		&-top {
+			&-circle-wrapper-wrapper, &-chevron {
+				display: none;
+			}
+
+			&-left {
+				padding: 0;
+				text-align: center;
+			}
+
+			&-right {
+				padding: 0 !important;
+				margin-top: 5rem;
+				margin-top: 5rem !important;
+			}
+		}
+	}
+
+	.section {
+		height: 70vh !important;
+	}
+	
+ }
+
+// Large devices (desktops, less than 1200px)
+@media (max-width: 1199.98px) { 
+	
+ }

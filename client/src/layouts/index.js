@@ -1,3 +1,5 @@
+
+import {default as LandingLayout} from './LandingLayout';
 import {default as PageLayout} from './PageLayout';
 import {default as AuthLayout} from './AuthLayout';
 import {default as SignpostLayout} from './SignpostLayout';
@@ -6,6 +8,7 @@ import {default as ErrorLayout} from './ErrorLayout';
 
 
 export {
+  LandingLayout,
   PageLayout,
   AuthLayout,
   SignpostLayout,

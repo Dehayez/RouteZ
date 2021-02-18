@@ -47,8 +47,6 @@ const CardMaterial = ({material, user, token}) => {
     getDoc(material.file);
   };
 
-  console.log(material);
-
   return (
 	  <div className="material-card">
 

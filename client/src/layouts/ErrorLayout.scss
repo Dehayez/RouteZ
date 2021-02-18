@@ -38,8 +38,8 @@
 			transition: 0.3s;
 			
 			&:hover {
-				-webkit-filter: drop-shadow(5px 5px 5px gba($routez-black, 0.4));
-				filter: drop-shadow(5px 5px 5px rgba($routez-black, 0.4));
+				transform: rotate(2deg);
+				// transform: scale(1.01);
 			}
 		}
 	}

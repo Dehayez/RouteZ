@@ -48,6 +48,7 @@ const Login = ({ onChange, value }) => {
             [e.target.id]: e.target.value,
 		});
     };
+	
   return (
 	<div className="auth-content">
 		<h1 className="title title--large">Welkom aan boord!</h1>

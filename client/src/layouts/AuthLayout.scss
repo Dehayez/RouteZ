@@ -80,6 +80,8 @@
 		color: $routez-black;
 		text-decoration: none;
 		font-size: 14px;
+		opacity: 0.8;
+		transition: 0.2s;
 
 		&--bottom {
 			margin-bottom: 10vh;
@@ -95,7 +97,7 @@
 		}
 
 		&:hover {
-			text-decoration: underline;
+			opacity: 1;
 			color: $routez-black;
 		}
 	}

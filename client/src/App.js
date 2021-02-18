@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import { CreateMaterial, Dashboard, EditMaterial, Landing, Login, Material, Materials, Module, MyMaterials, MyProfile, MyProfileSettings, Path, Register, SearchResults, SendReset, Signpost, Signposts, SubmitReset, NotFound } from './pages';
 
 // Main layouts
-import { PageLayout, AuthLayout, SignpostLayout, MaterialLayout, ErrorLayout } from './layouts';
+import { LandingLayout, PageLayout, AuthLayout, SignpostLayout, MaterialLayout, ErrorLayout } from './layouts';
 import { AuthRouteWithLayout, RouteWithLayout } from './utilities';
 
 // All routes
@@ -25,7 +25,7 @@ function App() {
             <Router basename='/'>
               <Switch>
                 {/** Where the site lands */}
-                <RouteWithLayout exact path={Routes.LANDING} component={Landing} layout={PageLayout} />
+                <RouteWithLayout exact path={Routes.LANDING} component={Landing} layout={LandingLayout} />
 	
                 {/** Main pages for authentication */}
                 <RouteWithLayout exact path={Routes.AUTH_SIGN_IN} component={Login} layout={AuthLayout} />

@@ -9,9 +9,22 @@ h3,
 h4,
 h5, 
 h6,
-p {
+p, 
+span,
+br {
 	font-family: $font-family-base;
 	color: $font-color-base;
+
+	max-width: 700px;
+
+	// highlight cursor color
+	&::selection {
+		background: $routez-secondary; /* WebKit/Blink Browsers */
+	}
+
+	&::-moz-selection {
+		background: $routez-secondary; /* Gecko Browsers */
+	}
 }
 
 .title {

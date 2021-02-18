@@ -90,11 +90,6 @@
 				transition: all 0.3s;
 				cursor: pointer;
 				text-decoration: none;
-	
-				&:hover {
-					text-decoration: underline;
-					text-decoration-color: $routez-black;
-				}
 			
 				&__text {
 					font-size: 12px;
@@ -479,5 +474,35 @@
 		& > .btn:first-child {
 			margin-right: 1rem;
 		}		
+	}
+}
+
+.react-tooltip {
+	-webkit-box-shadow: 0px 0px 21px -1px rgba(54,57,65,0.19);
+	-moz-box-shadow: 0px 0px 21px -1px rgba(54,57,65,0.19);
+	box-shadow: 0px 0px 21px -1px rgba(54,57,65,0.19);
+
+	background-color: white !important;
+	opacity: 0.95 !important;
+	border-radius: 5px !important;
+
+	&__email {
+		display: flex;
+		align-items: center;
+		margin: 0;
+
+		& > svg {
+			margin-right: 8px;
+		}
+	}
+
+	&__phone {
+		display: flex;
+		align-items: center;
+		margin: 0;
+
+		& > svg {
+			margin-right: 8px;
+		}
 	}
 }

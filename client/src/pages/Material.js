@@ -20,10 +20,13 @@ import { CardMaterials } from '../partials';
 
 // Components
 import { ButtonSmall } from '../components'
+import ReactTooltip from 'react-tooltip';
 
 // Icons 
 import { IoHeartSharp, IoHeartOutline } from 'react-icons/io5'
 import { HiOutlineDownload } from 'react-icons/hi';
+import { MdPhone, MdMailOutline } from 'react-icons/md';
+
 
 // Bootstrap
 import { Row, Col } from 'react-bootstrap'
@@ -100,12 +103,14 @@ const Material = () => {
     setLikedDigit(likedDigit-1);
   };
 
+
   return (
     <div className="material">
 		{
 		material && (
 			<>
 				<Row className="material-detail">
+					
 					{/** Material */}
 						<Col lg={7} className="material-detail-left">
 							<div className="material-detail-title-wrapper">
@@ -127,17 +132,22 @@ const Material = () => {
 						<Col lg={5} className="material-detail-right">
 							{/** Author */}
 							<h5 className="material-detail-right-title">Auteur van het materiaal</h5>
-							<div className="material-detail-right-profile" >
+							<div className="material-detail-right-profile">
 								{
 									material.author.profile.avatar ? (
 										<img className="material-detail-right-profile__image" src={`${apiConfig.baseURL}file/${ material.author.profile.avatar}`} alt="profile"/>
 									) : <img className="material-detail-right-profile__image" src={ DefaultImage } alt="profile"/>
 								}
-								<div className="material-detail-right-profile__text">
+								<div className="material-detail-right-profile__text" data-tip data-for='details'>
 									<p className="material-detail-right-profile__text-name">{material.author.profile.firstName + ' ' + material.author.profile.lastName}</p>
 									<p className="material-detail-right-profile__text-settings">{material.author.profile.schoolName}</p>
 								</div>
 							</div>
+							
+							<ReactTooltip className='react-tooltip' delayHide={1000} type="light" effect='solid' id='details' clickable='true' globalEventOff='click'>
+								<p className="react-tooltip__email"> <MdMailOutline/> {material.author.email}</p> <br/>
+								<p className="react-tooltip__phone"> <MdPhone/> {material.author.profile.phoneNumber}</p>
+							</ReactTooltip>
 
 							{/* <p className="material-detail-right-download-title">Download</p> */}
 							<div className="material-detail-right-download" title="Download PDF" onClick={() => getDoc(material.file)}>
