@@ -73,11 +73,12 @@ export default class PathController {
   createExercise = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
     try {
         // Get body
-        const { question, multiple, answers } = req.body;
+        const { question, multiple, answers, open } = req.body;
 
         const newExercise : IExercise = new Exercise({
             question: question,
             multiple: multiple,
+            open: open,
             answers: answers,
         });
 

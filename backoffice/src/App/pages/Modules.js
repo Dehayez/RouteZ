@@ -60,11 +60,12 @@ const Modules = () => {
           <div className="overview__items">
             {
               modules && modules.map((moduleItem, index) => {
+                console.log(moduleItem)
                 return (
                   <div className="overview__items--item d-flex justify-content-between align-items-center" key={index}>
                     <div className="overview__items--item--text">
                       <h5 onClick={() => history.push(Routes.MODULE.replace(':id', moduleItem._id))}>{moduleItem.title}</h5>
-                      <h6>Bevat {moduleItem.paths ? moduleItem.paths.length : 0} paden</h6>
+                      <h6>Bevat {moduleItem._pathIds ? moduleItem._pathIds.length : 0} paden</h6>
                     </div>
                     <div className="overview__items--item--buttons d-flex align-items-center justify-content-end">
                       <UsualButton text="Bewerk" action={() => history.push(Routes.EDIT_MODULE.replace(':id', moduleItem._id))} />

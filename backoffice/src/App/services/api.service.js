@@ -134,6 +134,27 @@ const ApiProvider = ({children}) => {
     return await response.json();
   };
 
+  /**
+   * @desc create one module
+   * @param {string} token 
+   * @param {string} content 
+   */
+  const createModule = async (token, content) => {
+    const url = `${BASE_URL}modules`;
+
+    const response = await fetch(url, {
+      'method': 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(content),
+    });
+
+    return await response.json();
+  };
+
   // PATH
 
   /**
@@ -556,6 +577,94 @@ const ApiProvider = ({children}) => {
     return await res.json();
   };
 
+  // EXERCISES
+
+  /**
+   * create exercise
+   * @param {string} token
+   * @param {json} body
+   */
+  const createExercise = async (token, body) => {
+    const url = `${BASE_URL}exercises`;
+
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body),
+    });
+
+    return await res.json();
+  };
+
+  // PATHS
+
+  /**
+   * create path
+   * @param {string} token
+   * @param {json} body
+   */
+  const createPath = async (token, body) => {
+    const url = `${BASE_URL}paths`;
+
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body),
+    });
+
+    return await res.json();
+  };
+
+  /**
+   * add exercise to path
+   * @param {*} token 
+   * @param {*} pathId 
+   * @param {*} exerciseId 
+   */
+  const addExerciseToPath = async (token, pathId, exerciseId) => {
+    const url = `${BASE_URL}exercises/${pathId}/${exerciseId}`;
+
+    const res = await fetch(url, {
+      method: "PATCH",
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+    });
+
+    return await res.json();
+  };
+
+  /**
+   * add path to module
+   * @param {*} token 
+   * @param {*} pathId 
+   * @param {*} moduleId 
+   */
+  const addPathToModule = async (token, pathId, moduleId) => {
+    const url = `${BASE_URL}exercises/${moduleId}/${pathId}`;
+
+    const res = await fetch(url, {
+      method: "PATCH",
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+    });
+
+    return await res.json();
+  };
+
   return (
     <ApiContext.Provider value={{
       getSignPosts,
@@ -564,6 +673,7 @@ const ApiProvider = ({children}) => {
       editSignPost,
       getModule,
       getModules,
+      createModule,
       getPath,
       getTags,
       uploadFile,
@@ -584,6 +694,10 @@ const ApiProvider = ({children}) => {
       deleteUser,
       createUser,
       editUser,
+      createExercise,
+      createPath,
+      addExerciseToPath,
+      addPathToModule,
     }}>
       {children}
     </ApiContext.Provider>
