@@ -11,6 +11,7 @@ import CreateMaterial from './CreateMaterial';
 import EditMaterial from './EditMaterial';
 import Modules from './Modules';
 import CreateModule from './CreateModule';
+import EditModule from './EditModule';
 
 export {
   Signin,
@@ -26,4 +27,5 @@ export {
   EditSignpost,
   EditUser,
   CreateModule,
+  EditModule,
 };

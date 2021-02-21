@@ -78,6 +78,25 @@ export default class ModuleController {
         };
     };
 
+    editModule = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
+        try {
+            const { title, content, paths } = req.body;
+            const { id } = req.params;
+
+            const result = await ModuleItem.findByIdAndUpdate(id, {
+                $set: {
+                    title: title,
+                    content: content,
+                    _pathIds: paths,
+                }
+            }).exec();
+
+            return res.status(200).json(result);
+        } catch (e) {
+            next(e);
+        };
+    };
+
     getModule = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
         try {
             // Get parameter

@@ -1,13 +1,10 @@
-import React, { useState } from 'react';
-import { Row, Col } from 'react-bootstrap';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
+import { Col, Row } from 'react-bootstrap';
 import ReactQuill from 'react-quill';
-import { useHistory } from 'react-router-dom';
 
 // Layouts
 import { UsualLayout } from '../layouts';
-
-// Component
-import { Checkbox, DeleteButton, InputField, Message, UsualButton } from '../components';
 
 // Config
 import * as Config from '../config';
@@ -18,27 +15,50 @@ import { useApi, useAuth } from '../services';
 // Routes
 import * as Routes from '../routes';
 
+// Components
+import { Checkbox, DeleteButton, InputField, UsualButton, Message } from '../components';
+
 // CSS
 import 'react-quill/dist/quill.snow.css';
 
-const CreateModule = () => {
+const EditModule = () => {
   // Routing
   const history = useHistory();
+  const { id } = useParams();
+
+  // Services
+  const { getModule, uploadFile, createExercise, createPath, editModule } = useApi();
+  const { currentUser } = useAuth();
 
   // States
-  const [ paths, setPaths ] = useState([]);
+  const [ moduleItem, setModuleItem ] = useState();
+  const [ paths, setPaths ] = useState(moduleItem ? moduleItem.paths : []);
   const [ typePath, setTypePath ] = useState();
   const [ moduleForm, setModuleForm ] = useState({
-    title: '',
-    content: '',
+    title: moduleItem ? moduleItem.title : '',
+    content: moduleItem ? moduleItem.content : '',
   });
   const [ error, setError ] = useState(false);
 
-  // Services
-  const { uploadFile, createExercise, createModule, createPath, addExerciseToPath, addPathToModule } = useApi();
-  const { currentUser } = useAuth();
+  // Fetching the module
+  const fetchModule = useCallback(async () => {
+    try {
+      const result = await getModule(currentUser.token, id);
+      setModuleItem(result);
+      setPaths(result.paths);
+      setModuleForm({
+        title: result.title,
+        content: result.content,
+      });
+    } catch (e) {
+      console.log(e);
+    };
+  }, [id, currentUser, getModule]);
 
-  // Delete path
+  useEffect(() => {
+    fetchModule();
+  }, [fetchModule]);
+
   const deletePath = (index) => {
     let array = [];
 
@@ -51,45 +71,28 @@ const CreateModule = () => {
     setPaths(array);
   };
 
-    // Create module
-  const addModule = async () => {
-    // Create module
-    const moduleResult = await createModule(currentUser.token, {
-      title: moduleForm.title,
-      content: moduleForm.content,
-    });
+  const changeModule = async () => {
+    // Create paths
+    let allPaths = [];
 
-    if (!moduleResult) {
-      setError(true);
-      return;
+    for (let i = 0; i < paths.length; i++) {
+      if (paths[i]._id) {
+        allPaths.push(paths[i]._id);
+      } else {
+        const pathResult = await createPath(currentUser.token, paths[i]);
+        allPaths.push(pathResult._id);
+      };
     };
 
-    // Create paths
-    for (let i = 0; i < paths.length; i++) {
-      const pathResult = await createPath(currentUser.token, paths[i]);
+    // Edit module
+    const result = await editModule(currentUser.token, {
+      title: moduleForm.title,
+      content: moduleForm.content,
+      paths: allPaths,
+    }, id);
 
-      if (!pathResult) {
-        setError(true);
-        return;
-      };
-
-      if (paths[i].type === "Oefeningen") {
-        for (let j = 0; j < paths[i]._exerciseIds.length; j++) {
-          const addedResult = await addExerciseToPath(currentUser.token, pathResult._id, paths[i]._exerciseIds[j]);
-
-          if (!addedResult) {
-            setError(true);
-            return;
-          };
-        }
-      }
-
-      const addedResult = await addPathToModule(currentUser.token, pathResult._id, moduleResult._id);
-
-      if (!addedResult) {
-        setError(true);
-        return;
-      }
+    if (!result) {
+      setError(true);
     };
 
     history.push(Routes.MODULES);
@@ -544,12 +547,12 @@ const CreateModule = () => {
     );
   };
 
-  return (
+  return moduleItem ? (
     <UsualLayout>
       <Row>
         <Col xs={12}>
           <h1 className="create__title">
-            Module maken
+            Module bewerken
           </h1>
         </Col>
         <div className="create__form">
@@ -559,7 +562,7 @@ const CreateModule = () => {
               name="title"
               placeholder="bv. Professioneel leren"
               id="title"
-              defaultValue=""
+              defaultValue={moduleItem.title}
               required={true}
               label="Titel"
               whenChanging={(e) => setModuleForm({...moduleForm, title: e.target.value})}
@@ -567,7 +570,7 @@ const CreateModule = () => {
             <div className="create__form--wysiwyg">
               <span className="wysiwyg-label">Beschrijving</span>
               <div className="wysiwyg-field">
-                <ReactQuill theme="snow" onChange={(e) => setModuleForm({...moduleForm, content: e})} />
+                <ReactQuill theme="snow" defaultValue={moduleItem.content} onChange={(e) => setModuleForm({...moduleForm, content: e})} />
               </div>
             </div>
             <div className="create__form--paths">
@@ -617,17 +620,17 @@ const CreateModule = () => {
                 }
               </div>
               {
-                error && <Message text="Deze module kon niet worden gemaakt" />
+                error && <Message text="Deze module kon niet worden aangepast" />
               }
               <div className="create__form--submit d-flex justify-content-end">
-                <UsualButton text="Maak module" action={addModule} />
+                <UsualButton text="Bewerk module" action={changeModule} />
               </div>
             </div>
           </Col>
         </div>
       </Row>
     </UsualLayout>
-  );
+  ) : '';
 };
 
-export default CreateModule;
+export default EditModule;
