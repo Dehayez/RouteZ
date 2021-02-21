@@ -155,6 +155,28 @@ const ApiProvider = ({children}) => {
     return await response.json();
   };
 
+  /**
+   * @desc edit one module
+   * @param {string} token 
+   * @param {string} content 
+   * @param {string} id
+   */
+  const editModule = async (token, content, id) => {
+    const url = `${BASE_URL}modules/${id}`;
+
+    const response = await fetch(url, {
+      'method': 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(content),
+    });
+
+    return await response.json();
+  };
+
   // PATH
 
   /**
@@ -674,6 +696,7 @@ const ApiProvider = ({children}) => {
       getModule,
       getModules,
       createModule,
+      editModule,
       getPath,
       getTags,
       uploadFile,

@@ -1,0 +1,134 @@
+@import '../../_sass/index';
+
+.radio-select {
+	border: 1px solid rgba($routez-grey, 0.3);
+	background-color: white;
+	font-size: 16px;
+	font-weight: 400;
+
+	border-radius: 5px;
+	padding: 0.5rem 0.8rem ;
+	margin-bottom: 2rem;
+	max-width: 500px;
+
+	&--active {
+		height: max-content;
+	}
+
+	&:hover {
+		cursor: pointer;
+	}
+
+	&__field {
+		color: $routez-primary;
+		font-size: 14px;
+	
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	&__select {
+		margin-top: 1rem;
+
+		/* &--section {
+			&__title {
+				font-size: 14px;
+				text-transform: capitalize;
+				font-weight: 700;
+			}
+			&__options--option {
+				font-size: 14px;
+	
+				width: 100%;
+				margin: 0.5rem 0;
+	
+				display: flex;
+				justify-content: space-between;
+			}
+		} */
+	}
+}
+
+.radio {
+	font-size: 14px;
+	font-weight: 400;
+
+	display: grid;
+	grid-template-columns: min-content auto;
+	grid-gap: 1em;
+
+	margin: 0.5rem 0;
+
+	&:hover {
+		cursor: pointer;
+	}
+
+	&__input {
+		display: flex;
+	
+		input {
+			opacity: 0;
+			width: 0;
+			height: 0;
+		}
+	}
+
+	&__label {
+		line-height: 1;
+	}
+
+	&__control {
+		display:grid;
+		place-items: center;
+		width: 1em;
+		height: 1em;
+		border-radius: 50%;
+		background-color: #eee;
+
+		transition: 0.3s;
+
+	}
+
+	&:hover input ~ .radio__control {
+		background-color: #ccc;
+	}
+}
+
+
+input + .radio__control::before {
+	content: "";
+	width: .5em;
+	height: .5em;
+	box-shadow: inset .5em .5em white;
+	border-radius: 50%;
+	transition: 180ms transform ease-in-out;
+
+	/* Hide check circle */
+	transform: scale(0);    
+}
+
+/* Show check circle when checked */
+input:checked + .radio__control::before {
+	transform: scale(1);
+}
+
+/* Change background when checked */
+input:checked + .radio__control {
+	background-color: $routez-primary;
+}
+
+
+
+.arrow-up, .arrow-down {
+	color: $routez-primary;
+	font-size: 1.2rem;
+
+	margin-left: 0.5rem;
+
+	transition: 0.4s;
+}
+
+.arrow-up {
+	transform: rotate(180deg);
+}

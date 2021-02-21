@@ -106,6 +106,7 @@ class ApiRouter {
         this.router.get('/modules', this.moduleController.allModules); // needs bearer
         this.router.get('/modules/:moduleId', this.moduleController.getModule); // needs bearer
         this.router.post('/modules', this.moduleController.createModule); // needs bearer and body
+        this.router.post('/modules/:id', this.moduleController.editModule); // only admin, needs param and body
 
         // Signposts
         this.router.get('/signposts', this.signpostController.allSignposts); // needs bearer

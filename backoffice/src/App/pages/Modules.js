@@ -60,7 +60,6 @@ const Modules = () => {
           <div className="overview__items">
             {
               modules && modules.map((moduleItem, index) => {
-                console.log(moduleItem)
                 return (
                   <div className="overview__items--item d-flex justify-content-between align-items-center" key={index}>
                     <div className="overview__items--item--text">
