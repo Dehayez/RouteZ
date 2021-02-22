@@ -6,6 +6,7 @@ import ImageUpload from './ImageUpload';
 import Tags from './Tags';
 import RadioSelect from './RadioSelect';
 import Checkbox from './Checkbox';
+import MultipleRadioSelect from './MultipleRadioSelect';
 
 export {
   InputField,
@@ -16,4 +17,5 @@ export {
   Tags,
   RadioSelect,
   Checkbox,
+  MultipleRadioSelect,
 };

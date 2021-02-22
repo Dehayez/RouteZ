@@ -113,7 +113,7 @@ export default class SignpostController {
     createSignpost = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
         try {
             // Get body
-            const { title, shortedTitle, text, illustration, icon } = req.body;
+            const { title, shortedTitle, text, illustration, icon, _moduleIds } = req.body;
 
             const newSignpost: ISignpost = new SignPost({
                 title: title,
@@ -121,6 +121,7 @@ export default class SignpostController {
                 text: text,
                 illustration: illustration,
                 icon: icon,
+                _moduleIds: _moduleIds,
             });
 
             const signpost = await newSignpost.save();
@@ -134,7 +135,7 @@ export default class SignpostController {
     editSignpost = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
         try {
             // Get body
-            const { title, shortedTitle, text, illustration, icon } = req.body;
+            const { title, shortedTitle, text, illustration, icon, _moduleIds } = req.body;
             const { signpostId } = req.params;
 
             const signpost = await SignPost.findByIdAndUpdate(signpostId, {
@@ -144,6 +145,7 @@ export default class SignpostController {
                     shortedTitle: shortedTitle,
                     icon: icon,
                     illustration: illustration,
+                    _moduleIds: _moduleIds,
                 },
             });
 

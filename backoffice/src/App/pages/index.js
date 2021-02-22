@@ -12,6 +12,7 @@ import EditMaterial from './EditMaterial';
 import Modules from './Modules';
 import CreateModule from './CreateModule';
 import EditModule from './EditModule';
+import Whoopsie from './Whoopsie';
 
 export {
   Signin,
@@ -28,4 +29,5 @@ export {
   EditUser,
   CreateModule,
   EditModule,
+  Whoopsie,
 };
