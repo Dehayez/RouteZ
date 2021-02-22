@@ -1,0 +1,29 @@
+@import '../_sass/index';
+
+.whoopsie {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__content {
+    h1 {
+      font-family: $font-family-secondary;
+      font-weight: 800;
+      font-size: 50px;
+      text-align: center;
+    }
+
+    h5 {
+      font-family: $font-family-primary;
+      font-weight: 200;
+      font-size: $font-size-l;
+      text-align: center;
+    }
+
+    &--button {
+      margin-top: 30px;
+    }
+  }
+}

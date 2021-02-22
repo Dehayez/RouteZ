@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 
 // Components
-import { ImageUpload, InputField, Textarea } from '../components';
+import { ImageUpload, InputField, MultipleRadioSelect, Textarea } from '../components';
 
 // Layouts
 import { UsualLayout } from '../layouts';
@@ -22,7 +22,7 @@ const CreateSignpost = () => {
   const history = useHistory();
 
   // Services
-  const { createSignPost } = useApi();
+  const { createSignPost, getModules } = useApi();
   const { currentUser } = useAuth();
 
   // States
@@ -32,7 +32,33 @@ const CreateSignpost = () => {
     text: '',
     illustration: '',
     icon: '',
+    _moduleIds: [],
   });
+
+  const [ allModules, setAllModules ] = useState();
+
+  // Change modules
+  const setSelectedModules = (id) => {
+    let array = [];
+    console.log(id)
+
+    for (let i = 0; i < form._moduleIds.length; i++) {
+      array.push(form._moduleIds[i]);
+    };
+
+    if (array.includes(id)) {
+      array.splice(array.indexOf(id), 1);
+    } else {
+      array.push(id);
+    };
+
+    console.log(array)
+
+    setForm({
+      ...form,
+      _moduleIds: array,
+    });
+  };
 
   // Add illustration
   const setIllustration = (illustration) => {
@@ -63,7 +89,21 @@ const CreateSignpost = () => {
     };
   };
 
-  return (
+  // Fetch modules
+  const fetchModules = useCallback(async () => {
+    try {
+      const modulesResult = await getModules(currentUser.token);
+      setAllModules(modulesResult);
+    } catch (e) {
+      console.log(e);
+    };
+  }, [currentUser, getModules]);
+
+  useEffect(() => {
+    fetchModules();
+  }, [fetchModules]);
+
+  return allModules ? (
     <UsualLayout>
       <Row>
         <Col xs={12}>
@@ -105,6 +145,12 @@ const CreateSignpost = () => {
                 required={true}
                 whenChanging={(e) => setForm({...form, [e.target.name]: e.target.value})}
               />
+              <MultipleRadioSelect 
+                text="Voeg modules toe aan deze wegwijzer"
+                data={allModules}
+                defaultSelected={form._moduleIds}
+                setSelected={setSelectedModules}
+              />
               <ImageUpload 
                 title="Illustratie toevoegen"
                 defaultImage={form.illustration}
@@ -125,7 +171,7 @@ const CreateSignpost = () => {
         </Row>
       </div>
     </UsualLayout>
-  );
+  ) : '';
 };
 
 export default CreateSignpost;

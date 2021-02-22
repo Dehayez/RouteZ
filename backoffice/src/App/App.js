@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 // Services
 import { ApiProvider, AuthProvider } from './services';
@@ -11,7 +11,7 @@ import { RouteCheck } from './utils';
 import * as Routes from './routes';
 
 // Pages
-import { CreateSignpost, Dashboard, EditSignpost, Materials, Modules, Signin, Signposts, Users, CreateMaterial, EditMaterial, CreateUser, EditUser, CreateModule, EditModule } from './pages';
+import { CreateSignpost, Dashboard, EditSignpost, Materials, Modules, Signin, Signposts, Users, CreateMaterial, EditMaterial, CreateUser, EditUser, CreateModule, EditModule, Whoopsie } from './pages';
 
 // CSS
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -23,6 +23,7 @@ const App = () => {
       <ApiProvider>
         <BrowserRouter>
           <Switch>
+            <RouteCheck tokenNeeded={false} path={Routes.WHOOPSIE} component={Whoopsie} />
             <RouteCheck tokenNeeded={true} path={Routes.MATERIALS} component={Materials} />
             <RouteCheck tokenNeeded={true} path={Routes.EDIT_MATERIAL} component={EditMaterial} />
             <RouteCheck tokenNeeded={true} path={Routes.CREATE_MATERIAL} component={CreateMaterial} />
@@ -37,6 +38,7 @@ const App = () => {
             <RouteCheck tokenNeeded={true} path={Routes.SIGNPOSTS} component={Signposts} />
             <RouteCheck tokenNeeded={true} path={Routes.DASHBOARD} component={Dashboard} />
             <RouteCheck tokenNeeded={false} path={Routes.SIGNIN} component={Signin} />
+            <RouteCheck tokenNeeded={false} path='/*' component={Whoopsie} />
           </Switch>
         </BrowserRouter>
       </ApiProvider>

@@ -3,7 +3,7 @@ import { Col, Row } from 'react-bootstrap';
 import { useHistory, useParams } from 'react-router-dom';
 
 // Components
-import { ImageUpload, InputField, Textarea } from '../components';
+import { ImageUpload, InputField, Textarea, MultipleRadioSelect } from '../components';
 
 // Layouts
 import { UsualLayout } from '../layouts';
@@ -23,7 +23,7 @@ const EditSignpost = () => {
   const { id } = useParams();
 
   // Services
-  const { editSignPost, getSignPost } = useApi();
+  const { editSignPost, getSignPost, getModules } = useApi();
   const { currentUser } = useAuth();
 
   // States
@@ -33,7 +33,10 @@ const EditSignpost = () => {
     text: '',
     illustration: '',
     icon: '',
+    _moduleIds: [],
   });
+
+  const [ allModules, setAllModules ] = useState();
 
   // Add illustration
   const setIllustration = (illustration) => {
@@ -51,13 +54,35 @@ const EditSignpost = () => {
     });
   };
 
+  // Change modules
+  const setSelectedModules = (id) => {
+    let array = [];
+    console.log(id)
+
+    for (let i = 0; i < form._moduleIds.length; i++) {
+      array.push(form._moduleIds[i]);
+    };
+
+    if (array.includes(id)) {
+      array.splice(array.indexOf(id), 1);
+    } else {
+      array.push(id);
+    };
+
+    console.log(array)
+
+    setForm({
+      ...form,
+      _moduleIds: array,
+    });
+  };
+
   // Edit signpost
   const edit = async (e) => {
     try {
       e.preventDefault();
 
       const result = await editSignPost(currentUser.token, form, id);
-
       if (result) history.push(Routes.SIGNPOSTS);
     } catch (e) {
       console.log(e);
@@ -68,11 +93,14 @@ const EditSignpost = () => {
   const fetchSignpost = useCallback(async () => {
     try {
       const result = await getSignPost(currentUser.token, id);
+      const modulesResult = await getModules(currentUser.token);
 
       if (result.error) {
         history.push(Routes.WHOOPSIE);
         return;
       };
+
+      setAllModules(modulesResult);
 
       setForm({
         title: result.title,
@@ -80,17 +108,18 @@ const EditSignpost = () => {
         shortedTitle: result.shortedTitle,
         illustration: result.illustration,
         icon: result.icon,
+        _moduleIds: result._moduleIds,
       });
     } catch (e) {
       console.log(e);
     };
-  }, [currentUser, id, getSignPost]);
+  }, [currentUser, id, getSignPost, getModules]);
 
   useEffect(() => {
     fetchSignpost();
   }, [fetchSignpost]);
 
-  return form.title ? (
+  return form.title ? allModules && (
     <UsualLayout>
       <Row>
         <Col xs={12}>
@@ -131,6 +160,12 @@ const EditSignpost = () => {
                 label='Beschrijving'
                 required={true}
                 whenChanging={(e) => setForm({...form, [e.target.name]: e.target.value})}
+              />
+              <MultipleRadioSelect 
+                text="Voeg modules toe aan deze wegwijzer"
+                data={allModules}
+                defaultSelected={form._moduleIds}
+                setSelected={setSelectedModules}
               />
               <ImageUpload 
                 title="Illustratie toevoegen"
