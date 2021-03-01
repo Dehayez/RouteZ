@@ -66,6 +66,10 @@ export default class FileController {
         Files.pipeFile(req, res);
     };
 
+    showSvg = (req: Request, res: Response, next: NextFunction): void => {
+        Files.pipeSvg(req, res);
+    };
+
     // Uploading file
     upload = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
         try {
@@ -228,7 +232,7 @@ export default class FileController {
 
     createMaterial = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
         try {
-            const { title, description, type, filename, file, videoUrl, size, _authorId, _moduleId, target } = req.body;
+            const { title, description, type, filename, file, videoUrl, size, _authorId, _moduleId, target , _tagIds} = req.body;
             
             let newMaterial: IMaterial;
             
@@ -243,6 +247,7 @@ export default class FileController {
                     target: target,
                     _authorId: _authorId,
                     _moduleId: _moduleId,
+                    _tagIds: _tagIds
                 });
             };
 
@@ -257,6 +262,7 @@ export default class FileController {
                     target: target,
                     _authorId: _authorId,
                     _moduleId: _moduleId,
+                    _tagIds: _tagIds
                 });
             };
 
@@ -269,6 +275,7 @@ export default class FileController {
                     target: target,
                     _authorId: _authorId,
                     _moduleId: _moduleId,
+                    _tagIds: _tagIds
                 });
             };
 

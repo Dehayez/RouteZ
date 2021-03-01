@@ -46,6 +46,8 @@ interface IProgress {
     _finishedPathIds: Array<IPath['_id']>;
     _finishedSignPostIds: Array<ISignpost['_id']>;
     _finishedExercises: Array<IExercise>;
+    _lastSignpost: ISignpost['_id'];
+    _lastModule: IModule['_id'];
 };
 
 // Main information of an user
@@ -147,6 +149,12 @@ const userSchema: Schema = new Schema({
                 }
             }],
         }],
+        _lastModule: {
+            type: Schema.Types.ObjectId, ref: 'Module', required: false,
+        },
+        _lastSignpost: {
+            type: Schema.Types.ObjectId, ref: 'Signpost', required: false,
+        },
     },
     role: {
         type: String,

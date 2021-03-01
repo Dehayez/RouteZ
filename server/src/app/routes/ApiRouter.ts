@@ -79,6 +79,7 @@ class ApiRouter {
         this.router.patch('/users/:id', this.userController.editUser); // needs bearer and id, only for admin
         this.router.post('/users/me', this.userController.updateMyself); // needs bearer and body
         this.router.post('/users/me/progress', this.userController.updateProgress); // needs bearer and body
+        this.router.post('/users/me/last', this.userController.updateLastProgress); // needs bearer and body
         this.router.post('/users/create', this.userController.createUser); // needs body, only admin
         this.router.delete('/users/me', this.userController.deleteMyself); // needs bearer
         this.router.delete('/users/:id', this.userController.deleteUser); // needs id, only admin
@@ -92,6 +93,7 @@ class ApiRouter {
         this.router.post('/doc', multer({storage: memoryStorage()}).single('file'), Files.uploadFile, this.fileController.upload); // uploading avatar, needs formdata
         this.router.get('/file/:filename', this.fileController.showImage); // needs filename as params
         this.router.get('/doc/:filename', this.fileController.showFile); // needs filename as params
+        this.router.get('/svg/:filename', this.fileController.showSvg); // needs filename as params
         this.router.get('/material/:id', this.fileController.getMaterial); // needs bearer and params
         this.router.get('/material/current/:userId', this.fileController.myMaterials); // needs userId as params and bearer
         this.router.get('/material', this.fileController.allMaterials); // needs bearer

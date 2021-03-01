@@ -107,7 +107,18 @@ export default class UserController {
 
             const { id } = payload;
 
-            const user = await User.findOne({ _id: id }); 
+            const user = await User.findOne({ _id: id }).populate({
+                path: 'progress',
+                populate: {
+                    path: '_lastModule',
+                }
+            }).populate(
+            {
+                path: 'progress',
+                populate: {
+                    path: '_lastSignpost',
+                }
+            });
             
             // When user doesn't exist
             if (!user) {
@@ -216,6 +227,43 @@ export default class UserController {
             next(e);
         };
     }
+
+    updateLastProgress = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
+        try {
+            const { moduleId, signpostId } = req.body;
+
+            // First off all, check if you're the user
+            if (!req.headers.authorization) {
+                return res.status(401).json({
+                    error: "Deze gebruiker bestaat niet.",
+                });
+            };
+
+            const token = req.headers.authorization.slice(7);
+            const payload = Object(jwtDecode(token));
+
+            const { id } = payload;
+
+            const user = await User.findOne({ _id: id }); 
+
+            if (!user) {
+                return res.status(404).json({
+                    error: "Deze gebruiker bestaat niet."
+                });
+            };
+
+            const updatedUser = await User.findByIdAndUpdate(user._id, {
+                $set: {
+                    'progress._lastSignpost': signpostId,
+                    'progress._lastModule': moduleId,
+                },
+            });
+
+            return res.status(200).json(updatedUser);
+        } catch (e) {
+            next(e);
+        };
+    };
 
     updateProgress = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
         try {

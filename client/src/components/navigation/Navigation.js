@@ -61,7 +61,7 @@ const Navigation = () => {
 										title={signpost.shortedTitle} 
 										alt={signpost.shortedTitle} 
 										endpoint={`/signposts/${signpost.id}`} 
-										logo={`${apiConfig.baseURL}file/${signpost.icon}`}
+										logo={`${apiConfig.baseURL}svg/${signpost.icon}`}
 									/>
 						})
         			}

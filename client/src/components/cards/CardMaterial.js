@@ -65,7 +65,7 @@ const CardMaterial = ({material, user, token}) => {
 				</div>
 
 				<p className="material-card-text">
-					"Prachtig documentje over het zelfgestuurd leren binnen onze school"
+					{material.title}
 				</p>
 
 				<div className="material-card-image" onClick={readMaterial}>

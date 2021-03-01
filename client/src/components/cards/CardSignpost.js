@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
+import ReactHtmlParser from 'react-html-parser';
 
 // Import components
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
@@ -9,16 +10,33 @@ import { Link } from 'react-router-dom';
 import './Cards.scss';
 
 const CardSignpost = ({endpoint, index, title, text, logo, alt, percentage }) => {
+	const [ logoResult, setLogoResult ] = useState();
 
+	const fetchSvg = useCallback(async () => {
+		await fetch(logo, {
+			method: "GET",
+		}).then(async (res) => setLogoResult(await res.text()));
+	}, [logo]);
+
+	useEffect(() => {
+		fetchSvg();
+	}, [fetchSvg]);
+
+	setTimeout(() => {
+		const shape = document.getElementsByTagName("svg")[0];
+		if (shape) shape.setAttribute("viewBox", "0 0 150 120"); 
+	}, 200);
 
   return (
 	  <Link className="signpost-card" to={endpoint}>
 		<h1 className="signpost-card__title">{index}. {title}</h1>
 		<p className="signpost-card__text">{text}</p>
-
 		<div className="signpost-card-bottom">
 			<div className="signpost-card-bottom__icon-wrapper">
-				<img className="signpost-card-bottom__icon" src={logo} alt={alt}/>
+					{
+						ReactHtmlParser(logoResult)
+					}
+				{/* <img className="signpost-card-bottom__icon" src={logo} alt={alt}/> */}
 			</div>
 			<div className="signpost-card-bottom__percentage">
 				<CircularProgressbar value={ percentage } strokeWidth={8} styles={buildStyles({

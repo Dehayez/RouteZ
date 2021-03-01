@@ -207,6 +207,7 @@ const CreateMaterial = () => {
         size: form.size,
         _authorId: currentUser.id,
         _moduleId: selectedModule,
+        _tagIds: selectedTags,
       });
     };
 

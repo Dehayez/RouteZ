@@ -45,7 +45,7 @@ class Files {
         };
     };
 
-    public uploadAvatar = async (req: IMulterRequest, res: Response, next: NextFunction): Promise <Response> => {
+    public uploadSvg = async (req: IMulterRequest, res: Response, next: NextFunction): Promise <Response> => {
         const uploadedImg = req.file;
 
         try {
@@ -72,6 +72,32 @@ class Files {
             });    
         };
     };
+
+    public uploadAvatar = async (req: IMulterRequest, res: Response, next: NextFunction): Promise <Response> => {
+        const uploadedImg = req.file;
+
+        try {
+            crypto.randomBytes(16, async (e, buf) => {
+                const name = buf.toString('hex') + path.extname(uploadedImg.originalname);
+                const bufferstream = new stream.PassThrough();
+
+                bufferstream.end(uploadedImg.buffer);
+                bufferstream.pipe(this.gfsBucket.openUploadStream(name).on('error', (error: any) => {
+                    return res.status(500).json({
+                        'error': 'Upload niet gelukt',
+                    });
+                }).on('finish', () => {
+                    req.file.filename = name;
+                    next();
+                }));
+            });
+        } catch (error) {
+            console.log('Upload not worked');
+            return res.status(500).json({
+                'error': 'Upload niet gelukt',
+            });    
+        };
+    }
 
     public uploadFile = async (req: IMulterRequest, res: Response, next: NextFunction): Promise <Response> => {
         const uploadedFile = req.file;
@@ -100,6 +126,20 @@ class Files {
     };
 
     public pipeImage(req: IMulterRequest, res: Response): void {
+        this.gfsBucket.find({
+            filename: req.params.filename,
+        }).toArray((e: any, files: any) => {
+            if(!files || files.length === 0) {
+                return res.status(404).json({
+                    error: 'Image not found',
+                });
+            };
+
+            this.gfsBucket.openDownloadStreamByName(req.params.filename).pipe(res);
+        });
+    };
+
+    public pipeSvg(req: IMulterRequest, res: Response): void {
         this.gfsBucket.find({
             filename: req.params.filename,
         }).toArray((e: any, files: any) => {
