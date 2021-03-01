@@ -14,6 +14,12 @@
 		}
 	}
 
+	&-toggler {
+		font-size: 2rem !important;
+		color: rgba($routez-black, .8) !important;
+		border: none !important;
+	}
+
 	&-collapse {
 		justify-content: flex-end;
 	}
@@ -23,7 +29,7 @@
 		padding: 0.5rem;
 		color: $routez-black;
 		text-decoration: none;
-		opacity: 0.7;
+		opacity: .7;
 		transition: 0.3s;
 
 		&::after {
@@ -45,18 +51,23 @@
 		}
 
 		&:hover {
-			color: $routez-primary;
 			cursor: pointer;
-			opacity: 1;
+			color: $routez-primary;
+			opacity: .9;
+		}
+
+		&:focus {
+			color: $routez-primary-dark;
+			opacity: .9;
 		}
 
 		&--active {
 			color: $routez-primary;
 			opacity: 1;
-			text-decoration: underline;
+			/* text-decoration: underline;
 			text-decoration-color: $routez-primary;
 			text-decoration-thickness: .125em;
-			text-underline-offset: 0.6em;
+			text-underline-offset: 0.6em; */
 		}
 	}
 }
@@ -86,6 +97,22 @@
 }
 
 
+
+
+
+/********************************* FOOTER *********************************/
+.footer {
+	padding: 1rem 1rem;
+	display: flex;
+	justify-content: end;
+	background-color: $routez-secondary-light;
+	font-size: 14px;
+
+	&-link {
+		text-decoration: none;
+		margin-left: 1rem;
+	}
+}
 
 
 /********************************* LANDING PAGE  *********************************/
@@ -258,8 +285,9 @@
 
 	&-section {
 		width: 100%;
-		height: 80vh;
-		padding: 0 8rem;
+		//height: 90vh;
+		//min-height: 700px;
+		padding: 5rem 8rem;
 
 		display: flex;
 		flex-direction: column;
@@ -292,33 +320,174 @@
 		&--two {
 			background-color: $routez-secondary-light;
 
-				&__title {
-					font-size: 36px;
-					font-weight: 600;
-					font-family: $font-family-secondary;
-					margin-bottom: 3rem;
+			&__title {
+				font-size: 36px;
+				font-weight: 600;
+				font-family: $font-family-secondary;
+				margin-bottom: 3rem;
+			}
+
+			&-left {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+
+				&__text {
+					font-size: 16px;
+					font-weight: 300;
+					margin: 2rem 0;
+					line-height: 2em;
 				}
+			}
 
-				&-left {
-					&__text {
-						font-size: 16px;
-						font-weight: 300;
-						margin: 2rem 0;
-						line-height: 2em;
+			&-right {
+				display: flex;
+				justify-content: center;
+				align-items: center;
 
-						& br {
-							font-size: 2rem;
-						}
+				&__image {
+					width: 80%;
+					height: max-content;
+					max-width: 300px;
+				}
+			}
+		}
+
+		&--four {
+			&__title {
+				font-size: 36px;
+				font-weight: 600;
+				font-family: $font-family-secondary;
+				margin-bottom: 3rem;
+			}
+
+			&-left {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+
+				&__text {
+					font-size: 16px;
+					font-weight: 300;
+					margin: 2rem 0;
+					line-height: 2em;
+				}
+			}
+
+			&-right {
+				display: flex;
+				flex-direction: column;
+
+				&__image {
+					width: 10%;
+					height: max-content;
+					max-width: 300px;
+				}
+			}
+			
+			&-circle {
+				height: 130vh;
+				width: 200vw;
+				background-color: $routez-secondary-light;
+				border-radius: 50%;
+				/* z-index: -2;
+				position: absolute;
+				top: -70vh; */
+				// top: -150vh;
+				position: absolute;
+	
+				&-wrapper {
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					position: relative;
+					width: 100vw;
+					height: 100vh;
+					padding-top: 80vh;
+					overflow: hidden;
+	
+					&-wrapper {
+						position: absolute;    
+						z-index: -1;
 					}
 				}
 				
-				/* &-right {
-
-				} */
+			}
 		}
 	}
 }
 
+
+
+/********************************* CAROUSEL *********************************/
+.carousel {
+	& div {
+		text-align: center;
+
+		& img {
+			width: 100%;
+			max-width: 500px;
+		}
+
+		& h3 {
+			font-size: 20px;
+			font-family: $font-family-secondary;
+			font-weight: 600;
+			margin: 2rem 0 1rem;
+		}
+
+		& p {
+			font-size: 16px;
+			font-weight: 300;
+			margin: 1rem 0 2rem;
+			max-width: 500px;
+		}
+	}
+}
+
+.rec {
+	&-arrow {
+		color: $routez-primary !important;
+		background-color: white !important;
+		box-shadow: none !important;
+		font-size: 3rem !important;
+	
+		&:hover {
+			color:$routez-primary-dark !important;
+			background-color: white !important;
+		}
+	
+		&:disabled {
+			opacity: 0 !important;
+			cursor: default !important;
+		}
+	}
+
+}
+// not active
+.eteURg {
+	box-shadow: none !important;
+	background-color: $routez-secondary !important;
+	
+	&:hover {
+		background-color: $routez-secondary-dark !important;
+	}
+
+}
+// active
+.jCPmTH {
+	background-color: $routez-primary !important;
+	box-shadow: none !important;
+	width: 30px !important;
+	border-radius: 10px !important;
+
+	&:hover {
+		background-color: $routez-primary !important;
+	}
+
+}
+
+/********************************* EXTRA *********************************/
 .spacer {
     width: 100%;
     height: 95px;
@@ -331,13 +500,18 @@
 
 // Small devices (landscape phones, 576px and up)
 @media (min-width: 576px) { 
+	.landing {
+		&-section {
+			padding: 4rem 2rem;
+		}
+	}
 	
- }
+}
 
 // Medium devices (tablets, 768px and up)
 @media (min-width: 768px) { 
-	
- }
+
+}
 
 // Large devices (desktops, 992px and up)
 @media (min-width: 992px) { 
@@ -349,38 +523,61 @@
 		&-top {
 			height: calc(100vh - 76px);
 		}
+
+		&-section {
+			padding: 5rem 8rem;
+		}
 	}
- }
+}
+
+
+	
 
 // X-Large devices (large desktops, 1200px and up)
 @media (min-width: 1200px) { 
+	.landing {
+		&-section {
+			padding: 5rem 8rem;
 
- }
+			&--four {
+				padding: 5rem 8rem 0;
+
+			}
+		}
+	}
+}
 
 // XX-Large devices (larger desktops, 1400px and up)
 @media (min-width: 1400px) { 
 
- }
+}
+
+
 
 
 
  // Extra small devices (portrait phones, less than 576px)
 @media (max-width: 575.98px) { 
-	
- }
+	.landing {
+		&-section {
+			padding: 4rem 1rem;
+		}
+	}
+}
 
 // Small devices (landscape phones, less than 768px)
 @media (max-width: 767.98px) { 
 	
- }
+}
 
 // Medium devices (tablets, less than 992px)
 @media (max-width: 991.98px) { 
 
 	.landing {
-		padding: 1rem;
-
 		&-top {
+			padding: 0;
+			padding: 1rem;
+
 			&-circle-wrapper-wrapper {
 				display: none;
 			}
@@ -388,18 +585,41 @@
 			&-left {
 				padding: 0;
 				text-align: center;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
 			}
 
 			&-right {
-				padding: 0 !important;
-				margin-top: 5rem;
 				margin-top: 5rem !important;
 			}
 		}
-	}
 
-	.section {
-		height: 70vh !important;
+		&-section {
+			/* &--one {
+				&__text {
+					text-align: left;
+				}
+			} */
+
+			&--two {
+				&-right {
+					display: none;
+				}
+
+				&-left {
+					&__text {
+						padding: 0 !important;
+					}
+				}
+			}
+
+			&--four {
+				&-circle-wrapper-wrapper {
+					display: none;
+				}
+			}
+		}
 	}
 	
  }

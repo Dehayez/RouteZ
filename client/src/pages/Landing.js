@@ -12,14 +12,20 @@ import FloatingLabelInput from 'react-floating-label-input';
 import { Link as LinkScroll } from 'react-scroll';
 
 // Bootstrap 
-import { Container, Row, Col } from 'react-bootstrap';
-import Carousel from 'react-bootstrap/Carousel'
+import { Row, Col } from 'react-bootstrap';
+
+// Carousel 
+import Carousel from 'react-elastic-carousel';
+
+// Scroll animate
+import "animate.css/animate.min.css";
+import { AnimationOnScroll } from 'react-animation-on-scroll';
 
 // Icons
 import { BsChevronDown } from 'react-icons/bs';
 
 // Images
-import { LandingIllustration } from '../assets/images';
+import { LandingIllustration, WegwijzerLanding, Plan } from '../assets/images';
 
 import "animate.css/animate.min.css";
 
@@ -36,6 +42,33 @@ const Landing = () => {
         "email": "",
         "password": "",
     });
+
+	const [ carouselItems, setCarouselItems ] = useState([
+		{
+			id: 1, 
+			title: '1. Leren',
+			text: 'Leer bij door wegwijzer na wegwijzer te volgen en zo de theorie onder de knie te krijgen!',
+			image: Plan,
+		},
+		{
+			id: 2, 
+			title: '2. Progressie',
+			text: 'Volg uw eigen progressie op de voet! Een eenvoudige klik op uw profielpagina en u ziet hoe ver u de route gevolgd hebt per wegwijzer.',
+			image: Plan,
+		},
+		{
+			id: 3, 
+			title: '3. Ontdek materiaal',
+			text: 'Hoe pas je de theorie nu precies toe? Ontdek het tussen de verschillende materialen!',
+			image: Plan,
+		},
+		{
+			id: 4, 
+			title: 'Plaats eigen materiaal',
+			text: 'Naast het ontdekken van andermans materiaal, kunt u ook eigen praktijkvoorbeelden plaatsen! Zo helpt u ook heel wat andere leerkrachten. Team work makes the dream work.',
+			image: Plan,
+		},
+	  ]);
 
     const loginUser = async (e) => {
 		e.preventDefault();
@@ -84,8 +117,7 @@ const Landing = () => {
 							hét platform voor zelfgestuurd leren in een krachtige leeromgeving!
 							<span> - door en voor leerkrachten</span>
 						</p>
-							<img className="landing-top-left__image" src={ LandingIllustration } alt="RouteZ"/>
-					
+						<img className="landing-top-left__image" src={ LandingIllustration } alt="RouteZ"/>
 					</Col>
 
 					<Col className="landing-top-right scale-in-center" lg={6}>
@@ -123,7 +155,8 @@ const Landing = () => {
 					</Col>
 				</Row>
 			</div>
-			
+
+			<AnimationOnScroll animateIn="animate__fadeInLeft" animateOut="animate__fadeOutRight">
 				<div className="landing-section landing-section--one" id="routez">
 					<div className="landing-section--one">
 						<h2 className="landing-section--one__title">Wat is RouteZ?</h2>
@@ -133,65 +166,65 @@ const Landing = () => {
 						</Link>
 					</div>
 				</div>
+			</AnimationOnScroll>
 
-			<div className="landing-section landing-section--two" id="signposts">
-				<h1 className="landing-section--two__title">Wegwijzers</h1>
-				<Row>
-					<Col className="landing-section--two-left__text" lg="7">
-						Het platform besteedt bijzondere aandacht aan de eigenheid van elke leerling (zelfgestuurd leren voor alle leerlingen), van elke leerkracht en de verschillende rollen die ze moeten opnemen. 
+			
+				<div className="landing-section landing-section--two" id="signposts">
+					
+							<h1 className="landing-section--two__title">Wegwijzers</h1>
+							<Row>
+								<Col className="landing-section--two-left__text" lg="7">
+									<p>Het platform besteedt bijzondere aandacht aan de <strong className="landing-section__strong">eigenheid van elke leerling</strong> (zelfgestuurd leren voor alle leerlingen), van elke leerkracht en de verschillende rollen die ze moeten opnemen. </p>
 
-						Een krachtige leeromgeving, rekening houdend met de 7 principes voor zelfgestuurd leren in krachtige leeromgevingen. 
-						Deze 7 principes hebben als doel je wegwijs te maken doorheen het proces van zelfgestuurd leren. 
+									<p>Een krachtige leeromgeving, rekening houdend met de <strong className="landing-section__strong">7 principes</strong> voor zelfgestuurd leren in krachtige leeromgevingen. 
+									Deze 7 principes hebben als doel je wegwijs te maken doorheen het proces van zelfgestuurd leren. </p>
 
-						Elke wegwijzer staat voor een bepaald principe. Deze wordt opgebouwd uit verschillende modules die zowel theorie (tips & tricks, filmpjes ...) als oefeningen omvatten.
-					</Col>
-					<Col lg="5">
-						<img src="" alt="wegwijzer"/>
-					</Col>
-				</Row>
-			</div>
+									<p>Elke wegwijzer staat voor een bepaald principe. Deze wordt opgebouwd uit <strong className="landing-section__strong">verschillende modules</strong> die zowel theorie (tips & tricks, filmpjes ...) als oefeningen omvatten.</p>
+									<Link to={Routes.DASHBOARD}>
+										<ButtonSmall color="primary" content="Bekijk de 7 principes"/>
+									</Link>
+								</Col>
+								<Col className="landing-section--two-right" lg="5">
+									<img className="landing-section--two-right__image" src={ WegwijzerLanding } alt="wegwijzer"/>
+								</Col>
+							</Row>
+					
+				</div>
 
-			<div className="landing-section landing-section--three" id="plan">
-				<h1 className="landing-section--two__title">Stappenplan</h1>
-				<Carousel>
-					<Carousel.Item interval={2000}>
-						<img
-						className="d-block w-100"
-						src="holder.js/800x400?text=First slide&bg=373940"
-						alt="First slide"
-						/>
-						<Carousel.Caption>
-						<h3>First slide label</h3>
-						<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-						</Carousel.Caption>
-					</Carousel.Item>
-					<Carousel.Item interval={2000}>
-						<img
-						className="d-block w-100"
-						src="holder.js/800x400?text=Second slide&bg=282c34"
-						alt="Second slide"
-						/>
-						<Carousel.Caption>
-						<h3>Second slide label</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-						</Carousel.Caption>
-					</Carousel.Item>
-					<Carousel.Item interval={2000}>
-						<img
-						className="d-block w-100"
-						src="holder.js/800x400?text=Third slide&bg=20232a"
-						alt="Third slide"
-						/>
-						<Carousel.Caption>
-						<h3>Third slide label</h3>
-						<p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-						</Carousel.Caption>
-					</Carousel.Item>
-				</Carousel>
-			</div>
+			<AnimationOnScroll animateIn="animate__fadeInLeft" animateOut="animate__fadeOutRight">
+				<div className="landing-section landing-section--three" id="plan">
+					<h1 className="landing-section--two__title">Stappenplan</h1>
+
+					<Carousel className="carousel">
+						{carouselItems.map(item => 
+							<div key={item.id} >
+								<img src={item.image} alt={item.title}/>
+								<h3>{item.title}</h3>
+								<p>{item.text}</p>
+							</div>)}
+					</Carousel>
+				</div>
+			</AnimationOnScroll>
 
 			<div className="landing-section landing-section--four" id="we">
-				
+
+				<h1 className="landing-section--four__title">Door en voor ...</h1>
+				<Row>
+					<Col className="landing-section--four-left__text" lg="7">
+						<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo? Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo?</p>
+					</Col>
+					<Col className="landing-section--four-right" lg="5">
+						<img className="landing-section--four-right__image" src={ WegwijzerLanding } alt="wegwijzer"/>
+						<img className="landing-section--four-right__image" src={ WegwijzerLanding } alt="wegwijzer"/>
+						<img className="landing-section--four-right__image" src={ WegwijzerLanding } alt="wegwijzer"/>
+					</Col>
+				</Row>
+
+				{/* <div className="landing-section--four-circle-wrapper-wrapper">
+					<div className="landing-section--four-circle-wrapper">
+						<div className="landing-section--four-circle"/>
+					</div>
+				</div> */}
 			</div>
         </div>
     )
