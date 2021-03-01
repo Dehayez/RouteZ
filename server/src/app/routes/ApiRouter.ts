@@ -18,6 +18,7 @@ import {
     ExerciseController,
     TagController,
     SearchController,
+    NotificationController,
 } from '../controllers';
 
 import { 
@@ -38,6 +39,7 @@ class ApiRouter {
     private exerciseController: ExerciseController;
     private tagController : TagController;
     private searchController: SearchController;
+    private notificationController: NotificationController;
 
     private config: IConfig;
     private auth: Auth;
@@ -63,6 +65,7 @@ class ApiRouter {
         this.pathController = new PathController();
         this.tagController = new TagController();
         this.searchController = new SearchController();
+        this.notificationController = new NotificationController();
     };
 
     private registerRoutes(): void {
@@ -139,6 +142,11 @@ class ApiRouter {
 
         // Searches
         this.router.post('/search-engine', this.searchController.searchItems); // needs bearer and body
+
+        // Notifications
+        this.router.post('/notification', this.notificationController.createNotification); // needs body
+        this.router.get('/notifications', this.notificationController.getNotifications); // needs bearer
+        this.router.get('/read-notifications', this.notificationController.readNotifications); // needs bearer
     };
 };
 

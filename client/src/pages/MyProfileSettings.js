@@ -10,6 +10,9 @@ import * as Routes from '../routes';
 // Import config
 import { apiConfig } from '../config';
 
+// Icons
+import { IoIosBrush } from 'react-icons/io';
+
 //Import components
 import { ButtonLarge, ButtonSmall }  from '../components/buttons';
 import { DefaultImage } from '../assets/images';
@@ -127,16 +130,21 @@ const MyProfileSettings = () => {
     }, [getAllData]);
 
     return (
+        <>
         <div className="settings">
             <form className="form-label-left" onSubmit={(e) => submitSettings(e)}>
+                <div className="form-avatar">
+                    {
+                        formData.avatar ? (
+                            <img className="form-label-left-image" src={`${apiConfig.baseURL}file/${formData.avatar}`} alt="profile"/>
+                        ) : <img className="form-label-left-image" src={ DefaultImage } alt="profile"/>
+                    }
+                    <div className="form-avatar__button">
+                        <IoIosBrush color="#4A84FC" />
+                        <input type="file" accept="image/*" id="avatar" onChange={(e) => changeImage(e)} ></input>
+                    </div>
+                </div>
 
-				{
-					formData.avatar ? (
-						<img className="form-label-left-image" src={`${apiConfig.baseURL}file/${formData.avatar}`} alt="profile"/>
-					) : <img className="form-label-left-image" src={ DefaultImage } alt="profile"/>
-				}
-                <input type="file" accept="image/*" id="avatar" onChange={(e) => changeImage(e)} ></input>
-				
 				<div className="form-label-left-item">
 					<label className="form-label-left-label">Voornaam*</label>
 					<input className="form-label-left-input" type="text" id="firstName" onChange={(e) => changeForms(e)} defaultValue={formData ? formData.firstName : ''} required/>
@@ -189,8 +197,12 @@ const MyProfileSettings = () => {
 					success && success
 				}
 			</div> */}
-
+            <div className="settings-delete">
+                <h5>U wilt uw account verwijderen?</h5>
+                <p>Dat kan. Neem contact op met <a href="mailto:help@routez.be">dit e-mailadres </a>om uw account te verwijderen. Alle gegevens worden zorgvuldig verwijderd.</p>
+            </div>
         </div>
+        </>
     )
 };
 

@@ -264,18 +264,27 @@ const CreateMaterial = () => {
 
           {
               form && form.type === 'Video' ? (
-                <input onChange={(e) => changeInput(e)} type="text" placeholder="video-url" name="videoUrl" id="videoUrl" />
+                <>
+                <label className="create-material__label d-block">Link naar video</label>
+                <input className="create-material-form__input w-100" onChange={(e) => changeInput(e)} type="text" placeholder="video-url" name="videoUrl" id="videoUrl" />
+                </>
               ) : (
                 <>
-                <input type="file" accept="application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint, text/plain, application/pdf, image/*" onChange={(e) => uploadNewDocument(e)} name="file" id="file"/>
+                <div>
+                  <div className="create-material__upload-button">
+                    <span>Bestand uploaden</span>
+                    <input type="file" accept="application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint, text/plain, application/pdf, image/*" onChange={(e) => uploadNewDocument(e)} name="file" id="file"/>
+                  </div>
+                </div>
                 {
                   file && (
-                    <span>
-                      <strong>{file.name}</strong>
+                    <div className="create-material__upload-text">
+                      <strong>{file.name}</strong><br/>
                       <span>{date.format('L')} | {(file.size / (1024*1024)).toFixed(2)}MB</span>
-                    </span>
+                    </div>
                   )
                 }
+
                 </>
             )
           }

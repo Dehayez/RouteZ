@@ -352,6 +352,47 @@
 		margin-bottom: 0.5rem;
 	}
 
+	&__upload-text {
+		background-color: $routez-grey-light;
+		display: inline-block;
+		padding: 10px 20px;
+		border-radius: 10px;
+		margin-top: 20px;
+		font-size: $font-size-s;
+	}
+
+	&__upload-button {
+		background-color: $routez-primary !important;
+		color: white!important;
+		font-weight: 400 !important;
+		font-size: 16px !important;
+		padding: 0.5rem 0.8rem !important;
+		max-height: 42px;
+		border-radius: 10px !important;
+		transition: 0.2s !important;
+		cursor: pointer;
+		display: inline-flex;
+		position: relative;
+
+		span {
+			color: white;
+		}
+
+		input {
+			opacity: 0;
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			cursor: pointer;
+		}
+
+		&:hover {
+			background-color: $routez-primary-dark !important;
+		}
+	}
+
 	&-form {
 		display: flex;
 		flex-direction: column;
