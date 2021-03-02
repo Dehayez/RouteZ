@@ -8,6 +8,7 @@ import {
     User,
     IUser,
     SignPost,
+    Notification
 } from "../models";
 
 import { 
@@ -321,6 +322,37 @@ export default class UserController {
                         },
                     }, { new : true }).exec();
                 };
+
+                const signposts = await SignPost.find().exec();
+
+                for (let i = 0; i < signposts.length; i++) {
+                    let completedSignpost;
+                    let addSignpost = true;
+
+                    for (let j = 0; j < array.length; j++) {
+                        if (!signposts[i]._moduleIds.includes(array[i])) {
+                            addSignpost = false;
+                            completedSignpost = signposts[i];
+                        };
+                    };
+                    
+                    if (addSignpost) {
+                        await User.findOneAndUpdate({_id: id}, {
+                            $push: {
+                                'progress._finishedSignpostIds': completedSignpost._id,
+                            }
+                        });
+
+                        const createdNotification = new Notification({
+                            text: 'Je hebt een nieuwe beloning ontvangen wegens het vervolledigen van een wegwijzer!',
+                            type: 'reward',
+                            _userId: id,
+                            _signpostId: completedSignpost._id,
+                        });
+
+                        await createdNotification.save();
+                    };
+                };
             };
 
             if (pathId) {
@@ -370,6 +402,7 @@ export default class UserController {
                         'progress._finishedExercises': exercise,
                     }
                 }, {new: true}).exec();
+
             };
 
             if (signpostId) {

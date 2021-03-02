@@ -228,6 +228,7 @@ const EditMaterial = () => {
               {_id: "Presentatie", title: "Presentatie"},
               {_id: "Video", title: "Video"},
             ]}
+            name="type"
             defaultSelected={material.type}
             setSelected={updateType}
           />
@@ -241,6 +242,7 @@ const EditMaterial = () => {
               {_id: "De vintjes", title: "De vintjes"},
               {_id: "De vrouwtjes", title: "De vrouwtjes"},
             ]}
+            name="target"
             defaultSelected={material.target}
             setSelected={updateTarget}
           />
@@ -251,6 +253,7 @@ const EditMaterial = () => {
             grouped={true}
             data={signposts}
             defaultSelected={material._moduleId}
+            name="module"
             setSelected={updateModule}
           />
           {

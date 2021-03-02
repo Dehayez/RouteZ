@@ -1,5 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import Moment from 'moment';
+import 'moment/locale/nl-be';
 
 // Import services
 import { useAuth } from '../services';
@@ -21,6 +23,7 @@ const Dashboard = () => {
     // All accessable data
     const [ user, setUser ] = useState();
     const [ avatar, setAvatar ] = useState();
+		const [ timeOfTheDay, setTimeOfTheDay ] = useState();
 
     const getAllData = useCallback(() => {
         const easyFetch = async () => {
@@ -32,6 +35,24 @@ const Dashboard = () => {
             if (userData.profile.avatar) {
                 setAvatar(userData.profile.avatar);
             };
+
+						const hours = Moment(Date.now()).hours();
+
+						if (hours < 11) {
+							setTimeOfTheDay('Goeiemorgen');
+						};
+
+						if (hours >= 11 && hours <= 13) {
+							setTimeOfTheDay('Goeiemiddag');
+						};
+
+						if (hours > 13 && hours < 18) {
+							setTimeOfTheDay('Goeienamiddag');
+						};
+
+						if (hours >= 18) {
+							setTimeOfTheDay('Goeienavond');
+						};
         };
 
         easyFetch();
@@ -41,6 +62,8 @@ const Dashboard = () => {
 		getAllData();
 	}, [getAllData]);
 
+
+
     return user ? (
         <div className="dashboard">
 			<div className="dashboard-card">
@@ -49,7 +72,7 @@ const Dashboard = () => {
 					{ 
 						user.progress._lastSignpost && (
 							<>
-								<h3 className="dashboard-card-content-text__title">Goeiemiddag, {user.profile.firstName}!</h3>
+								<h3 className="dashboard-card-content-text__title">{timeOfTheDay}, {user.profile.firstName}!</h3>
 								<p className="dashboard-card-content-text__text">Je was voor het laatst gebleven aan wegwijzer "{user.progress._lastSignpost.title}" in de module "{user.progress._lastModule.title}"</p>
 							</>
 						)

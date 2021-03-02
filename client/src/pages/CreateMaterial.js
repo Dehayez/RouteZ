@@ -239,6 +239,7 @@ const CreateMaterial = () => {
               {_id: "Presentatie", title: "Presentatie"},
               {_id: "Video", title: "Video"},
             ]}
+            name="type"
             setSelected={updateType}
           />
 
@@ -251,6 +252,7 @@ const CreateMaterial = () => {
               {_id: "De vintjes", title: "De vintjes"},
               {_id: "De vrouwtjes", title: "De vrouwtjes"},
             ]}
+            name="target"
             setSelected={updateTarget}
           />
 
@@ -260,6 +262,7 @@ const CreateMaterial = () => {
             grouped={true}
             data={signposts}
             setSelected={updateModule}
+            name="module"
           />
 
           {

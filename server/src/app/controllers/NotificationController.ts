@@ -82,7 +82,7 @@ export default class NotificationController {
 
       if (type === 'module') {        
         for (let i = 0; i < users.length; i++) {
-          const createdNotification = new Notification({text, type, _signpostId, _moduleId, _userId: users[i]._id});
+          const createdNotification = new Notification({text, type, _moduleId, _userId: users[i]._id});
           notification = await createdNotification.save();
         };
       };

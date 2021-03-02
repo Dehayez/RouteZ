@@ -35,11 +35,6 @@ const Signpost = () => {
         fetchData();
     }, [getSignPost, currentUser, id]);
 
-	// fout; object object in url
-    const goToModule = (id) => {
-        history.push(`/modules/${id}`);
-    };
-
     useEffect(() => {
         getAllData();
 	}, [getAllData]);

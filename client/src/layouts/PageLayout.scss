@@ -223,3 +223,28 @@
 		}
 	}
  }
+
+ /************************* NO-DESKTOP *************************/
+
+ .no-desktop {
+	 min-height: 100vh;
+	 display: flex;
+	 justify-content: center;
+	 align-items: center;
+	 padding: 0px 50px;
+
+	 &__logo {
+		 display: flex;
+		 justify-content: center;
+		 margin-bottom: 50px;
+
+		 img {
+			 width: 150px;
+		 }
+	 }
+
+	 p {
+		 font-size: $font-size-s;
+		 text-align: center;
+	 }
+ }
