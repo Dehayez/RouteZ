@@ -1,4 +1,5 @@
 // User model
+
 import {
     default as mongoose,
     Document,
@@ -233,7 +234,8 @@ userSchema.pre('save', function (next) {
 
 // Comparing password with input
 userSchema.methods.comparePassword = function(candidatePass: String, cb: Function) {
-    const user = this;
+    const user: IUser = this as IUser;
+    
     bcrypt.compare(candidatePass, user.password, (err, match) => {
         if (err) {
             return cb(err, null);

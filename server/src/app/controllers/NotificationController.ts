@@ -63,13 +63,16 @@ export default class NotificationController {
   createNotification = async (req: Request, res: Response, next: NextFunction):Promise<Response> => {
     try {
       // Body
-      const { text, type, _userId, _signpostId, _materialId, _moduleId } = req.params;
+      const { text, type, _userId, _signpostId, _materialId, _moduleId } = req.body;
 
       let notification;
+      const users = await User.find().exec();
 
       if (type === 'signpost') {
-        const createdNotification = new Notification({text, type, _signpostId, _userId});
-        notification = await createdNotification.save();
+        for (let i = 0; i < users.length; i++) {
+          const createdNotification = new Notification({text, type, _signpostId, _userId: users[i]._id});
+          notification = await createdNotification.save();
+        };
       };
 
       if (type === 'material') {
@@ -77,9 +80,11 @@ export default class NotificationController {
         notification = await createdNotification.save();
       };
 
-      if (type === 'module') {
-        const createdNotification = new Notification({text, type, _signpostId, _moduleId, _userId});
-        notification = await createdNotification.save();
+      if (type === 'module') {        
+        for (let i = 0; i < users.length; i++) {
+          const createdNotification = new Notification({text, type, _signpostId, _moduleId, _userId: users[i]._id});
+          notification = await createdNotification.save();
+        };
       };
 
       if (type === 'reward') {

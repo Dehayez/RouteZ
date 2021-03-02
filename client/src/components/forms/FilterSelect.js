@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 // Icons
-import Arrow from '../../assets/icons/arrow-blue.svg';
 import { IoIosArrowUp } from 'react-icons/io'
 
 // Components
@@ -99,7 +98,7 @@ const FilterSelect = ({text, options, sections, setQuery, query, type}) => {
                 return (
                   <div key={index} className="filter-select__select--section__options--option">
                     <label htmlFor={option.id ? option.id : option._id}>{option.title ? option.title : option.name}</label>
-                    <Checkbox change={editSelected} name={option.title ? option.title : option.name} id={option.id ? option.id : option._id} />
+                    <Checkbox action={true} change={editSelected} name={option.title ? option.title : option.name} id={option.id ? option.id : option._id} />
                   </div>
                 )
               }) : options.map((option, index) => {
@@ -112,7 +111,7 @@ const FilterSelect = ({text, options, sections, setQuery, query, type}) => {
                           return <div key={innerIndex} className="filter-select__select--section__options--option">
                             <label htmlFor={innerOption.id}>{innerOption.title}</label>
 							<div className="filter-select__select--section__options--option-checkbox">
-                           		<Checkbox change={editSelected} name={innerOption.title} id={innerOption.id} />
+                           		<Checkbox action={true} change={editSelected} name={innerOption.title} id={innerOption.id} />
 							</div>
                           </div>
                         })

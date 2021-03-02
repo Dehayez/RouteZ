@@ -255,21 +255,31 @@ const EditMaterial = () => {
           />
           {
               form && form.type === 'Video' ? (
-                <input onChange={(e) => changeInput(e)} type="text" defaultValue={form.videoUrl} name="videoUrl" id="videoUrl" />
+                <>
+                <label className="create-material__label d-block">Link naar video</label>
+                <input className="create-material-form__input w-100" defaultValue={form.videoUrl} onChange={(e) => changeInput(e)} type="text" placeholder="video-url" name="videoUrl" id="videoUrl" />
+                </>
               ) : (
                 <>
-                <input type="file" accept="application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint, text/plain, application/pdf, image/*" onChange={(e) => uploadNewDocument(e)} name="file" id="file"/>
-                
-				<div className="edit-material-form-file">
-					<div className="edit-material-form-file-text">
-						<p className="edit-material-form-file-text__name">{form.filename}</p>
-						<p className="edit-material-form-file-text__data">{form.file ? created.format('L') : newCreated.format('L')} | {form.size} | TODO pagina's</p>
-					</div>
-				</div>
+                <div>
+                  <div className="create-material__upload-button">
+                    <span>Bestand wijzigen</span>
+                    <input type="file" accept="application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint, text/plain, application/pdf, image/*" onChange={(e) => uploadNewDocument(e)} name="file" id="file"/>
+                  </div>
+                </div>
+                {
+                  form.file && (
+                    <div className="create-material__upload-text">
+                      <strong>{form.filename}</strong><br/>
+                      <span>{form.file ? created.format('L') : newCreated.format('L')} | {form.size}</span>
+                    </div>
+                  )
+                }
+
                 </>
             )
           }
-		
+	
 
 		  <div className="create-material-buttons">
 			<ButtonSmall content="Annuleren" color="secondary" onClick={() => history.push(Routes.MY_MATERIALS)}/>
