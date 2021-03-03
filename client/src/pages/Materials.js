@@ -43,6 +43,8 @@ const Materials = () => {
     "target": [],
   });
 
+  console.log(queryForm);
+
   // Context
   const typesContext = [{
     id: "Presentatie",
@@ -135,7 +137,7 @@ const Materials = () => {
     let vid = [];
     let pres = [];
 
-    if (queryForm.keywords.length !== 0 || queryForm.modules.length !== 0 || queryForm.type.length !== 0 || queryForm.target.length !== 0) {
+    if (queryForm.keywords.length !== 0 || queryForm.modules.length !== 0 || queryForm.type.length !== 0 || queryForm.target.length !== 0 || queryForm.tags.length !== 0) {
       const materialData = await queryMaterials(
         queryForm.keywords.length !== 0 ? queryForm.keywords : false,
         queryForm.type.length !== 0 ? queryForm.type : false,

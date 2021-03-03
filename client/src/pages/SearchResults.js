@@ -73,7 +73,7 @@ const SearchResults = () => {
 							{
 							fullResults.results.map((item, index) => {
 								return (
-								<div className="search-right-results-item" key={index} to={item.path}>
+								<div className="search-right-results-item" key={index} onClick={() => history.push(item.path)}>
 									<h5 className="search-right-results-item__title">{item.title}</h5>
 									<ButtonSmall content={item.tag} color="secondary"/>
 									<p className="search-right-results-item__text">{item.bottomText}</p>

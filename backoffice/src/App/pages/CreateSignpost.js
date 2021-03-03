@@ -22,7 +22,7 @@ const CreateSignpost = () => {
   const history = useHistory();
 
   // Services
-  const { createSignPost, getModules } = useApi();
+  const { createSignPost, getModules, createNotification } = useApi();
   const { currentUser } = useAuth();
 
   // States
@@ -82,7 +82,11 @@ const CreateSignpost = () => {
       e.preventDefault();
 
       const result = await createSignPost(currentUser.token, form);
-
+      await createNotification(currentUser.token, {
+        text: `Er is een nieuwe wegwijzer toegevoed genaamd "${result.title}"`,
+        type: 'signpost',
+        _signpostId: result._id,
+      });
       if (result) history.push(Routes.SIGNPOSTS);
     } catch (e) {
       console.log(e);

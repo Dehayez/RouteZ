@@ -26,7 +26,7 @@ const ListMaterialItem = ({material, owner}) => {
   moment.locale('nl-be');
 
   // Services
-  const { addLikeToMaterial, addDislikeToMaterial, deleteMaterial, getDoc } = useApi();
+  const { addLikeToMaterial, addDislikeToMaterial, deleteMaterial, getDoc, createNotification } = useApi();
   const { getMyself, currentUser } = useAuth();
 
   // States
@@ -53,6 +53,20 @@ const ListMaterialItem = ({material, owner}) => {
   // Add like
   const likeMaterial = async () => {
     await addLikeToMaterial(currentUser.token, currentUser.id, material._id);
+    const result = await createNotification(currentUser.token, {
+      text: `Iemand van jouw materiaal genaamd "${material.title}" leuk`,
+      type: 'material',
+      _userId: material.author._id,
+      _materialId: material._id,
+    });
+    console.log({
+      text: `Iemand van jouw materiaal genaamd "${material.title}" leuk`,
+      type: 'material',
+      _userId: material.author._id,
+      _materialId: material._id,
+    });
+    console.log(result)
+
     setLiked(true);
     setLikedDigit(likedDigit+1);
   };

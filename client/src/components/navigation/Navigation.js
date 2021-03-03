@@ -47,6 +47,7 @@ const Navigation = () => {
 	
 
 	return (
+<<<<<<< HEAD
 		<div className="nav">
 			<Link className="nav-header" to="/dashboard">
 				<img className="nav-header__image" src={LogoColor}/>
@@ -69,6 +70,31 @@ const Navigation = () => {
 			
 			<Link className="nav-link" to={Routes.SIGNPOSTS}>Alle wegwijzers</Link>
 		</div>
+=======
+			<div className="nav">
+				<Link className="nav-header" to="/dashboard">
+					<img className="nav-header__image" src={LogoColor}/>
+				</Link>
+
+				<nav className="nav-list">
+					{
+						signposts && signposts.map((signpost, i) => {
+							return <NavigationItem 
+										key={i} 
+										index={i+1}
+										title={signpost.shortedTitle} 
+										alt={signpost.shortedTitle} 
+										endpoint={`/signposts/${signpost.id}`} 
+										logo={`${apiConfig.baseURL}svg/${signpost.icon}`}
+									/>
+						})
+        			}
+				</nav>
+				
+				<Link className="nav-link" to={Routes.SIGNPOSTS}>Alle wegwijzers</Link>
+
+			</div>
+>>>>>>> b091f21651593e638818c3a602c411aac25540a8
 	);
 
 };

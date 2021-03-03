@@ -207,6 +207,7 @@ const CreateMaterial = () => {
         size: form.size,
         _authorId: currentUser.id,
         _moduleId: selectedModule,
+        _tagIds: selectedTags,
       });
     };
 
@@ -238,6 +239,7 @@ const CreateMaterial = () => {
               {_id: "Presentatie", title: "Presentatie"},
               {_id: "Video", title: "Video"},
             ]}
+            name="type"
             setSelected={updateType}
           />
 
@@ -250,6 +252,7 @@ const CreateMaterial = () => {
               {_id: "De vintjes", title: "De vintjes"},
               {_id: "De vrouwtjes", title: "De vrouwtjes"},
             ]}
+            name="target"
             setSelected={updateTarget}
           />
 
@@ -259,22 +262,32 @@ const CreateMaterial = () => {
             grouped={true}
             data={signposts}
             setSelected={updateModule}
+            name="module"
           />
 
           {
               form && form.type === 'Video' ? (
-                <input onChange={(e) => changeInput(e)} type="text" placeholder="video-url" name="videoUrl" id="videoUrl" />
+                <>
+                <label className="create-material__label d-block">Link naar video</label>
+                <input className="create-material-form__input w-100" onChange={(e) => changeInput(e)} type="text" placeholder="video-url" name="videoUrl" id="videoUrl" />
+                </>
               ) : (
                 <>
-                <input type="file" accept="application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint, text/plain, application/pdf, image/*" onChange={(e) => uploadNewDocument(e)} name="file" id="file"/>
+                <div>
+                  <div className="create-material__upload-button">
+                    <span>Bestand uploaden</span>
+                    <input type="file" accept="application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint, text/plain, application/pdf, image/*" onChange={(e) => uploadNewDocument(e)} name="file" id="file"/>
+                  </div>
+                </div>
                 {
                   file && (
-                    <span>
-                      <strong>{file.name}</strong>
+                    <div className="create-material__upload-text">
+                      <strong>{file.name}</strong><br/>
                       <span>{date.format('L')} | {(file.size / (1024*1024)).toFixed(2)}MB</span>
-                    </span>
+                    </div>
                   )
                 }
+
                 </>
             )
           }

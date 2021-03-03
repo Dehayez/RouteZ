@@ -40,8 +40,6 @@ const Progress = () => {
 		return s.charAt(0).toUpperCase() + s.slice(1);
 	};
 
-	console.log(progress)
-
 	return (
 		<div className="progression">
 			<h4 className="progression-title">Progressie</h4>

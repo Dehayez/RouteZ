@@ -1,4 +1,5 @@
 // User model
+
 import {
     default as mongoose,
     Document,
@@ -46,6 +47,8 @@ interface IProgress {
     _finishedPathIds: Array<IPath['_id']>;
     _finishedSignPostIds: Array<ISignpost['_id']>;
     _finishedExercises: Array<IExercise>;
+    _lastSignpost: ISignpost['_id'];
+    _lastModule: IModule['_id'];
 };
 
 // Main information of an user
@@ -147,6 +150,12 @@ const userSchema: Schema = new Schema({
                 }
             }],
         }],
+        _lastModule: {
+            type: Schema.Types.ObjectId, ref: 'Module', required: false,
+        },
+        _lastSignpost: {
+            type: Schema.Types.ObjectId, ref: 'Signpost', required: false,
+        },
     },
     role: {
         type: String,
@@ -225,7 +234,8 @@ userSchema.pre('save', function (next) {
 
 // Comparing password with input
 userSchema.methods.comparePassword = function(candidatePass: String, cb: Function) {
-    const user = this;
+    const user: IUser = this as IUser;
+    
     bcrypt.compare(candidatePass, user.password, (err, match) => {
         if (err) {
             return cb(err, null);

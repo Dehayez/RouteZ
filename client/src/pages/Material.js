@@ -51,8 +51,6 @@ const Material = () => {
   const [ liked, setLiked ] = useState();
   const [ likedDigit, setLikedDigit ] = useState();
 
-  const [ avatar, setAvatar ] = useState();
-
   // Init date
   let date = moment(material && material._createdAt);
   moment.locale('nl-be');
@@ -153,7 +151,7 @@ const Material = () => {
 							<div className="material-detail-right-download" title="Download PDF" onClick={() => getDoc(material.file)}>
 								<div className="material-detail-right-download-text">
 									<p className="material-detail-right-download-text__name">{material.filename}</p>
-									<p className="material-detail-right-download-text__data">{date.format('L')} | {material.size} | TODO pagina's</p>
+									<p className="material-detail-right-download-text__data">{date.format('L')} | {material.size}</p>
 								</div>
 								{/** Later on adding pages */}
 								<HiOutlineDownload className="material-icon__download" /> 
@@ -168,6 +166,11 @@ const Material = () => {
 									{ likedDigit === 0 ? 'Er zijn nog geen hartjes uitgedeeld' : 'Dit materiaal wordt geappreciëerd' }
 								</p>
 							</div>
+							{
+								material.tags.length !== 0 && material.tags.map((tag, index) => {
+									return <span key={index}>{tag.name}</span>
+								})
+							}
 						</Col>
 				</Row>
 					

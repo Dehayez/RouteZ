@@ -6,7 +6,7 @@ import { IoIosArrowUp } from 'react-icons/io'
 
 import './RadioSelect.scss';
 
-const RadioSelect = ({ grouped, text, data, defaultSelected, setSelected }) => {
+const RadioSelect = ({ grouped, text, data, defaultSelected, setSelected, name }) => {
   // States
   const [ showFully, setShowFully ] = useState(false);
 
@@ -29,7 +29,7 @@ const RadioSelect = ({ grouped, text, data, defaultSelected, setSelected }) => {
                         return (
 							<label className="radio" key={innerIndex}>
 								<span className="radio__input" htmlFor={module.title}> 
-									<input onChange={() => setSelected(module._id)} defaultChecked={defaultSelected === module._id ? true : false} type="radio" value={module._id} name="selectOne"/>
+									<input onChange={() => setSelected(module._id)} defaultChecked={defaultSelected === module._id ? true : false} type="radio" value={module._id} name={`one_${name}`}/>
 									<span className="radio__control"></span>
 								</span>
 								<span className="radio__label">{module.title}</span>
@@ -50,7 +50,7 @@ const RadioSelect = ({ grouped, text, data, defaultSelected, setSelected }) => {
                 data && data.map((element, index) => {
                   return <label className="radio" key={index}>
 							<span className="radio__input" htmlFor={element.title}> 
-								<input onChange={() => setSelected(element._id)} defaultChecked={defaultSelected === element._id ? true : false} type="radio" value={element._id} name="selectTwo"/>
+								<input onChange={() => setSelected(element._id)} defaultChecked={defaultSelected === element._id ? true : false} type="radio" value={element._id} name={`two_${name}`}/>
 								<span className="radio__control"></span>
 							</span>
 							<span className="radio__label">{ element.title }</span>

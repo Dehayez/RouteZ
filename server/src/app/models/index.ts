@@ -6,3 +6,4 @@ export * from './path.model';
 export * from './exercise.model';
 export * from './material.model';
 export * from './tag.model';
+export * from './notification.model';

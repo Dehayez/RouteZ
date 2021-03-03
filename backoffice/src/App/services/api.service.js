@@ -687,6 +687,29 @@ const ApiProvider = ({children}) => {
     return await res.json();
   };
 
+  // NOTIFICATIONS
+
+  /**
+   * create notification
+   * @param {string} token
+   * @param {json} content
+   */
+  const createNotification = async (token, content) => {
+    const url = `${BASE_URL}notification`;
+
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(content),
+    });
+
+    return await res.json();
+  };
+
   return (
     <ApiContext.Provider value={{
       getSignPosts,
@@ -721,6 +744,7 @@ const ApiProvider = ({children}) => {
       createPath,
       addExerciseToPath,
       addPathToModule,
+      createNotification,
     }}>
       {children}
     </ApiContext.Provider>

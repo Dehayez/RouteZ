@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 // Icons
-import Arrow from '../../assets/icons/arrow-blue.svg';
 import { IoIosArrowUp } from 'react-icons/io'
 
 // Components
@@ -98,9 +97,8 @@ const FilterSelect = ({text, options, sections, setQuery, query, type}) => {
               !sections ? options.map((option, index) => {
                 return (
                   <div key={index} className="filter-select__select--section__options--option">
-                    <label htmlFor={option.id ? option.id : option._id}>{option.title ? option.title : option.name}
-                    	<Checkbox change={editSelected} name={option.title ? option.title : option.name} id={option.id ? option.id : option._id} />
-					</label>
+                    <label htmlFor={option.id ? option.id : option._id}>{option.title ? option.title : option.name}</label>
+                    <Checkbox action={true} change={editSelected} name={option.title ? option.title : option.name} id={option.id ? option.id : option._id} />
                   </div>
                 )
               }) : options.map((option, index) => {
@@ -111,11 +109,10 @@ const FilterSelect = ({text, options, sections, setQuery, query, type}) => {
                       {
                         option.modules.map((innerOption, innerIndex) => {
                           return <div key={innerIndex} className="filter-select__select--section__options--option">
-                            <label htmlFor={innerOption.id}>{innerOption.title}
-								<div className="filter-select__select--section__options--option-checkbox">
-									<Checkbox change={editSelected} name={innerOption.title} id={innerOption.id} />
-								</div>
-							</label>
+                            <label htmlFor={innerOption.id}>{innerOption.title}</label>
+							<div className="filter-select__select--section__options--option-checkbox">
+                           		<Checkbox action={true} change={editSelected} name={innerOption.title} id={innerOption.id} />
+							</div>
                           </div>
                         })
                       }

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 // Import services
 import { useApi } from '../../services';
@@ -20,8 +20,6 @@ import { HiOutlineDownload } from 'react-icons/hi';
 import './Cards.scss';
 
 const CardMaterial = ({material, user, token}) => {
-  const history = useHistory();
-
   // Services
   const { addLikeToMaterial, addDislikeToMaterial, getDoc } = useApi();
 
@@ -65,7 +63,7 @@ const CardMaterial = ({material, user, token}) => {
 				</div>
 
 				<p className="material-card-text">
-					"Prachtig documentje over het zelfgestuurd leren binnen onze school"
+					{material.title}
 				</p>
 
 				<div className="material-card-image" onClick={readMaterial}>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 
 // Services
 import { useAuth } from '../../services';
@@ -14,23 +14,26 @@ const Exercises = ({exercises, previousResults}) => {
   const { editProgress, currentUser } = useAuth();
   const [ showPrevious, setShowPrevious ] = useState(true);
 
-  useEffect(() => {
-    if(showPrevious) {
-      if (previousResults && previousResults.length !== 0) {
-        for (let i = 0; i < previousResults.length; i++) {
-          if (previousResults[i].answers[0].response) {
-            document.getElementById(previousResults[i].questionId).value = previousResults[i].answers[0].response;
-          };
-
-          for (let j = 0; j < exercises.length; j++) {
-            if (previousResults[i].questionId === exercises[j]._id) {
-              for (let k = 0; k < previousResults[i].answers.length; k++) {
-                for (let l = 0; l < exercises[j].answers.length; l++) {
-                  if(previousResults[i].answers[k].answerId === exercises[j].answers[l]._id) {
-                    if (previousResults[i].answers[k].correct === exercises[j].answers[l].correct) {
-                      document.getElementById(previousResults[i].answers[k].answerId).className = 'correct-answer';
-                    } else {
-                      document.getElementById(previousResults[i].answers[k].answerId).className = 'wrong-answer';
+  useLayoutEffect(() => {
+    setTimeout(() => {
+      if(showPrevious) {
+        if (previousResults && previousResults.length !== 0) {
+          for (let i = 0; i < previousResults.length; i++) {
+            if (previousResults[i].answers[0].response) {
+              document.getElementById(previousResults[i].questionId).value = previousResults[i].answers[0].response;
+            };
+  
+            for (let j = 0; j < exercises.length; j++) {
+              if (previousResults[i].questionId === exercises[j]._id) {
+                for (let k = 0; k < previousResults[i].answers.length; k++) {
+                  for (let l = 0; l < exercises[j].answers.length; l++) {
+                    if(previousResults[i].answers[k].answerId === exercises[j].answers[l]._id) {
+                      if (previousResults[i].answers[k].correct === exercises[j].answers[l].correct) {
+                        console.log(previousResults[i].answers[k].answerId)
+                        document.getElementById(previousResults[i].answers[k].answerId).className = 'correct-answer';
+                      } else {
+                        document.getElementById(previousResults[i].answers[k].answerId).className = 'wrong-answer';
+                      };
                     };
                   };
                 };
@@ -39,7 +42,7 @@ const Exercises = ({exercises, previousResults}) => {
           };
         };
       };
-    };
+    }, 500);
   }, [previousResults, exercises]);
 
   const Question = ({element, index}) => {

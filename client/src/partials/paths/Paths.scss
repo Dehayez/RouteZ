@@ -111,6 +111,14 @@
 			& input:checked ~ .checkmark {
 				background-color: $routez-primary;
 			}
+
+			input.correct-answer + span {
+				background-color: green !important;
+			}
+
+			input.wrong-answer + span {
+				background-color: red !important;
+			}
 	  
 			/* Show the checkmark when checked */
 			& input:checked ~ .checkmark:after {

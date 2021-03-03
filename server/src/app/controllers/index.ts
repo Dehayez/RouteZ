@@ -7,6 +7,7 @@ import ExerciseController from './ExerciseController';
 import PathController from './PathController';
 import TagController from './TagController';
 import SearchController from './SearchController';
+import NotificationController from './NotificationController';
 
 export {
     UserController,
@@ -18,4 +19,5 @@ export {
     PathController,
     TagController,
     SearchController,
+    NotificationController,
 };

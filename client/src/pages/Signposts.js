@@ -37,8 +37,6 @@ const Signposts = () => {
 		fetchProgress();
 	}, [fetchProgress]);
 
-	console.log(progress)
-
     return (
         <div className="signposts">
 		{

@@ -397,6 +397,65 @@ const ApiProvider = ({children}) => {
     return await res.json();
   };
 
+  /**
+   * get all notifications
+   * @param {string} token
+   */
+  const getNotifications = async (token) => {
+    const url = `${BASE_URL}notifications`;
+
+    const res = await fetch(url, {
+      method: "GET",
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+    });
+
+    return await res.json();
+  };
+
+  /**
+   * read all notifications
+   * @param {string} token
+   */
+  const readNotifications = async (token) => {
+    const url = `${BASE_URL}read-notifications`;
+
+    const res = await fetch(url, {
+      method: "GET",
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+    });
+
+    return await res.json();
+  };
+
+  /**
+   * create notification
+   * @param {string} token
+   * @param {json} content
+   */
+  const createNotification = async (token, content) => {
+    const url = `${BASE_URL}notification`;
+
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(content),
+    });
+
+    return await res.json();
+  };
+
   return (
     <ApiContext.Provider value={{
       getSignPosts,
@@ -418,6 +477,9 @@ const ApiProvider = ({children}) => {
       addDislikeToMaterial,
       deleteMaterial,
       searchEverything,
+      getNotifications,
+      createNotification,
+      readNotifications,
     }}>
       {children}
     </ApiContext.Provider>

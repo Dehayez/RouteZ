@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
 // Import services
-import { useAuth } from '../../services';
+import { useApi, useAuth } from '../../services';
 
 // Import config
 import { apiConfig } from '../../config';
@@ -10,8 +10,11 @@ import { apiConfig } from '../../config';
 // Routes
 import * as Routes from '../../routes';
 
+// Partials
+import NotificationsPopup from './NotificationsPopup';
+
 // Icons
-// import { IoMdNotificationsOutline } from 'react-icons/io';
+import { IoMdNotificationsOutline } from 'react-icons/io';
 
 import { DefaultImage } from '../../assets/images';
 
@@ -25,17 +28,33 @@ const Header = () => {
 
     // Use services
     const { getMyself, currentUser } = useAuth();
+		const { getNotifications, readNotifications } = useApi();
 
     // All accessable data
     const [ user, setUser ] = useState();
     const [ avatar, setAvatar ] = useState();
-	const [ searchKeywords, setSearchKeywords ] = useState();
+		const [ searchKeywords, setSearchKeywords ] = useState();
+		const [ notifications, setNotifications ] = useState();
+		const [ unseenNotifications, setUnseenNotifications ] = useState(false);
+		const [ showNotifications, setShowNotifications ] = useState(false);
 
     const getAllData = useCallback(() => {
         const easyFetch = async () => {
             // All user information
             const userData = await getMyself(currentUser.token);
+						const notificationsData = await getNotifications(currentUser.token);
+						setNotifications(notificationsData);
             setUser(userData);
+
+						let arrayOfUnseen = [];
+
+						for (let i = 0; i < notificationsData.length; i++) {
+							if (notificationsData[i].seen === false) {
+								arrayOfUnseen.push(notificationsData[i]);
+							};
+						};
+
+						setUnseenNotifications(arrayOfUnseen);
 
             // Get users avatar, if has one
             if (userData.profile.avatar) {
@@ -61,25 +80,64 @@ const Header = () => {
 
 		history.push(Routes.SEARCH_RESULTS, {keywords: searchKeywords});
 	};
+
+	// View notifications
+	const viewNotifications = async (bool) => {
+		if (bool == true) {
+			await readNotifications(currentUser.token);
+			setShowNotifications(true);
+		} else {
+			setShowNotifications(false);
+		};
+	};
 	
   return (
-		<header className="header">
-			<div className="header-left">
-				<h1 className="header-left-title">
-					{
-						url.includes('dashboard') ? 'Dashboard' : 
-						url.includes('settings') ? 'Instellingen' : 
-						url.includes('my-profile') ? 'Mijn profiel' : 
-						url.includes('profile') ? 'Profiel' : 
-						url.includes('my-materials') ? 'Mijn materiaal' : 
-						url.includes('materials') ? 'Materiaal' : 
-						url.includes('material') ? 'Materiaal' : 
-						url.includes('create-material') ? 'Materiaal' : 
-						url.includes('search-results') ? 'Zoeken' : 
+    <header className="header">
+		<div className="header-left">
+			<h1 className="header-left-title">
+				{
+					url.includes('dashboard') ? 'Dashboard' : 
+					url.includes('settings') ? 'Instellingen' : 
+					url.includes('my-profile') ? 'Mijn profiel' : 
+					url.includes('profile') ? 'Profiel' : 
+					url.includes('my-materials') ? 'Mijn materiaal' : 
+					url.includes('materials') ? 'Materiaal' : 
+					url.includes('material') ? 'Materiaal' : 
+					url.includes('create-material') ? 'Materiaal' : 
+					url.includes('search-results') ? 'Zoeken' : 
+					url.includes('notifications') ? 'Meldingen' : 
 
-						'Wegwijzers'
+					'Wegwijzers'
+				}
+			</h1>
+		</div>
+
+		<div className="header-right">
+			<form onSubmit={(e) => submitSearch(e)}>
+				<input onChange={(e) => watchChanges(e)} className="header-right-input" id="search-engine" type="text" placeholder="Zoek"/>
+			</form>
+			<span className="header-notifications" onClick={() => viewNotifications(!showNotifications)}>
+				{
+					notifications && unseenNotifications.length !== 0 && <div className="header-notifications__checked"></div>
+				}
+				<IoMdNotificationsOutline className="header-right-icon"/>
+			</span>
+			{/** !! Tonen van notificaties */}
+			{
+				showNotifications && (
+					<NotificationsPopup notifications={unseenNotifications} hide={() => setUnseenNotifications(false)} />
+				)
+			}
+			<div className="header-right-profile">
+				<div className="header-right-profile__text">
+					{ 
+						user && (
+							<Link className="header-right-profile__text-name-link" to={Routes.MY_PROFILE}>
+								<p className="header-right-profile__text-name">{user.profile.firstName + ' ' + user.profile.lastName}</p>
+							</Link>
+						)
 					}
-				</h1>
+				</div>
 			</div>
 
 			<div className="header-right">
@@ -109,7 +167,8 @@ const Header = () => {
 					</Link>
 				</div>
 			</div>
-		</header>
+			</div>
+	</header>
   );
 };
 

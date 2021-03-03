@@ -17,6 +17,7 @@ import MyMaterials from './MyMaterials';
 import EditMaterial from './EditMaterial';
 import CreateMaterial from './CreateMaterial';
 import SearchResults from './SearchResults';
+import Notifications from './Notifications';
 
 import NotFound from './NotFound';
 
@@ -39,5 +40,6 @@ export {
   EditMaterial,
   CreateMaterial,
   SearchResults,
+  Notifications,
   NotFound,
 };

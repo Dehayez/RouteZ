@@ -35,7 +35,7 @@ const CreateModule = () => {
   const [ error, setError ] = useState(false);
 
   // Services
-  const { uploadFile, createExercise, createModule, createPath, addExerciseToPath, addPathToModule } = useApi();
+  const { uploadFile, createNotification, createExercise, createModule, createPath, addExerciseToPath, addPathToModule } = useApi();
   const { currentUser } = useAuth();
 
   // Delete path
@@ -57,6 +57,12 @@ const CreateModule = () => {
     const moduleResult = await createModule(currentUser.token, {
       title: moduleForm.title,
       content: moduleForm.content,
+    });
+
+    await createNotification(currentUser.token, {
+      text: `Er is een nieuwe module aangemaakt genaamd "${moduleResult.title}"`,
+      type: 'module',
+      _moduleId: moduleResult._id,
     });
 
     if (!moduleResult) {

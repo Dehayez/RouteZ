@@ -19,7 +19,7 @@ const Path = () => {
 
     // Services
     const { getPath, getModules, getSignPosts } = useApi();
-    const { currentUser, editProgress, getMyself } = useAuth();
+    const { currentUser, editProgress, getMyself, editLast } = useAuth();
 
     // Some states
     const [ path, setPath ] = useState();
@@ -88,7 +88,16 @@ const Path = () => {
         pathId: path._id,
       });
 
+      await editLast(currentUser.token, {
+        moduleId: moduleSet.id,
+        signpostId: signpost._id,
+      });
+
       if (pathIndex === paths.length-1) {
+        await editProgress(currentUser.token, {
+          moduleId: moduleSet.id,
+        });
+
         history.push(`${Routes.MODULE.replace(':id', moduleSet.id)}`);
       } else {
         history.push(`${Routes.PATH.replace(':id', paths[pathIndex+1]._id).replace(':type', paths[pathIndex+1].type.toLowerCase()).replace(':order', 1)}`);
