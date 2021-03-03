@@ -98,8 +98,9 @@ const FilterSelect = ({text, options, sections, setQuery, query, type}) => {
               !sections ? options.map((option, index) => {
                 return (
                   <div key={index} className="filter-select__select--section__options--option">
-                    <label htmlFor={option.id ? option.id : option._id}>{option.title ? option.title : option.name}</label>
-                    <Checkbox change={editSelected} name={option.title ? option.title : option.name} id={option.id ? option.id : option._id} />
+                    <label htmlFor={option.id ? option.id : option._id}>{option.title ? option.title : option.name}
+                    	<Checkbox change={editSelected} name={option.title ? option.title : option.name} id={option.id ? option.id : option._id} />
+					</label>
                   </div>
                 )
               }) : options.map((option, index) => {
@@ -110,10 +111,11 @@ const FilterSelect = ({text, options, sections, setQuery, query, type}) => {
                       {
                         option.modules.map((innerOption, innerIndex) => {
                           return <div key={innerIndex} className="filter-select__select--section__options--option">
-                            <label htmlFor={innerOption.id}>{innerOption.title}</label>
-							<div className="filter-select__select--section__options--option-checkbox">
-                           		<Checkbox change={editSelected} name={innerOption.title} id={innerOption.id} />
-							</div>
+                            <label htmlFor={innerOption.id}>{innerOption.title}
+								<div className="filter-select__select--section__options--option-checkbox">
+									<Checkbox change={editSelected} name={innerOption.title} id={innerOption.id} />
+								</div>
+							</label>
                           </div>
                         })
                       }

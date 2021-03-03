@@ -44,9 +44,10 @@
 
 	& > .active {
 		color: $routez-black;
+		font-weight: 500;
 
 		&:hover {
-			cursor: none;
+			cursor: default;
 			text-decoration: none;
 		}
 	}
@@ -103,7 +104,7 @@
 	  
 			/* On mouse-over, add a grey background color */
 			&:hover input ~ .checkmark {
-				background-color: #ccc;
+				background-color: $routez-grey-light-dark;
 			}
 			
 			/* When the checkbox is checked, add a blue background */
@@ -152,7 +153,7 @@
 	left: 0;
 	height: 25px;
 	width: 25px;
-	background-color: #eee;
+	background-color: $routez-grey-light;
 	border-radius: 5px;
 	transition: 0.2s ;
 

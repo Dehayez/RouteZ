@@ -65,7 +65,7 @@ const Signpost = () => {
 							/>
 						)
 					}
-					<h1 className="signpost-title">{ signpost.title }</h1>
+					<h1 className="signpost-title">{ signpost.shortedTitle }</h1>
 					<p className="signpost-text">{ signpost.text }</p>
 
 					<img className="signpost-illustration" src={`${apiConfig.baseURL}file/${signpost.illustration}`}/>

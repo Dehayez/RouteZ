@@ -27,6 +27,10 @@
 		font-weight: 700;
 		font-family: $font-family-secondary;
 		margin: 2rem 0;
+
+		&:first-letter{
+			text-transform: capitalize
+		  }
 	}
 
 	&-undertitle {

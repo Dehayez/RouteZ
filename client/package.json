@@ -32,6 +32,7 @@
     "react-scroll": "^1.8.1",
     "react-scroll-progress-bar": "^1.1.13",
     "react-to-pdf": "0.0.13",
+    "react-toastify": "^7.0.3",
     "react-tooltip": "^4.2.14",
     "react-use-scroll-indicator": "^1.1.1",
     "styled-components": "^5.2.1",

@@ -102,17 +102,27 @@
 
 /********************************* FOOTER *********************************/
 .footer {
-	padding: 1rem 1rem;
+	padding: 1rem;
 	display: flex;
 	justify-content: end;
-	background-color: $routez-secondary-light;
+	background-color: $routez-primary;
 	font-size: 14px;
 
 	&-link {
+		color: white;
+		opacity: 0.7;
+		font-weight: 300;
 		text-decoration: none;
 		margin-left: 1rem;
+
+		&:hover {
+			color: white;
+			opacity: 1;
+		}
 	}
 }
+
+
 
 
 /********************************* LANDING PAGE  *********************************/
@@ -354,6 +364,9 @@
 		}
 
 		&--four {
+			background-color: $routez-secondary-light;
+			border-radius: 50% 50% 0 0;
+
 			&__title {
 				font-size: 36px;
 				font-weight: 600;
@@ -487,6 +500,10 @@
 
 }
 
+
+
+
+
 /********************************* EXTRA *********************************/
 .spacer {
     width: 100%;
@@ -498,6 +515,12 @@
 	height: auto;
 }
 
+
+
+
+
+/********************************* MEDIA QUERIES *********************************/
+/**************** MIN WIDTH ****************/
 // Small devices (landscape phones, 576px and up)
 @media (min-width: 576px) { 
 	.landing {
@@ -519,6 +542,10 @@
 		padding: 2rem 10rem;
 	}
 
+	.footer {
+		padding: 1rem 10rem;
+	}
+
 	.landing {
 		&-top {
 			height: calc(100vh - 76px);
@@ -529,9 +556,6 @@
 		}
 	}
 }
-
-
-	
 
 // X-Large devices (large desktops, 1200px and up)
 @media (min-width: 1200px) { 
@@ -555,7 +579,7 @@
 
 
 
-
+/**************** MAX WIDTH ****************/
  // Extra small devices (portrait phones, less than 576px)
 @media (max-width: 575.98px) { 
 	.landing {
@@ -615,9 +639,7 @@
 			}
 
 			&--four {
-				&-circle-wrapper-wrapper {
-					display: none;
-				}
+				background-color: white;
 			}
 		}
 	}

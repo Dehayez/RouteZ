@@ -52,8 +52,9 @@
 				display: flex;
 				justify-content: space-between;
 
-				& label:hover {
+				& label {
 					cursor: pointer;
+					display: contents;
 				}
 
 			}

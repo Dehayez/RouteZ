@@ -63,53 +63,53 @@ const Header = () => {
 	};
 	
   return (
-    <header className="header">
-		<div className="header-left">
-			<h1 className="header-left-title">
-				{
-					url.includes('dashboard') ? 'Dashboard' : 
-					url.includes('settings') ? 'Instellingen' : 
-					url.includes('my-profile') ? 'Mijn profiel' : 
-					url.includes('profile') ? 'Profiel' : 
-					url.includes('my-materials') ? 'Mijn materiaal' : 
-					url.includes('materials') ? 'Materiaal' : 
-					url.includes('material') ? 'Materiaal' : 
-					url.includes('create-material') ? 'Materiaal' : 
-					url.includes('search-results') ? 'Zoeken' : 
+		<header className="header">
+			<div className="header-left">
+				<h1 className="header-left-title">
+					{
+						url.includes('dashboard') ? 'Dashboard' : 
+						url.includes('settings') ? 'Instellingen' : 
+						url.includes('my-profile') ? 'Mijn profiel' : 
+						url.includes('profile') ? 'Profiel' : 
+						url.includes('my-materials') ? 'Mijn materiaal' : 
+						url.includes('materials') ? 'Materiaal' : 
+						url.includes('material') ? 'Materiaal' : 
+						url.includes('create-material') ? 'Materiaal' : 
+						url.includes('search-results') ? 'Zoeken' : 
 
-					'Wegwijzers'
-				}
-			</h1>
-		</div>
-
-		<div className="header-right">
-			<form onSubmit={(e) => submitSearch(e)}>
-				<input onChange={(e) => watchChanges(e)} className="header-right-input" id="search-engine" type="text" placeholder="Zoek"/>
-			</form>
-			{/* <IoMdNotificationsOutline className="header-right-icon"/> */}
-			<div className="header-right-profile">
-				<div className="header-right-profile__text">
-					{ 
-						user && (
-							<Link className="header-right-profile__text-name-link" to={Routes.MY_PROFILE}>
-								<p className="header-right-profile__text-name">{user.profile.firstName + ' ' + user.profile.lastName}</p>
-							</Link>
-						)
+						'Wegwijzers'
 					}
-					<Link className="header-right-profile__text-settings-link" to={Routes.MY_PROFILE_SETTINGS}>
-						<p className="header-right-profile__text-settings">Instellingen</p>
+				</h1>
+			</div>
+
+			<div className="header-right">
+				<form onSubmit={(e) => submitSearch(e)}>
+					<input onChange={(e) => watchChanges(e)} className="header-right-input" id="search-engine" type="text" placeholder="Zoek"/>
+				</form>
+				{/* <IoMdNotificationsOutline className="header-right-icon"/> */}
+				<div className="header-right-profile">
+					<div className="header-right-profile__text">
+						{ 
+							user && (
+								<Link className="header-right-profile__text-name-link" to={Routes.MY_PROFILE}>
+									<p className="header-right-profile__text-name">{user.profile.firstName + ' ' + user.profile.lastName}</p>
+								</Link>
+							)
+						}
+						<Link className="header-right-profile__text-settings-link" to={Routes.MY_PROFILE_SETTINGS}>
+							<p className="header-right-profile__text-settings">Instellingen</p>
+						</Link>
+					</div>
+					<Link className="header-right-profile__image-link" to={Routes.MY_PROFILE}>
+						{
+							avatar ? (
+								<img className="header-right-profile__image" src={`${apiConfig.baseURL}file/${avatar}`} alt="profile"/>
+							) : <img className="header-right-profile__image" src={ DefaultImage } alt="profile"/>
+						}
 					</Link>
 				</div>
-				<Link className="header-right-profile__image-link" to={Routes.MY_PROFILE}>
-					{
-						avatar ? (
-							<img className="header-right-profile__image" src={`${apiConfig.baseURL}file/${avatar}`} alt="profile"/>
-						) : <img className="header-right-profile__image" src={ DefaultImage } alt="profile"/>
-					}
-				</Link>
 			</div>
-		</div>
-    </header>
+		</header>
   );
 };
 

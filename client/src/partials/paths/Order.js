@@ -15,6 +15,8 @@ const Order = ({ paths, pathId }) => {
     history.push(Routes.PATH.replace(':type', 'theorie').replace(':id', pathId).replace(':order', orderIndex));
   };
 
+  console.log(paths)
+
   return (
     <>
       <div className="order">

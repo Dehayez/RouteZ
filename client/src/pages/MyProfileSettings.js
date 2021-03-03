@@ -10,9 +10,13 @@ import * as Routes from '../routes';
 // Import config
 import { apiConfig } from '../config';
 
-//Import components
-import { ButtonLarge, ButtonSmall }  from '../components/buttons';
+// Import components
+import { ButtonLarge }  from '../components/buttons';
 import { DefaultImage } from '../assets/images';
+
+// Toaster
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const MyProfileSettings = () => {
     const history = useHistory();
@@ -26,6 +30,10 @@ const MyProfileSettings = () => {
     const [ error, setError ] = useState();
     const [ success, setSuccess ] = useState();
     const [ remove, setRemove ] = useState();
+
+	const notify = () => toast("💎 Je profiel is succesvol opgeslagen!", {
+		
+	});
 
     const [ formData, setFormData ] = useState({
         'avatar': '',
@@ -71,6 +79,8 @@ const MyProfileSettings = () => {
             setError(result.error ? result.error : 'Jouw account kon niet worden geupdate.');
             return;
         };
+
+		notify();
 
         // Show success message
         setSuccess(true);
@@ -128,6 +138,9 @@ const MyProfileSettings = () => {
 
     return (
         <div className="settings">
+
+			<ToastContainer />
+
             <form className="form-label-left" onSubmit={(e) => submitSettings(e)}>
 
 				{
