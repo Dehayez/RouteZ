@@ -228,8 +228,8 @@ const CreateMaterial = () => {
               <textarea className="create-material-form__input" onChange={(e) => changeInput(e)} placeholder="Beschrijving" name="description" id="description" required />
           </form>
 
-          <Tags  setForm={updateTags}/>
-
+          <Tags setForm={updateTags}/>
+		  
 		  <label className="create-material__label">Bestand</label>
           <RadioSelect 
             text="Welk soort bestand wil je uploaden?"

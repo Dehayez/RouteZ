@@ -33,17 +33,20 @@ const CardSignpost = ({endpoint, index, title, text, logo, alt, percentage }) =>
 		<p className="signpost-card__text">{text}</p>
 		<div className="signpost-card-bottom">
 			<div className="signpost-card-bottom__icon-wrapper">
+				<div className="signpost-card-bottom__icon">
 					{
 						ReactHtmlParser(logoResult)
 					}
-				{/* <img className="signpost-card-bottom__icon" src={logo} alt={alt}/> */}
+				</div>
 			</div>
 			<div className="signpost-card-bottom__percentage">
-				<CircularProgressbar value={ percentage } strokeWidth={8} styles={buildStyles({
+				<CircularProgressbar value={ percentage } strokeWidth={8} text={`${ percentage }%`} styles={buildStyles({
 					rotation: 0,
 					pathTransitionDuration: 2,
 					pathColor: '#4A84FC',
+					textColor: '#4A84FC',
 					trailColor: '#DDECFE',
+					textSize: '18px',
 				})} />
 			</div>
 		</div>

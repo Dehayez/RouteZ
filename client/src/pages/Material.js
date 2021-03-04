@@ -166,11 +166,13 @@ const Material = () => {
 									{ likedDigit === 0 ? 'Er zijn nog geen hartjes uitgedeeld' : 'Dit materiaal wordt geappreciëerd' }
 								</p>
 							</div>
-							{
-								material.tags.length !== 0 && material.tags.map((tag, index) => {
-									return <span key={index}>{tag.name}</span>
-								})
-							}
+							<div className="material-detail-right-tags">
+								{
+									material.tags.length !== 0 && material.tags.map((tag, index) => {
+										return <span className="material-detail-right-tags__item" key={index}>{tag.name}</span>
+									})
+								}
+							</div>
 						</Col>
 				</Row>
 					

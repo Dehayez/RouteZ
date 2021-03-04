@@ -9,6 +9,7 @@
 	height: 100%;
 	width: 350px;
 	position: fixed;
+	z-index: 2;
 
 	&-header {
 		display: flex;
@@ -74,13 +75,6 @@
 				justify-content: center;
 				align-items: center;
 
-				& svg, path {
-					width: 35px;
-					height: 35px;
-
-					fill: $routez-primary;
-				}
-
 				&-wrapper {
 					background-color: $routez-secondary;
 					border-radius: 10px;
@@ -89,6 +83,13 @@
 					display: flex;
 					justify-content: center;
 					align-items: center;
+				}
+
+				& svg, path {
+					fill: $routez-primary;
+
+					width: 35px;
+					height: 35px;
 				}
 			}
 

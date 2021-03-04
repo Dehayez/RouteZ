@@ -25,7 +25,7 @@ import { AnimationOnScroll } from 'react-animation-on-scroll';
 import { BsChevronDown } from 'react-icons/bs';
 
 // Images
-import { LandingIllustration, WegwijzerLanding, Plan } from '../assets/images';
+import { LandingIllustration, WegwijzerLanding, Plan1, Plan2, Plan3, Plan4 } from '../assets/images';
 
 import "animate.css/animate.min.css";
 
@@ -46,27 +46,27 @@ const Landing = () => {
 	const [ carouselItems, setCarouselItems ] = useState([
 		{
 			id: 1, 
-			title: '1. Leren',
+			title: 'Leren',
 			text: 'Leer bij door wegwijzer na wegwijzer te volgen en zo de theorie onder de knie te krijgen!',
-			image: Plan,
+			image: Plan1,
 		},
 		{
 			id: 2, 
-			title: '2. Progressie',
+			title: 'Progressie',
 			text: 'Volg uw eigen progressie op de voet! Een eenvoudige klik op uw profielpagina en u ziet hoe ver u de route gevolgd hebt per wegwijzer.',
-			image: Plan,
+			image: Plan2,
 		},
 		{
 			id: 3, 
-			title: '3. Ontdek materiaal',
+			title: 'Ontdek materiaal',
 			text: 'Hoe pas je de theorie nu precies toe? Ontdek het tussen de verschillende materialen!',
-			image: Plan,
+			image: Plan3,
 		},
 		{
 			id: 4, 
 			title: 'Plaats eigen materiaal',
 			text: 'Naast het ontdekken van andermans materiaal, kunt u ook eigen praktijkvoorbeelden plaatsen! Zo helpt u ook heel wat andere leerkrachten. Team work makes the dream work.',
-			image: Plan,
+			image: Plan4,
 		},
 	  ]);
 
@@ -106,7 +106,7 @@ const Landing = () => {
 					</div>
 				</div>
 
-				<LinkScroll className="landing-top-chevron bounce-top" to="routez" smooth={true} duration={1000}>
+				<LinkScroll className="landing-top-chevron bounce-top" to="routez" smooth={true} duration={1000} offset={-220}>
 					<BsChevronDown />
 				</LinkScroll>
 
@@ -219,12 +219,6 @@ const Landing = () => {
 						<img className="landing-section--four-right__image" src={ WegwijzerLanding } alt="wegwijzer"/>
 					</Col>
 				</Row>
-
-				{/* <div className="landing-section--four-circle-wrapper-wrapper">
-					<div className="landing-section--four-circle-wrapper">
-						<div className="landing-section--four-circle"/>
-					</div>
-				</div> */}
 			</div>
         </div>
     )

@@ -32,8 +32,8 @@ const NavigationItem = ({ index, title, alt, endpoint, logo }) => {
 						ReactHtmlParser(logoResult)
 					}
 				</div>
-
 			</div>
+			
 			<div className="nav-list-link__text">
 				<span className="nav-list-link__text-span">Wegwijzer {index}</span>
 				<p className="nav-list-link__text-title">{title}</p>

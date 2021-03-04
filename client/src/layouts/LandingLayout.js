@@ -14,6 +14,9 @@ import { HiMenuAlt3 } from 'react-icons/hi';
 
 // Scroll indicator
 import ProgressBar from "react-scroll-progress-bar";
+import { RouteIllustration } from '../assets/illustrations';
+
+import * as Routes from '../routes';
 
 const LandingLayout = ({children}) => {
 
@@ -27,7 +30,7 @@ const LandingLayout = ({children}) => {
 				<Navbar.Toggle aria-controls="basic-navbar-nav"><HiMenuAlt3/></Navbar.Toggle>
 				<Navbar.Collapse id="basic-navbar-nav">
 					<Nav className="mr-auto">
-						<LinkScroll className="navbar-link" activeClass="navbar-link--active" to="routez" offset={-90}  smooth={true} duration={1000} spy={true}>
+						<LinkScroll className="navbar-link" activeClass="navbar-link--active" to="routez" offset={-220}  smooth={true} duration={1000} spy={true}>
 							Wat is RouteZ
 						</LinkScroll>
 						<LinkScroll className="navbar-link" activeClass="navbar-link--active" to="signposts" offset={-90} smooth={true} duration={1000} spy={true}>
@@ -39,6 +42,9 @@ const LandingLayout = ({children}) => {
 						<LinkScroll className="navbar-link" activeClass="navbar-link--active" to="we" offset={-90}  smooth={true} duration={1000} spy={true}>
 							Wie zijn we
 						</LinkScroll>
+						<Link className="navbar-link" to={Routes.AUTH_SIGN_UP} >
+							Registreer
+						</Link>
 					</Nav>
 				</Navbar.Collapse>
 			</Navbar>

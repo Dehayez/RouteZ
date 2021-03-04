@@ -446,7 +446,7 @@
 			font-size: 20px;
 			font-family: $font-family-secondary;
 			font-weight: 600;
-			margin: 2rem 0 1rem;
+			margin: 0 0 1rem;
 		}
 
 		& p {
@@ -642,6 +642,11 @@
 				background-color: white;
 			}
 		}
+	}
+
+	.navbar-link {
+		margin: 0.5rem 0;
+		text-align: right;
 	}
 	
  }

@@ -13,6 +13,9 @@ import * as Routes from '../../routes';
 // Partials
 import NotificationsPopup from './NotificationsPopup';
 
+// Components
+import ReactTooltip from 'react-tooltip';
+
 // Icons
 import { IoMdNotificationsOutline } from 'react-icons/io';
 
@@ -117,18 +120,21 @@ const Header = () => {
 					<input onChange={(e) => watchChanges(e)} className="header-right-input" id="search-engine" type="text" placeholder="Zoek"/>
 				</form>
 
-				<span className="header-notifications" onClick={() => viewNotifications(!showNotifications)}>
+				<span className="header-notifications" data-tip data-for='notifications' data-event='click focus' onClick={() => viewNotifications(!showNotifications)}>
 					{
 						notifications && unseenNotifications.length !== 0 && <div className="header-notifications__checked"></div>
 					}
 					<IoMdNotificationsOutline className="header-right-icon"/>
 				</span>
-				{/** !! Tonen van notificaties */}
-				{
-					showNotifications && (
-						<NotificationsPopup notifications={unseenNotifications} hide={() => setUnseenNotifications(false)} />
-					)
-				}
+
+				
+					{
+						showNotifications && (
+							<ReactTooltip className='react-tooltip' type="light" effect='solid' id='notifications' clickable='true' globalEventOff='click'>
+								<NotificationsPopup notifications={unseenNotifications} hide={() => setUnseenNotifications(false)} />
+							</ReactTooltip>
+						)
+					}
 
 				<div className="header-right-profile">
 					<div className="header-right-profile__text">
