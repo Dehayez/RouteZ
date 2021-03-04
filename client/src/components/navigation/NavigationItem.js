@@ -32,7 +32,7 @@ const NavigationItem = ({ index, title, alt, endpoint, logo }) => {
 						ReactHtmlParser(logoResult)
 					}
 				</div>
-				{/* <img className="nav-list-link__icon" src={logo} alt={alt}/> */}
+
 			</div>
 			<div className="nav-list-link__text">
 				<span className="nav-list-link__text-span">Wegwijzer {index}</span>

@@ -112,39 +112,24 @@ const Header = () => {
 			</h1>
 		</div>
 
-		<div className="header-right">
-			<form onSubmit={(e) => submitSearch(e)}>
-				<input onChange={(e) => watchChanges(e)} className="header-right-input" id="search-engine" type="text" placeholder="Zoek"/>
-			</form>
-			<span className="header-notifications" onClick={() => viewNotifications(!showNotifications)}>
-				{
-					notifications && unseenNotifications.length !== 0 && <div className="header-notifications__checked"></div>
-				}
-				<IoMdNotificationsOutline className="header-right-icon"/>
-			</span>
-			{/** !! Tonen van notificaties */}
-			{
-				showNotifications && (
-					<NotificationsPopup notifications={unseenNotifications} hide={() => setUnseenNotifications(false)} />
-				)
-			}
-			<div className="header-right-profile">
-				<div className="header-right-profile__text">
-					{ 
-						user && (
-							<Link className="header-right-profile__text-name-link" to={Routes.MY_PROFILE}>
-								<p className="header-right-profile__text-name">{user.profile.firstName + ' ' + user.profile.lastName}</p>
-							</Link>
-						)
-					}
-				</div>
-			</div>
-
 			<div className="header-right">
 				<form onSubmit={(e) => submitSearch(e)}>
 					<input onChange={(e) => watchChanges(e)} className="header-right-input" id="search-engine" type="text" placeholder="Zoek"/>
 				</form>
-				{/* <IoMdNotificationsOutline className="header-right-icon"/> */}
+
+				<span className="header-notifications" onClick={() => viewNotifications(!showNotifications)}>
+					{
+						notifications && unseenNotifications.length !== 0 && <div className="header-notifications__checked"></div>
+					}
+					<IoMdNotificationsOutline className="header-right-icon"/>
+				</span>
+				{/** !! Tonen van notificaties */}
+				{
+					showNotifications && (
+						<NotificationsPopup notifications={unseenNotifications} hide={() => setUnseenNotifications(false)} />
+					)
+				}
+
 				<div className="header-right-profile">
 					<div className="header-right-profile__text">
 						{ 
@@ -166,7 +151,6 @@ const Header = () => {
 						}
 					</Link>
 				</div>
-			</div>
 			</div>
 	</header>
   );

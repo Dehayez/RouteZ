@@ -26,7 +26,6 @@ function App() {
               <Switch>
                 {/** Where the site lands */}
                 <RouteWithLayout exact path={Routes.LANDING} component={Landing} layout={LandingLayout} />
-                <RouteWithLayout path={Routes.NOT_FOUND} component={NotFound} layout={ErrorLayout} />
 	
                 {/** Main pages for authentication */}
                 <OnlyViewOnDesktop>
@@ -53,7 +52,11 @@ function App() {
                   <AuthRouteWithLayout exact path={Routes.ADD_MATERIAL} component={CreateMaterial} layout={MaterialLayout} />
                   <AuthRouteWithLayout exact path={Routes.SEARCH_RESULTS} component={SearchResults} layout={MaterialLayout} />
                 </OnlyViewOnDesktop>
+
+				<RouteWithLayout path={Routes.NOT_FOUND} component={NotFound} layout={ErrorLayout} />
+
               </Switch>
+
             </Router>
           </ApiProvider>
         </AuthProvider>

@@ -50,7 +50,9 @@
 				}
 			
 				& .nav-list-link__icon{
-					// background-color: $routez-secondary;
+					& svg, path {
+						fill: white;
+					}
 					
 				}
 
@@ -67,22 +69,20 @@
 			}
 
 			&__icon {
-				color: $routez-primary;
 				width: 70%;
 				display: flex;
 				justify-content: center;
 				align-items: center;
 
-				// Om SVG te bewerken
-				svg, path {
+				& svg, path {
 					width: 35px;
 					height: 35px;
 
-					// Verander kleur met fill
-					fill: white;
+					fill: $routez-primary;
 				}
 
 				&-wrapper {
+					background-color: $routez-secondary;
 					border-radius: 10px;
 					width: 60px;
 					height: 60px;

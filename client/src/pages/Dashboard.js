@@ -10,8 +10,8 @@ import { useAuth } from '../services';
 import * as Routes from '../routes';
 
 // Import components
-import { ButtonLarge, Progress } from '../components'
-import { DefaultImage } from '../assets/images';
+import { ButtonLarge, Progress } from '../components';
+import { SelectionIllustration } from '../assets/illustrations';
 
 const Dashboard = () => {
 		// Routing
@@ -87,7 +87,7 @@ const Dashboard = () => {
 					}
 				</div>
 				<div className="dashboard-card-image">
-					<img className="dashboard-card-image__image" src={ DefaultImage } alt="RouteZ"/>
+					<img className="dashboard-card-image__image" src={ SelectionIllustration } alt="RouteZ"/>
 				</div>
 			</div>
 
