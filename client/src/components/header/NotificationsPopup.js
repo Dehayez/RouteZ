@@ -34,7 +34,7 @@ const NotificationsPopup = ({ notifications }) => {
 						notification.type === 'signpost' &&  <img className="header-notifications-wrapper-content-item__icon" src={ Icon } alt="material"/>
 						}
 					</div>
-					<div lassName="header-notifications-wrapper-content-item__text">
+					<div className="header-notifications-wrapper-content-item__text">
 						{notification.text}
 					</div>
 				</div>

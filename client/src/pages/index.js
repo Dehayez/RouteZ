@@ -4,6 +4,7 @@ import SendReset from './SendReset';
 import SubmitReset from './SubmitReset';
 
 import Landing from './Landing';
+import Faq from './Faq';
 import Dashboard from './Dashboard';
 import MyProfile from './MyProfile';
 import MyProfileSettings from './MyProfileSettings';
@@ -27,6 +28,7 @@ export {
   SendReset,
   SubmitReset,
   Landing,
+  Faq,
   Dashboard,
   MyProfile,
   MyProfileSettings,

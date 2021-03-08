@@ -109,6 +109,7 @@ const Header = () => {
 					url.includes('create-material') ? 'Materiaal' : 
 					url.includes('search-results') ? 'Zoeken' : 
 					url.includes('notifications') ? 'Meldingen' : 
+					url.includes('faq') ? 'FAQ' : 
 
 					'Wegwijzers'
 				}

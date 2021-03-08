@@ -27,8 +27,6 @@ import { BsChevronDown } from 'react-icons/bs';
 // Images
 import { LandingIllustration, WegwijzerLanding, Plan1, Plan2, Plan3, Plan4 } from '../assets/images';
 
-import "animate.css/animate.min.css";
-
 const Landing = () => {
 	const { signIn } = useAuth();
     const history = useHistory();

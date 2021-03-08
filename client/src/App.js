@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
 
 // All pages
-import { CreateMaterial, Dashboard, EditMaterial, Landing, Login, Material, Materials, Module, MyMaterials, MyProfile, MyProfileSettings, Path, Register, SearchResults, SendReset, Signpost, Signposts, SubmitReset, NotFound, Notifications } from './pages';
+import { CreateMaterial, Dashboard, EditMaterial, Landing, Faq, Login, Material, Materials, Module, MyMaterials, MyProfile, MyProfileSettings, Path, Register, SearchResults, SendReset, Signpost, Signposts, SubmitReset, NotFound, Notifications } from './pages';
 
 // Main layouts
 import { LandingLayout, PageLayout, AuthLayout, SignpostLayout, MaterialLayout, ErrorLayout } from './layouts';
@@ -36,6 +36,7 @@ function App() {
 
                   {/** Platform pages */}
                   <AuthRouteWithLayout exact path={Routes.DASHBOARD} component={Dashboard} layout={PageLayout} />
+               	  <AuthRouteWithLayout exact path={Routes.FAQ} component={Faq} layout={PageLayout} />
                   <AuthRouteWithLayout exact path={Routes.MY_PROFILE} component={MyProfile} layout={PageLayout} />
                   <AuthRouteWithLayout exact path={Routes.MY_PROFILE_SETTINGS} component={MyProfileSettings} layout={PageLayout} />
                   <AuthRouteWithLayout exact path={Routes.NOTIFICATIONS} component={Notifications} layout={PageLayout} />
