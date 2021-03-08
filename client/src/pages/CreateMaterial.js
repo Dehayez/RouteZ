@@ -293,7 +293,7 @@ const CreateMaterial = () => {
           }
           {
             error.visible && (
-              error.text
+				<p className="create-material__error"> {error.text}</p>
             )
           }
 		  <div className="create-material-buttons">

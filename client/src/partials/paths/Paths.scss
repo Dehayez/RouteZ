@@ -68,7 +68,6 @@
 
 		&:focus {
 			outline: none;
-			//border: 1px solid $routez-primary;
 		}
 	}
 
@@ -112,12 +111,14 @@
 				background-color: $routez-primary;
 			}
 
-			input.correct-answer + span {
-				background-color: green !important;
+			& input.correct-answer ~ .checkmark {
+				background-color: white !important;
+				border: 7px solid $routez-succes !important;
 			}
 
-			input.wrong-answer + span {
-				background-color: red !important;
+			& input.wrong-answer ~ .checkmark {
+				background-color: white !important;
+				border: 7px solid $routez-danger !important;
 			}
 	  
 			/* Show the checkmark when checked */

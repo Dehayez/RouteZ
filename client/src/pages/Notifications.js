@@ -6,6 +6,10 @@ import 'moment/locale/nl-be';
 // Services
 import { useApi, useAuth } from '../services';
 
+// Icons notifs
+import material from '../assets/illustrations/notifications/Notification_material2.1.svg';
+import reward from '../assets/illustrations/notifications/Notification_reward2.svg'
+
 // Routes
 import * as Routes from '../routes';
 
@@ -42,16 +46,16 @@ const Notifications = () => {
             <div className="notifications-item" key={index} onClick={() => history.push(notification.type === 'material' ? Routes.MATERIAL.replace(':name', notification._materialId) : notification.type === 'reward' ? Routes.MY_PROFILE : notification.type === 'signpost' ? Routes.SIGNPOST.replace(':id', notification._signpostId) : Routes.MODULE.replace(':id', notification._moduleId))}>
 				<div className="notifications-item-icon">
 					{
-						notification.type === 'material' && ''
+						notification.type === 'material' && <img src={ material} alt="material"/>
 					}
 					{
-						notification.type === 'reward' && ''
+						notification.type === 'reward' && <img src={ reward} alt="material"/>
 					}
 					{
-						notification.type === 'module' && ''
+						notification.type === 'module' && <img src={ material} alt="material"/>
 					}
 					{
-						notification.type === 'signpost' && ''
+						notification.type === 'signpost' && <img src={ material} alt="material"/>
 					}
 				</div>
 				<div className="notifications-item-text">

@@ -35,13 +35,6 @@ const RadioSelect = ({ grouped, text, data, defaultSelected, setSelected, name }
 								<span className="radio__label">{module.title}</span>
 							</label>
                         )
-
-							{/* <div key={innerIndex}>
-								<label htmlFor={module.title}>
-								{module.title}
-								</label>
-								<input onChange={() => setSelected(module._id)} defaultChecked={defaultSelected === module._id ? true : false} type="radio" value={module._id} name="selectOne"/>
-							</div> */}
                       })
                     }
                   </div>

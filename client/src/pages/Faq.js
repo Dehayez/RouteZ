@@ -15,7 +15,7 @@ const Faq = () => {
 		{
 			id: 2, 
 			question: 'Hoe registreer ik?',
-			answer: '<p>Om alle mogelijkheden van RouteZ te benutten en om alle wegwijzers te kunnen bekijken, moet je je eerst registreren. <ul> <li>Surf naar <a href="www.route-z.be">www.route-z.be</a></li><li>Klik onder “Log in” op “Registreer hier” </li> <li>Vul je naam, voornaam en e-mailadres in waarmee je je wil registeren. Kies ook een wachtwoord.</li> <li>Wanneer je alle velden ingevuld hebt, klik je onderaan op de blauwe knop “Registreer”. </li> <li>Nu kan je naar hartenlust je weg zoeken op RouteZ! Het is steeds mogelijk je gegevens aan te passen onder “profiel”.</li></ul></p>',
+			answer: '<p>Om alle mogelijkheden van RouteZ te benutten en om alle wegwijzers te kunnen bekijken, moet je je eerst registreren. <ul> <li>Surf naar <a href="www.route-z.be" target="_blank">www.route-z.be</a></li><li>Klik onder “Log in” op “Registreer hier” </li> <li>Vul je naam, voornaam en e-mailadres in waarmee je je wil registeren. Kies ook een wachtwoord.</li> <li>Wanneer je alle velden ingevuld hebt, klik je onderaan op de blauwe knop “Registreer”. </li> <li>Nu kan je naar hartenlust je weg zoeken op RouteZ! Het is steeds mogelijk je gegevens aan te passen onder “profiel”.</li></ul></p>',
 		},
 		{
 			id: 3, 
