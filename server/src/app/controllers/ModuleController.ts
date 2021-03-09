@@ -44,13 +44,13 @@ export default class ModuleController {
             let modules;
 
             if (limit && skip) {
-                modules = await ModuleItem.paginate({}, {
-                    limit: Number(limit),
-                    page: Number(skip),
-                    sort: {
-                        _createdAt: -1,
-                    },
-                });
+                // modules = await ModuleItem.find().paginate({}, {
+                //     limit: Number(limit),
+                //     page: Number(skip),
+                //     sort: {
+                //         _createdAt: -1,
+                //     },
+                // });
             } else {
                 modules = await ModuleItem.find().populate({path: '_pathIds'}).sort({_createdAt: -1}).exec();
             };

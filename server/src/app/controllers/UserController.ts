@@ -75,13 +75,13 @@ export default class UserController {
 
             if (limit && skip) {
                 // Get user paginated
-                users = await User.paginate({}, {
-                    limit: 10,
-                    page: 1,
-                    sort: {
-                        _createdAt: -1,
-                    },
-                });
+                // users = await User.paginate({}, {
+                //     limit: 10,
+                //     page: 1,
+                //     sort: {
+                //         _createdAt: -1,
+                //     },
+                // });
             } else {
                 // Get all users
                 users = await User.find().sort({ _createdAt: -1 }).exec();

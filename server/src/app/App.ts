@@ -81,7 +81,7 @@ export default class App {
 
     public startServer(): void {
         // Start server on port 8000 of localhost
-        this.server.listen(8000, 'localhost');
+        this.server.listen(Number(process.env.PORT || 8000), '0.0.0.0');
     };
 
     public stopServer(): void {
@@ -94,6 +94,7 @@ export default class App {
     private shutdown(error?: Error): void {
         // Shutdown server
         if(error) {
+            console.log(error);
             process.exit(1);
         };
 
