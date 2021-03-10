@@ -66,7 +66,7 @@ const CardMaterial = ({material, user, token}) => {
 					{material.title}
 				</p>
 
-				<div className="material-card-image" onClick={readMaterial}>
+				<div className="material-card-image">
 					{
 						liked ? <div className="material-card-icon-heart-wrapper"> 
 									<IoHeartSharp className="material-card-icon-heart material-card-icon-heart--fill" onClick={dislikeMaterial} title="Dislike"/>
@@ -76,7 +76,7 @@ const CardMaterial = ({material, user, token}) => {
 								</div> 
 					}
 
-					<HiOutlineDownload className="material-card-image__download"/>
+					<HiOutlineDownload className="material-card-image__download"  onClick={readMaterial}/>
 				</div>
 		</Link>  
 	</div>

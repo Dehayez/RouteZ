@@ -75,13 +75,14 @@
 		position: relative;
 		object-fit: cover;
 
-		&:hover {
-			background-color: $routez-secondary-dark;
-		}
-
 		&__download {
 			font-size: 3rem;
 			color: white;
+			transition: 0.2s;
+
+			&:hover {
+				opacity: 0.6;
+			}
 		}
 	}
 
@@ -114,11 +115,11 @@
 					cursor: pointer;
 				}
 
-				&:hover > .material-icon-heart {
+				&:hover > .material-card-icon-heart {
 					color: $routez-primary;
 				}
 
-				&:hover > .material-icon-heart--fill {
+				&:hover > .material-card-icon-heart--fill {
 					color: $routez-primary-dark;
 				}
 			}

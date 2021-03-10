@@ -36,23 +36,23 @@ const Dashboard = () => {
                 setAvatar(userData.profile.avatar);
             };
 
-						const hours = Moment(Date.now()).hours();
+				const hours = Moment(Date.now()).hours();
 
-						if (hours < 11) {
-							setTimeOfTheDay('Goeiemorgen');
-						};
+				if (hours < 11) {
+					setTimeOfTheDay('Goeiemorgen');
+				};
 
-						if (hours >= 11 && hours <= 13) {
-							setTimeOfTheDay('Goeiemiddag');
-						};
+				if (hours >= 11 && hours <= 13) {
+					setTimeOfTheDay('Goeiemiddag');
+				};
 
-						if (hours > 13 && hours < 18) {
-							setTimeOfTheDay('Goeienamiddag');
-						};
+				if (hours > 13 && hours < 18) {
+					setTimeOfTheDay('Goeienamiddag');
+				};
 
-						if (hours >= 18) {
-							setTimeOfTheDay('Goeienavond');
-						};
+				if (hours >= 18) {
+					setTimeOfTheDay('Goeienavond');
+				};
         };
 
         easyFetch();

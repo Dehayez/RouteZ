@@ -191,7 +191,7 @@ const Landing = () => {
 
 			<AnimationOnScroll animateIn="animate__fadeInLeft" animateOut="animate__fadeOutRight">
 				<div className="landing-section landing-section--three" id="plan">
-					<h1 className="landing-section--two__title">Stappenplan</h1>
+					<h1 className="landing-section--three__title">Stappenplan</h1>
 
 					<Carousel className="carousel">
 						{carouselItems.map(item => 

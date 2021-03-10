@@ -9,7 +9,7 @@ import { useAuth, useApi } from '../services';
 import { apiConfig } from '../config';
 
 // Import components
-import { Navigation, Header } from '../components'
+import { Navigation, Header, Footer } from '../components'
 
 const PageLayout = ({ children }) => {
     // Use services
@@ -54,6 +54,7 @@ const PageLayout = ({ children }) => {
 		<main className="page-main">
 			<Header pageTitle={pageTitle}/>
 			{children}
+			<Footer/>
 		</main>
     </div>
   );

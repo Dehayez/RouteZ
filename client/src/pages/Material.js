@@ -177,7 +177,6 @@ const Material = () => {
 				</Row>
 					
 				<div className="material-recommended">
-					{/** Extra materials */}
 					{
 						extraMaterials && (
 						<>

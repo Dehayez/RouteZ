@@ -211,7 +211,7 @@ const MyProfileSettings = () => {
 				}
 			</div> */}
             <div className="settings-delete">
-                <h5>U wilt uw account verwijderen?</h5>
+                <h5>Account verwijderen?</h5>
                 <p>Dat kan. Neem contact op met <a href="mailto:help@routez.be">dit e-mailadres </a>om uw account te verwijderen. Alle gegevens worden zorgvuldig verwijderd.</p>
             </div>
         </div>

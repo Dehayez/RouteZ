@@ -211,6 +211,10 @@
 					opacity: 0.8;
 				}
 			}
+
+			&-button {
+				max-width: 300px;
+			}
 		}
 
 		&-image {
@@ -326,7 +330,7 @@
 				}
 
 				&__icon {
-					font-size: 2rem;
+					font-size: 1.5rem;
 					color: $routez-grey;
 					transition: 0.4s ease-out;
 
@@ -340,6 +344,7 @@
 			&-answer {
 				display: none;
 				font-weight: 300;
+				opacity: 0.8;
 
 				&--active {
 					display: block;

@@ -3,6 +3,17 @@
 .material {
 	padding: 1rem 3rem;
 
+	&-buttons {
+		display: flex;
+		justify-content: end;
+
+		margin-top: 1rem;
+		
+		& > a:first-child {
+			margin-right: 1rem;
+		}
+	}
+
 	&-form {
 		display: flex;
 		flex-direction: column;
@@ -272,6 +283,7 @@
 
 			&-buttons {
 				display: flex;
+				
 				& > a:first-child {
 					margin-right: 1rem;
 				}

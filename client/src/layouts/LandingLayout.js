@@ -30,20 +30,20 @@ const LandingLayout = ({children}) => {
 				<Navbar.Toggle aria-controls="basic-navbar-nav"><HiMenuAlt3/></Navbar.Toggle>
 				<Navbar.Collapse id="basic-navbar-nav">
 					<Nav className="mr-auto">
-						<LinkScroll className="navbar-link" activeClass="navbar-link--active" to="routez" offset={-220}  smooth={true} duration={1000} spy={true}>
+						<LinkScroll className="navbar-link" activeClass="navbar-link--active" to="routez" offset={-400}  smooth={true} duration={1000} spy={true}>
 							Wat is RouteZ
 						</LinkScroll>
-						<LinkScroll className="navbar-link" activeClass="navbar-link--active" to="signposts" offset={-90} smooth={true} duration={1000} spy={true}>
+						<LinkScroll className="navbar-link" activeClass="navbar-link--active" to="signposts" offset={-200} smooth={true} duration={1000} spy={true}>
 							Wegwijzers
 						</LinkScroll>
-						<LinkScroll className="navbar-link" activeClass="navbar-link--active" to="plan" offset={-90}  smooth={true} duration={1000} spy={true}>
+						<LinkScroll className="navbar-link" activeClass="navbar-link--active" to="plan" offset={-200}  smooth={true} duration={1000} spy={true}>
 							Stappenplan
 						</LinkScroll>
-						<LinkScroll className="navbar-link" activeClass="navbar-link--active" to="we" offset={-90}  smooth={true} duration={1000} spy={true}>
+						<LinkScroll className="navbar-link" activeClass="navbar-link--active" to="we" offset={-400}  smooth={true} duration={1000} spy={true}>
 							Wie zijn we
 						</LinkScroll>
-						<Link className="navbar-link" to={Routes.AUTH_SIGN_UP} >
-							Registreer
+						<Link className="navbar-link" to={Routes.DASHBOARD} >
+							Dashboard
 						</Link>
 					</Nav>
 				</Navbar.Collapse>
@@ -62,9 +62,9 @@ const LandingLayout = ({children}) => {
 		<div className="page">
 			{children}
 		</div>
-		<footer className="footer">
-			<Link className="footer-link">Privacy policy</Link>
-			<Link className="footer-link">Cookie policy</Link>
+		<footer className="landing-footer">
+			<Link className="landing-footer-link">Privacy policy</Link>
+			<Link className="landing-footer-link">Cookie policy</Link>
 		</footer>
 	</>
   );

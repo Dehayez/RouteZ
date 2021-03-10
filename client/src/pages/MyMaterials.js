@@ -1,8 +1,11 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, NavLink } from 'react-router-dom';
 
 // Import services
 import { useApi, useAuth } from '../services';
+
+// Components
+import { ButtonSmall } from '../components';
 
 // Import routes
 import * as Routes from '../routes';
@@ -59,15 +62,24 @@ const MyMaterials = () => {
 
   return (
     <div className="material">
-    {
-      videos && presentations && textFiles && (
-        <div className="material-content">
-          <ListMaterials owner={true} title="Alle tekstbestanden" materials={textFiles && textFiles} />
-          <ListMaterials owner={true} title="Alle presentaties" materials={presentations && presentations} />
-          <ListMaterials owner={true} title="Alle video's" materials={videos && videos} />
-        </div>
-      )
-    }
+		<div className="material-buttons">
+			<NavLink to={Routes.MATERIALS}>
+				<ButtonSmall content="Bekijk alle materiaal" color="secondary"/>
+			</NavLink>
+			<NavLink to={Routes.ADD_MATERIAL}>
+				<ButtonSmall content="Materiaal plaatsen" color="primary"/>
+			</NavLink>
+
+		</div>
+		{
+		videos && presentations && textFiles && (
+			<div className="material-content">
+			<ListMaterials owner={true} title="Alle tekstbestanden" materials={textFiles && textFiles} />
+			<ListMaterials owner={true} title="Alle presentaties" materials={presentations && presentations} />
+			<ListMaterials owner={true} title="Alle video's" materials={videos && videos} />
+			</div>
+		)
+		}
     </div>
   );
 };

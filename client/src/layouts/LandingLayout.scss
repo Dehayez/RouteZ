@@ -101,7 +101,7 @@
 
 
 /********************************* FOOTER *********************************/
-.footer {
+.landing-footer {
 	padding: 1rem;
 	display: flex;
 	justify-content: end;
@@ -363,6 +363,15 @@
 			}
 		}
 
+
+		&--three {
+			&__title {
+				font-size: 36px;
+				font-weight: 600;
+				font-family: $font-family-secondary;
+			}
+		}
+
 		&--four {
 			background-color: $routez-secondary-light;
 			border-radius: 50% 50% 0 0;
@@ -429,7 +438,6 @@
 		}
 	}
 }
-
 
 
 /********************************* CAROUSEL *********************************/

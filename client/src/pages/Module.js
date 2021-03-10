@@ -147,7 +147,7 @@ const Module = () => {
 						checkedModule && (
 							<>
 								<div className="signpost-extra">
-									<p className="signpost-undertitle">Wat anderen hebben gedeeld:</p>
+									<p className="signpost-undertitle">Wat anderen hebben gedeeld</p>
 									<div className="signpost-extra-buttons">
 										<NavLink to={{pathname: Routes.MATERIALS, props: {module: module._id,}}}>
 											<ButtonSmall content="Bekijk meer" color="secondary"/>
