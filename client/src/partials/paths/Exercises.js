@@ -165,13 +165,9 @@ const Exercises = ({exercises, previousResults}) => {
 				return !element.open ? <Question key={index} index={index} element={element} /> : <OpenQuestion element={element} index={index} key={index} />
 				})
 			}
-			{
-				!showPrevious && (
-					<div className="exercise-submit">
-						<ButtonSmall type="submit" content="Klaar" color="primary"/>
-					</div>
-				)
-			}
+      <div className="exercise-submit">
+        <ButtonSmall type="submit" content="Klaar" color="primary"/>
+      </div>
 			<span className="exercise-restart" onClick={redoExercise}>Herbeginnen</span>
 		</form>
 	)

@@ -69,11 +69,15 @@ const Dashboard = () => {
 			<div className="dashboard-card">
 				<div className="dashboard-card-content">
 					<div className="dashboard-card-content-text">
+					<h3 className="dashboard-card-content-text__title">{timeOfTheDay}, {user.profile.firstName}!</h3>
 					{ 
-						user.progress._lastSignpost && (
+						user.progress._lastSignpost ?(
 							<>
-								<h3 className="dashboard-card-content-text__title">{timeOfTheDay}, {user.profile.firstName}!</h3>
 								<p className="dashboard-card-content-text__text">Je was voor het laatst gebleven aan wegwijzer "{user.progress._lastSignpost.title}" in de module "{user.progress._lastModule.title}"</p>
+							</>
+						) : (
+							<>
+								<p className="dashboard-card-content-text__text">Leuk dat je erbij bent. Ga snel aan de slag met jouw leerproces!</p>
 							</>
 						)
 					}
