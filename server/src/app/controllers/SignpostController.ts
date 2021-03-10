@@ -44,13 +44,13 @@ export default class SignpostController {
             let signposts;
 
             if (limit && skip) {
-                signposts = await SignPost.paginate({}, {
-                    limit: Number(limit),
-                    page: Number(skip),
-                    sort: {
-                        _createdAt: -1,
-                    },
-                });
+                // signposts = await SignPost.paginate({}, {
+                //     limit: Number(limit),
+                //     page: Number(skip),
+                //     sort: {
+                //         _createdAt: -1,
+                //     },
+                // });
             } else {
                 signposts = await SignPost.find().sort({_createdAt: -1}).populate('modules').exec();
             };
