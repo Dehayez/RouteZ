@@ -306,11 +306,7 @@
 		&-item {
 			border-bottom: 1px solid $routez-grey-light;
 			padding: 1rem 0;
-			cursor: pointer;
 
-			&--active {
-			}
-			
 			&:hover .faq-items-item-question__text {
 				color: $routez-primary;
 			}
@@ -318,6 +314,7 @@
 			&-question {
 				display: flex;
 				justify-content: space-between;
+				cursor: pointer;
 
 				&__text {
 					font-weight: 500;
@@ -327,7 +324,6 @@
 					&--active {
 						color: $routez-primary;
 					}
-
 				}
 
 				&__icon {
@@ -343,12 +339,13 @@
 			}
 
 			&-answer {
-				display: none;
+				margin-top: 2rem;
+				margin-bottom: 1rem;
 				font-weight: 300;
 				opacity: 0.8;
 
-				&--active {
-					display: block;
+				& ul {
+					list-style-type: decimal;
 				}
 			}
 		}

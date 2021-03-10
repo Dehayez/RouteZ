@@ -76,11 +76,7 @@ const CardMaterial = ({material, user, token}) => {
 								</div> 
 					}
 
-<<<<<<< HEAD
 					<HiOutlineDownload className="material-card-image__download"  onClick={readMaterial}/>
-=======
-					<HiOutlineDownload onClick={readMaterial} className="material-card-image__download"/>
->>>>>>> 99e587cd57e228f31113efb872fc8ca0c1c4c300
 				</div>
 		</Link>  
 	</div>

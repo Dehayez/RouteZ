@@ -6,7 +6,7 @@ import { IoIosArrowForward } from 'react-icons/io'
 const Faq = () => {
 
 	const [ active, setActive ] = useState(false);
-	const [ faqItems, setFaqItems ] = useState([
+	const faqItems = [
 		{
 			id: 1, 
 			question: 'Hoe werkt het platform?',
@@ -47,12 +47,36 @@ const Faq = () => {
 			question: 'Ik heb het antwoord op mijn vraag hier niet gevonden. Wat nu?',
 			answer: 'Nog steeds niet het juiste antwoord gevonden? <br/>Dan kan je admin@routez.be contacteren voor verdere hulp. ',
 		},
-	  ]);
+	];
+	
+	const Faq = ({ content }) => {
+		const [ show, setShow ] = useState(false);
+
+		return (
+			<div className={show ? 'faq-items-item faq-items-item--active' : 'faq-items-item'} >
+				<div className="faq-items-item-question" onClick={() => setShow(!show)}>
+					<p className={show ? 'faq-items-item-question__text faq-items-item-question__text--active' : 'faq-items-item-question__text'}> {content.question} </p>
+					<IoIosArrowForward className={show ? 'faq-items-item-question__icon faq-items-item-question__icon--active' : 'faq-items-item-question__icon'}/>
+				</div>
+				{
+					show && (
+						<div className='faq-items-item-answer' dangerouslySetInnerHTML={ {__html: content.answer}} />
+					)
+				}
+			</div>
+		)
+	};
+
     return (
         <div className="faq">
 			<h1 className="faq__title">Veelgestelde vragen</h1>
 			<div className="faq-items">
-			{faqItems.map(item => 
+				{
+					faqItems.map((item, i) => {
+						return <Faq key={i} content={item} />
+					})
+				}
+			{/* {faqItems.map(item => 
 					<div className={active ? 'faq-items-item faq-items-item--active' : 'faq-items-item'} key={item.id} onClick={() => setActive(!active)}>
 						<div className="faq-items-item-question">
 							<p className={active ? 'faq-items-item-question__text faq-items-item-question__text--active' : 'faq-items-item-question__text'}> {item.question} </p>
@@ -61,7 +85,7 @@ const Faq = () => {
 						<div className={active ? 'faq-items-item-answer faq-items-item-answer--active' : 'faq-items-item-answer'} dangerouslySetInnerHTML={ {__html: item.answer}}>
 							
 						</div>
-					</div>)}
+					</div>)} */}
 			</div>
         </div>
     )
