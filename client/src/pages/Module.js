@@ -38,6 +38,9 @@ const Module = () => {
             try {
                 if (currentUser) {
                     const moduleData = await getModule(currentUser.token, id);
+
+										if (!moduleData || !moduleData.published) history.push(Routes.NOT_FOUND);
+										
                     const userData = await getMyself(currentUser.token);
                     const signpostData = await getSignPosts(currentUser.token);
     

@@ -137,4 +137,22 @@ export default class ModuleController {
             next();
         };
     };
+
+    publishModule = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
+        try {
+            const { moduleId } = req.params;
+            const { bool } = req.body;
+
+            const moduleItem = await ModuleItem.findByIdAndUpdate(moduleId, {
+                $set: {
+                    published: bool,
+                }
+            })
+            .exec();
+
+            return res.status(200).json(moduleItem);
+        } catch (e) {
+            next(e);
+        };
+    };
 };

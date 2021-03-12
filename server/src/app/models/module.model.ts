@@ -22,6 +22,7 @@ interface IModule extends Document {
     title: string;
     shortInfo: string;
     mainInfo: string;
+    published: boolean;
     _pathIds: Array<IPath['_id']>;
     _materialIds: Array<IMaterial['_id']>
 
@@ -45,6 +46,10 @@ const moduleItem: Schema = new Schema({
     content: {
         type: String,
         required: true,
+    },
+    published: {
+        type: Boolean,
+        default: false,
     },
     _pathIds: [
         {

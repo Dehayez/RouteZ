@@ -86,6 +86,7 @@ class ApiRouter {
         this.router.post('/users/create', this.userController.createUser); // needs body, only admin
         this.router.delete('/users/me', this.userController.deleteMyself); // needs bearer
         this.router.delete('/users/:id', this.userController.deleteUser); // needs id, only admin
+        this.router.get('/users-stats', this.userController.viewUserStats); // needs bearer, only admin
 
         // Reset password
         this.router.post('/reset/send', this.resetController.sendToken); // needs body
@@ -112,12 +113,14 @@ class ApiRouter {
         this.router.get('/modules/:moduleId', this.moduleController.getModule); // needs bearer
         this.router.post('/modules', this.moduleController.createModule); // needs bearer and body
         this.router.post('/modules/:id', this.moduleController.editModule); // only admin, needs param and body
+        this.router.post('/publish-module/:moduleId', this.moduleController.publishModule); // needs bearer, body, only for admin
 
         // Signposts
         this.router.get('/signposts', this.signpostController.allSignposts); // needs bearer
         this.router.get('/signposts/:signpostId', this.signpostController.getSignpost); // needs bearer
         this.router.patch('/signposts/:signpostId', this.signpostController.editSignpost); // needs bearer
         this.router.post('/signposts', this.signpostController.createSignpost); // needs bearer, only for admin
+        this.router.post('/publish-signpost/:signpostId', this.signpostController.publishSignpost); // needs bearer, body, only for admin
         this.router.patch('/signposts/add/:signpostId/:moduleId', this.signpostController.addModuleToSignpost); // needs bearer, only for admin
         this.router.patch('/signposts/remove/:signpostId/:moduleId', this.signpostController.removeModuleFromSignpost); // needs bearer, only for admin
         this.router.delete('/signposts/:id', this.signpostController.deleteSignpost); // needs bearer, only for admin
@@ -139,6 +142,8 @@ class ApiRouter {
         this.router.get('/tags', this.tagController.allTags); // needs bearer
         this.router.get('/tags/:id', this.tagController.getTag); // needs bearer
         this.router.post('/tags', this.tagController.createTag); // needs bearer, only for admin
+        this.router.delete('/tags/:id', this.tagController.deleteTag); // needs bearer, only for admin
+        this.router.patch('/tags/:id', this.tagController.editTag); // needs bearer, body, admin
 
         // Searches
         this.router.post('/search-engine', this.searchController.searchItems); // needs bearer and body

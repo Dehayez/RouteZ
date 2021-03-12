@@ -28,5 +28,10 @@ export const MATERIAL = '/material/:id';
 export const EDIT_MATERIAL = '/edit-material/:id';
 export const CREATE_MATERIAL = '/create-material';
 
+// TAGS
+export const TAGS = '/tags';
+export const EDIT_TAG = '/edit-tag/:id';
+export const CREATE_TAG = '/create-tag';
+
 // WHOOPS?
 export const WHOOPSIE = '/somethings-wrong';

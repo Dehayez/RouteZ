@@ -21,6 +21,7 @@ interface ISignpost extends Document {
     text: string;
     icon: string;
     illustration: string;
+    published: boolean;
     _moduleIds?: Array<IModule['_id']>;
 
     _createdAt: number;
@@ -54,6 +55,10 @@ const signPost: Schema = new Schema({
         type: String,
         unique: false,
         required: true,
+    },
+    published: {
+        type: Boolean,
+        default: false,
     },
     _moduleIds: [
         {

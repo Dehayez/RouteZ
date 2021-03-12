@@ -55,14 +55,14 @@ const Navigation = () => {
 			<nav className="nav-list">
 				{
 					signposts && signposts.map((signpost, i) => {
-						return <NavigationItem 
+						return signpost.published ? <NavigationItem 
 									key={i} 
 									index={i+1}
 									title={signpost.shortedTitle} 
 									alt={signpost.shortedTitle} 
 									endpoint={`/signposts/${signpost.id}`} 
 									logo={`${apiConfig.baseURL}svg/${signpost.icon}`}
-								/>
+								/> : ''
 					})
 				}
 			</nav>

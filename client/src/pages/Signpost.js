@@ -15,7 +15,7 @@ import * as Routes from '../routes';
 
 const Signpost = () => {
     const { id } = useParams();
-    const history = useHistory();
+		const history = useHistory();
 
     // Services
     const { getSignPost } = useApi();
@@ -29,6 +29,8 @@ const Signpost = () => {
             if (currentUser) {
                 const signpostData = await getSignPost(currentUser.token, id);
                 setSignpost(signpostData);
+
+								if (!signpostData.published || !signpostData) history.push(Routes.NOT_FOUND);
             };
         };
 
@@ -70,14 +72,14 @@ const Signpost = () => {
 						{
 							signpost && (
 								signpost.modules && signpost.modules.map((module, i) => {
-									return <div className="signpost-modules-item" key={i}>
+									return module.published ? <div className="signpost-modules-item" key={i}>
 										<p className="signpost-modules-item-title">{module.title}</p>
 										<div>
 											<Link to={`${Routes.MODULE.replace(':id', module._id)}`}>
 												<ButtonSmall content="Start" color="secondary"/>
 											</Link>
 										</div>
-									</div>
+									</div> : ''
 								})
 							)
 						}

@@ -171,6 +171,24 @@ export default class SignpostController {
         };
     };
 
+    publishSignpost = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
+        try {
+            const { signpostId } = req.params;
+            const { bool } = req.body;
+
+            const signpost = await SignPost.findByIdAndUpdate(signpostId, {
+                $set: {
+                    published: bool,
+                }
+            })
+            .exec();
+
+            return res.status(200).json(signpost);
+        } catch (e) {
+            next(e);
+        };
+    };
+
     getSignpost = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
         try {
             // Get parameter

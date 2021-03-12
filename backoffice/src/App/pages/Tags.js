@@ -14,29 +14,26 @@ import { UsualButton, DeleteButton } from '../components';
 // Routes
 import * as Routes from '../routes';
 
-// Images
-import Eye from '../assets/icons/view.png';
-
-const Signposts = () => {
+const Tags = () => {
   // Routing
   const history = useHistory();
 
   // Services
-  const { getSignPosts, deleteSignpost, publishSignpost } = useApi();
+  const { getTags, deleteTag } = useApi();
   const { currentUser } = useAuth();
 
   // States
-  const [ signposts, setSignposts ] = useState();
+  const [ tags, setTags ] = useState();
 
   // Fetch
   const getData = useCallback(async () => {
     try {
-      const data = await getSignPosts(currentUser.token);
-      setSignposts(data);
+      const data = await getTags();
+      setTags(data);
     } catch (e) {
       console.log(e);
     };
-  }, [getSignPosts, currentUser]);
+  }, [getTags]);
 
   useEffect(() => {
     getData();
@@ -44,12 +41,7 @@ const Signposts = () => {
 
   // Delete
   const deleteItem = async (id) => {
-    await deleteSignpost(currentUser.token, id);
-    window.location.reload();
-  };
-
-  const publishItem = async (bool, id) => {
-    await publishSignpost(currentUser.token, bool, id);
+    await deleteTag(id, currentUser.token);
     window.location.reload();
   };
 
@@ -58,26 +50,24 @@ const Signposts = () => {
       <Row>
         <Col xs={12} className="d-flex align-items-center justify-content-between">
           <h1 className="overview__title">
-            Alle wegwijzers
+            Alle tags
           </h1>
-          <UsualButton text="Wegwijzer maken" action={() => history.push(Routes.CREATE_SIGNPOST)} />
+          <UsualButton text="Tag maken" action={() => history.push(Routes.CREATE_TAG)} />
         </Col>
       </Row>
       <Row>
         <Col xs={12}>
           <div className="overview__items">
             {
-              signposts && signposts.map((signpost, index) => {
+              tags && tags.map((tag, index) => {
                 return (
                   <div className="overview__items--item d-flex justify-content-between align-items-center" key={index}>
                     <div className="overview__items--item--text">
-                      <h5 onClick={() => history.push(Routes.SIGNPOST.replace(':id', signpost._id))}>{signpost.title}</h5>
-                      <h6>Bevat {signpost.modules.length} modules</h6>
+                      <h5>{tag.name}</h5>
                     </div>
                     <div className="overview__items--item--buttons d-flex align-items-center">
-                      <img src={Eye} alt="publish" className={`publish-button ${signpost.published ? '' : 'not-published'}`} onClick={() => publishItem(!signpost.published, signpost._id)}/>
-                      <UsualButton text="Bewerk" action={() => history.push(Routes.EDIT_SIGNPOST.replace(':id', signpost._id))} />
-                      <DeleteButton text="Verwijder" action={() => deleteItem(signpost._id)} />
+                      <UsualButton text="Bewerk" action={() => history.push(Routes.EDIT_TAG.replace(':id', tag._id))} />
+                      <DeleteButton text="Verwijder" action={() => deleteItem(tag._id)} />
                     </div>
                   </div>
                 )
@@ -90,4 +80,4 @@ const Signposts = () => {
   );
 };
 
-export default Signposts;
+export default Tags;

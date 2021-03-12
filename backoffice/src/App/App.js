@@ -11,7 +11,7 @@ import { RouteCheck } from './utils';
 import * as Routes from './routes';
 
 // Pages
-import { CreateSignpost, Dashboard, EditSignpost, Materials, Modules, Signin, Signposts, Users, CreateMaterial, EditMaterial, CreateUser, EditUser, CreateModule, EditModule, Whoopsie } from './pages';
+import { CreateSignpost, Dashboard, EditSignpost, Materials, Modules, Signin, Signposts, Users, Tags, CreateMaterial, EditMaterial, CreateUser, EditUser, CreateModule, EditModule, Whoopsie, CreateTag, EditTag } from './pages';
 
 // CSS
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -36,6 +36,9 @@ const App = () => {
             <RouteCheck tokenNeeded={true} path={Routes.EDIT_SIGNPOST} component={EditSignpost} />
             <RouteCheck tokenNeeded={true} path={Routes.CREATE_SIGNPOST} component={CreateSignpost} />
             <RouteCheck tokenNeeded={true} path={Routes.SIGNPOSTS} component={Signposts} />
+            <RouteCheck tokenNeeded={true} path={Routes.CREATE_TAG} component={CreateTag} />
+            <RouteCheck tokenNeeded={true} path={Routes.EDIT_TAG} component={EditTag} />
+            <RouteCheck tokenNeeded={true} path={Routes.TAGS} component={Tags} />
             <RouteCheck tokenNeeded={true} path={Routes.DASHBOARD} component={Dashboard} />
             <RouteCheck tokenNeeded={false} path={Routes.SIGNIN} component={Signin} />
             <RouteCheck tokenNeeded={false} path='/*' component={Whoopsie} />

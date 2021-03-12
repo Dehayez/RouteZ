@@ -71,3 +71,14 @@ $font-size-xxl: 1.875rem;
     }
   }
 }
+
+.publish-button {
+  width: 25px;
+  height: 25px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.publish-button.not-published {
+  opacity: 0.4;
+}

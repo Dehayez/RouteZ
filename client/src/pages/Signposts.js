@@ -55,7 +55,7 @@ const Signposts = () => {
 			<div className="signposts-items">
 				{
 					progress && progress.map((signpost, i) => {
-						return <CardSignpost 
+						return signpost.published ? <CardSignpost 
 									key={i}
 									index={i+1}
 									title={signpost.signpost.title} 
@@ -64,7 +64,7 @@ const Signposts = () => {
 									endpoint={`/signposts/${signpost.signpost.id}`} 
 									logo={`${apiConfig.baseURL}file/${signpost.signpost.icon}`}
 									percentage={signpost.progress.percentage}
-								/>
+								/> : ''
 					})
 				}
 			</div>

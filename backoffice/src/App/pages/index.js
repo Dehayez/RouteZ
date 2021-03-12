@@ -12,6 +12,9 @@ import EditMaterial from './EditMaterial';
 import Modules from './Modules';
 import CreateModule from './CreateModule';
 import EditModule from './EditModule';
+import Tags from './Tags';
+import CreateTag from './CreateTag';
+import EditTag from './EditTag';
 import Whoopsie from './Whoopsie';
 
 export {
@@ -29,5 +32,8 @@ export {
   EditUser,
   CreateModule,
   EditModule,
+  Tags,
+  CreateTag,
+  EditTag,
   Whoopsie,
 };

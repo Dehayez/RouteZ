@@ -93,6 +93,28 @@ const ApiProvider = ({children}) => {
     return await response.json();
   };
 
+  /**
+   * @desc publish one signpost
+   * @param {string} token 
+   * @param {boolean} bool
+   * @param {string} id
+   */
+  const publishSignpost = async (token, bool, id) => {
+    const url = `${BASE_URL}publish-signpost/${id}`;
+
+    const response = await fetch(url, {
+      'method': 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({bool}),
+    });
+
+    return await response.json();
+  };
+
   // MODULES
 
   /**
@@ -172,6 +194,28 @@ const ApiProvider = ({children}) => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(content),
+    });
+
+    return await response.json();
+  };
+
+  /**
+   * @desc publish one module
+   * @param {string} token 
+   * @param {boolean} bool 
+   * @param {string} id
+   */
+   const publishModule = async (token, bool, id) => {
+    const url = `${BASE_URL}publish-module/${id}`;
+
+    const response = await fetch(url, {
+      'method': 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({bool}),
     });
 
     return await response.json();
@@ -270,6 +314,89 @@ const ApiProvider = ({children}) => {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       }
+    });
+
+    return await res.json();
+  };
+
+  /**
+   * get tag
+   * @param {string} id
+   * @param {string} bearer
+   */
+  const getTag = async (id, bearer) => {
+    const url = `${BASE_URL}tags/${id}`;
+
+    const res = await fetch(url, {
+      method: "GET",
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${bearer}`,
+        'Content-Type': 'application/json'
+      }
+    });
+
+    return await res.json();
+  };
+
+  /**
+   * delete tag
+   * @param {string} id
+   * @param {string} bearer
+   */
+  const deleteTag = async (id, bearer) => {
+    const url = `${BASE_URL}tags/${id}`;
+
+    const res = await fetch(url, {
+      method: "DELETE",
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${bearer}`,
+        'Content-Type': 'application/json'
+      }
+    });
+
+    return await res.json();
+  };
+
+  /**
+   * create tag
+   * @param {string} name
+   * @param {string} bearer
+   */
+     const createTag = async (name, bearer) => {
+      const url = `${BASE_URL}tags`;
+  
+      const res = await fetch(url, {
+        method: "POST",
+        headers: {
+          'Accept': 'application/json',
+          'Authorization': `Bearer ${bearer}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({name}),
+      });
+  
+      return await res.json();
+    };
+
+  /**
+   * edit tag
+   * @param {string} name
+   * @param {string} bearer
+   * @param {string} id
+   */
+  const editTag = async (name, bearer, id) => {
+    const url = `${BASE_URL}tags/${id}`;
+
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${bearer}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({name}),
     });
 
     return await res.json();
@@ -710,18 +837,46 @@ const ApiProvider = ({children}) => {
     return await res.json();
   };
 
+
+  // STATS
+
+  /**
+   * view charts
+   * @param {string} token
+   */
+   const viewCharts = async (token) => {
+    const url = `${BASE_URL}users-stats`;
+
+    const res = await fetch(url, {
+      method: "GET",
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+    });
+
+    return await res.json();
+  };
+
   return (
     <ApiContext.Provider value={{
       getSignPosts,
       getSignPost,
       createSignPost,
       editSignPost,
+      publishSignpost,
       getModule,
       getModules,
       createModule,
       editModule,
+      publishModule,
       getPath,
       getTags,
+      getTag,
+      createTag,
+      editTag,
+      deleteTag,
       uploadFile,
       uploadDoc,
       getDoc,
@@ -745,6 +900,7 @@ const ApiProvider = ({children}) => {
       addExerciseToPath,
       addPathToModule,
       createNotification,
+      viewCharts,
     }}>
       {children}
     </ApiContext.Provider>

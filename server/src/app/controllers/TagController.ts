@@ -59,4 +59,29 @@ export default class TagController {
       next();
     };
   };
+
+  deleteTag = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
+    try {
+      const { id } = req.params;
+
+      const tag = await Tag.findByIdAndDelete(id).exec();
+
+      return res.status(200).json(tag);
+    } catch(e) {
+      next();
+    };
+  };
+
+  editTag = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
+    try {
+      const { id } = req.params;
+      const { name } = req.body;
+
+      const tag = await Tag.findByIdAndUpdate(id, {$set: {name: name}}).exec();
+
+      return res.status(200).json(tag);
+    } catch(e) {
+      next();
+    };
+  };
 };

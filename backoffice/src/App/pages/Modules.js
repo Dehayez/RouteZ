@@ -14,12 +14,15 @@ import { UsualButton, DeleteButton } from '../components';
 // Routes
 import * as Routes from '../routes';
 
+// Images
+import Eye from '../assets/icons/view.png';
+
 const Modules = () => {
   // Routing
   const history = useHistory();
 
   // Services
-  const { getModules, deleteModule } = useApi();
+  const { getModules, deleteModule, publishModule } = useApi();
   const { currentUser } = useAuth();
 
   // States
@@ -45,6 +48,11 @@ const Modules = () => {
     window.location.reload();
   };
 
+  const publishItem = async (bool, id) => {
+    await publishModule(currentUser.token, bool, id);
+    window.location.reload();
+  };
+
   return (
     <UsualLayout>
       <Row>
@@ -67,6 +75,7 @@ const Modules = () => {
                       <h6>Bevat {moduleItem._pathIds ? moduleItem._pathIds.length : 0} paden</h6>
                     </div>
                     <div className="overview__items--item--buttons d-flex align-items-center justify-content-end">
+                      <img src={Eye} alt="publish" className={`publish-button ${moduleItem.published ? '' : 'not-published'}`} onClick={() => publishItem(!moduleItem.published, moduleItem._id)}/>
                       <UsualButton text="Bewerk" action={() => history.push(Routes.EDIT_MODULE.replace(':id', moduleItem._id))} />
                       <DeleteButton text="Verwijder" action={() => deleteItem(moduleItem._id)} />
                     </div>

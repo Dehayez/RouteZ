@@ -4,16 +4,17 @@ import {
     Response,
 } from "express";
 
-import { 
+import {
     User,
     IUser,
     SignPost,
-    Notification
+    Notification,
+    ModuleItem
 } from "../models";
 
-import { 
-    IConfig, 
-    Auth 
+import {
+    IConfig,
+    Auth
 } from "../services";
 
 import {
@@ -38,7 +39,7 @@ export default class UserController {
     };
 
     // Getting all users
-    public allUsers = async (req: Request, res: Response, next: NextFunction): Promise<Response<any>> => {
+    public allUsers = async (req: Request, res: Response, next: NextFunction): Promise < Response < any >> => {
         try {
             // Only possible when you are a admin
             if (!req.headers.authorization) {
@@ -50,9 +51,13 @@ export default class UserController {
             const token = req.headers.authorization.slice(7);
             const payload = Object(jwtDecode(token));
 
-            const { id } = payload;
+            const {
+                id
+            } = payload;
 
-            const user = await User.findOne({ _id: id });
+            const user = await User.findOne({
+                _id: id
+            });
 
             // If user doesn't exist
             if (!user) {
@@ -69,7 +74,10 @@ export default class UserController {
             };
 
             // Pagination inserted
-            const { limit, skip } = req.query;
+            const {
+                limit,
+                skip
+            } = req.query;
 
             let users;
 
@@ -84,7 +92,9 @@ export default class UserController {
                 // });
             } else {
                 // Get all users
-                users = await User.find().sort({ _createdAt: -1 }).exec();
+                users = await User.find().sort({
+                    _createdAt: -1
+                }).exec();
             };
 
             return res.status(200).json(users);
@@ -94,7 +104,7 @@ export default class UserController {
     };
 
     // Getting current user
-    getMyself = async (req: Request, res: Response, next: NextFunction): Promise<Response<any>> => {
+    getMyself = async (req: Request, res: Response, next: NextFunction): Promise < Response < any >> => {
         try {
             // Only you as a user will be given
             if (!req.headers.authorization) {
@@ -106,21 +116,24 @@ export default class UserController {
             const token = req.headers.authorization.slice(7);
             const payload = Object(jwtDecode(token));
 
-            const { id } = payload;
+            const {
+                id
+            } = payload;
 
-            const user = await User.findOne({ _id: id }).populate({
+            const user = await User.findOne({
+                _id: id
+            }).populate({
                 path: 'progress',
                 populate: {
                     path: '_lastModule',
                 }
-            }).populate(
-            {
+            }).populate({
                 path: 'progress',
                 populate: {
                     path: '_lastSignpost',
                 }
             });
-            
+
             // When user doesn't exist
             if (!user) {
                 return res.status(404).json({
@@ -135,12 +148,16 @@ export default class UserController {
     };
 
     // Get one user
-    getUser = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
+    getUser = async (req: Request, res: Response, next: NextFunction): Promise < Response > => {
         try {
-            const { id } = req.params;
+            const {
+                id
+            } = req.params;
 
-            const user = await User.findOne({ _id: id }); 
-            
+            const user = await User.findOne({
+                _id: id
+            });
+
             // When user doesn't exist
             if (!user) {
                 return res.status(404).json({
@@ -155,10 +172,18 @@ export default class UserController {
     };
 
     // Update a user
-    updateMyself = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
+    updateMyself = async (req: Request, res: Response, next: NextFunction): Promise < Response > => {
         try {
             // Main values to be edited
-            const { email, firstName, lastName, schoolName, avatar, professionalFunction, phoneNumber } = req.body;
+            const {
+                email,
+                firstName,
+                lastName,
+                schoolName,
+                avatar,
+                professionalFunction,
+                phoneNumber
+            } = req.body;
 
             // First off all, check if you're the user
             if (!req.headers.authorization) {
@@ -170,9 +195,13 @@ export default class UserController {
             const token = req.headers.authorization.slice(7);
             const payload = Object(jwtDecode(token));
 
-            const { id } = payload;
+            const {
+                id
+            } = payload;
 
-            const user = await User.findOne({ _id: id }); 
+            const user = await User.findOne({
+                _id: id
+            });
 
             if (!user) {
                 return res.status(404).json({
@@ -181,7 +210,9 @@ export default class UserController {
             };
 
             // Updating the user
-            const updatedUser = await User.findOneAndUpdate({ _id: id }, {
+            const updatedUser = await User.findOneAndUpdate({
+                _id: id
+            }, {
                 $set: {
                     email: email,
                     'profile.firstName': firstName,
@@ -192,7 +223,9 @@ export default class UserController {
                     'profile.phoneNumber': phoneNumber,
                     _modifiedAt: Date.now(),
                 },
-            }, { new : true }).exec();
+            }, {
+                new: true
+            }).exec();
 
             return res.status(200).json(updatedUser);
         } catch (e) {
@@ -200,12 +233,20 @@ export default class UserController {
         };
     };
 
-    editUser = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
-           try {         
-            const { id } = req.params;
-            const { role, firstName, lastName } = req.body;
+    editUser = async (req: Request, res: Response, next: NextFunction): Promise < Response > => {
+        try {
+            const {
+                id
+            } = req.params;
+            const {
+                role,
+                firstName,
+                lastName
+            } = req.body;
 
-            const user = await User.findOne({ _id: id }); 
+            const user = await User.findOne({
+                _id: id
+            });
 
             if (!user) {
                 return res.status(404).json({
@@ -214,14 +255,18 @@ export default class UserController {
             };
 
             // Updating the user
-            const updatedUser = await User.findOneAndUpdate({ _id: id }, {
+            const updatedUser = await User.findOneAndUpdate({
+                _id: id
+            }, {
                 $set: {
                     'profile.firstName': firstName,
                     'profile.lastName': lastName,
                     'role': role,
                     _modifiedAt: Date.now(),
                 },
-            }, { new : true }).exec();
+            }, {
+                new: true
+            }).exec();
 
             return res.status(200).json(updatedUser);
         } catch (e) {
@@ -229,9 +274,12 @@ export default class UserController {
         };
     }
 
-    updateLastProgress = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
+    updateLastProgress = async (req: Request, res: Response, next: NextFunction): Promise < Response > => {
         try {
-            const { moduleId, signpostId } = req.body;
+            const {
+                moduleId,
+                signpostId
+            } = req.body;
 
             // First off all, check if you're the user
             if (!req.headers.authorization) {
@@ -243,9 +291,13 @@ export default class UserController {
             const token = req.headers.authorization.slice(7);
             const payload = Object(jwtDecode(token));
 
-            const { id } = payload;
+            const {
+                id
+            } = payload;
 
-            const user = await User.findOne({ _id: id }); 
+            const user = await User.findOne({
+                _id: id
+            });
 
             if (!user) {
                 return res.status(404).json({
@@ -266,10 +318,15 @@ export default class UserController {
         };
     };
 
-    updateProgress = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
+    updateProgress = async (req: Request, res: Response, next: NextFunction): Promise < Response > => {
         try {
             // Main values to be edited
-            const { moduleId, pathId, signpostId, exercise } = req.body;
+            const {
+                moduleId,
+                pathId,
+                signpostId,
+                exercise
+            } = req.body;
 
             // First off all, check if you're the user
             if (!req.headers.authorization) {
@@ -281,9 +338,13 @@ export default class UserController {
             const token = req.headers.authorization.slice(7);
             const payload = Object(jwtDecode(token));
 
-            const { id } = payload;
+            const {
+                id
+            } = payload;
 
-            const user = await User.findOne({ _id: id }); 
+            const user = await User.findOne({
+                _id: id
+            });
 
             if (!user) {
                 return res.status(404).json({
@@ -304,23 +365,31 @@ export default class UserController {
                     array.push(moduleId);
 
                     // Updating the user
-                    updatedUser = await User.findOneAndUpdate({ _id: id }, {
+                    updatedUser = await User.findOneAndUpdate({
+                        _id: id
+                    }, {
                         $set: {
                             'progress._finishedModuleIds': array,
                             _modifiedAt: Date.now(),
                         },
-                    }, { new : true }).exec();
+                    }, {
+                        new: true
+                    }).exec();
                 } else {
                     // Updating the user
                     array = user.progress._finishedModuleIds;
                     array.push(moduleId);
 
-                    updatedUser = await User.findOneAndUpdate({ _id: id }, {
+                    updatedUser = await User.findOneAndUpdate({
+                        _id: id
+                    }, {
                         $set: {
                             'progress._finishedModuleIds': array,
                             _modifiedAt: Date.now(),
                         },
-                    }, { new : true }).exec();
+                    }, {
+                        new: true
+                    }).exec();
                 };
 
                 const signposts = await SignPost.find().exec();
@@ -335,9 +404,11 @@ export default class UserController {
                             completedSignpost = signposts[i];
                         };
                     };
-                    
+
                     if (addSignpost) {
-                        await User.findOneAndUpdate({_id: id}, {
+                        await User.findOneAndUpdate({
+                            _id: id
+                        }, {
                             $push: {
                                 'progress._finishedSignpostIds': completedSignpost._id,
                             }
@@ -366,23 +437,31 @@ export default class UserController {
                     array.push(pathId);
 
                     // Updating the user
-                    updatedUser = await User.findOneAndUpdate({ _id: id }, {
+                    updatedUser = await User.findOneAndUpdate({
+                        _id: id
+                    }, {
                         $set: {
                             'progress._finishedPathIds': array,
                             _modifiedAt: Date.now(),
                         },
-                    }, { new : true }).exec();
+                    }, {
+                        new: true
+                    }).exec();
                 } else {
                     array = user.progress._finishedPathIds;
                     array.push(pathId);
 
                     // Updating the user
-                    updatedUser = await User.findOneAndUpdate({ _id: id }, {
+                    updatedUser = await User.findOneAndUpdate({
+                        _id: id
+                    }, {
                         $set: {
                             'progress._finishedPathIds': array,
                             _modifiedAt: Date.now(),
                         },
-                    }, { new : true }).exec();
+                    }, {
+                        new: true
+                    }).exec();
                 };
             };
 
@@ -401,7 +480,9 @@ export default class UserController {
                     $push: {
                         'progress._finishedExercises': exercise,
                     }
-                }, {new: true}).exec();
+                }, {
+                    new: true
+                }).exec();
 
             };
 
@@ -416,23 +497,31 @@ export default class UserController {
                     array.push(signpostId);
 
                     // Updating the user
-                    updatedUser = await User.findOneAndUpdate({ _id: id }, {
+                    updatedUser = await User.findOneAndUpdate({
+                        _id: id
+                    }, {
                         $set: {
                             'progress._finishedSignPostIds': array,
                             _modifiedAt: Date.now(),
                         },
-                    }, { new : true }).exec();
+                    }, {
+                        new: true
+                    }).exec();
                 } else {
                     array = user.progress._finishedSignPostIds;
                     array.push(signpostId);
 
                     // Updating the user
-                    updatedUser = await User.findOneAndUpdate({ _id: id }, {
+                    updatedUser = await User.findOneAndUpdate({
+                        _id: id
+                    }, {
                         $set: {
                             'progress._finishedSignPostIds': array,
                             _modifiedAt: Date.now(),
                         },
-                    }, { new : true }).exec();
+                    }, {
+                        new: true
+                    }).exec();
                 };
             };
 
@@ -443,7 +532,7 @@ export default class UserController {
     };
 
     // Delete a user
-    deleteMyself = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
+    deleteMyself = async (req: Request, res: Response, next: NextFunction): Promise < Response > => {
         try {
             // Get your bearer token
             if (!req.headers.authorization) {
@@ -451,13 +540,17 @@ export default class UserController {
                     error: "Deze gebruiker bestaat niet.",
                 });
             };
-            
+
             const token = req.headers.authorization.slice(7);
             const payload = Object(jwtDecode(token));
-    
-            const { id } = payload;
 
-            const user = await User.findOneAndRemove({ _id: id });
+            const {
+                id
+            } = payload;
+
+            const user = await User.findOneAndRemove({
+                _id: id
+            });
 
             if (!user) {
                 return res.status(404).json({
@@ -466,17 +559,21 @@ export default class UserController {
             };
 
             return res.status(200).json(user);
-        } catch(e) {
+        } catch (e) {
             next(e);
         };
     };
 
     // Delete a user
-    deleteUser = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
+    deleteUser = async (req: Request, res: Response, next: NextFunction): Promise < Response > => {
         try {
-            const { id } = req.params;
+            const {
+                id
+            } = req.params;
 
-            const user = await User.findOneAndRemove({ _id: id });
+            const user = await User.findOneAndRemove({
+                _id: id
+            });
 
             if (!user) {
                 return res.status(404).json({
@@ -485,20 +582,26 @@ export default class UserController {
             };
 
             return res.status(200).json(user);
-        } catch(e) {
+        } catch (e) {
             next(e);
         };
     };
 
     // Registering a user
-    newUser = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
-        const { email } = req.body;
+    newUser = async (req: Request, res: Response, next: NextFunction): Promise < Response > => {
+        const {
+            email
+        } = req.body;
 
         // Check if user exists
-        let existing = await User.findOne({ email: email });
+        let existing = await User.findOne({
+            email: email
+        });
 
         if (existing) {
-            return res.status(403).json({ error: 'Er is al een gebruiker gemaakt met dit e-mailadres' });
+            return res.status(403).json({
+                error: 'Er is al een gebruiker gemaakt met dit e-mailadres'
+            });
         };
 
         // Fill in user data
@@ -515,12 +618,20 @@ export default class UserController {
     };
 
     // Create user from backoffice
-    createUser = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
+    createUser = async (req: Request, res: Response, next: NextFunction): Promise < Response > => {
         try {
-            const { email, password, role, firstName, lastName } = req.body;
+            const {
+                email,
+                password,
+                role,
+                firstName,
+                lastName
+            } = req.body;
 
             // Checking if user exists
-            const checkIfExist = await User.findOne({email: email});
+            const checkIfExist = await User.findOne({
+                email: email
+            });
 
             if (checkIfExist) return res.status(403).json({
                 error: "Er bestaat al reeds een gebruiker",
@@ -533,13 +644,13 @@ export default class UserController {
                 if (err) {
                     throw err;
                 };
-    
+
                 bcrypt.hash(password, salt, async (errHash, hash) => {
                     if (errHash) {
                         throw errHash;
                     };
-                    
-                    const newUser : IUser = new User({
+
+                    const newUser: IUser = new User({
                         email: email,
                         password: hash,
                         'profile.firstName': firstName,
@@ -557,18 +668,20 @@ export default class UserController {
         };
     };
 
-    calculateUserProgress = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
+    calculateUserProgress = async (req: Request, res: Response, next: NextFunction): Promise < Response > => {
         try {
             if (!req.headers.authorization) {
                 return res.status(401).json({
                     error: "Deze gebruiker bestaat niet.",
                 });
             };
-                        
+
             const token = req.headers.authorization.slice(7);
             const payload = Object(jwtDecode(token));
-                
-            const { id } = payload;
+
+            const {
+                id
+            } = payload;
 
             // Find user
             const user = await User.findById(id);
@@ -595,7 +708,14 @@ export default class UserController {
                 };
 
                 let percentage = (done / total) * 100;
-                array.push({signpost: signposts[i], progress: {percentage: percentage, finishedModules: done, totalModules: total}});
+                array.push({
+                    signpost: signposts[i],
+                    progress: {
+                        percentage: percentage,
+                        finishedModules: done,
+                        totalModules: total
+                    }
+                });
             };
 
             return res.status(200).json(array);
@@ -605,7 +725,7 @@ export default class UserController {
     };
 
     // User logging in
-    loggingInUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    loggingInUser = async (req: Request, res: Response, next: NextFunction): Promise < void > => {
         this.auth.passport.authenticate('local', {
             session: this.config.auth.jwt.session,
         }, (e, user) => {
@@ -623,12 +743,15 @@ export default class UserController {
             // Create a token
             const token = this.auth.createToken(user);
 
-            return res.status(200).json({token: token, id: user._id});
+            return res.status(200).json({
+                token: token,
+                id: user._id
+            });
         })(req, res, next);
     };
 
     // Admin logging in
-    loggingInAdmin = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    loggingInAdmin = async (req: Request, res: Response, next: NextFunction): Promise < void > => {
         this.auth.passport.authenticate('local', {
             session: this.config.auth.jwt.session,
         }, (e, user) => {
@@ -652,7 +775,10 @@ export default class UserController {
             // Create a token
             const token = this.auth.createToken(user);
 
-            return res.status(200).json({token: token, id: user._id});
+            return res.status(200).json({
+                token: token,
+                id: user._id
+            });
         })(req, res, next);
     };
 
@@ -664,13 +790,64 @@ export default class UserController {
                 error: "Deze gebruiker bestaat niet.",
             });
         };
-                    
+
         const token = req.headers.authorization.slice(7);
         const payload = Object(jwtDecode(token));
-            
-        const { id } = payload;
+
+        const {
+            id
+        } = payload;
         req.body.id = id;
 
         next();
+    };
+
+    // View stats
+    viewUserStats = async (req: Request, res: Response, next: NextFunction): Promise < Response > => {
+        try {
+            const signposts = await SignPost.find().exec();
+            const modules = await ModuleItem.find().exec();
+            const users = await User.find().exec();
+
+            let signpostsStats = [];
+            let modulesStats = [];
+
+            for (let i = 0; i < signposts.length; i++) {
+                let signpost = {
+                    title: signposts[i].title,
+                    finishers: 0
+                };
+
+                for (let j = 0; j < users.length; j++) {
+                    if (users[j].progress._finishedSignPostIds && users[j].progress._finishedSignPostIds.includes(signposts[i]._id)) {
+                        signpost.finishers = signpost.finishers + 1;
+                    };
+                };
+
+                signpostsStats.push(signpost);
+            };
+
+            for (let i = 0; i < modules.length; i++) {
+                let moduleItem = {
+                    title: modules[i].title,
+                    finishers: 0
+                };
+
+                for (let j = 0; j < users.length; j++) {
+                    if (users[j].progress._finishedModuleIds && users[j].progress._finishedModuleIds.includes(modules[i]._id)) {
+                        moduleItem.finishers = moduleItem.finishers + 1;
+                    };
+                };
+
+                modulesStats.push(moduleItem);
+            };
+
+            return res.status(200).json({
+                modulesStats,
+                signpostsStats,
+            });
+        } catch (e) {
+            next(e);
+        };
     };
 };
