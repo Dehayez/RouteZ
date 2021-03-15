@@ -25,7 +25,7 @@ import { AnimationOnScroll } from 'react-animation-on-scroll';
 import { BsChevronDown } from 'react-icons/bs';
 
 // Images
-import { LandingIllustration, WegwijzerLanding, Plan1, Plan2, Plan3, Plan4 } from '../assets/images';
+import { LandingIllustration, WegwijzerLanding, Plan1, Plan2, Plan3, Plan4, Artevelde } from '../assets/images';
 
 const Landing = () => {
 	const { signIn } = useAuth();
@@ -158,7 +158,7 @@ const Landing = () => {
 				<div className="landing-section landing-section--one" id="routez">
 					<div className="landing-section--one">
 						<h2 className="landing-section--one__title">Wat is RouteZ?</h2>
-						<p className="landing-section--one__text">RouteZ is een platform om leerkrachten te <strong className="landing-section__strong">ondersteunen</strong> in hun didactisch handelen met betrekking tot zelfgestuurd leren in een <strong className="landing-section__strong">krachtige leeromgeving.</strong> Aan de hand van aan de hand van <strong className="landing-section__strong">concrete voorbeelden en toepassingen</strong> wordt je ondersteund  bij het implementeren van zelfgestuurd leren in de lespraktijk. </p>
+						<p className="landing-section--one__text">RouteZ is een platform om leerkrachten te <strong className="landing-section__strong">ondersteunen</strong> in hun didactisch handelen met betrekking tot zelfgestuurd leren in een <strong className="landing-section__strong">krachtige leeromgeving.</strong> Aan de hand van <strong className="landing-section__strong">concrete voorbeelden en toepassingen</strong> wordt je ondersteund  bij het implementeren van zelfgestuurd leren in de lespraktijk. </p>
 						<Link to={Routes.DASHBOARD}>
 							<ButtonSmall color="primary" content="Ontdek het platform"/>
 						</Link>
@@ -209,12 +209,12 @@ const Landing = () => {
 				<h1 className="landing-section--four__title">Door en voor ...</h1>
 				<Row>
 					<Col className="landing-section--four-left__text" lg="7">
-						<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo? Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo?</p>
+						<p>Scholengroep 20, het schoolbestuur van 15 GO!-scholen van Geraardsbergen tot Zottegem. De scholengroep organiseert samen met 25 andere scholengroep het Onderwijs van de Vlaamse Gemeenschap en behoort tot het GO!.</p>
 					</Col>
 					<Col className="landing-section--four-right" lg="5">
-						<img className="landing-section--four-right__image" src={ WegwijzerLanding } alt="wegwijzer"/>
-						<img className="landing-section--four-right__image" src={ WegwijzerLanding } alt="wegwijzer"/>
-						<img className="landing-section--four-right__image" src={ WegwijzerLanding } alt="wegwijzer"/>
+						<img className="landing-section--four-right__image" src={ Artevelde } alt="wegwijzer"/>
+						<img className="landing-section--four-right__image" src={ Artevelde } alt="wegwijzer"/>
+						<img className="landing-section--four-right__image" src={ Artevelde } alt="wegwijzer"/>
 					</Col>
 				</Row>
 			</div>

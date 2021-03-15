@@ -30,16 +30,16 @@ const LandingLayout = ({children}) => {
 				<Navbar.Toggle aria-controls="basic-navbar-nav"><HiMenuAlt3/></Navbar.Toggle>
 				<Navbar.Collapse id="basic-navbar-nav">
 					<Nav className="mr-auto">
-						<LinkScroll className="navbar-link" activeClass="navbar-link--active" to="routez" offset={-400}  smooth={true} duration={1000} spy={true}>
+						<LinkScroll className="navbar-link" to="routez" offset={-400}   duration={1000} spy={true}>
 							Wat is RouteZ
 						</LinkScroll>
-						<LinkScroll className="navbar-link" activeClass="navbar-link--active" to="signposts" offset={-200} smooth={true} duration={1000} spy={true}>
+						<LinkScroll className="navbar-link" to="signposts" offset={-200}  duration={1000} spy={true}>
 							Wegwijzers
 						</LinkScroll>
-						<LinkScroll className="navbar-link" activeClass="navbar-link--active" to="plan" offset={-200}  smooth={true} duration={1000} spy={true}>
+						<LinkScroll className="navbar-link" to="plan" offset={-200}   duration={1000} spy={true}>
 							Stappenplan
 						</LinkScroll>
-						<LinkScroll className="navbar-link" activeClass="navbar-link--active" to="we" offset={-400}  smooth={true} duration={1000} spy={true}>
+						<LinkScroll className="navbar-link" to="we" offset={-400}   duration={1000} spy={true}>
 							Wie zijn we
 						</LinkScroll>
 						<Link className="navbar-link" to={Routes.DASHBOARD} >
