@@ -41,6 +41,7 @@ const Path = () => {
               let moduleId;
 
               const pathData = await getPath(currentUser.token, id);
+              console.log(pathData);
               const moduleData = await getModules(currentUser.token);
               const signpostData = await getSignPosts(currentUser.token);
               const userData = await getMyself(currentUser.token);

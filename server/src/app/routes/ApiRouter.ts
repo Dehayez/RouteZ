@@ -114,6 +114,7 @@ class ApiRouter {
         this.router.post('/modules', this.moduleController.createModule); // needs bearer and body
         this.router.post('/modules/:id', this.moduleController.editModule); // only admin, needs param and body
         this.router.post('/publish-module/:moduleId', this.moduleController.publishModule); // needs bearer, body, only for admin
+        this.router.delete('/modules/:moduleId', this.moduleController.deleteModule); // only admin, needs param and body
 
         // Signposts
         this.router.get('/signposts', this.signpostController.allSignposts); // needs bearer

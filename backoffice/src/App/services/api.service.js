@@ -199,6 +199,27 @@ const ApiProvider = ({children}) => {
     return await response.json();
   };
 
+    /**
+   * @desc delete one module
+   * @param {string} token 
+   * @param {string} id
+   */
+     const deleteModule = async (token, id) => {
+      const url = `${BASE_URL}modules/${id}`;
+  
+      const response = await fetch(url, {
+        'method': 'DELETE',
+        headers: {
+          'Accept': 'application/json',
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+      });
+  
+      return await response.json();
+    };
+  
+
   /**
    * @desc publish one module
    * @param {string} token 
@@ -868,6 +889,7 @@ const ApiProvider = ({children}) => {
       publishSignpost,
       getModule,
       getModules,
+      deleteModule,
       createModule,
       editModule,
       publishModule,

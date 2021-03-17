@@ -78,10 +78,13 @@ const CreateModule = () => {
         setError(true);
         return;
       };
+      console.log(paths[i])
 
       if (paths[i].type === "Oefeningen") {
+
         for (let j = 0; j < paths[i]._exerciseIds.length; j++) {
           const addedResult = await addExerciseToPath(currentUser.token, pathResult._id, paths[i]._exerciseIds[j]);
+          console.log(addedResult);
 
           if (!addedResult) {
             setError(true);

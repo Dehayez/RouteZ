@@ -19,11 +19,6 @@ const NavigationItem = ({ index, title, alt, endpoint, logo }) => {
 		fetchSvg();
 	}, [fetchSvg]);
 
-	setTimeout(() => {
-		const shape = document.getElementsByTagName("svg")[0];
-		if (shape) shape.setAttribute("viewBox", "0 0 150 120"); 
-	}, 200);
-
 	return logoResult ? (
 		<NavLink className="nav-list-link" activeClassName="nav-list-link--active" to={endpoint}>
 			<div className="nav-list-link__icon-wrapper">

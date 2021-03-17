@@ -49,7 +49,7 @@ const Progress = () => {
 						return <ProgressItem 
 									key={index} 
 									endpoint={`/signposts/${progress.signpost.id}`}
-									percentage={progress.progress.percentage} 
+									percentage={progress.progress.percentage ? progress.progress.percentage : 0} 
 									title={capitalizeTitle(progress.signpost.shortedTitle)} 
 								/>
 					})

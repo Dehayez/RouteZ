@@ -55,7 +55,7 @@ const Signposts = () => {
 			<div className="signposts-items">
 				{
 					progress && progress.map((signpost, i) => {
-						return signpost.published ? <CardSignpost 
+						return signpost.signpost.published ? <CardSignpost 
 									key={i}
 									index={i+1}
 									title={signpost.signpost.title} 

@@ -44,7 +44,7 @@ const Modules = () => {
 
   // Delete
   const deleteItem = async (id) => {
-    await deleteModule(currentUser.token, id);
+    const res = await deleteModule(currentUser.token, id);
     window.location.reload();
   };
 

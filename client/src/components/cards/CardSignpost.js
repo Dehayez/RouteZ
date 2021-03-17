@@ -21,12 +21,7 @@ const CardSignpost = ({endpoint, index, title, text, logo, alt, percentage }) =>
 	useEffect(() => {
 		fetchSvg();
 	}, [fetchSvg]);
-
-	setTimeout(() => {
-		const shape = document.getElementsByTagName("svg")[0];
-		if (shape) shape.setAttribute("viewBox", "0 0 150 120"); 
-	}, 200);
-
+	
   return (
 	  <Link className="signpost-card" to={endpoint}>
 		<h1 className="signpost-card__title">{index}. {title}</h1>
@@ -40,7 +35,7 @@ const CardSignpost = ({endpoint, index, title, text, logo, alt, percentage }) =>
 				</div>
 			</div>
 			<div className="signpost-card-bottom__percentage">
-				<CircularProgressbar value={ percentage } strokeWidth={8} text={`${ percentage }%`} styles={buildStyles({
+				<CircularProgressbar value={ percentage } strokeWidth={8} text={`${ percentage ? percentage : 0 }%`} styles={buildStyles({
 					rotation: 0,
 					pathTransitionDuration: 2,
 					pathColor: '#4A84FC',

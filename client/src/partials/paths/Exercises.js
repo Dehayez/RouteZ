@@ -29,7 +29,6 @@ const Exercises = ({exercises, previousResults}) => {
                   for (let l = 0; l < exercises[j].answers.length; l++) {
                     if(previousResults[i].answers[k].answerId === exercises[j].answers[l]._id) {
                       if (previousResults[i].answers[k].correct === exercises[j].answers[l].correct) {
-                        console.log(previousResults[i].answers[k].answerId)
                         document.getElementById(previousResults[i].answers[k].answerId).className = 'correct-answer';
                       } else {
                         document.getElementById(previousResults[i].answers[k].answerId).className = 'wrong-answer';

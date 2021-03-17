@@ -27,7 +27,7 @@ const EditModule = () => {
   const { id } = useParams();
 
   // Services
-  const { getModule, uploadFile, createExercise, createPath, editModule } = useApi();
+  const { getModule, uploadFile, createExercise, createPath, editModule, addExerciseToPath } = useApi();
   const { currentUser } = useAuth();
 
   // States
@@ -81,6 +81,17 @@ const EditModule = () => {
       } else {
         const pathResult = await createPath(currentUser.token, paths[i]);
         allPaths.push(pathResult._id);
+
+        if (paths[i].type === "Oefeningen") {
+          for (let j = 0; j < paths[i]._exerciseIds.length; j++) {
+            const addedResult = await addExerciseToPath(currentUser.token, pathResult._id, paths[i]._exerciseIds[j]);
+  
+            if (!addedResult) {
+              setError(true);
+              return;
+            };
+          }
+        }
       };
     };
 

@@ -13,7 +13,7 @@ const AuthRouteWithLayout = ({ component, layout, ...rest }) => {
 
   return (
     <Route {...rest} render={routeProps => {
-      return !!currentUser ? (
+      return currentUser ? (
         renderMergedProps(component, layout, routeProps)
       ) : (
           <Redirect to={Routes.AUTH_SIGN_IN} />

@@ -155,4 +155,17 @@ export default class ModuleController {
             next(e);
         };
     };
+
+    deleteModule = async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
+        try {
+            const { moduleId } = req.params;
+
+            const moduleItem = await ModuleItem.findByIdAndDelete(moduleId)
+            .exec();
+
+            return res.status(200).json(moduleItem);
+        } catch (e) {
+            next(e);
+        };
+    };
 };
