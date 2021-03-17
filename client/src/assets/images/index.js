@@ -9,6 +9,9 @@ import { default as Plan2 } from './stappenplan/stappenplan-2.png';
 import { default as Plan3 } from './stappenplan/stappenplan-3.png';
 import { default as Plan4 } from './stappenplan/stappenplan-4.png';
 
+
+import { default as Artevelde } from './logo/artevelde.jpeg';
+
 export {
 	DefaultImage,
 	BackSignpost,
@@ -19,4 +22,5 @@ export {
 	Plan2,
 	Plan3,
 	Plan4,
+	Artevelde
 } 
