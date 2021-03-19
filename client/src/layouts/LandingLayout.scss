@@ -374,7 +374,6 @@
 
 		&--four {
 			background-color: $routez-secondary-light;
-			border-radius: 50% 50% 0 0;
 
 			&__title {
 				font-size: 36px;
@@ -393,6 +392,11 @@
 					font-weight: 300;
 					margin: 2rem 0;
 					line-height: 2em;
+
+					p b {
+						color: $routez-primary;
+						font-weight: 500;
+					}
 				}
 			}
 
@@ -401,11 +405,12 @@
 				justify-content: space-around;
 				align-items: center;
 				width: 100%;
+				margin: 2rem 0;
 
 				&__image {
 					width: 100%;
 					max-width: 200px;
-					filter: grayscale(0.8);
+					filter: grayscale(0.6);
 					transition: 0.4s;
 
 					&:hover {

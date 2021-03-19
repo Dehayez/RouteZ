@@ -208,7 +208,19 @@ const Landing = () => {
 
 				<h1 className="landing-section--four__title">Door en voor ...</h1>
 					<div className="landing-section--four-left__text">
-						<p>Scholengroep 20, het schoolbestuur van 15 GO!-scholen van Geraardsbergen tot Zottegem. De scholengroep organiseert samen met 25 andere scholengroep het Onderwijs van de Vlaamse Gemeenschap en behoort tot het GO!.</p>
+						<p>
+							Zelfgestuurd leren wil niet zeggen dat de leerlingen de leerstof op hun eigen houtje moeten verwerken. Integendeel, als  er één vorm van onderwijs is die toelaat om zoveel mogelijk rekening te houden met de eigenheid van leerlingen, is het deze wel. 
+							Uit voorgaand onderzoek is gebleken dat leerkrachten vinden dat ze op deze manier veel beter kunnen inspelen op de uiteenlopende noden van leerlingen dan in het “klassieke systeem”. (Carbonez et al., 2020)
+							<br/>
+							<br/>
+							Leerkrachten hebben nog ondersteuning nodig omtrent de invulling van deze rollen en ze hebben nood aan praktijkvoorbeelden om zelfgestuurd leren vorm te geven in een krachtige leeromgeving. 
+							RouteZ biedt deze nodige ondersteuning aan met een heel duidelijke structuur en doordacht design. 
+							<br/>
+							<br/>
+							Dit project is een samenwerking tussen Arteveldehogeschool, Scholengroep20 en Scholengroep Adite. Het resultaat, professionaliseringstool RouteZ wordt aangeboden door: <br/>
+							<b>Onderzoeksteam:</b> Carbonez, J., Debruyne, T., De Geyter, J., Grosemans, N. <br/>
+							<b>Ontwerpteam:</b> Callebaut Valentine, De Hauwere Yentel, Deryckere Jens.
+						</p>
 					</div>
 					<div className="landing-section--four-right">
 						<a href="https://web.scholengroep20.be/" alt="Scholengroep20" target="_blank" rel="noopener noreferrer">
