@@ -96,3 +96,13 @@
     }
   }
 }]
+2021-03-18 20:01:42 [[31merror[39m: 	Can	 connect to the database {
+  "object": {
+    "e": {
+      "errno": "ESERVFAIL",
+      "code": "ESERVFAIL",
+      "syscall": "querySrv",
+      "hostname": "_mongodb._tcp.maincluster.jf027.mongodb.net"
+    }
+  }
+}]

@@ -158,7 +158,9 @@
 		justify-content: space-between;
 		margin-top: 2rem;
 
-		
+		& button:last-child {
+			margin-left: auto;
+		}
 	}
 }
 

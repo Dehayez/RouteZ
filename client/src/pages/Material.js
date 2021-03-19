@@ -143,8 +143,13 @@ const Material = () => {
 							</div>
 							
 							<ReactTooltip className='react-tooltip' delayHide={1000} type="light" effect='solid' id='details' clickable='true' globalEventOff='click'>
-								<p className="react-tooltip__email"> <MdMailOutline/> {material.author.email}</p> <br/>
-								<p className="react-tooltip__phone"> <MdPhone/> {material.author.profile.phoneNumber}</p>
+								<p className="react-tooltip__email"> <MdMailOutline/> {material.author.email}</p>
+								
+								<p className="react-tooltip__phone"
+								 style={ { display: material.author.profile.phoneNumber ? 'block' : 'none' } }> 
+									 <MdPhone/> {material.author.profile.phoneNumber}
+								 </p>
+									
 							</ReactTooltip>
 
 							{/* <p className="material-detail-right-download-title">Download</p> */}

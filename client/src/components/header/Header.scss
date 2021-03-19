@@ -21,10 +21,13 @@
 		position: relative;
 		display: inline-flex;
 		margin: 0 2rem;
+		opacity: 0.8;
+
+		transition: 0.2s;
 		cursor: pointer;
 
 		&:hover {
-			opacity: 0.8;
+			opacity: 1;
 		}
 
 		&__checked {
@@ -129,7 +132,6 @@
 			display: flex;
 
 			border-radius: 10px;
-			padding: 0.5rem 1rem;
 			transition: all 0.3s;
 		
 			&__text {
@@ -138,7 +140,7 @@
 				display: flex;
 				flex-direction: column;
 				justify-content: center;
-				text-align: right;
+				text-align: left;
 		
 				&-name {
 					font-weight: 600;
@@ -146,6 +148,7 @@
 
 					&-link {
 						text-decoration: none;
+
 					}
 				}
 
@@ -155,6 +158,13 @@
 
 					&-link {
 						text-decoration: none;
+						margin-top: 8px;
+						cursor: pointer;
+
+						&--logout {
+							border-top: 2px solid $routez-grey-light;
+							padding-top: 8px;
+						}
 					}
 
 					&:hover {
@@ -167,11 +177,17 @@
 				width: 50px;
 				height: 50px;
 				border-radius: 50%;
-				margin-left: 1rem;
 				object-fit: cover;
 
 				&-link {
 					text-decoration: none;
+					cursor: pointer;
+
+					svg {
+						font-size: 1.6rem;
+						color: $routez-grey;
+						margin-left: 0.2rem;
+					}
 				}
 			}
 
@@ -179,3 +195,12 @@
 	}
 }
 
+.react-tooltip {
+	-webkit-box-shadow: 0px 0px 21px -1px rgba(54,57,65,0.19);
+	-moz-box-shadow: 0px 0px 21px -1px rgba(54,57,65,0.19);
+	box-shadow: 0px 0px 21px -1px rgba(54,57,65,0.19);
+
+	background-color: white !important;
+	opacity: 0.95 !important;
+	border-radius: 5px !important;
+}

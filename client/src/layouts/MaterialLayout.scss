@@ -399,6 +399,12 @@
 		cursor: pointer;
 		display: inline-flex;
 		position: relative;
+		align-items: center;
+
+		svg {
+			margin-left: 0.5rem;
+			font-size: 1.2rem;
+		}
 
 		span {
 			color: white;
@@ -577,6 +583,7 @@
 		display: flex;
 		align-items: center;
 		margin: 0;
+		margin-top: 0.5rem;
 
 		& > svg {
 			margin-right: 8px;

@@ -11,6 +11,8 @@ import { useApi, useAuth } from '../services';
 import { default as moment } from 'moment';
 import 'moment/locale/nl-be';
 
+import { HiOutlineUpload } from 'react-icons/hi'
+
 // Components
 import { Tags, RadioSelect, ButtonSmall } from '../components';
 
@@ -276,6 +278,7 @@ const CreateMaterial = () => {
                 <div>
                   <div className="create-material__upload-button">
                     <span>Bestand uploaden</span>
+					<HiOutlineUpload/>
                     <input type="file" accept="application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint, text/plain, application/pdf, image/*" onChange={(e) => uploadNewDocument(e)} name="file" id="file"/>
                   </div>
                 </div>

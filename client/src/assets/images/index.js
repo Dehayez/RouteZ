@@ -10,7 +10,9 @@ import { default as Plan3 } from './stappenplan/stappenplan-3.png';
 import { default as Plan4 } from './stappenplan/stappenplan-4.png';
 
 
-import { default as Artevelde } from './logo/artevelde.jpeg';
+import { default as Artevelde } from './logo/arteveldehogeschool.png';
+import { default as Adite } from './logo/adite.png';
+import { default as Scholengroep20 } from './logo/scholengroep20.png';
 
 export {
 	DefaultImage,
@@ -22,5 +24,7 @@ export {
 	Plan2,
 	Plan3,
 	Plan4,
-	Artevelde
+	Artevelde,
+	Adite, 
+	Scholengroep20,
 } 

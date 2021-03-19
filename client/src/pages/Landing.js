@@ -25,7 +25,7 @@ import { AnimationOnScroll } from 'react-animation-on-scroll';
 import { BsChevronDown } from 'react-icons/bs';
 
 // Images
-import { LandingIllustration, WegwijzerLanding, Plan1, Plan2, Plan3, Plan4, Artevelde } from '../assets/images';
+import { LandingIllustration, WegwijzerLanding, Plan1, Plan2, Plan3, Plan4, Artevelde, Adite, Scholengroep20 } from '../assets/images';
 
 const Landing = () => {
 	const { signIn } = useAuth();
@@ -207,16 +207,21 @@ const Landing = () => {
 			<div className="landing-section landing-section--four" id="we">
 
 				<h1 className="landing-section--four__title">Door en voor ...</h1>
-				<Row>
-					<Col className="landing-section--four-left__text" lg="7">
+					<div className="landing-section--four-left__text">
 						<p>Scholengroep 20, het schoolbestuur van 15 GO!-scholen van Geraardsbergen tot Zottegem. De scholengroep organiseert samen met 25 andere scholengroep het Onderwijs van de Vlaamse Gemeenschap en behoort tot het GO!.</p>
-					</Col>
-					<Col className="landing-section--four-right" lg="5">
-						<img className="landing-section--four-right__image" src={ Artevelde } alt="wegwijzer"/>
-						<img className="landing-section--four-right__image" src={ Artevelde } alt="wegwijzer"/>
-						<img className="landing-section--four-right__image" src={ Artevelde } alt="wegwijzer"/>
-					</Col>
-				</Row>
+					</div>
+					<div className="landing-section--four-right">
+						<a href="https://web.scholengroep20.be/" alt="Scholengroep20" target="_blank" rel="noopener noreferrer">
+							<img className="landing-section--four-right__image" src={ Scholengroep20 } alt="wegwijzer"/>
+						</a>
+						<a href="https://www.adite.be/" alt="Adite" target="_blank" rel="noopener noreferrer">
+							<img className="landing-section--four-right__image" src={ Adite } alt="wegwijzer"/>
+						</a>
+						<a href="https://www.arteveldehogeschool.be/" alt="Artevelde hogeschool" target="_blank" rel="noopener noreferrer">
+							<img className="landing-section--four-right__image" src={ Artevelde } alt="wegwijzer"/>
+						</a>
+						
+					</div>
 			</div>
         </div>
     )
