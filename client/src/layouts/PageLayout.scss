@@ -275,10 +275,6 @@
 
 			font-weight: 300;
 
-			&__text {
-
-			}
-
 			&__date {
 				color: $routez-primary;
 			}
@@ -375,5 +371,14 @@
 	 p {
 		 font-size: $font-size-s;
 		 text-align: center;
+	 }
+ }
+
+
+ .full-page {
+	 min-height: 100vh;
+	 padding: 60px 0 0 0;
+	 h2, p, h4 {
+		 max-width: 100%;
 	 }
  }

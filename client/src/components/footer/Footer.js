@@ -20,8 +20,8 @@ const Footer = () => {
 				<Link className="footer__link" to={Routes.FAQ}>FAQ</Link>
 			</div>
 			<div className="footer-right">
-				<Link className="footer__link">Privacy Policy</Link>
-				<Link className="footer__link">Cookie policy</Link>
+				<Link className="footer__link" to="/privacy-policy">Privacy Policy</Link>
+				<Link className="footer__link" to="/terms-of-service">Algemene voorwaarden</Link>
 			</div>
 		</footer>
 		<div className="footer-spacer">

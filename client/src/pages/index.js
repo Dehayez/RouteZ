@@ -20,6 +20,9 @@ import CreateMaterial from './CreateMaterial';
 import SearchResults from './SearchResults';
 import Notifications from './Notifications';
 
+import PrivacyPolicy from './PrivacyPolicy';
+import Terms from './Terms';
+
 import NotFound from './NotFound';
 
 export {
@@ -44,4 +47,6 @@ export {
   SearchResults,
   Notifications,
   NotFound,
+  PrivacyPolicy,
+  Terms,
 };

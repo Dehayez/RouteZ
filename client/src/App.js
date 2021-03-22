@@ -2,10 +2,10 @@ import React from 'react';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
 
 // All pages
-import { CreateMaterial, Dashboard, EditMaterial, Landing, Faq, Login, Material, Materials, Module, MyMaterials, MyProfile, MyProfileSettings, Path, Register, SearchResults, SendReset, Signpost, Signposts, SubmitReset, NotFound, Notifications } from './pages';
+import { CreateMaterial, Dashboard, EditMaterial, Landing, Faq, Login, Material, Materials, Module, MyMaterials, MyProfile, MyProfileSettings, Path, Register, SearchResults, SendReset, Signpost, Signposts, SubmitReset, NotFound, Notifications, PrivacyPolicy, Terms } from './pages';
 
 // Main layouts
-import { LandingLayout, PageLayout, AuthLayout, SignpostLayout, MaterialLayout, ErrorLayout } from './layouts';
+import { LandingLayout, PageLayout, AuthLayout, SignpostLayout, MaterialLayout, ErrorLayout, StandardLayout } from './layouts';
 import { AuthRouteWithLayout, RouteWithLayout, OnlyViewOnDesktop } from './utilities';
 
 // All routes
@@ -26,7 +26,9 @@ function App() {
               <Switch>
                 {/** Where the site lands */}
                 <RouteWithLayout exact path={Routes.LANDING} component={Landing} layout={LandingLayout} />
-	
+                <RouteWithLayout exact path={Routes.PRIVACY_POLICY} component={PrivacyPolicy} layout={StandardLayout} />
+                <RouteWithLayout exact path={Routes.TERMS} component={Terms} layout={StandardLayout} />
+
                 {/** Main pages for authentication */}
                 <OnlyViewOnDesktop>
                   <RouteWithLayout exact path={Routes.AUTH_SIGN_IN} component={Login} layout={AuthLayout} />

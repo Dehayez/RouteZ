@@ -63,8 +63,8 @@ const LandingLayout = ({children}) => {
 			{children}
 		</div>
 		<footer className="landing-footer">
-			<Link className="landing-footer-link">Privacy policy</Link>
-			<Link className="landing-footer-link">Cookie policy</Link>
+			<Link className="landing-footer-link" to="/privacy-policy">Privacy policy</Link>
+			<Link className="landing-footer-link" to="/terms-of-service">Algemene voorwaarden</Link>
 		</footer>
 	</>
   );

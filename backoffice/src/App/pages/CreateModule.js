@@ -78,7 +78,6 @@ const CreateModule = () => {
         setError(true);
         return;
       };
-      console.log(paths[i])
 
       if (paths[i].type === "Oefeningen") {
 

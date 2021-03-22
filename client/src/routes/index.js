@@ -23,4 +23,8 @@ export const EDIT_MATERIAL = '/edit-material';
 export const SEARCH_RESULTS = '/search-results';
 export const NOTIFICATIONS = '/notifications';
 
+// Extra pages
+export const PRIVACY_POLICY = '/privacy-policy';
+export const TERMS = '/terms-of-service';
+
 export const NOT_FOUND = '/not-found';
